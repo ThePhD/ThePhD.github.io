@@ -1,0 +1,16 @@
+---
+layout: post
+title: Towards a Unicode Future for C++
+tags: [C++, Unicode, Text Processing, Future, sg-16, 🤝, ⌨️]
+---
+
+
+Working Group 21 (The C++ Committee of the ISO) has approved and encouraged Study Group 16 ! Please lend your voice and ideas for improving C++ support for Unicode and text processing by joining me and others in:
+
+- The Mailing list: http://www.open-std.org/mailman/listinfo/unicode
+- The C++ Slack: https://cpplang.slack.com/messages/sg16-unicode
+- The GitHub: https://github.com/sg16-unicode
+
+It's time to get Unicode into C++, and to do it right with SG-16. I'm very excited about this, and have already presented my [earlier unicode abstraction to the group](/presentations/unicode/2018.03.07 - ThePhD - a rudimentary unicode abstraction.pdf). I've begun to work on understanding what a useful `Encoding` concept for C++ would look like, and how we can use it to further advance operations like Transcoding, Normalization, Segmentation and other necessary unicode algorithms.
+
+If you have ideas and thoughts, please do bring them to the Github Organization / Repositories and to the mailing list! We have a decent core membership but it is always great to hear what the use cases of others are.

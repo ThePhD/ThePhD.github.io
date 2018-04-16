@@ -1,7 +1,0 @@
----
-layout: default
----
-
-# [](#header-1) Well, Hello There
-
-It's time we got started with all this fun stuff, right?
