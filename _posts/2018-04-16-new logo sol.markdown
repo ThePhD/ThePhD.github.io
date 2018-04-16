@@ -2,9 +2,12 @@
 layout: post
 title: New Logo for sol!
 tags: [sol, sol2, graphic design, 🎨]
+excerpt_separator: <!--more-->
 ---
 
 We have a new logo for the [sol project](/portfolio/sol)!
+
+<!--more-->
 
 ![this shiny, beautiful version](/assets/img/2018-04-16/new sol.png)
 

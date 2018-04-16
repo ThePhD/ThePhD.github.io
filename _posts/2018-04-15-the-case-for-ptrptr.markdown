@@ -2,9 +2,12 @@
 layout: post
 title: The Case for ptrptr in the Standard Library
 tags: [C++, ptrptr, performance, benchmarks, 🚌, ⌨️]
+excerpt_separator: <!--more-->
 ---
 
-Someone spoke to me about a common idiom that gets used across many code bases and the potential performance left on the table, sparking a curious investigation! Let's start with the results:
+Someone spoke to me about a common out-param C++ abstraction that gets used across many code bases and the potential performance left on the table, sparking a curious investigation! Let's start with the results:
+
+<!--more-->
 
 ### Free Performance is left on the table?!
 

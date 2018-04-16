@@ -1,9 +1,12 @@
 ---
 layout: post
 tags: [hello, about, 👋]
+excerpt_separator: <!--more-->
 ---
 
 It is time we got started with all this fun stuff, right? Blog posts and everything else galore, woohoo!
+
+<!--more-->
 
 The posts made here will be for tracking personal endeavors and work. As always, opinions are my own, and do not reflect anyone I am affiliated with, employ, or are employed by. Boring legalese statements side...
 

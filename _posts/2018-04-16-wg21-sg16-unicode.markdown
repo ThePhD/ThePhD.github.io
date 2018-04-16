@@ -2,10 +2,15 @@
 layout: post
 title: Towards a Unicode Future for C++
 tags: [C++, Unicode, Text Processing, Future, sg-16, 🤝, ⌨️]
+excerpt_separator: <!--more-->
 ---
 
+Working Group 21 (The C++ Committee of the ISO) has approved and encouraged Study Group 16!
 
-Working Group 21 (The C++ Committee of the ISO) has approved and encouraged Study Group 16 ! Please lend your voice and ideas for improving C++ support for Unicode and text processing by joining me and others in:
+<!--more-->
+
+Please lend your voice and ideas for improving C++ support for Unicode and text processing by joining me and others in:
+
 
 - The Mailing list: http://www.open-std.org/mailman/listinfo/unicode
 - The C++ Slack: https://cpplang.slack.com/messages/sg16-unicode
