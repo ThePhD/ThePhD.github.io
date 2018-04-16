@@ -2,9 +2,12 @@
 layout: post
 title: C++ Now, as a Student Volunter + Speaker
 tags: [C++ Now, speaking, conferences, 🤝, 📣]
+excerpt_separator: <!--more-->
 ---
 
 I'll be attending the [C++ Now](http://cppnow.org/) conference in Aspen, Colorado, USA! And, while I'm there, I'll be [giving a talk](http://sched.co/EJjw) while also participating as a Student Volunteer.
+
+<!--more-->
 
 Three people really encouraged me to apply and go. I would have never touched the application had it not been for them, so Thank You to Jason Turner (@lefticus), Simon Brand (@TartanLlama), and Mark Zeren for giving me the gentle nudge to go all the way. Sometimes, people understimate what a little encouragement can do: sometimes, thumbs up is all it takes!
 

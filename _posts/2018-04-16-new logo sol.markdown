@@ -17,6 +17,8 @@ It also helps that the new logo is version-agnostic and can represent the Sol pr
 
 Thanks to Hipony (Alexandr Timofeev) and kyzo (Alexander Scigajlo) from the C++ Slack for helping me get this just right!
 
-For posterity, here's the old, ugly version:
+For posterity, here's the older version:
 
 ![this older, uglier version](/assets/img/2018-04-16/old sol.png)
+
+It still looks clean, but... well, I really like the newer version!
