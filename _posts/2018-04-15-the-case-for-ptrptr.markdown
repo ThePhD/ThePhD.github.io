@@ -17,9 +17,11 @@ Of course, it can't just be about the destination: so it is time for a journey! 
 
 # Starting down the Path
 
-The code in question is the `ptrptr` technique used on `std::unique_ptr`s and `std::shared_ptr`s:
+The code in question is the `ptrptr` technique used on `std::unique_ptr`s and friends:
 
 ````cpp
+#include <some_lib/ptrptr.hpp>
+#include <memory>
 
 extern "C" c_api_err_num clib_init_thing(void** handle_out);
 extern "C" void clib_destroy_thing(void* handle);
@@ -32,7 +34,7 @@ struct destroy_thing_deleter {
 
 int main(int, char*[]) {
 	std::unique_ptr<c_handle, destroy_thing_deleter> my_handle(nullptr);
-	// out_ptr( p ) performs ~*~magic~*~
+	// ptrptr(p) performs ~*~magic~*~
 	c_api_err_num err = clib_init_thing(ptrptr(my_handle));
 	if (err == C_API_DOOM_GLOOM) { 
 		/* oh nooooo */
@@ -65,7 +67,10 @@ The `ptrptr` library's implementation contains one key difference. To determine 
 
 The benchmarks were written using Google's Benchmark. Benchmark takes care of measuring environmental overhead and iterating enough times to produce a statistically valid measurement. We then perform a number of repetitions of these iterated benchmarks to collect data to perform some basic analysis. There are 2 kinds being tested: having a pointer that was already created and simply resetting into it ("reset"), and having a fresh pointer that was created for each loop ("local"). C versions were also written as a baseline, but our primary concern is the manual vs. the simple_ptrptr versus the clever_ptrptr versions. Here's what the C code version for a local pointer looks like:
 
-````cpp
+```cpp
+#include <benchmark/benchmark.h>
+// fictional C API
+#include <ficapi/ficapi.hpp>
 
 void c_code_local(benchmark::State& state) {
 	int64_t x = 0;
@@ -81,7 +86,7 @@ void c_code_local(benchmark::State& state) {
 	}
 }
 BENCHMARK(c_code_local);
-````
+```
 
 The full code is [here](https://github.com/ThePhD/ptrptr/tree/master/benchmarks), and there are instructions for building and running all of the tests/benchmarks with CMake.
 
