@@ -1,7 +1,7 @@
 ---
 layout: post
 title: C++ Now, as a Student Volunter + Speaker
-tags: [C++ Now, speaking, conferences, 🤝, 📣]
+tags: [C++, C++ Now, speaking, conferences, 🤝, 📣]
 excerpt_separator: <!--more-->
 ---
 
