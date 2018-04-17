@@ -100,7 +100,7 @@ You can clearly see here that the `clever_ptrptr` has a statistically significan
 
 Perhaps my only concern is what is happening with the `c_code` version. It is unclear to me what is going on, and I will need to ask others and disassemble the code to understand it. (If you look at the code and see I did something wrong, I will be more than happy to re-run my benchmarks and write a new article!)
 
-# # Disassembly ?
+## Disassembly ?
 
 It is not quite that easy!
 
