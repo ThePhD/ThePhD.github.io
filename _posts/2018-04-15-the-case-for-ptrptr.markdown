@@ -100,7 +100,13 @@ You can clearly see here that the `clever_ptrptr` has a statistically significan
 
 Perhaps my only concern is what is happening with the `c_code` version. It is unclear to me what is going on, and I will need to ask others and disassemble the code to understand it. (If you look at the code and see I did something wrong, I will be more than happy to re-run my benchmarks and write a new article!)
 
+# # Disassembly ?
+
+It is not quite that easy!
+
 I tried to get a decent disassembly from things like Matt Godbolt's Compiler Explorer online, or the Quick Bench online utility, but the benchmarks rely on a dynamically-compiled C API function to prevent the compiler from seeing through the function call and thusly optimizing out literally everything!
+
+So, with the online utilities I can see almost nothing:
 
 ![Quick Bench, everything compiled together.](/assets/img/2018-04-15/ptrptr quick bench optimization.png)
 
