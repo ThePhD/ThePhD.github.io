@@ -1,0 +1,7 @@
+- the importance of documentation
+- std::embed
+- unicode ideas and tzlaine/text unstapling
+- the implementation of sol2
+- after C++-Now
+- making a game in C++ and Lua
+- making a game with Phaser ES6

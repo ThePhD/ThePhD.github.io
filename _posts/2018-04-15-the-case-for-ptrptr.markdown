@@ -65,7 +65,7 @@ The `ptrptr` library's implementation contains one key difference. To determine 
 
 # The Benchmarks
 
-The benchmarks were written using Google's Benchmark. Benchmark takes care of measuring environmental overhead and iterating enough times to produce a statistically valid measurement. We then perform a number of repetitions of these iterated benchmarks to collect data to perform some basic analysis. There are 2 kinds being tested: having a pointer that was already created and simply resetting into it ("reset"), and having a fresh pointer that was created for each loop ("local"). C versions were also written as a baseline, but our primary concern is the manual vs. the simple_ptrptr versus the clever_ptrptr versions. Here's what the C code version for a local pointer looks like:
+The benchmarks were written using Google's Benchmark. Benchmark takes care of measuring environmental overhead and iterating enough times to produce a statistically valid measurement. We then perform a number of repetitions of these iterated benchmarks to collect data to perform some basic analysis. There are 2 kinds being tested: having a pointer that was already created and simply resetting into it ("reset"), and having a fresh pointer that was created for each loop ("local"). C versions were also written as a baseline, but our primary concern is the manual vs. the simple_ptrptr versus the clever_ptrptr versions. Here's what the C code version and `ptrptr`-abstraction versions for a local pointer looks like:
 
 ```cpp
 #include <benchmark/benchmark.h>
@@ -86,11 +86,27 @@ void c_code_local(benchmark::State& state) {
 	}
 }
 BENCHMARK(c_code_local);
+
+// ...
+
+void clever_ptrptr_local(benchmark::State& state) {
+	int64_t x = 0;
+	for (auto _ : state) {
+		std::unique_ptr<int, ficapi::handle_deleter> p(nullptr);
+		ficapi_handle_create(phd::clever_ptrptr(p));
+		x += *p;
+	}
+	int64_t expected = int64_t(state.iterations()) * ficapi_get_data();
+	if (x != expected) {
+		std::abort();
+	}
+}
+BENCHMARK(clever_ptrptr_local);
 ```
 
 The full code is [here](https://github.com/ThePhD/ptrptr/tree/master/benchmarks), and there are instructions for building and running all of the tests/benchmarks with CMake.
 
-The graphs below come from a dedicated Core i7 machine, compiled with the usual flags for each platform (`-O3` on g++/clang++, `/Ox` for VC++), we generate the values of the runs in JSON format and then send them to a [quick python script I wrote](https://github.com/ThePhD/ptrptr/blob/master/benchmarks/tools/generate_graphs.py) that can output their values for me to inspect in pretty graph form. The graphs have error bars representing the standard deviation, bars up to the mean, and transparent scatter plots indicating the distribution of 1000 multi-iteration benchmark samples:
+The graphs below come from a dedicated Core i7 machine, compiled with the usual flags for each platform (`-O3` on g++/clang++, `/Ox` for VC++), we generate the values of the runs in JSON format and then send them to a [quick python script I wrote](https://github.com/ThePhD/ptrptr/blob/master/benchmarks/tools/generate_graphs.py) that can output their values for me to inspect in pretty graph form. The graphs have error bars representing the standard deviation, bars up to the mean, and transparent scatter plots indicating the distribution of 1000 multi-iteration benchmark samples. We sort from fastest to slowest, and the color remains the same for each technique (`c_code` versus `simple_ptrptr` versus `clever_ptrptr` used):
 
 ![Local ptrptr benchmarks.](https://raw.githubusercontent.com/ThePhD/ptrptr/master/benchmark_results/ptrptr_benchmarks.local.png)
 
