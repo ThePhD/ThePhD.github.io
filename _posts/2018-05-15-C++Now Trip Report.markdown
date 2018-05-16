@@ -23,7 +23,7 @@ Bob Steagall's talk in the same space also went through these subjects, but from
 
 ## Speaking: sol2, Lightning, and More!
 
-On Thursday, I gave my talk about sol2. The slides are [here](/presentations/sol2/C++ Now/2018/2018.03.28 - ThePhD - Compile Fast, Run Faster, Scale Forever.pdf), which in and of themselves I think turned out very nicely. It's a bit unfortunate that usertypes were relegated to a demo but there's more than enough documentation and examples in sol2 for someone to steep themselves into it if they really liked it.
+On Thursday, I gave my talk about [sol2](http://sol2.rtfd.io/). The slides are [here](/presentations/sol2/C++ Now/2018/2018.03.28 - ThePhD - Compile Fast, Run Faster, Scale Forever.pdf), which in and of themselves I think turned out very nicely. It's a bit unfortunate that usertypes were relegated to a demo but there's more than enough documentation and examples in sol2 for someone to steep themselves into it if they really liked it.
 
 I think my talk was received well. Someone in the audience actually **used** sol2 as well, which really made it hit home that I was developing a library that was supposed to be usable for other people. It really had reinvigorated me to have that level of responsibility and ownership over some code, and that my care of it affects the performance and ability for many, many applications.
 
