@@ -13,19 +13,33 @@ Aspen, Colarado is an absolutely gorgeous area. When I first got there, it felt 
 
 Volunteering for a conference was a lot of fun! You had to attend a talk at every single track, help move food and clean up, and manage a few conference tasks like registrations and guide people at the beginning of the conference. All in all much of it was done ahead of time and I was just gluing together some of the pieces other people had prepared to make things easier. We also got to test run the new website-based, schedule-based digital timers for C++Now 2018, which in my opinion were an immense success!
 
-My favorite talk was Jason Turner's "Initializer Lists are Broken, Let's Fix Them", albeit I hesitate to call it a talk. It was more of a guided, interactive performance exploration of `initializer_list`, what it means, and ways to improve the design. It was really engaging and demonstrated some practical implications for API designers who were looking for both speed and API design tradeoffs. I am more or less intensely interested in exactly this design space, so the talk was immensely practical for me!
+## Listening: initializer_lists and Unicode and more!
+
+My favorite talk was Jason Turner (@lefticus)'s "Initializer Lists are Broken, Let's Fix Them", albeit I hesitate to call it a talk. It was more of a guided, interactive performance exploration of `initializer_list`, what it means, and ways to improve the design. It was really engaging and demonstrated some practical implications for API designers who were looking for both speed and API design tradeoffs. I am more or less intensely interested in exactly this design space, so the talk was immensely practical for me!
+
+Another great two-part talk was Zach Laine's about [Boost.Text](https://github.com/tzlaine/text), which was both a great overview and a wonderful deep-dive into designing a practical API that can handle Unicode. Seeing the design choices he made and tackled in getting a full collation-handling, grapheme-identifying, normalization-using text processing library was very interesting, plus all the interesting things about human languages that come with trying to make it all work out properly in code. The world is an amazingly complex place, and Text is just one area where you see all the complexities and not-so-clean but entirely rational ways in which human beings communicate with one another. I hope get some of his work in hand and start benchmarking it against other solutions in the same space.
+
+Bob Steagall's talk in the same space also went through these subjects, but from the perspective of performing blazing fast utf8 decoding! You can read some of his experience and about his talk at [Bob's Trip Report](https://bobsteagall.com/2018/05/13/cppnow-2018-trip-report/).
+
+## Speaking: sol2, Lightning, and More!
 
 On Thursday, I gave my talk about sol2. The slides are [here](/presentations/sol2/C++ Now/2018/2018.03.28 - ThePhD - Compile Fast, Run Faster, Scale Forever), which in and of themselves I think turned out very nicely. It's a bit unfortunate that usertypes were relegated to a demo but there's more than enough documentation and examples in sol2 for someone to steep themselves into it if they really liked it.
+
+I think my talk was received well. Someone in the audience actually **used** sol2 as well, which really made it hit home that I was developing a library that was supposed to be usable for other people. It really had reinvigorated me to have that level of responsibility and ownership over some code, and that my care of it affects the performance and ability for many, many applications.
+
+Plus, it's really awesome when someone as amazing as [Odin Holmes](https://twitter.com/odinthenerd/status/995495656054710272) tells me that I did a good job and that he likes my talk!
 
 I did not get a chance to publish my updated benchmarks at my talk, so as a follow-up I'll be placing my updated benchmarking numbers in sol2's documentation and in a new blog post soon!
 
 I gave 2 additional lightning talks while I was there too. One was about [`std::embed`](https://rawgit.com/ThePhD/embed/master/papers/P1040%20-%20embed.html), a way to lift a resource into a compile-time view.
 
-The other was a less technical and more personal talk about "Where I Belong", and how I feel like I belong in a given place.
+The other was a less technical and more personal talk about the idea of where I belong.
+
+## "We Are Glad You Are Here"
 
 There are a lot of criteria people have for feeling like they belong. It usually boils down to feeling like there's a community that you can tap into and share with and be a productive member of. It also comes from not feeling like you are being pushed out for reasons which are either beyond your control or have nothing to do with the core of your character. I never really felt like I had a community I could tap into, for various reasons. I talked a little bit about that, and the response was overwhelming.
 
-From a nerd who grew up in a Hippie Commune to the son of a Polish family who spoke very little English, the story seemed to resonate with many people. I was a bit sad that so many people felt alone, but extremely encouraged that my experience was not just a "People of Color" feeling. There is a shared experience when you are smart and bright and are not considered part of the norm, and it takes a degree of dedication and tenacity to pursue your dreams and goals in the face of these things.
+From a nerd who grew up in a Hippie Commune to the son of an immigrating Polish family who spoke very little English, the story seemed to resonate with many people. I was a bit sad that so many people felt alone, but extremely encouraged that my experience was not just a "People of Color" feeling or a singular thing. There is a shared experience when you are smart and bright in a way that is not expected of you. And the overwhelming end goal is simple: it is going to be okay, so long as you do not give up that thing that helps shape who you are for the sake of fitting an expectation other people have of you.
 
 I am elated that C++Now was the place I ended up from pursuing those goals. It was my first C++ conference and I felt incredibly welcome. My skin color was not an issue: I was judged as a human being, student, and upon the merits of my work alone.
 
@@ -35,4 +49,4 @@ I cannot wait to go to another C++ conference and dive into that kind of atmosph
 
 Until next time! ♥
 
-<sup><sup><sup>Const West Const Best!</sup></sup></sup>
+<sup><sup><sup><sup>Const West is Const Best!</sup></sup></sup></sup>
