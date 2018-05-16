@@ -41,7 +41,7 @@ There are a lot of criteria people have for feeling like they belong. It usually
 
 From a nerd who grew up in a Hippie Commune to the son of an immigrating Polish family who spoke very little English, the story seemed to resonate with many people. I was a bit sad that so many people felt alone, but extremely encouraged that my experience was not just a "People of Color" feeling or a singular thing. There is a shared experience when you are smart and bright in a way that is not expected of you. And the overwhelming end goal is simple: it is going to be okay, so long as you do not give up that thing that helps shape who you are for the sake of fitting an expectation other people have of you.
 
-I am elated that C++Now was the place I ended up from pursuing those goals. It was my first C++ conference and I felt incredibly welcome. My skin color was not an issue: I was judged as a human being, student, and upon the merits of my work alone.
+I am elated that C++Now was the place I ended up from pursuing my unique interests, drive and goals. It was my first C++ conference and I felt incredibly welcome. My skin color was not an issue: I was judged as a human being, student, and upon the merits of my work alone.
 
 These are the kinds of places I live for; the preconceived notions and ideas of what I might be capable of because what I look like were left at the door, and I was viewed as the individual I signed up to be. I am **first** a Student, a Volunteer, a presenter and a software developer who is immensely interested in learning, growing and ultimately sharing what I had learned, accomplished, and experienced. I never had to think that I was being judged first for being dark-skinned above all else, and that was liberating.
 
