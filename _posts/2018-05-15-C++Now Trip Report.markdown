@@ -1,7 +1,7 @@
 ---
 layout: post
-title: C++ Now, as a Student Volunter + Speaker
-tags: [C++, C++ Now, speaking, conferences, 🤝, 📣]
+title: C++ Now 2018 Trip Report
+tags: [C++, C++ Now, speaking, conferences, 🤝, 📣, 📜]
 excerpt_separator: <!--more-->
 ---
 
@@ -35,11 +35,4 @@ I cannot wait to go to another C++ conference and dive into that kind of atmosph
 
 Until next time! ♥
 
-
-
-
-
-
-
-
-<sup>Const West Const Best!</sup>
+<sup><sup><sup>Const West Const Best!</sup></sup></sup>
