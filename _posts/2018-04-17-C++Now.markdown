@@ -1,6 +1,6 @@
 ---
 layout: post
-title: C++ Now, as a Student Volunter + Speaker
+title: C++Now 2018, as a Student Volunter + Speaker
 tags: [C++, C++ Now, speaking, conferences, 🤝, 📣]
 excerpt_separator: <!--more-->
 ---
