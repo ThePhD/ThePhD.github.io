@@ -11,7 +11,7 @@ The trip for the [C++ Now 2018](http://cppnow.org/) conference in Aspen, Colorad
 
 Aspen, Colarado is an absolutely gorgeous area. When I first got there, it felt like I was taking a vacation! Of course, a vacation might have had me getting a little more sleep than I ended up catching that week, but every night staying up until 12 or 1 AM in the morning talking about C++, techniques, experiences and ideas was entirely well worth it. It is rare I get to geek out in person... and I got to do a whole **week** of it in beautiful Aspen!
 
-Volunteering for a conference was a lot of fun! You had to attend a talk at every single track, help move food and clean up, and manage a few conference tasks like registrations and guide people at the beginning of the conference. All in all much of it was done ahead of time and I was just gluing together some of the pieces other people had prepared to make things easier. We also got to test run the new website-based, schedule-based digital timers for C++Now 2018, which in my opinion were an immense success!
+Volunteering for a conference was a lot of fun! You had to attend a talk at every single track, help move food and clean up, and manage a few conference tasks like registration and guide people at the beginning of the conference. All in all much of it was done ahead of time and I was just gluing together some of the pieces other people had prepared to make things easier. We also got to test run the new website-based, schedule-based digital timers for C++Now 2018, which in my opinion were an immense success!
 
 ## Listening: initializer_lists and Unicode and more!
 
