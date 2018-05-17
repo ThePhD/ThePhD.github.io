@@ -42,11 +42,13 @@ I have contacted all library authors with various questions at one point or anot
 
 The syntax for tests which preload Lua code and run it expect that same syntax to work across libraries. I do not impose a syntax requirement for the C++ side, only the Lua side (companies may be migrating existing code bases, therefore it is not practical to ask them to perform sweeping Lua refactoring because a library does not support e.g. variable access with `obj.member_variable` and for them to use self-function `obj:member_variable(value)` syntax on their objects).
 
+**Note:** sol3 and sol2 are identical in these benchmarks. There may be small system artefacts that prevent them from looking completely identical, but they are mostly within the boundaries of one another and within the standard deviation.
+
 ## The Benchmarks
 
 Here are the benchmark, with various notes about the requirements and findings. Note here that I always sort the benchmark with the best score first, meaning the clustering at the top of the graph is Performance Ruler.
 
-The colors and patterns remain the same for each library name. Hopefully, this makes it easier to see which libraries have clear performance benefits.
+The colors and patterns remain the same for each library name. Hopefully, this makes it easier to see which libraries have clear performance benefits. There are also standard deviation error bars on the graphs, as well as light scatter plots showing the actual distribution of values.
 
 ### Table Abstractions
 
@@ -169,3 +171,7 @@ If you have a library you want me to benchmark, please make sure it has some amo
 This was a fairly deep dive, but that's it for now. There are some interesting things from these benchmarks that will likely result in new blog posts! Until then,
 
 see you later. ♥
+
+P.S.:
+
+Some future directions for this could include checking memory usage for each runtime as well. There's a whole host of measurements beyond just performance that would be quite important! 
