@@ -1,6 +1,8 @@
 ---
 layout: post
 title: C++Now 2018, as a Student Volunter + Speaker
+feature-img: "assets/img/thumbnails/CppNowLogo.svg"
+thumbnail: "assets/img/thumbnails/CppNowLogo.svg"
 tags: [C++, C++ Now, speaking, conferences, 🤝, 📣]
 excerpt_separator: <!--more-->
 ---
@@ -9,6 +11,6 @@ I'll be attending the [C++ Now 2018](http://cppnow.org/) conference in Aspen, Co
 
 <!--more-->
 
-Three people really encouraged me to apply and go. I would have never touched the application had it not been for them, so Thank You to Jason Turner (@lefticus), Simon Brand (@TartanLlama) and Mark Zeren for giving me the gentle nudge to go all the way. Sometimes, people understimate what a little encouragement can do: sometimes, thumbs up is all it takes!
+Three people really encouraged me to apply and go. I would have never touched the application had it not been for them, so Thank You to Jason Turner ([@lefticus](https://twitter.com/lefticus)), Simon Brand ([ @TartanLlama](https://twitter.com/TartanLlama)) and Mark Zeren for giving me the gentle nudge to go all the way. Sometimes, people understimate what a little encouragement can do: sometimes, thumbs up is all it takes!
 
 I'm incredibly fortunate to be afforded this opportunity by the C++ Now Program Committee, and I hope to make the whole ordeal a blast! 🎉

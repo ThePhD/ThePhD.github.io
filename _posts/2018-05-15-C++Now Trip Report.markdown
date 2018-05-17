@@ -1,6 +1,8 @@
 ---
 layout: post
 title: C++ Now 2018 Trip Report
+feature-img: "assets/img/2018-05-15/C++Now feature.jpg"
+thumbnail: "assets/img/2018-05-15/C++Now feature.jpg"
 tags: [C++, C++ Now, speaking, conferences, 🤝, 📣, 📜]
 excerpt_separator: <!--more-->
 ---
@@ -10,6 +12,8 @@ The trip for the [C++ Now 2018](http://cppnow.org/) conference in Aspen, Colorad
 <!--more-->
 
 Aspen, Colarado is an absolutely gorgeous area. When I first got there, it felt like I was taking a vacation! Of course, a vacation might have had me getting a little more sleep than I ended up catching that week, but every night staying up until 12 or 1 AM in the morning talking about C++, techniques, experiences and ideas was entirely well worth it. It is rare I get to geek out in person... and I got to do a whole **week** of it in beautiful Aspen!
+
+![Breathtaking!]({{ site.baseurl }}/assets/img/2018-05-15/C++Now Scenery.jpg)
 
 Volunteering for a conference was a lot of fun! You had to attend a talk at every single track, help move food and clean up, and manage a few conference tasks like registration and guide people at the beginning of the conference. All in all much of it was done ahead of time and I was just gluing together some of the pieces other people had prepared to make things easier. We also got to test run the new website-based, schedule-based digital timers for C++Now 2018, which in my opinion were an immense success!
 
@@ -31,7 +35,7 @@ Plus, it's really awesome when someone as amazing as [Odin Holmes](https://twitt
 
 I did not get a chance to publish my updated benchmarks at my talk, so as a follow-up I'll be placing my updated benchmarking numbers in sol2's documentation and in a new blog post soon!
 
-I gave 2 additional lightning talks while I was there too. One was about [`std::embed`](https://rawgit.com/ThePhD/embed/master/papers/P1040%20-%20embed.html), a way to lift a resource into a compile-time view.
+I gave 2 additional lightning talks while I was there too. One was about [`std::embed`](https://rawgit.com/ThePhD/embed/master/papers/P1040%20-%20embed.html), a way to lift a resource into a compile-time view. I gave it as a bit of a cheesy limerick, and then made comments about it afterwards! Most people seem to really like the idea, but we will see how it goes in the C++ Standards Committee.
 
 The other was a less technical and more personal talk about the idea of where I belong.
 
