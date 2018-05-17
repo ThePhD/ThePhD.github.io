@@ -54,13 +54,13 @@ The colors and patterns remain the same for each library name. Hopefully, this m
 
 The following benchmarks measure how one interacts with a Lua table in C++. I accept various APIs for doing this since it is done in C++, from default-constructed reference-out parameters, to something closer to the `int v = table["a"]["b"]["c"];`.
 
-![global table, set](https://github.com/ThePhD/lua-bindings-shootout/blob/bbead8912ca8989cdce917243a9f729e036ad834/benchmark_results/table%20global%20string%20set.png?raw=true)
+![global table, set](https://github.com/ThePhD/lua-bindings-shootout/blob/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/table%20global%20string%20set.png?raw=true)
 
-![global table, get](https://github.com/ThePhD/lua-bindings-shootout/blob/bbead8912ca8989cdce917243a9f729e036ad834/benchmark_results/table%20global%20string%20get.png?raw=true)
+![global table, get](https://github.com/ThePhD/lua-bindings-shootout/blob/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/table%20global%20string%20get.png?raw=true)
 
-![regular table, set](https://github.com/ThePhD/lua-bindings-shootout/blob/bbead8912ca8989cdce917243a9f729e036ad834/benchmark_results/table%20set.png?raw=true)
+![regular table, set](https://github.com/ThePhD/lua-bindings-shootout/blob/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/table%20set.png?raw=true)
 
-![regular table, get](https://github.com/ThePhD/lua-bindings-shootout/blob/bbead8912ca8989cdce917243a9f729e036ad834/benchmark_results/table%20get.png?raw=true)
+![regular table, get](https://github.com/ThePhD/lua-bindings-shootout/blob/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/table%20get.png?raw=true)
 
 Here, I can see most implementations perform the right optimization. Lua's C API has multiple ways of accessing tables: there are functions for the global table with a string key, functions for a string key with a regular table, and even specializations for accessing a table with an integer key. There are also "raw" access and non-raw access versions of this as well. There are a few libraries that don't make the distinction and suffer varying degrees of performance penalty for using the wrong API for the job.
 
@@ -70,11 +70,11 @@ A few libraries here also make a curious choice: rather than making you pass sep
 
 Here are some benchmarks for function calls. I have various different kinds of function calls I can perform in the context of Lua. I will explain each one per-graph.
 
-![calling a C++ function](https://github.com/ThePhD/lua-bindings-shootout/blob/bbead8912ca8989cdce917243a9f729e036ad834/benchmark_results/c%20function.png?raw=true)
+![calling a C++ function](https://github.com/ThePhD/lua-bindings-shootout/blob/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/c%20function.png?raw=true)
 
 This is a very simple benchmark where I call a C++ function through some Lua code. Performance is steady across implementations, save for luacppinterface. Much of this has to do with how efficiently arguments are pushed onto and pulled off of the stack: too much boilerplate in these mechanisms results in unwanted overhead.
 
-![calling a Lua function in C++](https://github.com/ThePhD/lua-bindings-shootout/blob/bbead8912ca8989cdce917243a9f729e036ad834/benchmark_results/lua%20function%20in%20c.png?raw=true)
+![calling a Lua function in C++](https://github.com/ThePhD/lua-bindings-shootout/blob/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/lua%20function%20in%20c.png?raw=true)
 
 This benchmarks the function abstraction of the library, to see how efficiently it wraps up and calls `lua_pcall` (or `lua_call`). This is typically done through some abstraction `lib::lua_function f = lua["f"]; f(123);`. What is most surprising here is how sol seems to outperform the handwritten C code here.
 
@@ -98,13 +98,13 @@ Classes are an interesting beast. I primarily test the interop inside of Lua and
 
 Below are tests for member function calls (in lua with `obj:mem_func()`, and member variable access (in lua with `obj.my_var = 20` and similar getter) on customized usertypes / userdata:
 
-![member function calls](https://raw.githubusercontent.com/ThePhD/lua-bindings-shootout/bbead8912ca8989cdce917243a9f729e036ad834/benchmark_results/member%20function%20call.png?raw=true)
+![member function calls](https://raw.githubusercontent.com/ThePhD/lua-bindings-shootout/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/member%20function%20call.png?raw=true)
 
-![member variables](https://raw.githubusercontent.com/ThePhD/lua-bindings-shootout/bbead8912ca8989cdce917243a9f729e036ad834/benchmark_results/userdata%20variable%20access.png?raw=true)
+![member variables](https://raw.githubusercontent.com/ThePhD/lua-bindings-shootout/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/userdata%20variable%20access.png?raw=true)
 
 The support story drops off sharply here between member functions and member variables. Many library writers did not want to invest the time to learn how to make both member function and member variable lookup worked (it is a non-trivial exploration for C binding code) and -- even if some did -- some did not want to take the fixed overhead penalty for having to retrieve both member variables and member functions from C++. In particular, `kaguya`, `selene`, and a few other libraries lost support because they immediately reached for automatic creation of `obj:member_variable_get/set()` or overloaded `obj:member_variable()/obj:member_variable(value)` functions.
 
-![member variables, pathological case of multiple variables](https://raw.githubusercontent.com/ThePhD/lua-bindings-shootout/bbead8912ca8989cdce917243a9f729e036ad834/benchmark_results/userdata%20variable%20access%20large.png?raw=true)
+![member variables, pathological case of multiple variables](https://raw.githubusercontent.com/ThePhD/lua-bindings-shootout/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/userdata%20variable%20access%20large.png?raw=true)
 
 Here I measure the pathological case of where I bind over 50 member variables of similar names, and with different types (mostly `double`, `int`, and `int64_t`). This is more or less a stress test to tease out performance differences between lookup strategies.
 
@@ -118,13 +118,13 @@ It is worth mentioning the Plain C code here isn't entirely a full C solution. P
 
 Inheritance is an incredibly rough beast. There are only 2 benchmarks I do related to this, and both are not pretty for sol:
 
-![inheritance lookup with 2 bases](https://github.com/ThePhD/lua-bindings-shootout/blob/bbead8912ca8989cdce917243a9f729e036ad834/benchmark_results/implicit%20inheritance.png?raw=true)
+![inheritance lookup with 2 bases](https://github.com/ThePhD/lua-bindings-shootout/blob/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/implicit%20inheritance.png?raw=true)
 
 This benchmark is a little bit more lenient. The actual Lua code here only calls one of 2 inherited functions: if you write your bindings correctly with Lua-Intf and Luabridge, you can get away with the fact that Lua-Intf and Luabridge don't actually support multiple inheritance. In the future I will probably make the benchmark check both depended-on functions, in which case a few more frameworks will drop into "unsupported" land. But, as you can see, Macro-based solutions like OOLua beat out the typical hand-written inheritance situation in Plain C and most other libraries. SWIG also performs well because it forwards all base member function and variable registration onto its derived classes, saving itself from having to perform a chained lookup.
 
 Chained lookup is exactly what plagues sol in this case: there is a complicated series of indirections and lookups to check for base classes and walk each one. Not to mention that base class lookup is entirely linear: due to the way the code is registered, sol checks the proper base class with the right entry last, resulting in an unfortunate speed drop. This is something I plan to fix for sol3 and have been [warning about in the documentation for a long time](http://sol2.readthedocs.io/en/latest/api/usertype.html#inheritance).
 
-![base from derived in C++ code](https://github.com/ThePhD/lua-bindings-shootout/blob/bbead8912ca8989cdce917243a9f729e036ad834/benchmark_results/base%20derived.png?raw=true)
+![base from derived in C++ code](https://github.com/ThePhD/lua-bindings-shootout/blob/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/base%20derived.png?raw=true)
 
 This shows part of the reason why sol is slow in the implicit inheritance benchmark. sol allows the user to obtain the base class of a derived member **at will in raw C++ code**. Almost no other library has that kind of support story. Plain C is fast because I cheat heavily: I simply get the proper derived type and then `static_cast` to the right base type. In a real system, you often do not have that kind of fore-knowledge. Still, it serves as a good comparison to what the theoretical fastest would be.
 
@@ -134,11 +134,11 @@ Another big concern is how deeply can you dive into a nested table and properly 
 
 Below are libraries that (successfully) allow you to avoid the segfault and check if something exists in a nested tables resulting from executing the pre-script `"warble = { value = 3 }"`. For the "half failure" test, I remove the value: for the full "failure" test, there is no table at all.
 
-![access a nested table, all tables present](https://github.com/ThePhD/lua-bindings-shootout/blob/bbead8912ca8989cdce917243a9f729e036ad834/benchmark_results/optional%20success.png?raw=true)
+![access a nested table, all tables present](https://github.com/ThePhD/lua-bindings-shootout/blob/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/optional%20success.png?raw=true)
 
-![access a nested table, table present but no value](https://github.com/ThePhD/lua-bindings-shootout/blob/bbead8912ca8989cdce917243a9f729e036ad834/benchmark_results/optional%20half%20failure.png?raw=true)
+![access a nested table, table present but no value](https://github.com/ThePhD/lua-bindings-shootout/blob/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/optional%20half%20failure.png?raw=true)
 
-![access a nested table, no tables present](https://github.com/ThePhD/lua-bindings-shootout/blob/bbead8912ca8989cdce917243a9f729e036ad834/benchmark_results/optional%20failure.png?raw=true)
+![access a nested table, no tables present](https://github.com/ThePhD/lua-bindings-shootout/blob/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/optional%20failure.png?raw=true)
 
 Important to note that asides from Selene's performance here, most libraries are good at performing the minimum necessary work to check and avoid failure, or to give success. The fastest code simply performs type checks all the way down. sol here loses some performance because I check if a type is more than just a table or not: e.g., a userdata can simulate table-like properties by overriding metamethods, and so there is a slight bit of overhead here for the goal of having a more robust table abstraction in C++. It is important for many code bases to handle "callable-alike" and "table-alike" types, and it is incredibly frustrating when code ultimately fails due to a cruddy assertion like `assert(lua_istable(L, index));`.
 
