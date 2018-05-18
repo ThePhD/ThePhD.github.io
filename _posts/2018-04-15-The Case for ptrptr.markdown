@@ -1,7 +1,7 @@
 ---
 layout: post
 title: The Case for ptrptr in the Standard Library
-tags: [C++, ptrptr, performance, benchmarks, 🚌, ⌨️]
+tags: [C++, ptrptr, ptrptr series, series, performance, benchmarks, 🚌, ⌨️]
 excerpt_separator: <!--more-->
 ---
 
