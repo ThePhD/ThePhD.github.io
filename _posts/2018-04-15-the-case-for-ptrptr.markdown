@@ -108,9 +108,9 @@ The full code is [here](https://github.com/ThePhD/ptrptr/tree/master/benchmarks)
 
 The graphs below come from a dedicated Core i7 machine, compiled with the usual flags for each platform (`-O3` on g++/clang++, `/Ox` for VC++), we generate the values of the runs in JSON format and then send them to a [quick python script I wrote](https://github.com/ThePhD/ptrptr/blob/master/benchmarks/tools/generate_graphs.py) that can output their values for me to inspect in pretty graph form. The graphs have error bars representing the standard deviation, bars up to the mean, and transparent scatter plots indicating the distribution of 1000 multi-iteration benchmark samples. We sort from fastest to slowest, and the color remains the same for each technique (`c_code` versus `simple_ptrptr` versus `clever_ptrptr` used):
 
-![Local ptrptr benchmarks.](https://raw.githubusercontent.com/ThePhD/ptrptr/master/benchmark_results/ptrptr_benchmarks.local.png)
+![Local ptrptr benchmarks.](https://raw.githubusercontent.com/ThePhD/ptrptr/6aeb22198e1b74f6578944d18d0d859a705b35e1/benchmark_results/ptrptr_benchmarks.local.png)
 
-![Reset ptrptr benchmarks.](https://raw.githubusercontent.com/ThePhD/ptrptr/master/benchmark_results/ptrptr_benchmarks.reset.png)
+![Reset ptrptr benchmarks.](https://raw.githubusercontent.com/ThePhD/ptrptr/6aeb22198e1b74f6578944d18d0d859a705b35e1/benchmark_results/ptrptr_benchmarks.reset.png)
 
 You can clearly see here that the `clever_ptrptr` has a statistically significant performance advantage: it is outside two or even three standard deviations. The raw data that is available publicly in the github repository also reports an Index of Dispersion that is far less than 1% (e.g., the Index of Dispersion is on the order of pico- and femtoseconds while the measurements are on the order of nanoseconds). This means the results are not subject to wild variance and hold significance.
 
