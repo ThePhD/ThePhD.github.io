@@ -1,6 +1,8 @@
 ---
 layout: post
 title: The Case for ptrptr in the Standard Library 2 -- Electric Boogaloo
+feature-img: "assets/img/portfolio/ptrptr.png"
+thumbnail: "assets/img/portfolio/ptrptr.png"
 tags: [C++, ptrptr, ptrptr series, series, performance, benchmarks, 🚌, ⌨️]
 excerpt_separator: <!--more-->
 ---

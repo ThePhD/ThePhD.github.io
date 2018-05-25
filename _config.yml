@@ -1,15 +1,15 @@
 # SITE CONFIGURATION
 baseurl: ""
 url: "https://ThePhD.github.io"
-title: Name::Pending
+title: The Pasture
 description: "Code, posts, discussion, theorycrafting and adventures with The Phantom Derpstorm (ThePhD)" # used by search engines
 
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: Name::Pending
-  avatar: assets/img/triangle.svg
+  title: The Pasture
+  avatar: assets/img/thephd.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
 
@@ -34,7 +34,7 @@ theme_settings:
   google_plus:
   instagram:
   keybase:
-  linkedin:  # Full URL
+  linkedin: https://www.linkedin.com/in/thephd # Full URL
   pinterest:
   reddit:
   soundcloud:
