@@ -2,7 +2,7 @@
 layout: post
 title: New Avatar!
 thumbnail: "assets/img/thumbnails/art-beautiful-bloom.jpg"
-tags: [avatar, blah, graphic design, 🎨]
+tags: [avatar, blah, art, graphic design, 🎨, 🖌️]
 excerpt_separator: <!--more-->
 ---
 
