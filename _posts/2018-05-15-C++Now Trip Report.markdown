@@ -11,7 +11,7 @@ The trip for the [C++ Now 2018](http://cppnow.org/) conference in Aspen, Colorad
 
 <!--more-->
 
-Aspen, Colarado is an absolutely gorgeous area. When I first got there, it felt like I was taking a vacation! Of course, a vacation might have had me getting a little more sleep than I ended up catching that week, but every night staying up until 12 or 1 AM in the morning talking about C++, techniques, experiences and ideas was entirely well worth it. It is rare I get to geek out in person... and I got to do a whole **week** of it in beautiful Aspen!
+Aspen, Colorado is an absolutely gorgeous area. When I first got there, it felt like I was taking a vacation! Of course, a vacation might have had me getting a little more sleep than I ended up catching that week, but every night staying up until 12 or 1 AM in the morning talking about C++, techniques, experiences and ideas was entirely well worth it. It is rare I get to geek out in person... and I got to do a whole **week** of it in beautiful Aspen!
 
 ![Breathtaking!]({{ site.baseurl }}/assets/img/2018-05-15/C++Now Scenery.jpg)
 
