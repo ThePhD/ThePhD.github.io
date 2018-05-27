@@ -13,3 +13,5 @@ I am an Undergraduate studying at Columbia University's Fu School of Engineering
 C++ is my first love, wheel house, and primary jam. But! I've worked in several other languages (Lua, Typescript, Python, C#, C, Java, the usual C-family of languages alongside OCaml) and performed fun things with others (Javascript, ActionScript 3, Elm, and a tiny bit of Haskell).
 
 In my free time I try to write and draw, which has naturally led me to creating this place here! I'll be posting... well, anything and everything that comes to mind that I think might be worth sharing. Feel free to poke around and examine things!
+
+The adorable favicon is the Twitter Sheep Emoji from [Twemoji 2.7](https://github.com/twitter/twemoji). The avatar is something I drew by hand! 
