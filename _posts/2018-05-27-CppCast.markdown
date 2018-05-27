@@ -1,0 +1,20 @@
+---
+layout: post
+title: CppCast 2018, with Rob Irving and Jason Turner!
+feature-img: "assets/img/thumbnails/logo@2x.png"
+thumbnail: "assets/img/thumbnails/logo@2x.png"
+tags: [C++, CppCast, speaking, podcast, 🤝, 📣, 🎧]
+excerpt_separator: <!--more-->
+---
+
+Me and my new avatar showed up on CppCast!
+
+<!--more-->
+
+Jason Turner and Rob Irving invited me to [speak on CppCast](http://cppcast.com/2018/05/jeanheyd-meneide/), so I did! I was nervous, but I think it turned out alright. There's a tiiiiny bit of ambient noise, but I think it is alright.
+
+I spent most of my time talking about [std::embed](https://rawgit.com/ThePhD/embed/master/papers/P1040%20-%20embed.html) and [sol2](portfolio/sol), as well as my upcoming trip to Rapperswil! 🎉
+
+I also spent a good chunk of time talking about where I belong and inclusivity again, much like my C++Now 2018 lightning talk. It's a bit weird to keep putting my story out there and talking about it. I think doing it twice and writing about it in my [C++Now Trip Report](/2018/05/15/C++Now-Trip-Report.html) and having the Lightning Talk video floating out there somewhere is more than enough for me, for the time being. There is a lot more to the story, but I want to focus more on the technical things rather than divulge an entire autobiograhy.
+
+Until next time. ♥
