@@ -78,7 +78,7 @@ This is a very simple benchmark where I call a C++ function through some Lua cod
 
 This benchmarks the function abstraction of the library, to see how efficiently it wraps up and calls `lua_pcall` (or `lua_call`). This is typically done through some abstraction `lib::lua_function f = lua["f"]; f(123);`. What is most surprising here is how sol seems to outperform the handwritten C code here.
 
-I unrolled the code for sol and compared it to the sequence of calls for plain C. One difference is that sol -- when retrieving the return value of the function -- boils down to `double v = lua_tonumberx(L, index, &is_num);` versus the typical `doule v = lua_tonunmber(L, index);`. The latter is a macro for `lua_tonumberx(L, index, NULL);`.
+I unrolled the code for sol and compared it to the sequence of calls for plain C. One difference is that sol -- when retrieving the return value of the function -- boils down to `double v = lua_tonumberx(L, index, &is_num);` versus the typical `double v = lua_tonunmber(L, index);`. The latter is a macro for `lua_tonumberx(L, index, NULL);`.
 
 The other difference is in library's and handwritten's code use in `lua_call` (which defers to `lua_callk`) versus `lua_pcall` (which defers to `lua_pcallk`). `lua_call` does not attempt to set any error handlers or perform any safety. You would think that `lua_call` would have equal (or mostly negligible)  performance to `lua_pcall` if you set all the continuation and error-checking arguments to be their null types.
 
