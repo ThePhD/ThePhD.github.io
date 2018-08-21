@@ -81,7 +81,7 @@ Of course, this is why I've already booked my trip to San Diego nice and E A R L
 
 # Oh, the Groups
 
-Right. The committee is currently split into four factions: ~~Orcs, Elves, Humans and Dwarves~~ Evolution, Library, Core, and Library Evolution. The first two are the gatekeepers that hammer out design and feature set of things related to the language and the library, respectively. The last two are for the exact words that end up in the standard (again, language and library respectively).
+Right. The committee is currently split into four factions: ~~Orcs, Elves, Humans and Dwarves~~ Evolution, Library, Core, and Library Evolution. The Evolution groups are the gatekeepers that hammer out design and feature set of things related to the language and the library, respectively. The remaining two (Core and Library) are for the exact words that end up in the standard (again, language and library respectively).
 
 There are also Study Groups, but maybe those can be reviewed later. The bigger groups have private e-mail "reflectors" to keep a high signal-noise ratio as high as possible and to not let any old person come in [and throw a massive tantrum](https://groups.google.com/a/isocpp.org/forum/#!topic/std-proposals/qd3L1-bGg1A).
 
@@ -105,7 +105,7 @@ This is also where big-ticket library features get discussed as well. Executors 
 
 ### Library
 
-The only room I did not expose myself to enough was Library. I sat in one half-session, and one library issues processing. I could only offer one meager comment in the issues processing session, and whisper a few things to the amazing C++ veteran Walter Brown about a few ideas I had. As explained to me, this room is 100% the bottleneck for most standards features. Prioritization and off-shelf meetings between members help process things at a rate acceptable to the explosive growth of the language.
+The only room I did not expose myself to enough was Library. Library is responsible for wording. You hand them a feature, they make it specification. I sat in one half-session, and one library issues processing. I could only offer one meager comment in the issues processing session, and whisper a few things to the amazing C++ veteran Walter Brown about a few ideas I had. As explained to me, this room is 100% the bottleneck for most standards features. Prioritization and off-shelf meetings between members help process things at a rate acceptable to the explosive growth of the language.
 
 If the C++ language is big, the C++ library is huge by comparison, and there's quite literally tons of issues and only a handful of experts willing to not only implement them but wrangle the wording to be consistently good. This is the room I want to help so desperately, but I feel completely outmatched. From Jonathan Wakely to Marshall Clow to Billy O'Neal, this is quite literally the "Rocket Scientist" room. The little knowledge I have is utterly eclipsed by just a fraction of their expertise and its daunting to want to make suggestions about wording when I understand nearly nothing of it.
 
