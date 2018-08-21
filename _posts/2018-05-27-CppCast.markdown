@@ -1,8 +1,8 @@
 ---
 layout: post
 title: CppCast 2018, with Rob Irving and Jason Turner!
-feature-img: "assets/img/thumbnails/logo@2x.png"
-thumbnail: "assets/img/thumbnails/logo@2x.png"
+feature-img: "assets/img/thumbnails/CppCast.png"
+thumbnail: "assets/img/thumbnails/CppCast.png"
 tags: [C++, CppCast, speaking, podcast, 🤝, 📣, 🎧]
 excerpt_separator: <!--more-->
 ---

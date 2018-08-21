@@ -1,8 +1,8 @@
 ---
 layout: post
 title: The (Late) Rapperswil Trip Report
-feature-img: "assets/img/thumbnails/logo@2x.png"
-thumbnail: "assets/img/thumbnails/logo@2x.png"
+feature-img: "assets/img/thumbnails/RapperswilRainbow.jpg"
+thumbnail: "assets/img/thumbnails/RapperswilRainbow.jpg"
 tags: [C++, Unicode, text processing, future, sg-16, embed, standards, proposals, 🤝, ⌨️, 📜]
 excerpt_separator: <!--more-->
 ---
