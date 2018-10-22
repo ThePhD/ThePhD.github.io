@@ -1,0 +1,3 @@
+[submodule "vendor/future_cxx"]
+	path = vendor/future_cxx
+	url = https://github.com/ThePhD/future_cxx.git

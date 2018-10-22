@@ -47,7 +47,7 @@ There's still quite a bit of bikeshed about what the final sequence of tokens / 
 
 # On the Committee Itself
 
-If you have never gone to a Committee meeting and you have an entire week to blow with a bunch of nerds who have excellent taste in food and lots of great stories to share, you can do like I did an sit in the middle of a bunch of insanely intelligent lads and lasses and just soak it up. It's absolutely worth it and it really puts a lot of the hard work into perspective. It's also pretty amazing that you can walk up to people who are basically C++ demigods, shake their hand, and just... have a chat. Literally, have a chat, right then and there, with people like Herb Sutter or Hubert Tong.
+If you have never gone to a Committee meeting and you have an entire week to blow with a bunch of nerds who have excellent taste in food and lots of great stories to share, you can do like I did and sit in the middle of a bunch of insanely intelligent lads and lasses and just soak it up. It's absolutely worth it and it really puts a lot of the hard work into perspective. It's also pretty amazing that you can walk up to people who are basically C++ demigods, shake their hand, and just... have a chat. Literally, have a chat, right then and there, with people like Herb Sutter or Hubert Tong.
 
 ### Voting
 
@@ -55,11 +55,11 @@ A few things about how voting worked and the like perplexed me in the beginning.
 
 This makes sense, since the vast majority of attendees are ISO members whose presence is both bankrolled by their company and also serve as ISO representatives in the US/French/German/Dutch/Netherland/Polish/etc. National Body. Voting along company lines is to be expected, but I suppose I was still surprised for the first few votes I saw out of some individuals, before in my head I went "ah, right, they belong to contingency X representing Y".
 
-As a student and bankrolling my own trips, I don't have anyone to answer to. I could put my hands in the air like I just didn't care! ... Except, well, for a lot of votes I did care. There was even one vote where I was the only person who put my hand up for it! A wise man once said:
+As a student bankrolling my own trips, I don't have anyone to answer to. I could put my hands in the air like I just didn't care! ... Except, well, for a lot of votes I did care. There was even one vote where I was the only person who put my hand up for it! A wise man once said:
 
 > Remember to always speak up, always ask your question, and always raise your hand, because you **are** the last line of defense. They **must** answer your questions and concerns! - Bryce Adelstein Lelbach, 2018
 
-And he's right: votes that pass strawpolls in the rooms have to be voted on by the ISO members in plenary at the end of the week. If you did not stop it then -- and if you're not an ISO member -- the strawpoll **is** the last time you can put a stop on something!
+And he's right: votes that pass straw polls in the rooms have to be voted on by the ISO members in plenary at the end of the week. If you did not stop it then -- and if you're not an ISO member -- the straw poll **is** the last time you can put a stop on something!
 
 ### Bikeshedding
 

@@ -23,7 +23,7 @@ theme_settings:
 
   # Icons
   rss: false  # Make sure you created a feed.xml with feed.xml layout
-  email_address: # Full email address, e.g. "sam@example.com"
+  email_address: phdofthehouse@gmail.com # Full email address, e.g. "sam@example.com"
   behance:
   bitbucket:
   dribbble:
@@ -36,6 +36,7 @@ theme_settings:
   keybase:
   linkedin: https://www.linkedin.com/in/thephd # Full URL
   pinterest:
+  patreon: thephd
   reddit:
   soundcloud:
   stack_exchange:  # Full URL
@@ -56,6 +57,7 @@ theme_settings:
   
   # Localization strings
   str_follow_on: "Follow on"
+  str_follow_on: "Support Opensource, Become a Patron"
   str_rss_follow: "Follow RSS feed"
   str_email: "Email"
   str_next_post: "Next post"

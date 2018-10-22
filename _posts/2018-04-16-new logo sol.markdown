@@ -9,7 +9,7 @@ We have a new logo for the [sol project](/portfolio/sol)!
 
 <!--more-->
 
-![this shiny, beautiful version](/assets/img/2018-04-16/new sol.png)
+![This shiny, beautiful version!](/assets/img/2018-04-16/new sol.png)
 
 The old logo was made in 10 or so minutes a day before I had to give a presentation in class about sol2 and the various API design and engineering/testing that went into it. This new logo was crafted with a bit more thinking in mind, and then polished with the help of some friends. It looks much more beautiful, even a bit professional!
 

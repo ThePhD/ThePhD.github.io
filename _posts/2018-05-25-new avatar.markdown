@@ -10,7 +10,7 @@ It took me a while, but I finally created a new avatar!
 
 <!--more-->
 
-![this shiny, beautiful version](/assets/img/2018-05-25/thephd.png)
+![This shiny, beautiful version!](/assets/img/2018-05-25/thephd.png)
 
 The new avatar is quite nice, and I drew it myself. The glasses are still the same from my last avatar, but this is more or less the version I want. I might add horns and make some minor adjustments later (in which case, they'll show up in the above image)!
 
