@@ -27,7 +27,7 @@ sol2 (and the upcoming sol3) are reaching a point for me where I'm not actually 
 
 But my excitement is still waning.
 
-I spent a good while talking to other people and looking at how they maintain their open source projects. I do not want to go the route of just abandoning sol2 to be a ghost repository, which seemed to be quite a common theme. Being bored is an absolute killer when there is an opensource project on the line, because it is strictly a time sink for little return-on-investment, especially if it is freeware (e.g., MIT Licensed). I don't want to get bored of sol2, but I can sort of feel it creeping into my soul. I am still making solid progress on sol3 and have finished completely rewriting the `usertype` system, but now I have quite a bit of extra work to do from new feature requests and test re-engineering and goodness does it hit me hard every time I open up the files those 2K assertions...!
+I spent a good while talking to other people and looking at how they maintain their open source projects. I do not want to go the route of just abandoning sol2 to be a ghost repository, which seemed to be quite a common theme. Being bored is an absolute killer when there is an opensource project on the line, because it is strictly a time sink for little return-on-investment, especially if it is freely available with no real requirements in return (e.g., MIT Licensed). I don't want to get bored of sol2, but I can sort of feel it creeping into my soul. I am still making solid progress on sol3 and have finished completely rewriting the `usertype` system, but now I have quite a bit of extra work to do from new feature requests and test re-engineering and goodness does it hit me hard every time I open up the files those 2K assertions...!
 
 
 
