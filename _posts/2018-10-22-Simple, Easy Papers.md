@@ -12,9 +12,9 @@ There are 274 papers in the San Diego mailing! But some of them hardly need comm
 
 Yes.
 
-Reading through all of these papers takes a lot of time, and it is quite a bit more than usual (apparently, record-breaking!) influx of papers. With such heavy volume I decided to do some pre-review of a few papers. And, in doing so, I can hopefully get everyone to reach consensus a little faster about them.
+Reading through all of these papers takes a lot of time, and it is quite a bit more than the usual (apparently, record-breaking!) influx of papers. With such heavy volume I decided to do some pre-review of a few papers. And, in doing so, I can hopefully get everyone to reach consensus a little faster about them.
 
-I post my sentiment at the end of each section, over the spectrum Strongly in Favor, in Favor, Neutral, Against, and Strongly Against (the same polling strategy as the working and study grounds in the C++ Standards Committee).
+I post my sentiment at the end of each section, over the spectrum Strongly in Favor, in Favor, Neutral, Against, and Strongly Against (the same polling strategy as the working and study groups in the C++ Standards Committee).
 
 # Starting Simple
 
@@ -69,7 +69,7 @@ void main() {
 ```
 
 
-My only problem with the paper is that it preemptively does not mark the function `constexpr` in the realization that an implementation can just use `std::bit_cast` to implement this, which is not `constexpr` for this task.
+My only problem with the paper is that it preemptively does not mark the function `constexpr`. This is from the realization that an implementation of `std::offsetof` can just use `std::bit_cast` to implement this. `std::bit_cast` is not fully `constexpr`, and as such either `bit_cast` needs to change or this paper needs to take the leap of faith into demanding this be a requirement.
 
 This can still be put into the Standard, even as it is. I would just have preferred it to be `constexpr` too.
 
@@ -78,7 +78,7 @@ In Favor!
 
 ### [p1005 - `namespace std { namespace fs = filesystem; }`](https://wg21.link/p1005)
 
-The paper title says it all. `std::filesystem` is an enormous drag to type out. `std::fs` is much better and will have less people creating aliases or doing `using namespace std;`.
+The paper title says it all. `std::filesystem` is an enormous drag to type out. `std::fs` is much better and will have less people creating aliases or doing `using namespace std::filesystem;`.
 
 Unanimous consent. ... That was easy, wasn't it?
 
@@ -92,6 +92,8 @@ The original author got busy, but the paper was pretty much super successful and
 I picked `z` and `uz`/`zu` to have parity with how C++ has its current built-in suffixes for literals: there is a base that represents the signed version `z` and the other that represents the unsigned version by slapping `u` before or after it. This threw out the design decisions of having separate `sz` or `s` for `size_t` and a separate `t` or `td` or `pd` for `ptrdiff_t`. I also cannot use `s` because there is another paper working on `short float` for the "half float" data type found in a lot of architectures right now. That paper would reasonably want `s`, so it makes sense not to take it. `z` has some precedence for being the size of things in C++, so this seemed like the most logical choice.
 
 This might get bikeshed, [but other people already feel like the paper is a win](http://gcc.1065356.n8.nabble.com/C-PATCH-Implement-C-2a-P0330R2-Literal-Suffixes-for-ptrdiff-t-and-size-t-td1523832.html) and have patches lined up and ready to go!
+
+Strongly in Favor.
 
 That's all the simple and easy papers for now. I will post about other spicier papers soon.
 
