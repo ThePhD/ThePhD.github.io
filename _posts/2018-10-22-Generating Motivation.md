@@ -55,6 +55,6 @@ Writing papers for C++ Standardization and implementing them, thankfully, is alw
 
 This has been a very satisfying experience. There are a number of papers that people propose once that are genuinely good ideas, but do not have the time or energy to push them through the C++ Committee. I think I am getting a very good grasp of that, and so would potentially like to offer that service to others, maybe even to patrons of the Patreon! It's still an idea I am toying with and not something I can act on right away: I have school to think about and my final year of classes coming up so I can get my Bachelor's and start looking at Master's/industry! But... it's an idea in my back pocket.
 
-That is all for now. I haven't put a link to my Patreon in this post, per se, because I still need to keep polishing it. (I have this thing where I want to even draw my own art on it, sheesh. I might just have to stick with using presentation materials instead!)
+That is all for now. I hope you will check out the Patreon if it interests you, and perhaps help me engage in keeping sol supported and my motivation in a good place!
 
 Until next time! ♥
