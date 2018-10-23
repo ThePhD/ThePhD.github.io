@@ -46,7 +46,7 @@ All too often have I seen a pedant on Stack Overflow add to the comments or thei
 I have nothing but burning, passionate, and fiery Strongly in Favor for this paper.
 
 
-### [p1272 - Byteswapping for fun&&nuf](https://wg21.link/p1276)
+### [p1272 - Byteswapping for fun&&nuf](https://wg21.link/p1272)
 
 Yes. Or, more appropriately: _it's about damn time_. `htonl` and `ntohl` has been present since the beginning of time. That we didn't just slap it into the C++ standard and make everyone's lives easier has been tiresome. Someone finally wrote the paper, and hopefully in C++20 we will have actual standard byteswapping.
 
