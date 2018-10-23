@@ -54,7 +54,7 @@ Unanimous consent, yes **please**.
 
 ### [p1278 - offsetof for the Modern Era](https://wg21.link/p1278)
 
-Making a function out of a macro and adding features to is only a good thing. This paper lets you specify a member object pointer to `std::offsetof` and get its actual offset from the type. This is pretty cool and allows generic code to do some nifty things, especially in relation to working with C APIs:
+Making a function out of a macro and adding features to it is only a good thing. This paper lets you specify a member object pointer to `std::offset` and get its actual offset from the type. This is pretty cool and allows generic code to do some nifty things, especially in relation to working with C APIs:
 
 ```c++
 struct A {
