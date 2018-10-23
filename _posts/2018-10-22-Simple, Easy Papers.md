@@ -64,7 +64,7 @@ struct A {
 };
 
 void main() {
-	std::ptrdiff_t c_offset = std::offsetof<A>(&A::c);
+	std::ptrdiff_t c_offset = std::offsetof(&A::c);
 }
 ```
 
