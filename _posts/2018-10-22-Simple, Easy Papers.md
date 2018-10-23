@@ -41,7 +41,7 @@ Strongly in Favor.
 
 ### [p1276 - `void main`](https://wg21.link/p1276)
 
-All too often have I seen a pedant on Stack Overflow add to the comments or their answer about how wrong OP's `main` is. _That is an extension and you're not writing conformant standard C++._ It's time to retroactively fix all those answers, patch all those books, and let `main` return `void` because, let's be honest: that is kind of how the standard lets us specify it. We can leave off the return type entirely, or only return on one branch and forget the others. `main` looks, feels, smells, and behaves like a `void` function in all except name: this paper fixes that.
+All too often have I seen a pedant on Stack Overflow add to the comments or their answer about how wrong OP's `main` is. '_That is an extension and you're not writing conformant standard C++._', they quickly point out. It's time to retroactively fix all those answers, patch all those books, and let `main` return `void` because, let's be honest: that is kind of how the standard lets us specify it. We can leave off the return statement entirely, or only return on one branch and forget the others. For all intents and purposes, `main` feels, smells, and behaves like a `void` function in all except signature: this paper fixes that. It's time `main` started looking exactly how we specify it.
 
 I have nothing but burning, passionate, and fiery Strongly in Favor for this paper.
 
