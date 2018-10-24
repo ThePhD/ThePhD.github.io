@@ -1,28 +1,25 @@
 # SITE CONFIGURATION
 baseurl: ""
-url: "https://ThePhD.github.io"
-title: The Pasture
-description: "Code, posts, discussion, theorycrafting and adventures with The Phantom Derpstorm (ThePhD)" # used by search engines
+url: "https://thephd.github.io"
+title: The Pasture # site's title
+description: "The musings, ideas, discussions, and sometimes silly words from a programming sheep & shepherd" # used by search engines
 
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: The Pasture
+  title: The Pasture # blog's title
   avatar: assets/img/thephd.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
-
   # Header and footer text
   header_text: "♡"
-  #header_text: > #two or three lines to describe your site
-  #   <p>Change header text in <code>_config.yml</code> <br> to update this feature.</p>
-  header_text_feature_image: assets/img/pexels/triangular.jpeg
+  header_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
    Copyright © 2018 ThePhD -- Powered by <a href="https://jekyllrb.com/">Jekyll</a> with a modified <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap!</a>
 
   # Icons
-  rss: false  # Make sure you created a feed.xml with feed.xml layout
+  rss: true  # Make sure you created a feed.xml with feed.xml layout
   email_address: phdofthehouse@gmail.com # Full email address, e.g. "sam@example.com"
   behance:
   bitbucket:
@@ -35,31 +32,53 @@ theme_settings:
   instagram:
   keybase:
   linkedin: https://www.linkedin.com/in/thephd # Full URL
+  patreon: ThePhD
   pinterest:
-  patreon: thephd
   reddit:
   soundcloud:
   stack_exchange:  # Full URL
   steam:
   tumblr:
-  twitter: "thephantomderp"
+  twitter: thephantomderp # "twitter username"
   vimeo:
   wordpress:
   youtube:
+  
+  # Sharing options
+  share_buttons:
+    facebook: false
+    twitter: true
+    google_plus: false
+    tumblr:
+    pinterest:
+    pocket:
+    reddit: true
+    linkedin:
+    wordpress:
+    email: true
 
   # Scripts / Features 
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
   disqus_shortname:
   katex: true # Enable if using math markup
-  portfolio: true
-  search: true
-  tags: true
+  
+  special_page:
+    search: 
+      icon: "search"
+      enabled: true
+    tags:
+      icon: "tags"
+      enabled: true
   
   # Localization strings
   str_follow_on: "Follow on"
-  str_follow_on: "Support Opensource, Become a Patron"
   str_rss_follow: "Follow RSS feed"
+  str_share_on: "Share on"
+  str_add_to: "Add to"
   str_email: "Email"
+  str_tweet: "Tweet"
+  str_become_patron: "Become a Patron"
+  str_pin_it: "Pin it"
   str_next_post: "Next post"
   str_previous_post: "Previous post"
   str_next_page: "Next"
@@ -74,7 +93,7 @@ theme_settings:
   # Post navigation
   post_navigation: true
   
-
+  
 # PAGINATION
 paginate: 5
 paginate_path: "blog/page:num"
@@ -95,4 +114,4 @@ sass:
   style: :compressed
 plugins: [jekyll-paginate, jekyll-seo-tag]
 #theme: type-on-strap # Uncomment if using the theme as a jekyll theme gem
-exclude: ["Gemfile", "Gemfile.lock", "type-on-strap.gemspec", "*.gem", "LICENSE", "README.md", "screenshot.png"]
+exclude: ["Gemfile", "Gemfile.lock", "type-on-strap.gemspec", "*.gem", "LICENSE", "README.md", "screenshot.png", "package.json", "node_modules", "gulpfile.js", ".idea/*"]

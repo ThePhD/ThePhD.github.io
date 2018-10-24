@@ -3,7 +3,7 @@ layout: post
 title: Simple, Easy Papers
 feature-img: "assets/img/pexels/book-glass.jpeg"
 thumbnail: "assets/img/2018-10-22/San Diego Papers.jpg"
-tags: [C++, CppCon, speaking, conferences, 🤝, 📣, 📜]
+tags: [C++, future, standards, proposals, review, ⌨️, 📜]
 excerpt_separator: <!--more-->
 ---
 
@@ -95,6 +95,8 @@ This might get bikeshed, [but other people already feel like the paper is a win]
 
 Strongly in Favor.
 
-That's all the simple and easy papers for now. I will post about other spicier papers soon.
+### And that's it for now!
+
+That's all the simple and easy papers. I will post about other spicier papers soon.
 
 Until next time! ♥
