@@ -64,7 +64,7 @@ This paper solves a fundamental problem that has plagued the Standard Library Ma
 
 This proposal helps ease some of those woes by creating a `!` that can't be overridden: in particular, `if not ( expression... ) { ... }`. A side effect of this is greatly improving the readability of code where performing the exact negation of each element of `expression` (since it can be quite a mix of compound operations) is a bit annoying to have to perform. The benefit of this is that `not` is very much just a mechanical replacement of `!`, so the syntax boils down to `if !( expression... )`. There are no new tokens to parse, and as far as I can read this does not clobber or confuse the grammar any. Note that the negation applies only after the full evaluation of the expression and the result is converted to a boolean, leaving any potential for overriding `!` out of the equation.
 
-This also applies to `if constexpr`. Thankfully, [p1073 - immediate functions](wg21.link/p1073) are proposing a new keyword, so `if constexpr !` is actually just fine despite the hesitations in the paper! [p1073](wg21.link/p1073) ended up with `consteval`.
+This also applies to `if constexpr`. Thankfully, [p1073 - immediate functions](wg21.link/p1073) is proposing a new keyword that is not `constexpr!`, so `if constexpr !` is actually just fine despite the hesitations in the paper! [p1073](wg21.link/p1073) ended up with `consteval`.
 
 I don't discuss p1073, but both of these papers receive a Strongly in Favor from me.
 
