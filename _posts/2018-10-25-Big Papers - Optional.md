@@ -1,15 +1,15 @@
 ---
 layout: post
-title: San Diego Pregame - Non-Optional Optional Choices
+title: San Diego Pregame - Optional Choices to Make
 feature-img: "assets/img/2018-10-25/choose.jpg"
-thumbnail: "assets/img/2018-10-23/san-diego.jpg"
+thumbnail: "assets/img/2018-10-25/choose.jpg"
 tags: [C++, future, optional, standards, proposals, review, ⌨️, 📜]
 excerpt_separator: <!--more-->
 ---
 
-Alright, with the last two blog posts the warm up is done. It's time we tackled a much larger paper in the San Diego mailing:<!--more--> optional.
+The warm up is done, and it is time to choose. Not between Apples and Pears (would pick apples, by the way). It's time to make some choices about something that's been looming over the Standards Committee for a long time, and is part of two pretty important papers in the San Diego mailing:<!--more--> optional.
 
-Now, before some of you sharpen your rebind and assign-through spears and point them in my direction: this will not talk about rebind and assign-through. Because, at the end of the day, those choices are irrelevant to the 2 proposals on the table that need to be discussed: [p0798 - Monadic operations for `std::optional`](https://wg21.link/p0798) and [p1172 - a simple, practical optional reference for C++](https://wg21.link/p1175).
+Now, before some of you sharpen your rebind spears and assign-through broadswords and brandish them in my direction: this will not talk about rebind and assign-through. Because, at the end of the day, those choices are irrelevant to the 2 proposals on the table that need to be discussed: [p0798 - Monadic operations for `std::optional`](https://wg21.link/p0798) and [p1172 - a simple, practical optional reference for C++](https://wg21.link/p1175).
 
 First, however, a bit of history. You can skip down to "The Practicality of References" if you are not interested in the backstory bits.
 
@@ -97,7 +97,7 @@ In all cases, values perform worse. However, something weird seemed to happened 
 
 Right. These benchmarks already take an age to run (literally hours) because of the serious confidence that needs to be established by [Google Benchmark](https://github.com/google/benchmark), so it runs anywhere from ten thousand times to 4 million times. Therefore, to not have to die of old age waiting for the statistics to compute the 4 million iterations _for each and every sample_, the `vector`s only had `8` `int`s in them. I'm sure if you put `MyBigHonkinExpensiveType` in the vector, these numbers would get DRAMATICALLY worse. But I don't have the laptop to fry over running that benchmark! ♩~
 
-As we can see, there is clearly a measurable benefit to references. Which is part of the reason why financial companies, LLVM shops, and other places are still using `tl::optional` or inventing their own type with reference and void specializations. Matt Calabrese's [Regular Void](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0146r1.html) paper will one day fix void specializations so that everything is okay. But, the references question is still an open one. Given the performance benefits, the fact that it is incredibly frustration to suffer random copies in the middle of generic code because `std::optional` will throw a hissy fit, and because sometimes it is _not_ okay to go back and change all prior code using references to return `std::reference_wrapper`s, Simon Brand's paper needs a partner paper! A partner like...
+As we can see, there is clearly a measurable benefit to references. Which is part of the reason why financial companies, LLVM shops, and other places are still using `tl::optional` or inventing their own type with reference and void specializations. Matt Calabrese's [Regular Void](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0146r1.html) paper will one day fix void specializations so that everything is okay. But, the references question is still an open one. Given the performance benefits, the fact that it is frustrating to suffer random copies in the middle of generic code because `std::optional` will throw a hissy fit, and because sometimes it is _not_ okay to go back and change all prior code using references to return `std::reference_wrapper`s, Simon Brand's paper needs a partner paper! A partner like...
 
 
 # [p1175 - a simple and practical optional for C++](https://wg21.link/p1172)
