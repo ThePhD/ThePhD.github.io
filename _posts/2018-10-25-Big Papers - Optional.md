@@ -9,7 +9,7 @@ excerpt_separator: <!--more-->
 
 The warm up is done, and it is time to choose. Not between Apples and Pears (would pick apples, by the way). It's time to make some choices about something that's been looming over the Standards Committee for a long time, and is part of two pretty important papers in the San Diego mailing:<!--more--> optional.
 
-Now, before some of you sharpen your rebind spears and assign-through broadswords and brandish them in my direction: this will not talk about rebind and assign-through. Because, at the end of the day, those choices are irrelevant to the 2 proposals on the table that need to be discussed: [p0798 - Monadic operations for `std::optional`](https://wg21.link/p0798) and [p1172 - a simple, practical optional reference for C++](https://wg21.link/p1175).
+Now, before some of you sharpen your rebind spears and assign-through broadswords and brandish them in my direction: this will not talk about rebind and assign-through. Because, at the end of the day, those choices are irrelevant to the 2 proposals on the table that need to be discussed: [p0798 - Monadic operations for `std::optional`](https://wg21.link/p0798) and [p1175 - a simple, practical optional reference for C++](https://wg21.link/p1175).
 
 First, however, a bit of history. You can skip down to "The Practicality of References" if you are not interested in the backstory bits.
 
@@ -100,7 +100,7 @@ Right. These benchmarks already take an age to run (literally hours) because of 
 As we can see, there is clearly a measurable benefit to references. Which is part of the reason why financial companies, LLVM shops, and other places are still using `tl::optional` or inventing their own type with reference and void specializations. Matt Calabrese's [Regular Void](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0146r1.html) paper will one day fix void specializations so that everything is okay. But, the references question is still an open one. Given the performance benefits, the fact that it is frustrating to suffer random copies in the middle of generic code because `std::optional` will throw a hissy fit, and because sometimes it is _not_ okay to go back and change all prior code using references to return `std::reference_wrapper`s, Simon Brand's paper needs a partner paper! A partner like...
 
 
-# [p1175 - a simple and practical optional for C++](https://wg21.link/p1172)
+# [p1175 - a simple and practical optional for C++](https://wg21.link/p1175)
 
 This paper removes anything and everything that could spark the holy war and presents an optional that not only adds references, but is designed to cover the 80% use cases where optional is found  today. This is for: function arguments, return types, and keeping programmer intent. For any type-based binding layers (e.g., bindings that use type declarations), it not only helps programmers express their intent more correctly but enables additional performance by separating the `null` state from the potential values of the desired type (this [has performance implications for how certain binding layers](https://www.youtube.com/watch?v=0Lwy4_sKeJM&feature=youtu.be&t=3615) such as [sol2](https:/github.com/ThePhD/sol2) can retrieve values from the underlying system).
 
