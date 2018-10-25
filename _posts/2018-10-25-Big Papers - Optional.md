@@ -30,11 +30,11 @@ What's the deal?
 
 ### Searching for Truth
 
-A while ago, in preparation for a huge paper that would take a side on the holy war talked about in Jonathan Boccara's post, I made a survey about optional. I sent out over a dozen e-mails before than, and then a good eight more after it. I (accidentally) ran headlong into legal teams wondering why I was asking their employees about their code, I plunged into the history of several different optional types both pre-dating and post-dating `boost::optional`, and I even e-mailed authors of the first reference wrapper types for C++ (that go back as far as pre-2000)! It was an enlightening experience, absolutely, and messaging and reaching out to Douglas McGregor and Jaakko Järvi (original `boost::tuple` author) was an incredibly fascinating.
+A while ago, in preparation for a huge paper that would take a side on the holy war talked about in Jonathan Boccara's post, I made a survey about optional. I sent out over a dozen e-mails before then, and then a good eight more after it. I (accidentally) ran headlong into legal teams wondering why I was asking their employees about their code, I plunged into the history of several different optional types both pre-dating and post-dating `boost::optional`, and I even e-mailed authors of the first reference wrapper types for C++ (that go back as far as pre-2000)! It was an enlightening experience, absolutely, and messaging and reaching out to Douglas McGregor and Jaakko Järvi (original `boost::tuple` author) made the journey incredibly fascinating.
 
 But that deep-dive is for a later date.
 
-We are not going to talk about rebinding or assign-through or consistency or any of that. There is a much bigger topic that trumps all of these notions quite firmly.
+We are not going to talk about rebinding or assign-through or consistency or any of that. There is a much bigger topic that quite firmly supersedes all of these notions.
 
 
 # The Practicality of References (Benching [p0798](https://wg21.link/p0798))
@@ -43,7 +43,9 @@ References are immensely practical and bring real performance gains to applicati
 
 > What is the performance of shoving some basic data types through the monadic operations a handful of times, with and without references?
 
-Important to note: p0798 introduces the feature that was **the #1 feature request** in the C++ Developer Optional Survey I ran. Monadic operations such as map/and_then/etc. outranked even the want for references in optionals (by a handful of votes). The investigation was sparked by some comments in a conversation I was having about piping things through p0798's optionals multiple times and noticing performance was not equivalent to in-place operations:
+Important to note: p0798 introduces the feature that was **the #1 feature request** in the C++ Developer Optional Survey I ran. Monadic operations such as map/and_then/etc. outranked even the want for references in optionals (by a handful of votes).
+
+In either case, the investigation of performance was sparked by some comments in a conversation I was having about piping things through p0798's optionals multiple times and noticing performance was not equivalent to in-place operations:
 
 > It tends to be helped by copy elision quite a bit, but otherwise that's probably fair. Compilers are good with values generally. Since they're easier to reason about.
 
@@ -52,9 +54,9 @@ So, well. How good are compilers, _really_?
 
 ## Testing the Theory
 
-As mentioned in the history, Simon Brand has implemented an exceedingly high-quality [`tl::optional`](https://github.com/TartanLlama/optional) which is used as part of the fodder in his excellent CppCon 2018 talk, Writing Well-Behaved Value Wrappers:
+As mentioned in the history, Simon Brand has implemented an exceedingly high-quality [`tl::optional`](https://github.com/TartanLlama/optional) which is used as part of the fodder in his excellent CppCon 2018 talk, [How to Write Well-Behaved Value Wrappers](https://www.youtube.com/watch?v=J4A2B9eexiw):
 
-[![Writing Well-Behaved Value Wrappers](/assets/img/2018-10-25/Simon Brand CppCon 2018 Talk.png)](https://www.youtube.com/watch?v=J4A2B9eexiw)
+[![How to Write Well-Behaved Value Wrappers](/assets/img/2018-10-25/Simon Brand CppCon 2018 Talk.png)](https://www.youtube.com/watch?v=J4A2B9eexiw)
 
  I was in the audience for this one and the volunteer helping out with it, but that will come during a (very late, I'm working on it...) Trip Report to CppCon 2018.
 
@@ -92,9 +94,10 @@ In all cases, values perform worse. However, something weird seemed to happened 
 
 # Wait a second, it's only nanoseconds...!
 
-Right. These benchmarks already take an age to run (literally hours) because of the serious confidence that needs to be established by [Google Benchmark](https://github.com/google/benchmark), so it runs anywhere from ten thousand times to 4 million times. Therefore, to not have to die of old age waiting for the statistics to compute the 4 million iterations _for each and every sample_, the vectors were only of size 8, with `int`s in them. I'm sure if you put `MyBigHonkinExpensiveType` in the vector, these numbers would get DRAMATICALLY worse. But I don't have the laptop to fry over running that benchmark. :D
 
-As we can see, there is clearly a huge benefit to references. Which is exactly why Simon Brand's paper needs a partner.
+Right. These benchmarks already take an age to run (literally hours) because of the serious confidence that needs to be established by [Google Benchmark](https://github.com/google/benchmark), so it runs anywhere from ten thousand times to 4 million times. Therefore, to not have to die of old age waiting for the statistics to compute the 4 million iterations _for each and every sample_, the `vector`s only had `8` `int`s in them. I'm sure if you put `MyBigHonkinExpensiveType` in the vector, these numbers would get DRAMATICALLY worse. But I don't have the laptop to fry over running that benchmark! ♩~
+
+As we can see, there is clearly a measurable benefit to references. Which is part of the reason why financial companies, LLVM shops, and other places are still using `tl::optional` or inventing their own type with reference and void specializations. Matt Calabrese's [Regular Void](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0146r1.html) paper will one day fix void specializations so that everything is okay. But, the references question is still an open one. Given the performance benefits, the fact that it is incredibly frustration to suffer random copies in the middle of generic code because `std::optional` will throw a hissy fit, and because sometimes it is _not_ okay to go back and change all prior code using references to return `std::reference_wrapper`s, Simon Brand's paper needs a partner paper! A partner like...
 
 
 # [p1175 - a simple and practical optional for C++](https://wg21.link/p1172)
