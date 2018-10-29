@@ -19,9 +19,9 @@ Yes, we were serious enough to modify the standard library!
 
 This is going to be a short post because the answer is exactly as anyone would expect: exposing a reference to the internal pointer and grabbing it directly has the save performance of doing the clever, undefined-behavior aliasing trick as before:
 
-![Local out_ptr benchmarks.](https://raw.githubusercontent.com/ThePhD/out_ptr/master/benchmark_results/local.png)
+![Local out_ptr benchmarks.](https://raw.githubusercontent.com/ThePhD/phd/master/benchmark_results/out_ptr/local out ptr.png)
 
-![Reset out_ptr benchmarks.](https://raw.githubusercontent.com/ThePhD/out_ptr/master/benchmark_results/reset.png)
+![Reset out_ptr benchmarks.](https://raw.githubusercontent.com/ThePhD/phd/master/benchmark_results/out_ptr/reset out ptr.png)
 
 This definitely means that by having the simple `out_ptr` implementation in the standard library, where the smart pointers can safely friend the implementation without leaking its reference to the world, is ideal.
 

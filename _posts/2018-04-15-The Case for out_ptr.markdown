@@ -106,13 +106,13 @@ void clever_out_ptr_local(benchmark::State& state) {
 BENCHMARK(clever_out_ptr_local);
 ```
 
-The full code is [here](https://github.com/ThePhD/out_ptr/tree/master/benchmarks), and there are instructions for building and running all of the tests/benchmarks with CMake.
+The full code is [here](https://github.com/ThePhD/phd/tree/master/benchmarks/out_ptr), and there are instructions for building and running all of the tests/benchmarks with CMake.
 
-The graphs below come from a dedicated Core i7 machine, compiled with the usual flags for each platform (`-O3` on g++/clang++, `/Ox` for VC++), we generate the values of the runs in JSON format and then send them to a [quick python script I wrote](https://github.com/ThePhD/out_ptr/blob/master/benchmarks/tools/generate_graphs.py) that can output their values for me to inspect in pretty graph form. The graphs have error bars representing the standard deviation, bars up to the mean, and transparent scatter plots indicating the distribution of 1000 multi-iteration benchmark samples. We sort from fastest to slowest, and the color remains the same for each technique (`c_code` versus `simple_out_ptr` versus `clever_out_ptr` used):
+The graphs below come from a dedicated Core i7 machine, compiled with the usual flags for each platform (`-O3` on g++/clang++, `/Ox` for VC++), we generate the values of the runs in JSON format and then send them to a [quick python script I wrote](https://github.com/ThePhD/phd/blob/master/benchmarks/tools/generate_graphs.py) that can output their values for me to inspect in pretty graph form. The graphs have error bars representing the standard deviation, bars up to the mean, and transparent scatter plots indicating the distribution of 1000 multi-iteration benchmark samples. We sort from fastest to slowest, and the color remains the same for each technique (`c_code` versus `simple_out_ptr` versus `clever_out_ptr` used):
 
-![Local out_ptr benchmarks.](https://raw.githubusercontent.com/ThePhD/out_ptr/6aeb22198e1b74f6578944d18d0d859a705b35e1/benchmark_results/out_ptr_benchmarks.local.png)
+![Local out_ptr benchmarks.](/assets/img/2018-04-15/local out ptr.png)
 
-![Reset out_ptr benchmarks.](https://raw.githubusercontent.com/ThePhD/out_ptr/6aeb22198e1b74f6578944d18d0d859a705b35e1/benchmark_results/out_ptr_benchmarks.reset.png)
+![Reset out_ptr benchmarks.](/assets/img/2018-04-15/reset out ptr.png)
 
 You can clearly see here that the `clever_out_ptr` has a statistically significant performance advantage: it is outside two or even three standard deviations. The raw data that is available publicly in the GitHub repository also reports an Index of Dispersion that is far less than 1% (e.g., the Index of Dispersion is on the order of pico- and femtoseconds while the measurements are on the order of nanoseconds). This means the results are not subject to wild variance and hold significance.
 
@@ -130,5 +130,3 @@ So, with the online utilities I can see almost nothing:
 
 
 LTO, constant-expression elision, and inlining are *crazy* powerful optimizations...! They get rid of nearly everything, since it's possible to prove I'm just working with a constant value (and a constant pointer value) that puts the same value into the argument. You can see an older version of the quick bench code live [here](http://quick-bench.com/ulnPxcdWyInoAlWCiAJTOfa6awM); I didn't update it with the newest benchmark code because it had no effect on the compiler being as smart as it is and just eliding nearly everything. Thusly, we have to stick with the version where we can compile multiple things or it becomes nearly impossible to measure _just_ the cost of the `out_ptr` abstraction chosen. And that cost is important to see and measure!
-
-Next, we will be modifying the standard library itself and see how well a directly modified `std::unique_ptr<>` that friends this implementation to avoid any Undefined Behavior!
