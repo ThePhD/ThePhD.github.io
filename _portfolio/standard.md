@@ -11,7 +11,8 @@ I have quite a few C++ proposals I am working on and percolating through the C++
 
 p0051: `std::overload` | Not Published | [Latest Draft](/vendor/future_cxx/papers/d0051.html)
 p0330: Literal Suffixes for `ptrdiff_t` and `size_t` | [Published](https://wg21.link/p0330) | [Latest Draft](/vendor/future_cxx/papers/d0330.html)
-p1039: I got you, FAM: Flexible Array Members for C++| Not Published | [Latest Draft](/vendor/future_cxx/papers/d1039.html)
+p1025: Update References to the Unicode Standard | [Published](https://wg21.link/p1025) | [Accepted!](https://wg21.link/p1025)
+p1039: I got you, FAM - Flexible Array Members for C++| Not Published | [Latest Draft](/vendor/future_cxx/papers/d1039.html)
 p1040: std::embed | [Published](https://wg21.link/p1040) | [Latest Draft](/vendor/future_cxx/papers/d1040.html)
 p1129: A Survey of References for Standard Library Types - A Survey of Optionals | Not Published | [Latest Draft](/vendor/future_cxx/papers/d1129.html)
 p1130: For All We Care: When Compilers are made Equal | Not Published | [Latest Draft](/vendor/future_cxx/papers/d1130.html)
