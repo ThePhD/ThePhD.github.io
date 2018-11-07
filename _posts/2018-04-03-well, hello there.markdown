@@ -1,5 +1,7 @@
 ---
 layout: post
+title: "Well, Hello There!"
+permalink: /hello
 feature-img: "assets/img/pexels/open.jpg"
 thumbnail: "assets/img/thumbnails/open.jpg"
 tags: [hello, about, 👋]

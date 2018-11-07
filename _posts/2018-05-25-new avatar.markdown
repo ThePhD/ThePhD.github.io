@@ -1,6 +1,7 @@
 ---
 layout: post
 title: New Avatar!
+permalink: /new-avatar-I
 thumbnail: "assets/img/thumbnails/art-beautiful-bloom.jpg"
 tags: [avatar, blah, art, graphic design, 🎨, 🖌️]
 excerpt_separator: <!--more-->

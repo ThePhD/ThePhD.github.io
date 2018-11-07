@@ -1,6 +1,7 @@
 ---
 layout: post
 title: San Diego Pregame - Simple, Easy Papers
+permalink: /sandiego-2018-pregame-paper-review-I
 feature-img: "assets/img/pexels/book-glass.jpeg"
 thumbnail: "assets/img/2018-10-22/San Diego Papers.jpg"
 tags: [C++, future, standards, proposals, review, ⌨️, 📜]

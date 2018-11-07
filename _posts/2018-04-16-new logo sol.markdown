@@ -1,6 +1,7 @@
 ---
 layout: post
 title: New Logo for sol!
+permalink: /new-sol-logo
 tags: [sol, sol2, graphic design, 🎨]
 excerpt_separator: <!--more-->
 ---

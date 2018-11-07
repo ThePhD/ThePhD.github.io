@@ -1,6 +1,7 @@
 ---
 layout: post
 title: C++ Now 2018 Trip Report
+permalink: /c++now-2018-trip-report
 feature-img: "assets/img/2018-05-15/C++Now feature.jpg"
 thumbnail: "assets/img/2018-05-15/C++Now feature.jpg"
 tags: [C++, C++ Now, speaking, conferences, 🤝, 📣, 📜]

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: The (Late) Rapperswil Trip Report
+permalink: /rapperswil-2018-c++-committee-trip-report
 feature-img: "assets/img/thumbnails/RapperswilRainbow.jpg"
 thumbnail: "assets/img/thumbnails/RapperswilRainbow.jpg"
 tags: [C++, Unicode, text processing, future, sg-16, embed, standards, proposals, 🤝, ⌨️, 📜]

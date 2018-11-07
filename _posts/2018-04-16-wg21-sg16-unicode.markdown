@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Towards a Unicode Future for C++
+permalink: /c++-unicode-future
 thumbnail: "assets/img/thumbnails/the unicode standard 5.0.jpg"
 tags: [C++, Unicode, Text Processing, Future, sg-16, 🤝, ⌨️]
 excerpt_separator: <!--more-->
