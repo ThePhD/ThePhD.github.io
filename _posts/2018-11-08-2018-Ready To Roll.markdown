@@ -13,9 +13,9 @@ excerpt_separator: <!--more-->
 
 Sections marked with 🛡️ means I've either been voluntold or volunteered to pick the paper up and defend it. Others are the ones I wrote up. Some papers I originally volunteered for, but eventually bailed on staying with them (time constraints, etc.) so someone else will have to present them in my stead.
 
-# Heading for EWGI
+# Heading for EWG(I)
 
-The Committee has ~~factions~~groups, as I detailed in [a previous blogpost](/rapperswil-2018-c++-committee-trip-report). The ~~Uruk'Hai~~ EWG put a new splinter Study Group to help deal with the unprecedented paper volume, ~~Orcs~~ EWGI, or Evolution Working Group, Incubator. It is apparently pronounced "oogie", as in "oogie boogie". This group needs some serious firepower to get through: many papers often die in Evolution. As put by someone else: "I can get the hang of every room in the Standards Committee. I generally know what they all want... except for EWG." To get things through here, your best game has to be on the table; and maybe a little luck, too.
+The Committee has ~~factions~~groups, as I detailed in [a previous blogpost](/rapperswil-2018-c++-committee-trip-report). The ~~Uruk'Hai~~ EWG put a new splinter Study Group to help deal with the unprecedented paper volume, ~~Orcs~~ EWGI, or Evolution Working Group, Incubator. It is apparently pronounced "oogie", as in "oogie boogie". EWG is one of the hardest groups to get through, with many papers often dying in Evolution and then staying dead for a good while. As put by someone else: "I can get the hang of every room in the Standards Committee. I generally know what they all want... except for EWG." To get things through here, your best game has to be on the table; and maybe a little luck, too. EWGI will hopefully be a tad easier...!
 
 ### [p0330: Literal Suffixes for size_t and ptrdiff_t (🛡️)](/vendor/future_cxx/papers/d0330.html)
 
