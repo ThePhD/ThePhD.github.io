@@ -1,0 +1,81 @@
+---
+layout: post
+title: San Diego 2018 - The Plan™ (Ready to Roll)
+permalink: /sandiego-2018-c++-committee-plan
+feature-img: "assets/img/pexels/architect-architecture-black-and-white.jpg"
+thumbnail: "assets/img/pexels/chess-battle-black-and-white-blur.jpg"
+tags: [C++, standards, meeting, conferences, 🤝, 📣, 📜]
+excerpt_separator: <!--more-->
+---
+
+
+(I wrote this paper but forgot to publish it, sorry! I'm still gonna publish it as a bit of a retrospective on what I prepared...!) Got all loaded up decked out for the big paper bonanza; practice talks, draft papers with Double T's, and more...<!--more-->
+
+Sections marked with 🛡️ means I've either been voluntold or volunteered to pick the paper up and defend it. Others are the ones I wrote up. Some papers I originally volunteered for, but eventually bailed on staying with them (time constraints, etc.) so someone else will have to present them in my stead.
+
+# Heading for EWGI
+
+The Committee has ~~factions~~groups, as I detailed in [a previous blogpost](/rapperswil-2018-c++-committee-trip-report). The ~~Uruk'Hai~~ EWG put a new splinter Study Group to help deal with the unprecedented paper volume, ~~Orcs~~ EWGI, or Evolution Working Group, Incubator. It is apparently pronounced "oogie", as in "oogie boogie". This group needs some serious firepower to get through: many papers often die in Evolution. As put by someone else: "I can get the hang of every room in the Standards Committee. I generally know what they all want... except for EWG." To get things through here, your best game has to be on the table; and maybe a little luck, too.
+
+### [p0330: Literal Suffixes for size_t and ptrdiff_t (🛡️)](/vendor/future_cxx/papers/d0330.html)
+
+This paper should have been in C++17 but the original author lost motivation to continue the work. I picked it up at the behest of someone else. I've essentially become its champion and now I need to shepherd it through. The change is fairly simple, but I anticipate WAY more bikeshed than is necessary about the actual suffixes. _Some_ individuals are hellbent on having `uz` mean `size_t`, and `t` mean `ptrdiff_t`. That leaves the problem of what `z` means (is it like POSIX'S `ssize_t`? Which, by the way, is not part of the Standard right now) and what `ut` means (`unsigned ptrdiff_t`? What is that type? Who knows.) I proposed `uz`/`zu` and `z` for consistency with the core language, but some people have a nice little hill about `t` that they would like to die on.
+
+As is usual, the simpler papers generate the most ~~awful~~ bikeshed, so I anticipate to spend long minutes justifying why having 2 different identifiers mixed with the Standards consistent `u` treatment is just not in scope for this paper: until someone can define in the standard what `ut` and what `z` mean in the world where we have 2 suffixes, those suffixes and definitions are inconsistent and useless to the Standard because it will just be one more Implementation Defined Handwaved Integral Type That Can Have This Signed And Size Or Totally More Maybe You Know Whatever Works, Friendo. Sometimes those are needed.
+
+This is not one of those times.
+
+### [p1040: std::embed](/vendor/future_cxx/papers/d1040.html)
+
+Not really much to say here. Everybody, and their cat/dog/guinea pig/mouse/zebra/tiger, wants this. It was supposed to be seen in Rapperswil by EWG but it ended up losing out. Now it's in EWGI's hands.
+
+Hopefully we get this into C++.
+
+### [p1249: forwarding from std::initializer_list (🛡️)](https://wg21.link/p1249)
+
+This paper is actually proposed by Alex Christensen, but I recently leaned he will not be able to attend the meeting to push this paper through. So I will be presenting and advocating for it. Originally targeted at LEWG by just changing the `const`-ness of the `initializer_list` parameter, this paper now needs a trip through Evolutionary groups to approve the change to the core language wording discussed in my previous write-up of it in [paper reviews](/sandiego-2018-pregame-paper-review-II).
+
+As the paper's new champion, there is one fundamental question that I need answers to, particularly from a few people who seemed to champion this change when `initializer_list` was first created:
+
+_Why is the backing storage `const` and what is the key motivation for such a restriction on the compiler?_
+
+If I cannot receive a good answer to this question, then the change is essentially justified from the lack of good reasoning. We can also swat down the `movable_initializer_list` debate, because it's been crushed before precisely because it'd be a whole set of complicated rules on when to un-`const` the backing array and provide this new type on top. If there wasn't a good reason to `const` the array (or the reason no longer Applies in This Day and Age™), then we can just fix `initializer_list` without really, really poor patch jobs.
+
+A thing to note is that in prior discussions everyone was talking about how to extend `initializer_list` or add a new type, not to just fix the current definition. There are, as always, concerns about doing this but I think there are far too many people who are extremely annoyed about `initializer_list`'s behaviors and do not have dependencies on its `const`-ness to begin with. Fixing this makes `initializer_list`s far more suitable with their desired usage.
+
+### [p1214: Pointer to Member Functions and Member Objects are just Callables!](/vendor/future_cxx/papers/d1214.html)
+
+I like this paper. I was not sure I was going to write it before quite a few people encouraged me to. I think this paper helps bring a lot of useful syntax into the language that people have wanted for quite some time. I also think it is incredibly important that we do not need to `std::invoke` for everything, and that the language can reasonably handle some of this without excessive amounts of template spew.
+
+### [p1301: nodiscard should have a reason (🛡️)](/vendor/future_cxx/papers/d1301.html)
+
+This was not my paper; I borrowed it from someone to lighten their paper load. It's a dirt-simple paper: let library authors provide a reason why they do not want you to discard this return value. You can even put something like `"this is a legacy work around and okay to (void)"`. Not really too bent out of shape about this going through or not, but it would be nice.
+
+# Headed for LEWG(I)
+
+If you were around, I posted in my [Rapperswil Trip Report](/rapperswil-2018-c++-committee-trip-report) about the ~~Humans~~ Library Evolution Working Group's acronym being LEWG and sounding like loog? Well, I said it's one or two letters off from sounding like loogie.
+
+And then this group appears.
+
+The absolute madlads did it. They created a group whose acronym is actually said loogie! Feelings of prophetic joy aside, LEWGI is the ~~Half-Humans~~ Library Evolution Working Group Incubator. Again, it's meant to handle all sorts of proposals and try to filter out the good ones to either forward to LEWG or -- with some approval from LEWG's chair -- send it right to the ~~Elves~~ LWG.
+
+### [p1132: out_ptr - An Output Pointer Abstraction](/vendor/future_cxx/papers/d1132.html)
+
+This paper paves the way for getting rid of people overloading unary address-of operator `&` and violating a fundamental C++-ism: that every object has a (unique) address that you can get to. Of course, this does not help when you have a smart pointer that you want to `&my_ptr` into a C API that takes `T**`. So, this proposal steps in.
+
+The one known case of someone overloading unary operator `&` is `CComPtr`. The shiny new windows library WRL doesn't make this mistake again and, as discussed in the paper, goes a route similar to what is designed in p1132. VMWare and a bunch of other Fortune 100 companies also have this in their codebase. In short: it's a long-standing existing practice, gives people who overloaded a bad operator a way out, and solves a serious problem.
+
+It has wording now, and I fully intend to get it to LWG by the end of the week.
+
+### [p1175: A Simple and Practical optional reference for C++](/vendor/future_cxx/papers/d1175.html)
+
+I wrote about this paper in [one of my other posts](/sandiego-2018-pregame-optional) so there's no reason to go over it a lot. But, I really believe this one needs to reach LEWG and LWG this cycle. It is critical we do not make our lives worse.
+
+# Headed for NWHR
+
+These are papers headed for the Nowhere Study Group, SG0. They're for the dark void of my imagination, and will probably take C++23 or C++26 to see the light of day.
+
+- [p1039: I got you, FAM - Flexible Array Members for C++](/vendor/future_cxx/papers/d1039.html)
+- [p1193: Explicitly Specified Returns for (Implicit) Conversions](/vendor/future_cxx/papers/d1193.html)
+- [p1129: The Holy War](/vendor/future_cxx/papers/d1130.html)
+- pXXXX: string_literal and basic_c_string_view (just an idea I'm toying with for now)

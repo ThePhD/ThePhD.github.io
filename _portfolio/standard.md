@@ -15,7 +15,6 @@ p1025: Update References to the Unicode Standard | [Published](https://wg21.link
 p1039: I got you, FAM - Flexible Array Members for C++| Not Published | [Latest Draft](/vendor/future_cxx/papers/d1039.html)
 p1040: std::embed | [Published](https://wg21.link/p1040) | [Latest Draft](/vendor/future_cxx/papers/d1040.html)
 p1129: A Survey of References for Standard Library Types - A Survey of Optionals | Not Published | [Latest Draft](/vendor/future_cxx/papers/d1129.html)
-p1130: For All We Care: When Compilers are made Equal | Not Published | [Latest Draft](/vendor/future_cxx/papers/d1130.html)
 p1132: out_ptr - a scalable output pointer abstraction | [Published](https://wg21.link/p1132) | [Latest Draft](/vendor/future_cxx/papers/d1132.html)
 p1175: A simple and practical optional reference for C++ | [Published](https://wg21.link/p1175) | [Latest Draft](/vendor/future_cxx/papers/d1175.html)
 p1193: Explicitly Specified Returns for (Implicit) Conversions | Not Published | [Latest Draft](/vendor/future_cxx/papers/d1193.html)
