@@ -8,7 +8,7 @@ tags: [C++, standards, proposals, writing, 📜, 📝]
 excerpt_separator: <!--more-->
 ---
 
-I am not great at writing proposals. In fact, I am absolute :dog: :poo: in many aspects. But, I had feedback and help, so I wanted to put out some tips so that when people write proposals they are much less trash when they hit the Committee. I want to read 🔥 💯 ✌️ papers when they hit the Committee, rather than being the fuel _for_ a trash-fire.<!--more-->
+I am not great at writing proposals. In fact, I am absolute 🐕 💩 in many aspects. But, I had feedback and help, so I wanted to put out some tips so that when people write proposals they are much less trash when they hit the Committee. I want to read 🔥 💯 ✌️ papers when they hit the Committee, rather than being the fuel _for_ a trash-fire.<!--more-->
 
 # Survey the Area/Industry/Academia/Hobby Code
 
@@ -34,7 +34,7 @@ Solid r0 papers make it easy to get motivation for a feature before you put your
 
 Some people are very pedantic and particular, care very much about the language used, and catch onto this stuff very quickly. Or, they have been around for a long while and are have implemented these things and have been baptized in the holy fire of long-term compiler/library development and have the scars and triage experience and bug reports to prove it. Chances are,
 
-wording is going to be :horse: :poo: on the first writeup.
+wording is going to be 🐎 💩 on the first writeup.
 
 Ask someone for help. There are people who will help. If the feature is not big then other people may not be necessary: look at the Standard or other proposals (the latest revision, preferably). Look at the wording. It will help.
 
