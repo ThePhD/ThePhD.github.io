@@ -55,3 +55,5 @@ It also helps me refine my wording so that I begin to associate certain intentio
 That's all for now. Please, make sure to write good proposals. It is necessary! If you think your proposal is not good enough, then hold onto it until its better. I submitted a number of proposals, but I held back about 4 proposals for C++20, and _that's okay_. It is better to ship good, right specification than garbage we need to keep patching over for 20 years!
 
 Ta-ta 'till later. ♥
+
+P.S.: Have a goddamn Tony Table! (Before/After tables, but we call them Tony Tables in the Committee. There's some exemplary ones [here](https://github.com/tvaneerd/cpp20_in_TTs).)
