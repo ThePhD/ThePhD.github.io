@@ -32,7 +32,7 @@ Solid r0 papers make it easy to get motivation for a feature before you put your
 
 # It Will Suck
 
-Some people are very pedantic and particular, care very much about the language used, and catch onto this stuff very quickly. Or, they have been around for a long while and are have implemented these things and have been baptized in the holy fire of long-term compiler/library development and have the scars and triage experience and bug reports to prove it. Chances are,
+Some people are very pedantic and particular, care very much about the language used, and catch onto this stuff very quickly. Or, they have been around for a long while, have implemented these things, and have been baptized in the holy fire of long-term compiler/library development. They typically have the scars, triage experience, and bug reports to prove it. Chances are,
 
 wording is going to be 🐎 💩 on the first writeup.
 
