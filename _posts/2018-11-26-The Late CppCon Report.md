@@ -88,7 +88,7 @@ Bryce roped me into being on the panel. And by rope I mean he just asked me plai
 
 I learned a lot. When I approach the industry, I'm lucky: I'm mostly talented enough that I can take the preconceived notions, slights of hand, shitty commentary and other things to toss it behind me and move ahead with my life. I am also incredibly lucky that my single Mom raised me to be a whole and complete human being on my own without looking at any of my physical attributes: this makes me largely resilient to people's fairly crappy attitudes on- and off-line.
 
-I feel like Patricia has a ton of knowledge on the subject, far more than I do. Her responses and experience to the panel questions were pretty fantastic. Other people at the `#include` dinner also had a lot of knowledge, where they also did a Women in C++ panel. It was also very encouraging. We had a lot of great questions, especially from people who felt like they 
+I feel like Patricia has a ton of knowledge on the subject of how to navigate dangerous spaces, far more than I do. Her responses and experience input to the panel questions were pretty fantastic. Other people at the `#include` dinner also had a lot of knowledge, where they also did a Women in C++ panel. It was also very encouraging. We had a lot of great questions, especially from people who felt like they did not know what to do. I think we were able to prove a good chunk of useful guidance.
 
 For starters, not everyone is so lucky.
 
@@ -123,7 +123,7 @@ And sometimes, you get hit with this priceless rigmarole:
 
 ![Deep Sigh Intensifies.](/assets/img/2018-11-26/rigmarole.jpg)
 
-In fact, some people in my past internships thought I was a _woman_ because I was too jolly in my intra-company chatting and because of my name (avatar wasn't set up yet). (Perhaps I'll tell the story of how their behavior and demeanor towards me changed utterly once they saw me face, but this article is long enough.) Nobody assumes I have dark skin. Because _that's just crazy how could you be black?!_ Because, as we know, there are no Black Engineers! We're a rare breed, or something. During my first internship, this is what I was told: "you are the first black software engineer I have ever seen in my entire life.".
+In fact, some people in my past internships thought I was a woman because I was too jolly in my intra-company chatting and because of my name (avatar wasn't set up yet). (Perhaps I'll tell the story of how their behavior and demeanor towards me changed utterly once they saw me face, but this article is long enough.) Nobody assumes I have dark skin. Because _that's just crazy how could you be black?!_ Because, as we know, there are no Black Engineers! We're a rare breed, or something. During my first internship, this is what I was told: "you are the first black software engineer I have ever seen in my entire life.".
 
 It makes for some pretty great chat and soundbites, sometimes. But the overwhelming impression is that I should not be here to begin with. It's unexpected. And for some people, that's a good surprise (but still a problem). Other people think it's a bad idea I'm here to begin with, which is much more of a problem. Both are still a problem because it should not matter what my skin color is when I do the same technical work, and yet somehow it works its way into conversations and worms its way into my purview whenever people find out what I look like.
 
