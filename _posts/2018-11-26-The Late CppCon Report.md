@@ -17,7 +17,7 @@ To my utter embarrassment, I did not realize it was Scott Meyers. I had tried al
 
 "Oh, I'm Scott Meyers."
 
-![The Lord Hath Blessed Me This Day](/assets/img/2018-11-26/tenor.gif)
+![... Wot.](/assets/img/2018-11-26/surprised-cat.jpg "u wot, m8?")
 
 I maybe had a little [fanboy mental short circuit](https://twitter.com/thephantomderp/status/1043715145061416960). I even misspelled the location like a champ. Thankfully, this was a good run-in! I even got to talk a little bit about my future with him and he even shared some of how his life went, which definitely gave me quite the perspective.
 
@@ -48,7 +48,7 @@ I still don't know full well about the whole hierarchy, but seeing Arthur's talk
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/GC4cp4U2f2E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-This talk was so much fun! If you're already embroiled in error handling patterns like I am, you won't really learn too much, but near the end they propose some **wicked awesome** syntaxes for a potential C++23 world that has Herbceptions (Deterministic Static Exceptions, [p1095](http://wg21.link/p1095)), the Workflow Operator (https://wg21.link/p1282), and a good `std::excepted`. `std::expected` was also covered this year from another talk, [Expect the Expected](https://www.youtube.com/watch?v=PH4WBuE1BHI), that was pretty great! But again, not really terribly new information for me since I'd already picked this stuff up earlier from his MSDN / Channel 9 talk. It was still entertaining to listen to my first Andrei Alexandrescu talk in person!
+This talk was so much fun! If you're already embroiled in error handling patterns like I am, you won't really learn too much, but near the end they propose some **wicked awesome** syntaxes for a potential C++23 world that has Herbceptions (Deterministic Static Exceptions, [p1095](http://wg21.link/p1095)), the Workflow Operator [p1282](https://wg21.link/p1282), and a good `std::excepted`. `std::expected` was also covered this year from another talk, [Expect the Expected](https://www.youtube.com/watch?v=PH4WBuE1BHI), that was pretty great! But again, not really terribly new information for me since I'd already picked this stuff up earlier from his MSDN / Channel 9 talk. It was still entertaining to listen to my first Andrei Alexandrescu talk in person!
 
 
 <iframe width="700" height="315" src="https://www.youtube.com/embed/IupP8AFrOJk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -69,7 +69,7 @@ And to top it off, I had my own talk to give.
 
 Yes, I had one! It was about the future of sol2 named -- you guessed it -- sol3. sol3 is still under active development because boy howdy did I completely underestimate how much work it is to have so many proposals and other things to do with C++.
 
-To be honest, I thought I bombed my talk. And top top that feeling off, it was in the same slot as Odin Holmes, Matt Godbolt, Hyrum Wright, and Sean Parent. _Yes_, all this legends in the same time slot. This probably means that the conference organizers believed in me enough to put me at that time slot and not fail spectacularly. I'm happy to report that the room was definitely not empty!
+To be honest, I thought I bombed my talk. And to top that feeling off, it was in the same slot as Odin Holmes, Matt Godbolt, Hyrum Wright, and Sean Parent. _Yes_, all this legends in the same time slot. This probably means that the conference organizers believed in me enough to put me at that time slot and not fail spectacularly. I'm happy to report that the room was definitely not empty!
 
 <iframe width="700" height="315" src="https://www.youtube-nocookie.com/embed/xQAmGBfKnas" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -82,9 +82,9 @@ This was also when [I decided to put up my Patreon](/generating-motivation) to h
 
 # My... Surprise Talk?
 
-Well, not really a talk. This ended up being a panel held on Friday. It was not recorded, which made me a bit sad. I had a suit on and everything (it was the same day as my talk so I got to be on the panel after barely sleeping to run benchmarks / re-do my presentation the night before) and the volunteer duties were wearing into me. I think I stared at the floor a lot during it so that I could focus purely on the words people spoke while struggling to make sure I was attentive to everything my co-panelists said (Kate Gregory, C.B. Bailey, Barbara Geller and Patricia Aas were there on the panel with me, which was great!).
+Well, not really a talk. This ended up being a panel held on Friday. It was not recorded, which made me a bit sad. I had a suit on and everything (it was the same day as my talk so I got to be on the panel after barely sleeping to run benchmarks / re-do my presentation the night before) and the volunteer duties were wearing into me since I also did a few that day too. I wanted to focus purely on the words people spoke while struggling to make sure I was attentive to everything my co-panelists said (Kate Gregory, C.B. Bailey, Barbara Geller and Patricia Aas were there on the panel with me, which was great!).
 
-Bryce roped me into being on the panel. And by rope I mean he just asked me plainly and I said Yes. No real reason to figure that one out.
+Bryce roped me into being on the panel. And by rope I mean he just asked me plainly and I said Yes. No real pressure or anything, albeit it did leave me a day or two to prepare...! Which made me all the more nervous. But, a lot of people said I did a good job on the panel! (I don't know what a Good Job is supposed to be for a panel, other than speaking clearly and enunciating properly.) I was also a bit of a counter-balance: only black person, only student, etc. etc. I got to give some perspectives that other people maybe had not thought about, which is very much the point: exposing people to different though processes from different individuals at different points in their life helps give a more complete picture. I do wish we had others on the panel! Maybe one or two more.
 
 I learned a lot. When I approach the industry, I'm lucky: I'm mostly talented enough that I can take the preconceived notions, slights of hand, shitty commentary and other things to toss it behind me and move ahead with my life. I am also incredibly lucky that my single Mom raised me to be a whole and complete human being on my own without looking at any of my physical attributes: this makes me largely resilient to people's fairly crappy attitudes on- and off-line.
 
@@ -113,9 +113,9 @@ Free Speech, right?
 
 So you can be sexist, homophobic, transphobic, racist, and whatever else you want towards people in environments that are _supposed to be technical and bereft of such nonsense in nature_, but as long as "The Work is Getting Done" it doesn't matter. Eventually -- with a touch of [Holy Ascended +10 Rich Rockstar Developer](https://twitter.com/MrAlanCooper/status/1060553914209071106) sparkles -- you end up here. Individualism (Free Speech, full process control, no sharing, no required coordination) of the past -- rewarded by resounding success and piles of cash -- struggles against a team-based ethic (diversity, inclusivity, accessibility, common ground, politeness and good communication) and ideology to make us more efficient as a group so we can push fields forward war with one another.
 
-# So Are You Gonna Do, Derpstorm?
+# So What Are You Gonna Do, Derpstorm?
 
-I do not intend to partake in the greater war. All I know is that I have to do what I usually do in this situation, which is put on my Token Black Person clothing and go speak at as many conferences as I can to prove that someone with my skin color can be technically excellent. Because -- for some damn reason -- nobody believes I have dark skin ever when they see my videos or meet me. Which results in hilarious reactions:
+I'm glad you asked! I actually do not intend to partake in the greater war. All I know is that I have to do what I usually do in this situation, which is put on my Token Black Person clothing and go speak at as many conferences as I can to prove that someone with my skin color can be technically excellent. Because -- for some damn reason -- nobody believes I have dark skin ever when they see my videos or meet me. Which results in hilarious reactions:
 
 ![Lel.](/assets/img/2018-11-26/Asian.png)
 
