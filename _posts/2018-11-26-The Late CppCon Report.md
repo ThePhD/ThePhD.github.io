@@ -90,9 +90,9 @@ I learned a lot. When I approach the industry, I'm lucky: I'm mostly talented en
 
 I feel like Patricia has a ton of knowledge on the subject of how to navigate dangerous spaces, far more than I do. Her responses and experience input to the panel questions were pretty fantastic. Other people at the `#include` dinner also had a lot of knowledge, where they also did a Women in C++ panel. It was also very encouraging. We had a lot of great questions, especially from people who felt like they did not know what to do. I think we were able to prove a good chunk of useful guidance.
 
-For starters, not everyone is so lucky.
+For starters, not everyone is as strong or as resilient as the people on the panel or who do take stands.
 
-Anecdotally, lots of people struggle. And it's not just the "minority" that struggles either: people who are "within the normal" still end up on the receiving end of demeaning and humiliating commentary, jokes, and advances. One thing that scares me the most about joining the technical industry is something I still don't quite have a name for, but for the meantime I am just going to call the Jerk Problem.
+Anecdotally, lots of people struggle. And it's not just the "minority" that struggles either: people who are "within the normal" still end up on the receiving end of demeaning and humiliating commentary, jokes, and advances. Several people contributed patches through friends or just straight up did not contribute at all to [the Linux Kernel](https://twitter.com/TartanLlama/status/1042306063234674688) because nobody wanted a piece of that place.One thing that scares me the most about joining the technical industry is something I still don't quite have a name for, but for the meantime I am just going to call the Jerk Problem.
 
 
 # The Jerk Problem?
