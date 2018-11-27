@@ -77,7 +77,7 @@ These are papers headed for the Nowhere Study Group, SG0. They're for the dark v
 
 - [p1039: I got you, FAM - Flexible Array Members for C++](/vendor/future_cxx/papers/d1039.html)
 - [p1193: Explicitly Specified Returns for (Implicit) Conversions](/vendor/future_cxx/papers/d1193.html)
-- [p1129: The Holy War](/vendor/future_cxx/papers/d1130.html)
+- [p1129: The Holy War](/vendor/future_cxx/papers/d1129.html)
 - pXXXX: string_literal and basic_c_string_view (just an idea I'm toying with for now)
 
 That's all for now!

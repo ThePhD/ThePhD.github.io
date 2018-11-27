@@ -111,7 +111,7 @@ When you make decency and politeness secondary (or tertiary or just not-a-factor
 
 Free Speech, right?
 
-So you can be sexist, homophobic, transphobic, racist, and whatever else you want towards people in environments that are _supposed to be technical and bereft of such nonsense in nature_, but as long as "The Work is Getting Done" it doesn't matter. Eventually -- with a touch of [Holy Ascended +10 Rich Rockstar Developer](https://twitter.com/MrAlanCooper/status/1060553914209071106) sparkles -- you end up here. Individualism (Free Speech, full process control, no sharing, no required coordination) of the past -- rewarded by resounding success and piles of cash -- struggles against a team-based ethic (diversity, inclusivity, accessibility, common ground, politeness and good communication) and ideology to make us more efficient as a group, so we can push fields forward, war with one another.
+So you can be sexist, homophobic, transphobic, racist, and whatever else you want towards people in environments that are _supposed to be technical and bereft of such nonsense in nature_, but as long as "The Work is Getting Done" it doesn't matter. Eventually -- with a touch of [Holy Ascended +10 Rich Rockstar Developer](https://twitter.com/MrAlanCooper/status/1060553914209071106) sparkles -- you end up here. Individualism (Free Speech, full process control, no sharing, no required coordination) of the past -- rewarded by resounding success and piles of cash -- struggles against a team-based ethic (diversity, inclusivity, accessibility, common ground, politeness and good communication) and thusly continue war with one another.
 
 # So What Are You Gonna Do, Derpstorm?
 
