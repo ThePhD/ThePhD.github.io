@@ -19,7 +19,7 @@ p1040: std::embed | [Published](https://wg21.link/p1040) | [Latest Draft](/vendo
 p1132: out_ptr - a scalable output pointer abstraction | [Published](https://wg21.link/p1132) | [Latest Draft](/vendor/future_cxx/papers/d1132.html)
 p1193: Explicitly Specified Returns for (Implicit) Conversions | Not Published | [Latest Draft](/vendor/future_cxx/papers/d1193.html)
 p1301: nodiscard should have a reason | [Published](https://wg21.link/p1301) | [Latest Draft](/vendor/future_cxx/papers/d1301.html)
-pXXX0: std::string_literal | Not Published | [Latest Draft](/vendor/future_cxx/papers/dXXX0.html)
+p1378: std::string_literal | Not Published | [Latest Draft](/vendor/future_cxx/papers/d1378.html)
 
 
 In progress / being reworked from feedback:
