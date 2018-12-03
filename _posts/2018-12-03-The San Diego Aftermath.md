@@ -12,7 +12,7 @@ I'm not going to give you an overview of everything that happened at the meeting
 
 Let's dig in.<!--more-->
 
-I've talked about the Committee before and its processes. This blog post is going to contain some of the information about the inner workings of the Committee, but it will mostly talk about proposals, proposals, proposals. Some of the more fun things I did will be interspersed around!
+I've talked about the Committee before and its processes. This blog post is going to contain some of the information about the inner workings of the Committee, but it will mostly talk about proposals, proposals, proposals. Some of the more fun things I did will be interspersed around other topics!
 
 I'm going to use some emoji to depict the state of all the proposals I talk about or are interested in. It'll work out something like this:
 
@@ -28,9 +28,9 @@ I'm going to use some emoji to depict the state of all the proposals I talk abou
 
 # Things Unseen
 
-My deepest apologies to Rein Halbersma and Cicada for not getting [p0330 - Literal Suffixes for size_t and ptrdiff_t](/vendor/future_cxx/papers/d0330.html) looked at in time; I could not be in EWGI while the `std::out_ptr` review in LEWGI was ongoing to take advantage of overflow time. p0330 remained unscheduled throughout the week. The good news is I will still advocate for Literal Suffixes in Kona 2019, since it is an absolutely tiny and reasonable feature that probably shouldn't be shuttered into C++23 since it was originally almost put into C++17 before the original author ran out of steam. I also sent an e-mail out to the internal reflector to get some bikeshed discussions out of the way as well. Still, we are in a feature freeze so it may just be objected or not seen on those grounds, and it'll end up in C++23 anyways.
+My deepest apologies to Rein Halbersma and Cicada for not getting [p0330 - Literal Suffixes for size_t and ptrdiff_t](/vendor/future_cxx/papers/d0330.html) looked at in time; I could not be in EWGI while the `std::out_ptr` review in LEWGI was ongoing to take advantage of overflow time. p0330 remained unscheduled throughout the week. The good news is I will still advocate for Literal Suffixes in Kona 2019, since it is an absolutely tiny and reasonable feature that probably shouldn't be shuttered into C++23 since it was originally almost put into C++17 before the original author ran out of steam. I also sent an e-mail out to the internal reflector to get some bikeshed discussions out of the way as well. Still, we are in a feature freeze so it may just be objected or not seen on procedural grounds, and it'll end up in C++23 anyways.
 
-On the bright side, I have some [cool, hip slides](/vendor/future_cxx/papers/presentations/d0330.pdf) for the feature already so at least my work is done in that department.
+On the bright side, I have [some cool, hip slides](/vendor/future_cxx/papers/presentations/d0330.pdf) for the feature already so at least my work is done in that department.
 
 # EWGI Battle Standings
 
@@ -62,7 +62,7 @@ I wish we would keep the API stable, but commit to breaking the ABI every 3 stan
 
 It's an interesting situation we have ourselves here, that's for sure.
 
-The way forward for this paper is simple. Keep `std::initializer_list`. Make `std::init_list`. Duplicate every `std::initializer_list` construct to one that takes a `std::init_list` for the entire Standard Library. Add an implicit conversion from `std::init_list` to `std::initializer_list` Then, apply the new rules to the core wording from p1249. Then we can finally have not-broken `init_list`.
+The way forward for this paper is simple. Keep `std::initializer_list`. Make `std::init_list`. Duplicate every `std::initializer_list` constructor to one that takes a `std::init_list` for the entire Standard Library. Add an implicit conversion from `std::init_list` to `std::initializer_list` Then, apply the new rules to the core wording from p1249. Then we can finally have not-broken `init_list`.
 
 I hope.
 
@@ -79,9 +79,9 @@ So, I'm rewriting the paper to be a huge cleanup of callables and `std::overload
 
 🛡️ - **Well-championed, moved forward to EWG!**
 
-An SG16 paper by the legendary "Robot" -- author of nonius + libogonek and the creator of the Rule of Zero -- this one was easy to get through. I had a bit of a presentation going but Tom Honermann -- chair of SG16 -- made [a much better presentation about it](/vendor/future_cxx/papers/presentations/p1041r1.pdf) then I did. I realized something as Tom did his presentation in EWGI: when you are arguing for things that contain mostly wording or legalese fixes, people are much more likely to defer to the "expert" on the wording in the room and very many people drop right out of having a serious opinionated decision. This is especially the case with encodings and how they are worded in the standard.
+An SG16 paper by the legendary "Robot" -- author of nonius + libogonek and the creator of the Rule of Zero -- this one was easy to get through. I had a bit of a presentation going but Tom Honermann -- chair of SG16 -- made [a much better presentation about it](/vendor/future_cxx/papers/presentations/p1041r1.pdf) then I did. I realized something as Tom did his presentation in EWGI: when you are arguing for things that contain mostly wording or legalese fixes, people are much more likely to defer to the "expert" on the wording in the room and very many people drop right out of having hyper-opinionated decision. This is especially the case with encodings and how they are worded in the standard.
 
-As Tom presented the wording and other things, consensus to move this forward was pretty much guaranteed as people's eyes glazed over from being pointed out these differences in wording. I have a feeling this will go well in EWG since we also have data showing we have not come across a compiler that obeys this model. This is a small paper that can make it into C++20, and it should so SG16 doesn't have to handle some crazy assumption someone comes up with about the encoding scheme for UTF16 or UTF32. Right now the industry is with us in that nobody's done anything looney with the wiggle-wording afforded them. We want to close this out before somebody creates some looney 16-bit or 32-bit encoding and tries to standardize it. It would also be great for the rest of SG16's work.
+As Tom presented the wording and other things, consensus to move this forward was pretty much guaranteed as people's eyes glazed over from being pointed out these differences in wording. I have a feeling this will go well in EWG since we also have data showing we have not come across a compiler that violates the UTF16 / UTF32 intention to date. This is a small paper that can make it into C++20, and it should so SG16 doesn't have to handle some crazy assumption someone comes up with about the encoding scheme for UTF16 or UTF32. Right now the industry is with us in that nobody's done anything looney with the wiggle-wording afforded them. We want to close this out before somebody creates some looney 16-bit or 32-bit encoding and tries to standardize it. It would also be great for the rest of SG16's work.
 
 
 ### [Named Escape Sequences - p1097](https://wg21.link/p1097)
@@ -154,7 +154,7 @@ One of the things LEWG asked me to explore was different extension mechanisms. I
 ```
 template <typename Smart, typename... Args>
 auto out_ptr( Smart& s, Args&& ... args ) {
-	// ...           ^ This stuff right here
+	// ...          ^-- This stuff right here
 	// ...
 }
 ```
@@ -205,6 +205,12 @@ Paul McKenney -- a long-time engineer that has a vast swath of knowledge that I 
 # So Where Next?
 
 Well. The Post-meeting Mailing is going to be coming out. I dropped a lot of my new features into that mailing, including the Flexible Array Members and Explicit Return Types for (Implicit) Conversions papers. I have no expectations that anything except Literal Suffixes and `std::out_ptr` will make it for C++20: sorry to everyone who wanted `std::embed` before C++23. It's just not going to happen until I tackle this abominable dependency problem...! I started the process of interviewing for at least 5 different companies, and e-mailed many more, for a 2019 Summer internship. I am really doing my best to work hard and keep pushing forward.
+
+I should take a moment to talk about San Diego. San Diego is actually REALLY pretty! When I first got there I was taken on a bit of a tour by a very awesome guy by the name of Jerry Coffin. He told me a lot about San Diego and the surrounding area, how the seasons play out close to and far-away from the Sea, and a bunch of other really neat information that helped me get around on my first days. Being close to the sea was good, because it meant the temperature wasn't "BUUUUURN" levels of hot.
+
+I also got to spend a lot of time walking around with Corentin Jabot and talking about C++ and plans and the future towards the end of my trip, and I even met Bryce Adelstein Lelbach for a dinner at the pier. There's a lot of things that will make for a complete C++, and I'm excited for it all. I feel like we can almost complete it all in time for C++30... a complete, fully functional, library-complete language...
+
+Maybe one day when I'm not working on so many things, I'll get to relax in a place like San Diego.
 
 There's a lot more I could've written but this report is quite lengthy already.
 
