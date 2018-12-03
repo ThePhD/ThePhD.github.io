@@ -129,7 +129,7 @@ EWGI forwarded not the paper, but the question of "dependency management??" to E
 Modules just had to go and complicate everything.
 
 
-### [[[nodiscard("should have a reason")]] - p1097](https://wg21.link/p1097)
+### [[[nodiscard("should have a reason")]] - p1301](https://wg21.link/p1301)
 
 🛡️ 🛡️ 🛡️ - **EASIEST paper of my life, forwarded to EWG!**
 
@@ -147,7 +147,7 @@ Forwarded to EWG, so long as we stop by LWG/LEWG and have them give us a short 5
 
 [The presentation](/vendor/future_cxx/papers/presentations/d1132.pdf) went well in LEWGI. Some things needed patching up, which I managed to fix up for the post-San Diego mailing (the papers were due November 26th, so I sent all mine in). A lot of questions in LEWG around whether or not we want to solve this just for the C++ Standard Library pointers, or if we want to solve it for all smart pointers. A non-negligible amount of people wanted to solve this for just the Standard Library, but a lot more votes were for solving this for everyone. I am very much strongly in favor of solving this for everyone: having other people reinvent the wheel is not to our benefit as a community.
 
-I also found some more usages of this in the wild. Asides from Microsoft's WRL::ComPtrRef, quite a few company's internal versions of this, and my own version of this, there is also one in Adobe's Chromium. It's even more widespread than I initially find, and more and more people are very much excited about this.
+I also found some more usages of this in the wild. Asides from Microsoft's `WRL::ComPtrRef`, quite a few company's internal versions of this, and my own version of this, there is also one in Adobe's Chromium. It's even more widespread than I initially find, and more and more people are very much excited about this.
 
 One of the things LEWG asked me to explore was different extension mechanisms. I evaluated quite a few and got back with their results quite swiftly in the next revision of the paper. One of the biggest contenders to get rid of the current class-based overriding mechanism was to use ADL. While attractive at first, it is actually a flamingly bad idea. Particularly, because of the way the factory functions and constructors for these types would work:
 
@@ -163,7 +163,7 @@ Unconstrained variadic forwarding arguments are the worst thing to throw into an
 
 This is not a nightmare I am willing to sell to the standard, so the `std::out_ptr_t` and `std::inout_ptr_t` extension points still seem like the best option.
 
-The cool thing about this proposal's extensibility is that it comes with out-of-the-box support for [`unique_resource` and friends](wg21.link/p0052). This is part of the appeal of `std::out_ptr` and its counterpart `std::inout_ptr`: things that are well-behaved can participate in the standard's niceties without requiring an additional paper per ownership/resource wrapper we come up with. Simple, effective, and extensible designs built on foundational concepts like RAII help us create abstractions that can stand up to a diverse range of use cases without having to rewrite or append to the C++ specification.
+The cool thing about this proposal's extensibility is that it comes with out-of-the-box support for [`unique_resource` and friends](https://wg21.link/p0052). This is part of the appeal of `std::out_ptr` and its counterpart `std::inout_ptr`: things that are well-behaved can participate in the standard's niceties without requiring an additional paper per ownership/resource wrapper we come up with. Simple, effective, and extensible designs built on foundational concepts like RAII help us create abstractions that can stand up to a diverse range of use cases without having to rewrite or append to the C++ specification.
 
 Being able to talk nicely to C APIs is one of C++'s strong suits. This proposal enhances that, and if I go to the upcoming Kona meeting this is priority 0.
 
