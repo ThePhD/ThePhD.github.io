@@ -2,8 +2,8 @@
 layout: post
 title: The San Diego 2018 Aftermath
 permalink: /san-diego-2018-c++-committee-trip-report
-feature-img: "assets/img/2018-12-02/beach-dawn.jpg"
-thumbnail: "assets/img/2018-12-02/beach-dawn.jpg"
+feature-img: "assets/img/2018-12-03/beach-dawn.jpg"
+thumbnail: "assets/img/2018-12-03/beach-dawn.jpg"
 tags: [C++, CppCon, speaking, conferences, 🤝, 📣, 📜]
 excerpt_separator: <!--more-->
 ---
