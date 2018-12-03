@@ -4,7 +4,7 @@ title: The San Diego 2018 Aftermath
 permalink: /san-diego-2018-c++-committee-trip-report
 feature-img: "assets/img/2018-12-03/beach-dawn.jpg"
 thumbnail: "assets/img/2018-12-03/beach-dawn.jpg"
-tags: [C++, Unicode, text processing, future, sg-16, embed, out_otr, standards, proposals, 🤝, ⌨️, 📜]
+tags: [C++, Unicode, text processing, future, sg-16, embed, out_ptr, standards, proposals, 🤝, ⌨️, 📜]
 excerpt_separator: <!--more-->
 ---
 
