@@ -54,7 +54,7 @@ What makes this even more sad is that this ABI break is due to a premature optim
 
 By making it backed by an "array of **const** `E`", compilers were free to assume that nobody would move out of the storage or touch the storage in any meaningful fashion. This means they could essentially perform only a single allocation of an `initalizer_list`'s backing array storage for a loop, rather than create a new `initializer_list` with every loop (so long as the `initializer_list`'s contents did not depend on something in the loop's iteration or function parameters or runtime local variables, etc. etc. the list of cases goes on).
 
-If we were to make p1249's in C++20 or C++23, the destruction would be subtle and full of the best Stack Overflow questions filled to the brim with confusion: someone taking a `std::initializer_list` into a DLL compiled with C++20 or later with p1249r0 would move out of your C++17 or below application's `std::initializer_list`. The storage would not be renewed since the compiler is assume it will never be moved out of, only copied out of. And thusly, everything goes to hell in your main application while the C++20 DLL happily chugs along.
+If we were to make p1249's in C++20 or C++23, the destruction would be subtle and full of the best Stack Overflow questions filled to the brim with confusion: someone taking a `std::initializer_list` into a DLL compiled with C++20 or later with p1249r0 would move out of your C++17 or below application's `std::initializer_list`. The storage would not be renewed since the compiler will assume it will never be moved out of, only copied out of. And thusly, everything goes to hell in your main application while the C++20 DLL happily chugs along.
 
 It's a convoluted scenario but chances are someone in the millions of C++ programmers would trip that mine, and they'd be upset. "C++ is terrible." "C++ betrayed me." "What is the Committee doing?" "What's wrong with GCC, why would they do this?" "How could Clang allow this change into the compiler, this is crazy!" And so on, and so forth.
 
@@ -71,7 +71,7 @@ I hope.
 
 ⚔️ - ️**Exactly 2/3rds majority, but held back in EWGI for another round**
 
-This paper was seen before about 2 years ago, and then some 6ish years ago before that. It made it through EWGI with the exact definition of a 2/3rds majority, but as the chair gets to decide what is consensus he said it's alright but needs to come back to EWGI with additional motivation and examples so this does not end up back in EWG to die a death it's already died twice.
+This paper was seen before about 2 years ago, and then some 6ish years ago before that. It made it through EWGI with the exact definition of a 2/3rds majority. But, as the chair gets to decide what is consensus, JF Bastien said it's alright but needs to come back to EWGI with additional motivation and examples so this does not end up back in EWG to die a death it has already died twice.
 
 So, I'm rewriting the paper to be a huge cleanup of callables and `std::overload` for C++! It'll take some work but I think making a holistic package of things that clean up the standard's way of handling functions and disparate things that should be put into overload is a good idea for this paper.
 
