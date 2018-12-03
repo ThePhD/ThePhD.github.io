@@ -69,7 +69,7 @@ I hope.
 
 ### [Pointer to Member Functions and Member Objects are just Callables! - p1214](https://wg21.link/p1214)
 
-⚔️ - ️**Exactly 2/3rds majority, but held back in EWGI for another round**
+⚔️ - ️**Exactly 2/3rds majority, but held back in EWGI for another round.**
 
 This paper was seen before about 2 years ago, and then some 6ish years ago before that. It made it through EWGI with the exact definition of a 2/3rds majority. But, as the chair gets to decide what is consensus, JF Bastien said it's alright but needs to come back to EWGI with additional motivation and examples so this does not end up back in EWG to die a death it has already died twice.
 
@@ -94,15 +94,15 @@ const auto& ohm = "\N{OHM SIGN}";
 
 Another SG16 paper written by the same legendary "Robot", this one was easy to get through. Both Tom and I had made presentations for this one, but eventually decided to [go ahead with my presentation](/vendor/future_cxx/papers/presentations/d1097.pdf) after a few tweaks. This was voted forward to EWG with strong consensus, with a few additional polls about how exactly we wanted to do Named Escape Sequence matching. The presentation shows some of the different matching forms (with some SG16 bias as to which ones to pick). The polls indicated that case insensitive matching for names was preferred among the 3 alternatives (no transformations, case-insensitive, and then full UAX #44-LM2).
 
-It was noted during the conversation that [full UAX #44-LM2](https://www.unicode.org/reports/tr44/#UAX44-LM2) would allow for the smallest possible trie to contain all the Named Character Escape Sequence data. Note that the data would only be kept around for the compiler, not for compiled executables: these sequences are just for the compiler to insert the sequence of encoded bytes. Something that came up was the idea that having to have this data with the compiler would add gigabytes of Unicode data to every compiler.
+It was noted during the conversation that [full UAX #44-LM2](https://www.unicode.org/reports/tr44/#UAX44-LM2) would allow for the smallest possible trie to contain all the "Named Alias" and similar data. Note that the data would only be kept around for the compiler, not for compiled executables: these sequences are just for the compiler to insert the sequence of encoded bytes. Something that came up was the idea that having this data with the compiler would add gigabytes of Unicode data to every compiler.
 
-The full Unicode Character Database (UCD) in Extra-Lazy-No-Space-Savings-Just-Make-Lots-Of-Arrays form is 10.2 MB in a DLL compiled with Visual Studio 2017. This includes literally everything all of the Unihan and Historical character data that next-to-nobody would ever need.
+The full Unicode Character Database (UCD) in Extra-Lazy-No-Space-Savings-Just-Make-Lots-Of-Arrays form is 10.2 MB in a DLL compiled with Visual Studio 2017. This includes _literally everything_: all of the Unihan and Historical character data that next-to-nobody would ever need.
 
-Name Alias and Named Sequences are only about 2 MB, with no space saving storage schemes or optimizations applied.
+Named Alias and Named Sequences are only about 2 MB, with no space saving storage schemes or search optimizations applied.
 
 With luck, this can be quietly moved into C++20. It's not really worth much debate, except maybe asking for UAX #44-LM2 to give implementers a chance to crush those lookup tries down even more.
 
-Hilariously, I spelled one of the sequences wrong on one of the slides and someone pointed out that I spelled it wrong. We got a good laugh saying that it would be a compiler error rather than just getting a bad code point because I used a valid-but-not-quite-right `\UXXXX` escape. Sometimes, even mistakes can help point out the utility of a feature, hah!
+Hilariously, I spelled one of the sequences wrong on one of the slides and someone pointed out that I spelled it wrong. We got a good laugh out of that, before we pointed out that it would be a compiler error rather than just getting a bad code point! If we had been using a number, we might have just misspelled the hex sequence and gotten a valid-but-not-quite-right `\UXXXX`-defined code point, which would have been hell to debug. Sometimes, even mistakes can help point out the utility of a feature, hah!
 
 
 ### [std::embed - p1040](/vendor/future_cxx/papers/d1040.html)
@@ -141,7 +141,7 @@ Forwarded to EWG, so long as we stop by LWG/LEWG and have them give us a short 5
 
 ### [std::out_ptr - p1132r2](/vendor/future_cxx/papers/d1132.html)
 
-🛡️ - **Strong Consensus to move forward, Recommended C++23 but C++20-possible with effort**
+🛡️ - **Strong Consensus to move forward, Recommended C++23 but C++20-possible with effort.**
 
 `std::out_ptr` is possibly the best thing I've ever designed. It's small, simple, easy to implement, easier to optimize, and represented an insanely widespread industry practice that _other_ people in the industry did not know about and got so excited seeing that they actually send e-mails on mailing lists about it. That's a pretty dope feeling.
 
@@ -173,7 +173,7 @@ All in all, I hope everything pans out nicely.
 
 ### [Optional - p1175r0](https://wg21.link/p1175r0)
 
-🗡️ - **No Consensus to Move Forward for C++20**
+🗡️ - **No Consensus to Move Forward for C++20.**
 
 The simplest optional possible to enter C++20 failed to receive enough consensus to get in, but the idea in the paper itself and other ideas to fix optional are not completely dead. LEWG Chair Titus Winters makes a distinction between a paper not receiving consensus to move forward and a paper being outright rejected: p1175 was the former. This means that this paper -- in its current form, even -- or a similar solution can be looked at in time for C++23.
 
@@ -192,7 +192,7 @@ Study Group 16 - Unicode met in San Diego. SG16 couldn't meet during the Rappers
 
 We discussed the [direction paper we wrote, p1238](https://wg21.link/p1238). We also took a bunch of polls and some votes on what we want to see insofar as direction. Transcoding and normalization were at the top of the list, but one that also crept in was a `std::locale` replacement. It's going to be bonkers hard redefining locale, but... well. We sort of accepted this job when we made SG16, didn't we?
 
-As a side note: Tom Honermann is a great guy. Compassionate, understanding, willing to put in a lot of hard work in shepherding proposals, bouncing ideas and helping proposals, it's been great working with him in SG16. I can only hope I can produce some work that makes him proud to have me as a member of SG16. (I've already started to revive my old [`text` and `text_view` types](https://github.com/ThePhD/phd/blob/master/include/phd/text/basic_text_view.hpp), though they're mostly skeletons right now...)
+As a side note: Tom Honermann is a great guy. Compassionate, understanding, willing to put in a lot of hard work in shepherding proposals, bouncing ideas and helping proposals; it's been great working with him in SG16. I can only hope I can produce some work that makes him proud to have me as a member of SG16. (I've already started to revive my old [`text` and `text_view` types](https://github.com/ThePhD/phd/blob/master/include/phd/text/basic_text_view.hpp), though they're mostly skeletons right now...)
 
 
 # Writing History
