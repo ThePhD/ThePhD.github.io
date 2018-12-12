@@ -19,7 +19,7 @@ It is critical to note that even for such an important tenet, the One Definition
 
 What does it mean to for an ill-formed NDR to happen in your program?
 
-It means your program _might_ compile. And it _might_ run. Most things classified by ill-formed NDR means the compiler _can_ do a best-effort attempt to kick the compilation in its face and stop it from going any further. But it can do anything under the sun at that point, because it is an ill-formed program that violates the tenants of the abstract machine. The only holding corollary is that once you violate a fundamental tenant like this, your entire program's working state is now up in the air: you are now in the world of Undefined Behavior. Let's illustrate with a poignant example:
+It means your program _might_ compile. And it _might_ run. Most things classified by ill-formed NDR means the compiler _can_ do a best-effort attempt to kick the compilation in its face and stop it from going any further. But it can do anything under the sun at that point, because it is an ill-formed program that violates the tenets of the abstract machine. The only holding corollary is that once you violate a fundamental tenet like this, your entire program's working state is now up in the air: you are now in the world of Undefined Behavior. Let's illustrate with a poignant example:
 
 `func.h++`
 ```c++
