@@ -15,7 +15,7 @@ One Definition Rule (ODR) is a hallmark of C++, which allows its Parameterized N
 
 # Rules, and Power
 
-It is critical to note that even for such an important tenant, the One Definition Rule is exactly that: a rule. Most other things that go wrong in C++'s abstract machine are classified with a Phrase of Power called "ill-formed". This means that the abstract machine has to stop and tell you that something is wrong with your program, and terminate the program (in the case of most compilers today, that means stop compilation. But if you were running C++ as, say, through an interpreter, then that means stop execution). This makes them less rules, and more Steel-clad Law. The One Definition Rule is funny in that in some cases, the compiler is not required to terminate: this is another Phrase of Power, called "Ill-formed, (with) No Diagnostic Required" (ill-formed (w/) NDR).
+It is critical to note that even for such an important tenant, the One Definition Rule is exactly that: a rule. Most other things that go wrong in C++'s abstract machine are classified with a Phrase of Power called "ill-formed". This means that the abstract machine has to stop and tell you that something is wrong with your program, and terminate the program (in the case of most compilers today, that means stop compilation. But if you were running C++ through, say, an interpreter, then that means stop execution). This makes them less rules, and more Steel-clad Law. The One Definition Rule is funny in that in some cases, the compiler is not required to terminate: this is another Phrase of Power, called "Ill-formed, (with) No Diagnostic Required" (ill-formed (w/) NDR).
 
 What does it mean to for an ill-formed NDR to happen in your program?
 
@@ -126,7 +126,7 @@ int main () {
 }
 ```
 
-We have 2 uses of `inline_func`. One is supposed to `return 1`, the other is supposed to `return 2`. But it's an inline definition, and as per the One Definition Rule, there is only supposed to be one definition. Having 2 definitions 2 with different implementations is assuredly a violation of the rule. And the compiler can see that the code inside is fundamentally different, right? The compiler can save us from triggering this and having our poor bodies clamped in the vice-grip of the mouse tra-
+We have 2 uses of `inline_func`. One is supposed to `return 1`, the other is supposed to `return 2`. But it's an inline definition, and as per the One Definition Rule, there is only supposed to be one definition. Having 2 definitions 2 with different implementations is assuredly a violation of the rule. And the compiler can see that the code inside is fundamentally different, right? The compiler can save us from triggering this and having our poor bodies clamped in the vice-grip of the mouse trap-
 
 ```
 > use_1.c++
@@ -143,7 +143,7 @@ We have 2 uses of `inline_func`. One is supposed to `return 1`, the other is sup
 
 ... Okay, so it runs too. It picked the definition with the `#define` on, returned 1, and then added both together to return that value. Maybe? It's ill-formed, but there's no diagnostic. The implementation just makes some choice because we passed the compiler's heuristics for determining if we followed the One Definition Rule, because all of our definitions are supposed to be identical for an `inline` function (class methods defined in the class are also implicitly declared `inline` as well).
 
-Why didn't the compiler save us from our mistake? This is clearly a bad idea: the implementations were different! Couldn't the compiler just check all the code and make sure it is identical? And it could. But, consider the not-so-infrequent use of something like `<vector>`. As a template class, 99% of its definition needs to be in the header, inside of a template. It's all `inline`, as far as the world is concerned. So for every translation unit that features `<vector>`, the compiler would need to do exhaustive checks for _every single definition of every class and function_ to make sure they are identical after compilation, and issue and error if its not. And for `<string>`. And for `<iostream>`. And fo-
+Why didn't the compiler save us from our mistake? This is clearly a bad idea: the implementations were different! Couldn't the compiler just check all the code and make sure it is identical? And it could. But, consider the not-so-infrequent use of something like `<vector>`. As a template class, 99% of its definition needs to be in the header, inside of a template. It's all `inline`, as far as the world is concerned. So for every translation unit that features `<vector>`, the compiler would need to do exhaustive checks for _every single definition of every class and function_ to make sure they are identical after compilation, and issue and error if its not. And for `<string>`. And for `<iostream>`. And for-
 
 Yeah, okay, that's not feasible.
 
