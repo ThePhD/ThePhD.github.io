@@ -15,7 +15,7 @@ One Definition Rule (ODR) is a hallmark of C++, which allows its Parameterized N
 
 # Rules, and Power
 
-It is critical to note that even for such an important tenant, the One Definition Rule is exactly that: a rule. Most other things that go wrong in C++'s abstract machine are classified with a Phrase of Power called "ill-formed". This means that the abstract machine has to stop and tell you that something is wrong with your program, and terminate the program (in the case of most compilers today, that means stop compilation. But if you were running C++ through, say, an interpreter, then that means stop execution). This makes them less rules, and more Steel-clad Law. The One Definition Rule is funny in that in some cases, the compiler is not required to terminate: this is another Phrase of Power, called "Ill-formed, (with) No Diagnostic Required" (ill-formed (w/) NDR).
+It is critical to note that even for such an important tenet, the One Definition Rule is exactly that: a rule. Most other things that go wrong in C++'s abstract machine are classified with a Phrase of Power called "ill-formed". This means that the abstract machine has to stop and tell you that something is wrong with your program, and terminate the program (in the case of most compilers today, that means stop compilation. But if you were running C++ through, say, an interpreter, then that means stop execution). This makes them less rules, and more Steel-clad Law. The One Definition Rule is funny in that in some cases, the compiler is not required to terminate: this is another Phrase of Power, called "Ill-formed, (with) No Diagnostic Required" (ill-formed (w/) NDR).
 
 What does it mean to for an ill-formed NDR to happen in your program?
 
@@ -154,7 +154,7 @@ This is why it is ill-formed, NDR. This Phrase of Power is for the things the St
 
 Everyone, actually. Everyone likes to talk about how terrible macros are, but everyone uses them. Whether you want it or not, if you [Follow the River, You Will Find the C](http://www.cs.columbia.edu/~jae/papers/3157-paper-v2.2-camera-final.pdf). You may not like macros but they are the go-to way to customize C and C++ code. Every prominent C library from `zlib` to `freetype` gives you a `config.h` to cram defines in to change library behavior, and you had better make sure it's exactly the same when you are both building the library and using the library (unless the documentation provides explicit sanctuary otherwise).
 
-Even if you don't pick up these sorts of libraries, standard libraries have debug defines for iterator checking. Compilers define macros for their versions. They're everywhere, and it's impossible to avoid this problem. "Macros are a mistake", I hear you groaning. But it's alright, macros aren't the only monster here: beautiful, modern C++ loads cocks that shotgun and aims it right for your big toe:
+Even if you don't pick up these sorts of libraries, standard libraries have debug defines for iterator checking. Compilers define macros for their versions. They're everywhere, and it's impossible to avoid this problem. "Macros are a mistake", I hear you groaning. But it's alright, macros aren't the only monster here: beautiful, modern C++ loads that shotgun and aims it right for your big toe:
 
 `fooable.h++`
 ```c++
