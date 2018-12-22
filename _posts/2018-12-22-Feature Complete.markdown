@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Feature Complete
-permalink: /feature-complete-sol3
+title: sol3: Feature Complete
+permalink: /sol3-feature-complete
 feature-img: "assets/img/pexels/correct-diverse-diversity.jpg"
 thumbnail: "assets/img/pexels/correct-diverse-diversity.jpg"
 tags: [C++, sol3, sol2, completed, ⌨️, 🚌]
