@@ -1,6 +1,6 @@
 ---
 layout: post
-title: sol3: Feature Complete
+title: sol3 is Feature Complete
 permalink: /sol3-feature-complete
 feature-img: "assets/img/pexels/correct-diverse-diversity.jpg"
 thumbnail: "assets/img/pexels/correct-diverse-diversity.jpg"
