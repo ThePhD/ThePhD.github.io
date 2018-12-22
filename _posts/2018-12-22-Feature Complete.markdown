@@ -27,12 +27,12 @@ Because this is a major version increase, some of the code people wrote before w
 
 # Usertype Removals and Cleanup
 
-I cleaned up a lot here.
+These were high-priority targets to fix, but were ultimately easy since it mostly involved my `[delete]` key and a fascination for seeing things disappear.
 
 - `new_simple_usertype` and the `simple_usertype` objects do not exist anymore. They were hacks to increase compile time throughput while forcing the user to pay runtime costs in certain cases. No longer necessary, and the code is about as fast as it can be at all times now: this has been **removed**.
 - `sol::usertype<T>`'s "I take a million things things and create several layers of variadic template crap and bring the compiler to its knees with a 12 GB AST OooOooh!" constructor is dead. `sol::usertype` is now an actual meta-table type that behaves like a regular `sol::table`, where you can set/get things. The wonky constructor with `set_usertype` no longer exists. As it should: I regret ever writing it.
 
-All code that is wrong produces a build break now, since I prefer that I break your build rather than let you upgrade and then silently do the wrong thing. The cool thing about the breakages here is that it's not just breakages without respite: everything that's broken now has better ways of doing it that compiles faster (though I don't promise you won't end up with a 12 GB heap, especially if you're careless).
+All code that is wrong produces a build break now, since I prefer that I break your build rather than let you upgrade and then silently do the wrong thing. The cool thing about the breakages here is that it's not just breakages without respite: everything that's broken now has better ways of doing it that compiles faster (though I don't promise you won't end up with a 12 GB compiler heap, especially if you're careless).
 
 One thing I did not break was `lua.new_usertype<blah>( ctor, "key", value, "key2", sol::property(...), /* LITERALLY EVERYTHING */ );`. That will keep working. And it will also bring your compiler to its knees again, which isn't very nice of you. Please consider using 
 
@@ -143,7 +143,7 @@ struct two_things {
 };
 
 template <typename Handler>
-bool check(sol::types<two_things>, lua_State* L, int index, 
+bool sol_lua_check(sol::types<two_things>, lua_State* L, int index, 
 Handler&& handler, sol::stack::record& tracking) {
 	int absolute_index = lua_absindex(L, index);
 	bool success = sol::stack::check<int>(L, absolute_index, handler) 
@@ -152,7 +152,7 @@ Handler&& handler, sol::stack::record& tracking) {
 	return success;
 }
 
-two_things get(sol::types<two_things>, lua_State* L, int index, 
+two_things sol_lua_get(sol::types<two_things>, lua_State* L, int index, 
 sol::stack::record& tracking) {
 	int absolute_index = lua_absindex(L, index);
 	int a = sol::stack::get<int>(L, absolute_index);
@@ -161,7 +161,7 @@ sol::stack::record& tracking) {
 	return two_things{ a, b };
 }
 
-int push(sol::types<two_things>, lua_State* L, const two_things& things) {
+int sol_lua_push(sol::types<two_things>, lua_State* L, const two_things& things) {
 	int amount = sol::stack::push(L, things.a);
 	amount += sol::stack::push(L, things.b);
 	return amount;
@@ -177,7 +177,7 @@ Note that the code reduction is literally chopping out the namespaces and a bunc
 
 Ah, you got me. It's Feature Complete, but it's not Release-Ready. The code is fine, but:
 
-- Documentation needs to be updated for how the new usertype stuff is done. This includes tutorials and API reference documentation. All examples are built as part of the tests though, which are passing! This means that the examples can serve as decent-enough documentation for the time being. Remember you can pop into the sol2 Discord: we're a pretty helpful bunch and help people not only get started but solve complex problems too! You can also @thephantomderp on twitter if you're a dork.
+- Documentation needs to be updated for how the new usertype stuff is done. This includes tutorials and API reference documentation. All examples are built as part of the tests though, which are passing! This means that the examples can serve as decent-enough documentation for the time being. Remember you can pop into the sol2 Discord: we're a pretty helpful bunch and help people not only get started but solve complex problems too! You can also [@thephantomderp](https://twitter.com/thephantomderp) on Twitter if you're a dork.
 - The API reference documentation features me copy-pasting or hand-writing code that properly indicates the semantics of sol2. It would probably be better if I could just reference the actual block of constructors in the code, rather than creating (typo-filled) markup.
 - I want to make a shiny sol3 logo. ... But I suck at drawing. So, that's a thing.
 - The testing infrastructure sucks. Because my CMake skills suck.
@@ -190,7 +190,7 @@ There is also the writhing leviathan that is the SFINAE-and-tag-dispatch-at-the-
 
 # `if constexpr` ? But Derpstorm, what about my {old compiler here}?!
 
-I gave a pretty long-standing heads up that sol3 will be going to C++17 tech, mostly to save me compile time speeds and sanity. Because sol3 is an open-source library, I get to do it for fun and not profit. Which translates to:
+I gave a pretty long-standing heads up that sol3 will be going to C++17 tech (like, nearly 2 years ago now?), mostly to save me compile time speeds and sanity. Because sol3 is an open-source library, I get to do it for fun and not profit. Which translates to:
 
 🎉 Pull requests welcome! 🎉
 
