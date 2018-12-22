@@ -13,12 +13,12 @@ It's finally happening. After the C++Now and CppCon 2018 talks and much work and
 
 # What Does That Mean?
 
-sol3 is a mostly-compatible take on the previous sol2. It means that I will not be working on sol2 anymore (sol2 has already been feature-complete for nearly a year now, and has received mostly bugfixes for). All critical changes are going towards sol3. The biggest changes:
+sol3 is a mostly-compatible take on the previous sol2. It means that I will not be working on sol2 anymore (sol2 has already been feature-complete for nearly a year now, and has received mostly bugfixes for a while now). All critical changes are going towards sol3. The biggest changes:
 
 - There is a shiny new Customization Point space for users, with the explicit promise that as a library author I will never write anything that can potentially compete with your Customization Points. sol2 users will need to move their customization points to this new layer (which is fine: the fix is literally deleting a bunch of lines of code and no longer needing to write them in the sol2 namespace).
 - There are huge performance gains now for all people who relied on the previously dicey inheritance for usertypes. It is as fast as I could possibly make it without reflection, platform-specific hacks and assembly tricks. Once the Reflection finishes going through PD TS balloting and is approved for C++20/23 and compilers roll it out, I can implement this seamlessly with sol3's new mechanisms without backwards compatibility breaks and gain the last drops of performance that will allow users to reach SWIG levels of inheritance performance without any additional markup.
 - Container usertypes have better handling and defaults in some select cases, and slightly better performance. We also fixed an older class of bugs that were nonetheless breaking changes that I could not touch in sol2: it's all clean now.
-- CMake integration is now Modern Top Tier™. You can grab sol2, the single, or the generated single now. You get sol2's target by doing `sol2::sol2`, `sol2::single` after `add_subdirectory(sol/single)`, or `sol2::single_generated` after `add_subdirectory(sol/single)`. We also vastly improved header hygiene and similar with new compilation tests, and added a whole new suite of runtime tests. The default for including sol2 is also now `#include <sol/sol.hpp>`, following the `boost::` style of inclusion to help prevent clashes.
+- CMake integration is now Modern Top Tier™. You can grab sol2, the single, or the generated single now. You get sol2's target by doing `sol2::sol2`, `sol2::sol2_single` after `add_subdirectory(sol/single)`, or `sol2::sol2_single_generated` after `add_subdirectory(sol/single)`. We also vastly improved header hygiene and similar with new compilation tests, and added a whole new suite of runtime tests. The default for including sol2 is also now `#include <sol/sol.hpp>`, following the `boost::` style of inclusion to help prevent clashes.
 - C++17 enabled. The defines enabling C++17 features are there still out of pure laziness: it's a C++17 library now.
 - Performance is Good™.
 
@@ -29,8 +29,8 @@ Because this is a major version increase, some of the code people wrote before w
 
 I cleaned up a lot here.
 
-- `new_simple_usertype` and the `simple_usertype` objects do not exist anymore. They were hacks to increase compile times while forcing the user to pay runtime costs in certain cases. No longer necessary, and the code is about as fast as it can be at all times now: this has been **removed**.
-- `sol::usertype<T>`'s "I take a million things things and create several layers of variadic template crap and bring the compiler to its knees with a 12 GB AST OooOooh!" constructor is dead. `sol::usertype` is now an actual meta-table type that behaves like a regular `sol::table`, where you can set/get things. The wonky constructor with `set_usertype` no longer exists. As it shouldn't: I regret ever writing it.
+- `new_simple_usertype` and the `simple_usertype` objects do not exist anymore. They were hacks to increase compile time throughput while forcing the user to pay runtime costs in certain cases. No longer necessary, and the code is about as fast as it can be at all times now: this has been **removed**.
+- `sol::usertype<T>`'s "I take a million things things and create several layers of variadic template crap and bring the compiler to its knees with a 12 GB AST OooOooh!" constructor is dead. `sol::usertype` is now an actual meta-table type that behaves like a regular `sol::table`, where you can set/get things. The wonky constructor with `set_usertype` no longer exists. As it should: I regret ever writing it.
 
 All code that is wrong produces a build break now, since I prefer that I break your build rather than let you upgrade and then silently do the wrong thing. The cool thing about the breakages here is that it's not just breakages without respite: everything that's broken now has better ways of doing it that compiles faster (though I don't promise you won't end up with a 12 GB heap, especially if you're careless).
 
@@ -63,12 +63,12 @@ int main () {
 }
 ```
 
-The runtime speed of the resulting binding is the same, thanks to some serious optimizations I perform on making sure we serialize what is as close to an optimized map of `std::unique_ptr<char[]>` -> `callable or variable` I could possibly produce. Usertypes also can handle non-string keys now as well, allowing someone to index into them with userdata (pointers and such), integers, and other data points without needing to override the `__index` or `__newindex` methods.
+The runtime speed of the resulting binding is the same, thanks to some serious optimizations I perform on making sure we serialize what is as close to an optimized map of `std::unique_ptr<char[]>` ➡️ `callable or variable` I could possibly produce. Usertypes also can handle non-string keys now as well, allowing someone to index into them with userdata (pointers and such), integers, and other data points without needing to override the `__index` or `__newindex` methods.
 
 The amount of improvements is actually staggering, really...! I could write a whole article on the deterministic runtime qualities we've imbued into sol2 now thanks to doing things like having an `unordered_map` that no longer needs to allocate to lookup for keys without having to resort to `boost::` or hacking up our own `unordered_map`. This means that support for people who were using sol2 for real-time processing purposes remains in place, making sure they have a 0-allocation runtime path they can take advantage of for usertypes and similar.
 
 
-# New Customization Points: Your Own Backyard
+# New Customization Points: Your Own Backyard (and Off My Lawn)
 
 Customization points were also poor in sol2. Sometimes, users wanted to change how fundamental types were handled by the system: they could not without writing over my code. I speak for a good moment about why struct specialization points as a fundamental abstraction are bad for a library like sol2 in my [CppCon 2018 video](https://youtu.be/ejvzoifkgAI?t=2243) and how I have to struggle to keep a clean separation.
 
@@ -198,6 +198,6 @@ I have to finish school and I will be interning over the summer. sol2 has alread
 
 That's all for now. I'll be working on the documentation of sol3, some enhancements to a benchmarking framework so it's usable for all the crazy tooling stuff I want to do, and preparing to bother SG16's chair -- Tom Honermann -- and the legendary libogonek creator -- Robot -- with lots of Unicode Interface questions soon! And then after that it's school, and everything might go quiet.
 
-[Or... will it? ♩~](/assets/img/2018-12-22/Dun dun dun.png)
+[Or... will it? 🏭](/assets/img/2018-12-22/Dun dun dun.png)
 
 Toodle-oo! ❤️
