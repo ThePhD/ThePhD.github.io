@@ -34,14 +34,16 @@ The first time I inquired about it, I ultimately could NOT use the Travel Assist
 
 The second time, I did it semi-properly. I had several papers going to LEWG and EWG, I had worked out the wording, and I had spent a lot of time also preparing to present other people's papers. I sent a very detailed e-mail discussing the papers I wrote, my hopes for what they would accomplish with a short abstract of what they did, and what they were worth to a person at the Standard C++ Foundation. This was also the _wrong_ thing to do: the **proper** way is to actually message one of the group chairs (the Standard C++ Foundation keeps an extensive list of that [here](https://isocpp.org/std/the-committee)). Many of the people here are also on Twitter, reply in the [std-proposals Google Group discussion](https://groups.google.com/a/isocpp.org/forum/#!forum/std-proposals), and have e-mails you can find in some way (through that web page, through the Boost Community, from their mailing list posts in interest communities, etc.). They are all fairly active.
 
-Send them an e-mail with your paper(s), your request, and everything necessary about it. If you need help, ping other people you know are committee members (on Reddit, on Twitter), DM them to at the very least check over your paper. Post your paper on std-proposals to put it in good shape before you send it to a Chair. Make sure you do your search: [write a good proposal](https://thephd.github.io/writing-good-proposals). They get back to you, saying "Yes, this person's work is useful and I sponsor their travel". And then that's it, it happens. Some things of note, however, that are true as of December 29th, 2018:
+Send them an e-mail with your paper(s), your request, and everything necessary about it. If you need help, ping other people you know are committee members or who help with papers (on Reddit, on Twitter). DM them to at the very least check over your paper. Or, more appropriately, post your paper on std-proposals to put it in good shape before you send it to a Chair. Make sure you do your research: [write a good proposal](https://thephd.github.io/writing-good-proposals).
 
-- Sponsorship is typically done in the form of Reimbursements, and all Reimbursements and given through tangible receipts. Save your flight receipt, taxi receipts, and everything, please;
+If the Chair gets back to you saying "Yes, this person's work is useful and I sponsor their travel", then that's it. Send an e-mail to the Standard C++ Foundation with that approval, and it should happen. Some things of note, however, that are true as of December 29th, 2018:
+
+- Sponsorship is typically done in the form of Reimbursements, and all Reimbursements are given through tangible receipts. Save your flight receipt, taxi receipts, and everything, please;
 - Travel Assistance covers up to Coach / Economy on a plane ride;
 - Meals are not covered;
 - and, transportation to/from the airport is also covered.
 
-And that's it. I also like programs like these because they are based purely on something I think is a fairly good equalizer: financial hardship. There's literally no other requirements! If you can prove you are willing to do the work and write papers or pick up papers that need standardization or contribute in a positive way to the Committee, they will help you get there. Just please make your case as well as you can, and make sure you have actually written a paper!
+That's it. I also like programs like these because they are based purely on something I think is a fairly good equalizer: financial hardship. There's literally no other requirements! If you can prove you are willing to do the work and write papers or pick up papers that need standardization or contribute in a positive way to the Committee, they will help you get there. Just please make your case as well as you can, and make sure you have actually written a paper!
 
 
 # And that's your in!
