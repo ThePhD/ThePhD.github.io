@@ -10,7 +10,7 @@ excerpt_separator: <!--more-->
 
 This is what I get for opening my big mouth in Twitter threads with people far my senior. Let's just hope I don't get in trouble, here...!<!--more-->
 
-I ended up getting pinged in a thread that was going on about [Eric Niebler's ranges post and general C++ lamentations](https://twitter.com/Timewatcher/status/1078222716442800128). From that, spawned a Blog Post from [Game Industry Legend Aras Pranckevičius about their lamentations for C++](http://aras-p.info/blog/2018/12/28/Modern-C-Lamentations/). In it, a lot of C++'s well-known pain points were once more brought to the forefront when discussing the upcoming Ranges: terrible build/compile times, cognitive load to understand new (or revamped) features, put-it-in-a-library fetishism that often tanks runtime performance except when inlined by the compiler, and more.
+I ended up getting pinged in a thread that was going on about [Eric Niebler's ranges post and general C++ lamentations](https://twitter.com/Timewatcher/status/1078222716442800128). From that, spawned a Blog Post from [Game Industry Legend Aras Pranckevičius about their lamentations for C++](http://aras-p.info/blog/2018/12/28/Modern-C-Lamentations/). In it, a lot of C++'s well-known pain points were once more brought to the forefront when discussing the upcoming Ranges: terrible build/compile times, cognitive load to understand new (or revamped) features, put-it-in-a-library urges that often tanks runtime performance except when inlined by the compiler, and more.
 
 I also got asked a question:
 
@@ -102,3 +102,5 @@ I think it should give people some decent insight into the process, and what it 
 This was written pretty hastily, so forgive my typos and maybe any lacking details, I'm always available to answer questions!
 
 Toooodles. 💚
+
+<sub>P.S.: I used the term "fetishism" before to describe the want to make very complex libraries that often come at the cost of debug build speed. I edited the term out since, while it makes for spicy writing, is probably not the best for good communication with my hardworking peers and colleagues since it can be seen as an attack on the hard work they do. I most certainly am not trying to depress or disparage anyone: I want to move things forward, not backwards, and positive + constructive communication is an important part of that.</sub>
