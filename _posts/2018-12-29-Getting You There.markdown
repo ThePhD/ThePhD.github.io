@@ -18,7 +18,7 @@ Any who:
 
 If you're facing Financial Hardship, are a student, are self-employed, **and** have written a proposal that the chairs of the C++ Standardization Groups (Library Evolution, Evolution, Core, Library, Parallelism/Concurrency, and similar study groups) deem necessary to help move the language forward (in large or small ways), you can apply for [Grant Assistance from the C++ Standards Foundation](https://isocpp.org/about/financial-assistance-policy). If you have an employer but that employer will not cover the full cost, you have papers to present (yours or on behalf of others) and similar, [you can apply for Travel Assistance](https://isocpp.org/about/financial-assistance-policy).
 
-I will talk about Travel Assistance, because that is what I have applied for and successfully received.
+I will talk about Travel Assistance, because that is what I have applied for and successfully received. A huge thanks to the Standard C++ Foundation for making something like this available! I can only hope that my work will continue to be things that they need, and that I can continue to write papers and do work on behalf of the C++ Community to move our various industries forward.
 
 
 # What You don't know won't hurt You, But it will hurt Your Wallet!
