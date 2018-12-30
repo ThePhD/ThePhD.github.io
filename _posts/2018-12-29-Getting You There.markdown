@@ -8,7 +8,13 @@ tags: [C++, standardization, logistics, ✈️, 👛]
 excerpt_separator: <!--more-->
 ---
 
-As part of a series of "[I open my big mouth](https://twitter.com/thephantomderp/status/1079001746402365440) and [volunteer to do more things](https://twitter.com/thephantomderp/status/1079164306137235457)", I am going to do my best to be brief and do more than just give observations about the C++ Standards Committee, but give you some of the tools on<!--more--> how to get there.
+As part of a series of "[I open my big mouth](https://twitter.com/thephantomderp/status/1079001746402365440) and [volunteer to do more things](https://twitter.com/thephantomderp/status/1079164306137235457)", I am going to do my best to be brief and do more than just give observations about the C++ Standards Committee, but give you some of the tools on<!--more--> how to get there. This also comes in the wake of [a big conversation a lot of folk started](https://twitter.com/_Felipe/status/1078932775103803393) over on how exactly we can influence the C++ Standards Committee's direction better by getting our voices heard and being present when decisions are made.
+
+I won't talk about [SG14](https://github.com/WG21-SG14/SG14) and such, but you should know that SG14 is the Low-Latency / Games group and they do a _lot_ of work to try and handle where a good chunk of these concerns come from. At the bottom of this post are a bunch of links to Study Groups I have personally participated in at least twice, and can direct you to some of their resources.
+
+This post will talk about what you do after you go through some of those channels, get yourself a paper, and want to attend a C++ Standards Meeting. It unfortunately will not tell you how to secure 1 week of time off from work, how to convince your husband to handle all 3 kids while you're doing C++ work, nor will it make your boss suddenly understand that this is actually a seriously volunteer effort and yes the meeting is in Cologne, Germany near the River but it's _not a vacation for the Love of God_...!
+
+Any who:
 
 If you're facing Financial Hardship, are a student, are self-employed, **and** have written a proposal that the chairs of the C++ Standardization Groups (Library Evolution, Evolution, Core, Library, Parallelism/Concurrency, and similar study groups) deem necessary to help move the language forward (in large or small ways), you can apply for [Grant Assistance from the C++ Standards Foundation](https://isocpp.org/about/financial-assistance-policy). If you have an employer but that employer will not cover the full cost, you have papers to present (yours or on behalf of others) and similar, [you can apply for Travel Assistance](https://isocpp.org/about/financial-assistance-policy).
 
@@ -37,6 +43,11 @@ Send them an e-mail with your paper(s), your request, and everything necessary a
 
 And that's it. I also like programs like these because they are based purely on something I think is a fairly good equalizer: financial hardship. There's literally no other requirements! If you can prove you are willing to do the work and write papers or pick up papers that need standardization or contribute in a positive way to the Committee, they will help you get there. Just please make your case as well as you can, and make sure you have actually written a paper!
 
-The Standards Process is time-consuming, but it *can* be accessible. Please be sure to do your due diligence and bring high-quality work to the C++ Standards Body. If you feel like it needs more work, SG14 calls are open and free to participate in, SG16 (if you're doing text) calls are open to the public, the Linear Algebra SIG coordinates through SG14 and does work, SG15 has a public mailing list and they will happily beat your tooling-related proposals up (they beat up [p1130](https://thephd.github.io/vendor/future_cxx/papers/d1130.html) into pretty good form for Kona), go to the std-proposals forum, and more...!
 
-You can do it. I believe in you! 🧡
+# And that's your in!
+
+The Standards Process is time-consuming, but it *can* be accessible to those of us not traditionally in the systems programming sphere who still want to contribute! Please be sure to do your due diligence and bring high-quality work to the C++ Standards Body. If you feel like it needs more work, [SG14](https://github.com/WG21-SG14/SG14) calls are open and free to participate in, [SG16](https://github.com/sg16-unicode/sg16) (if you're doing text) calls are open to the public, the Linear Algebra SIG coordinates through SG14 and does work, [SG15](https://cppcast.com/2018/06/titus-winters/) has a public mailing list and they will happily beat your tooling-related proposals up (they beat up [p1130](https://thephd.github.io/vendor/future_cxx/papers/d1130.html) into pretty good form for Kona), go to the [std-proposals forum](https://groups.google.com/a/isocpp.org/forum/#!forum/std-proposals), and more...!
+
+You can do it. We can make C++ better, as a more diverse group with a more inclusive set of interests!
+
+I believe in us! 🧡🧡
