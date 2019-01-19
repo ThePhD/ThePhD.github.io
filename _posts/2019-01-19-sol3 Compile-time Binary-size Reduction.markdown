@@ -184,7 +184,7 @@ void compute(T data) {
 
 This makes not only instantiating the right function template but selecting it (as most tag dispatches are within templated functions) expensive. It's less expensive than raw SFINAE on function templates but it's still expensive. `if constexpr` doesn't work well when you have separate paths of code whose _conditions_ are not behind templates (remember the condition has to be part of a dependent type to have the compiler not fully parse _and_ semantically check that branch). It works wonders when you do have a template and you can gain a lot of benefit by taking what used to be overload sets and changing them into single function (template) invocations. Now you are only paying the cost of instantiation, and not the cost of overloading several entities you've defined!
 
-This is a lot simpler to do and probably makes the code much easier to read as well. It's only available for C++17 but I do not mind increasing the compiler requirements for sol3! Especially since all 3 major compilers are free at this point, with MinGW-x64 serving up the world's easiest-to-use installer. Albeit for some reason it still doesn't ship a regular `make.exe`-named executable, but rather some weird `mingw32-make.exe` thingy instead. It's amazing how much tooling this breaks... I have to add a `mklink make.exe mingw32-make.exe`, usually.
+This is a lot simpler to do and probably makes the code much easier to read as well. It's only available for C++17 but I do not mind increasing the compiler requirements for sol3! Especially since all 3 major compilers are free at this point, with MinGW-w64 serving up the world's easiest-to-use installer. Albeit for some reason it still doesn't ship a regular `make.exe`-named executable, but rather some weird `mingw32-make.exe` thingy instead. It's amazing how much tooling this breaks... I have to add a `mklink make.exe mingw32-make.exe`, usually.
 
 I digress!
 
@@ -345,7 +345,8 @@ This proposal is fine (it does not solve my key-value pair patterning problem in
 template <typename... Args>
 void f( Args&&... args ) {
 	for constexpr( std::size_t i : std::ranges::iota(0, sizeof...(Args))) {
-		language_func_to_get_pack_element(i, args); // THIS RIGHT HERE
+		// THIS RIGHT HERE
+		decltype(auto) element = language_func_to_get_pack_element...(i, args);
 	}
 }
 ```
@@ -354,13 +355,13 @@ This is what I want. Not more tuple tricks. Not more compile-time bloat through 
 
 let us use them properly!
 
-With the above snippet, I'm in control. Now I don't need tuple. Or reflection. Or `reflexpr`. Or any of that. I get packs, I get to work with packs rather than treat each one like an ever-elusive, unobservable collection of maybe-Schrödinger's cats. I don't need to instantiate anything. I just let the compiler do the 1 operation people have been trying to propose since 2015; "get the element here from this pack". Now, regular programming paradigms mean something. I do not need a special crash course in `std::index_sequence` or `std::tuple` or a hand-rolled `type_list`. I don't need `std::tuple_element_t`: I'll have `decltype()`. I don't need `std::get<T>` or `std::get<N>`: I have `language_func_to_get_pack_element(i, args)`.
+With the above snippet, I'm in control. Now I don't need tuple. Or reflection. Or `reflexpr`. Or any of that. I get packs, I get to work with packs rather than treat each one like an ever-elusive, unobservable collection of maybe-Schrödinger's cats. I don't need to instantiate anything. I just let the compiler do the 1 operation people have been trying to propose since 2015; "get the element here from this pack". Now, regular programming paradigms mean something. I do not need a special crash course in `std::index_sequence` or `std::tuple` or a hand-rolled `type_list`. I don't need `std::tuple_element_t`: I'll have `decltype()`. I don't need `std::get<T>` or `std::get<N>`: I have `language_func_to_get_pack_element...(i, args)`.
 
 I don't care what the actual name is: bikeshed it to death. `static_pack_get` has 0 hits for code on GitHub, maybe use that name as a raw language keyword. Whatever it's called: _this_ is the feature I need. This is what I was hoping for since C++14. And C++17. And C++20.
 
 p1306 would be made even better if I could use a traditional for loop where I control the initializer and condition as well, without having to go through a `constexpr` version of `std::ranges::iota`. I sent an e-mail to the author of that paper, asking them to consider a traditional `constexpr` for loop with the typical expressions, just with the caveat that they must be compile-time ones. If that gets in, I don't need to drag in `std::ranges::iota` just to get some indices, or `std::tuple` just to create a tuple of numbers.
 
-This is the feature that is going to put the compilation time is back in my hands and not in a library abstraction I don't own. In perhaps hamster wheel levels of hilarity, when p0478 was rejected in _2015_ the _reason_ it was rejected was because they wanted someone to bring a paper forward for `language_func_to_get_pack_element(i, args)`. Papers like that were brought forward, and they died too. Do I dip my hands into the pot and try to write that paper again? Do I revive it, knowing that it was killed and abandoned?
+This is the feature that is going to put the compilation time is back in my hands and not in a library abstraction I don't own. In perhaps hamster wheel levels of hilarity, when p0478 was rejected in _2015_ the _reason_ it was rejected was because they wanted someone to bring a paper forward for `language_func_to_get_pack_element...(i, args)`. Papers like that were brought forward, and they died too. Do I dip my hands into the pot and try to write that paper again? Do I revive it, knowing that it was killed and abandoned?
 
 Is that _really_ a good use of my time...?
 
@@ -380,7 +381,9 @@ but together, we do.
 
 # And while we wait for that to bake...
 
-sol3's compile times related to the above proposals will have to stay as they are. Thankfully, there's a bunch more places where I can cull some significantly ugly tag-dispatch-and-SFINAE usage, and a few more places where I can cut out more tuples and function templates. I was hoping to release sol3 this week, but I was not able to do documentation yet (and I refuse to release sol3 and make it the default branch without documentation). I need to improve these compile times. I _need_ to do it. Even if I have to make all of my code horrible and ugly, it needs to be fast. It _must_ be fast to compile...
+sol3's compile times related to the above proposals will have to stay as they are. Thankfully, there's a bunch more places where I can cull some significantly ugly tag-dispatch-and-SFINAE usage, and a few more places where I can cut out more tuples and function templates. I think I can squeeze another 10 minutes at least off the compile times of the project mentioned above **at least**, probably more if I get very dedicated. But this isn't exactly a paid job, and I've done a fairly heroic amount of effort so far and school is starting in like 4 days...! Maybe I should switch to Jonathan Müller's "productive week" model, focusing on weekends and stuff?
+
+I was hoping to release sol3 this week, but I was not able to do documentation yet (and I refuse to make it the default branch without documentation). I need to improve these compile times. I _need_ to do it. Even if I have to make all of my code horrible and ugly, it needs to be fast. It _must_ be fast to compile...
 
 ... But, until that wonderful day?
 
