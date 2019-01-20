@@ -52,7 +52,7 @@ Just where I found that bloat -- asides from the obvious places where I used exa
 
 # Easy to Write, Easy to Read, Easy to... Bloat?
 
-Lambda's are ultra convenient and -- in some cases -- even more powerful than structs you declare locally (for example, you can't template function-local structs but you can do it with a lambda and `auto`/Concept function argument types!) But, I needed to tear them down in several places where I had capturing lambdas inside of templated code. I only did this in a handful of places -- 6 or 7 total in the whole library, up from 1 or 2 in sol2 -- and it did a fair amount of to save me the mental overhead when programming. They're just Immediately Invoked Function Expressions, right? How costly can they be?
+Lambdas are ultra convenient and -- in some cases -- even more powerful than structs you declare locally (for example, you can't template function-local structs but you can do it with a lambda and `auto`/Concept function argument types!) But, I needed to tear them down in several places where I had capturing lambdas inside of templated code. I only did this in a handful of places -- 6 or 7 total in the whole library, up from 1 or 2 in sol2 -- and it did a fair amount of to save me the mental overhead when programming. They're just Immediately Invoked Function Expressions, right? How costly can they be?
 
 It turns out capturing Lambdas -- even entirely local ones -- don't optimize out cleanly in terms of _code size_ for C++ and a lot of it gets dumped into the object file and the resulting executable. I used `dumpbin` to get me all the symbols in a text file (an 11 megabyte text file) and then proceeded to just goof around and scroll through it. Some things there was nothing I could do about, like all the string spam for my Compile-Time Type Strings work I was doing. But, for this 1 object file where only 1 class was being bound using an alpha of sol3, I ran a count for the times `lambda` showed up:
 
@@ -202,7 +202,7 @@ Removing recursive tricks to use tuples + fold expressions didn't help. In the e
 
 ![Yep, no longer a problem.](assets/img/2019-01-19/new-enum-solutions.png)
 
-I suspect that a 130 argument (x 2 to name each key, so actually 260 argument) instantiated variadic template function is big, but let's be fair: the compiler reduced both the executable footprint and the size with the same information but in an `initializer_list`. Part of this is because we mashing down what was 60+ different `const char[N]` from string literals of different sizes. Another part was because we were not instantiating a 260-size tuple in the `initializer_list` version, then destructing that said 260-element tuple and forwarding each `const char[N]` and `enumT` pair into a single `set` call where a hell of a lot of work is done. Just not having to do 60+ different instantiations for a bunch of different-length string names and one `enumT` is pretty great, already!
+I suspect that a 130 argument (x 2 to name each key, so actually 260 argument) instantiated variadic template function is big, but let's be fair: the compiler reduced both the executable footprint and the size with the same information but in an `initializer_list`. Part of this is because we mashing down what was 60+ different `const char[N]` from string literals of different sizes. Another part was because we were not instantiating a 260-size tuple in the `initializer_list` version, then destroy that said 260-element tuple and forwarding each `const char[N]` and `enumT` pair into a single `set` call where a hell of a lot of work is done. Just not having to do 60+ different instantiations for a bunch of different-length string names and one `enumT` is pretty great, already!
 
 Still, it's not as if the thing is entirely escapable at the moment. When you cannot pin the types down for an `initializer_list`, you need tuples to interact with patterns in your variadic lists (pairs, "the last of the list", triplets, every 5th argument, whatever it is). In C++, common idioms for working with patterns and other are not viable options with variadic packs without doing tuple shenanigans. It is impossible to perform novel algorithms with variadics for more than just utterly pure -- e.g. without co-dependency on any shared state between arguments -- expressions.
 
@@ -291,7 +291,7 @@ Many people tried to convince me that I can write a non-recursive form by
 2. doing `detail::swallow{ 0, (mutators.mutate(), 0)... }` (or equivalent fold expression) to call `pull_args_from_storage<Args>(*p_storage, *p_order_dependent_state);` inside the `mutate()`
 3. store the value in a delay-initialized object, then pull out the internal value and forward it to the actual `f` with `f( mutators.get()... )`.
 
-This does not work because it is impossible to delay-initialize things without forcing extra moves in the case of values returned by `pull_args_from_storage<T>`. I can assume an l-value will be stored somewhere and save a pointer to it. But what about `T&&`? Consider the following pseudo-implementation of `mutator`:
+This does not work because it is impossible to delay-initialize things without forcing extra moves in the case of values returned by `pull_args_from_storage<T>`. I can assume an lvalue will be stored somewhere and save a pointer to it. But what about `T&&`? Consider the following pseudo-implementation of `mutator`:
 
 ```cpp
 template <typename T>
@@ -323,7 +323,7 @@ struct mutator {
 
 Problems to consider with this approach:
 
-1. Storing a delay-initialized value `T` directly means you enforce an extra construction, extra move, and extra destructor call for this type. If you only construct but don't destruct and just move the class, that's a huge bug.
+1. Storing a delay-initialized value `T` directly means you enforce an extra construction, extra move, and extra destructor call for this type. If you only construct but don't destroy and just move the class, that's a huge bug.
 2. If someone returns a `T&&` directly (or you decide you're going to avoid the problem in item 1), how do you delay-initialize that reference? Remember that references don't _actually_ exist (even though they do and you can observe and touch them at times), and `sizeof(T&&)` gives back `sizeof(T)`, which means `aligned_storage` or any other size-based delay-initialized storage mechanism is out of the question.
 
 At the very least, I could solve `T&` by assuming it's valid and storing a pointer, and then passing along that dereferenced pointer (e.g., partially specialize the struct for `template <typename T> struct mutator<T&> { ... };`). But how do I store the `T&&`? Do I just take the address, hope lifetime extension lasts long enough, and then dereference-and-return?
