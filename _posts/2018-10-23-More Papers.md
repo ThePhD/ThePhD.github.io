@@ -2,6 +2,7 @@
 layout: post
 title: San Diego Pregame - Paper Review II
 permalink: /sandiego-2018-pregame-paper-review-II
+redirect_from: [ /2018/10/23/More-Papers.html ]
 feature-img: "assets/img/pexels/disco-full.jpeg"
 thumbnail: "assets/img/2018-10-23/san-diego.jpg"
 tags: [C++, future, standards, proposals, review, ⌨️, 📜]

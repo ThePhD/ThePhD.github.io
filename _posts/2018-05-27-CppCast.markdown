@@ -3,6 +3,7 @@ layout: post
 title: CppCast 2018, with Rob Irving and Jason Turner!
 permalink: /cppcast-2018-june
 feature-img: "assets/img/thumbnails/CppCast.png"
+redirect_from: [/2018-05-07-Lua-Bindings-Shootout.html]
 thumbnail: "assets/img/thumbnails/CppCast.png"
 tags: [C++, CppCast, speaking, podcast, 🤝, 📣, 🎧]
 excerpt_separator: <!--more-->

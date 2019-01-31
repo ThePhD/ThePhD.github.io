@@ -2,6 +2,7 @@
 layout: post
 title: New Logo for sol!
 permalink: /new-sol-logo
+redirect_from: ["/2018/04/16/new-logo-sol.html"]
 tags: [sol, sol2, graphic design, 🎨]
 excerpt_separator: <!--more-->
 ---

@@ -2,6 +2,7 @@
 layout: post
 title: San Diego Pregame - Optional Choices to Make
 permalink: /sandiego-2018-pregame-optional
+redirect_from: [/2018/10/25/Big-Papers-Optional.html]
 feature-img: "assets/img/2018-10-25/choose.jpg"
 thumbnail: "assets/img/2018-10-25/choose.jpg"
 tags: [C++, future, optional, standards, proposals, review, ⌨️, 📜]

@@ -2,6 +2,7 @@
 layout: post
 title: Generating Motivation
 permalink: /generating-motivation
+redirect_from: [ /2018/10/22/Generating-Motivation.html ]
 feature-img: "assets/img/2018-10-22/stay-focused.jpg"
 thumbnail: "assets/img/2018-10-22/flowchart-point.jpg"
 tags: [C++, sol, sol2, support, motivation, ⌨️]

@@ -2,7 +2,9 @@
 layout: post
 title: New Avatar!
 permalink: /new-avatar-I
+redirect_from: [ /2018/05/25/new-avatar.html ]
 thumbnail: "assets/img/thumbnails/art-beautiful-bloom.jpg"
+redirect_from: [/2018-05-07-Lua-Bindings-Shootout.html]
 tags: [avatar, blah, art, graphic design, 🎨, 🖌️]
 excerpt_separator: <!--more-->
 ---

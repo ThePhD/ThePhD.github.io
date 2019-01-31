@@ -2,6 +2,7 @@
 layout: post
 title: The Case for out_ptr in the Standard Library
 permalink: /case-for-out_ptr-I
+redirect_from: [/2018/04/15/The-Case-for-out_ptr.html, /2018/04/15/The-Case-for-ptrptr.html]
 feature-img: "assets/img/portfolio/out_ptr.png"
 thumbnail: "assets/img/portfolio/out_ptr.png"
 tags: [C++, out_ptr, out_ptr series, series, performance, benchmarks, 🚌, ⌨️]
