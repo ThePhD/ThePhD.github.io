@@ -2,7 +2,8 @@
 layout: post
 title: The (Late) Rapperswil Trip Report
 permalink: /rapperswil-2018-c++-committee-trip-report
-redirect_from: [ /2018/08/21/The-Late-Rapperswil-Trip-Report.html ]
+redirect_from:
+  - /2018/08/21/The-Late-Rapperswil-Trip-Report.html
 feature-img: "assets/img/thumbnails/RapperswilRainbow.jpg"
 thumbnail: "assets/img/thumbnails/RapperswilRainbow.jpg"
 tags: [C++, Unicode, text processing, future, sg-16, embed, standards, proposals, 🤝, ⌨️, 📜]

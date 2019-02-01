@@ -2,7 +2,8 @@
 layout: post
 title: "Well, Hello There!"
 permalink: /hello
-redirect_from: ["/2018/04/03/well,hello-there.html"]
+redirect_from:
+  - "/2018/04/03/well,hello-there.html"
 feature-img: "assets/img/pexels/open.jpg"
 thumbnail: "assets/img/thumbnails/open.jpg"
 tags: [hello, about, 👋]

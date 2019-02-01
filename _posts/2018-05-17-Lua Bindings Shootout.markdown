@@ -2,7 +2,8 @@
 layout: post
 title: Lua Bindings Shootout
 permalink: /lua-bindings-shootout
-redirect_from: [ /2018/05/17/Lua-Bindings-Shootout.html ]
+redirect_from: 
+  - /2018/05/17/Lua-Bindings-Shootout.html
 feature-img: "assets/img/2018-05-17/lbs feature.png"
 thumbnail: "assets/img/2018-05-17/lbs feature.png"
 tags: [C++, Lua, sol, sol2, performance, benchmarks, 🚌, ⌨️, 🔫]
