@@ -77,7 +77,7 @@ Here are some benchmarks for function calls. I have various different kinds of f
 
 This is a very simple benchmark where I call a C++ function through some Lua code. Performance is steady across implementations, save for Luacppinterface. Much of this has to do with how efficiently arguments are pushed onto and pulled off of the stack: too much boilerplate in these mechanisms results in unwanted overhead.
 
-![calling a Lua function in C++](https://github.com/ThePhD/lua-bindings-shootout/blob/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/Lua%20function%20in%20c.png?raw=true)
+![calling a Lua function in C++](https://github.com/ThePhD/lua-bindings-shootout/blob/e19623be686365800a17e8ae2d158cfb055b131e/benchmark_results/lua%20function%20in%20c.png?raw=true)
 
 This benchmarks the function abstraction of the library, to see how efficiently it wraps up and calls `lua_pcall` (or `lua_call`). This is typically done through some abstraction `lib::lua_function f = Lua["f"]; f(123);`. What is most surprising here is how sol seems to outperform the handwritten C code here.
 
@@ -87,7 +87,7 @@ The other difference is in library's and handwritten's code use in `lua_call` (w
 
 Here is a (quick, 5-sample, multiple-iterations) benchmark of the same thing using `lua_call` rather than `lua_pcall`:
 
-![calling a Lua function in C++, using `lua_call` instead of `lua_pcall`]({{ site.baseurl }}/assets/img/2018-05-17/Lua function in c.png)
+![calling a Lua function in C++, using `lua_call` instead of `lua_pcall`]({{ site.baseurl }}/assets/img/2018-05-17/lua function in c.png)
 
 Bam, now its all even!
 
