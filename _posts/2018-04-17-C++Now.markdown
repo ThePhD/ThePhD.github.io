@@ -7,7 +7,7 @@ redirect_from:
   - /2018/04/17/C++-Now.html]
 feature-img: "assets/img/thumbnails/CppNowLogo.svg"
 thumbnail: "assets/img/thumbnails/CppNowLogo.svg"
-tags: [C++, C++ Now, speaking, conferences, 🤝, 📣]
+tags: [C++, C++Now, speaking, conferences, 🤝, 📣]
 excerpt_separator: <!--more-->
 ---
 

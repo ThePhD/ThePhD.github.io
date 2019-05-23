@@ -7,7 +7,7 @@ redirect_from:
   - /2018/05/15/C++Now-Trip-Report.html
 feature-img: "assets/img/2018-05-15/C++Now feature.jpg"
 thumbnail: "assets/img/2018-05-15/C++Now feature.jpg"
-tags: [C++, C++ Now, speaking, conferences, 🤝, 📣, 📜]
+tags: [C++, C++Now, speaking, conferences, 🤝, 📣, 📜]
 excerpt_separator: <!--more-->
 ---
 
