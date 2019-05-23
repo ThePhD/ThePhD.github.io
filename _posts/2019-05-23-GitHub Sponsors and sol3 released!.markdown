@@ -13,11 +13,11 @@ The C++ library for fast interop to Lua is finally official, and now I can say I
 
 # 🎊 sol3 is Released 🎊
 
-It's been out for some time, actually, I just never formally declared it because I was worried about documentation and was trying to fix a bug with `/permissive-`. Turns out that bug is entirely unfixable at the moment, and I just have to wait for `/permissive-` to get better. In the meantime, if you want your code to be conformant to strict C++ just compile it with GCC and Clang.
+[Tada!](https://github.com/ThePhD/sol2) It's been out for some time, actually, I just never formally declared it because I was worried about documentation and was trying to fix a bug with `/permissive-`. Turns out that bug is entirely unfixable at the moment, and I just have to wait for `/permissive-` to get better. In the meantime, if you want your code to be conformant to strict C++ just compile it with GCC and Clang.
 
-But 2,087 commits in, 88 releases, and quite a bit of finagling later, sol3 is now officially out for the masses to consume. There is a SLEW of new features, renamed functionality, improved code and some updates. Most of the migration bits are covered in [this issue here](https://github.com/ThePhD/sol2/issues/776) and [this blog post](/sol3-compile-times-binary-sizes).
+But 2,087 commits in, 88 releases, and quite a bit of finagling later, [sol3 is now officially out](https://github.com/ThePhD/sol2/releases/tag/v3.0.2) for the masses to consume. There is a SLEW of new features, renamed functionality, improved code and some updates. Most of the migration bits are covered in [this issue here](https://github.com/ThePhD/sol2/issues/776) and [this blog post](/sol3-compile-times-binary-sizes).
 
-The benchmarks have not been fully updated yet but I expect that everything is still in-line with everything else. Some highlights:
+The benchmarks have not been fully updated yet but I expect that sol3 is still in-line with everything else. Some highlights:
 
 * No more simple usertype vs. regular usertype: compilation improvements have come to the forefront and drastically improved the code, leaving only a regular `usertype` with a better, table-like interface!
 * The [`dump()` function](https://github.com/ThePhD/sol2/blob/develop/examples/source/dump.cpp) is now available on all `sol::function`-like types, allowing you to serialize their byte code.
