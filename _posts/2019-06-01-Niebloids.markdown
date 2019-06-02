@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A Weakness in the Niebloid
+title: A Weakness in the Niebloids
 permalink: /a-weakness-in-the-niebloids
 feature-img: "assets/img/2019-06-01/bandaged hand.jpg"
 thumbnail: "assets/img/2019-06-01/bandaged hand.jpg"
@@ -19,14 +19,14 @@ While the video is not out yet, the slides are available [here](/presentations/s
 
 # But first: Niebloid?!
 
-Niebloid is a catchy short hand named after Eric Niebler, the person who crafted [range-v3](https://github.com/ericniebler/range-v3) and the Ranges TS, now officially `std::ranges` for C++20. It refers to a [set of requirements placed on algorithm invokables](http://eel.is/c++draft/algorithms.requirements#2). The effects written down in that clause are essentially only achievable by making a class that has an overloaded function call operator which is then instantiated as an object to use for the call. Alternatively, one can hold out hope for [Matt Calabrese's p1292](https://wg21.link/p1292) which -- I pray -- makes it for the C++23 cycle and saves us from having to go the long way around with function objects (a.k.a Niebloids).
+Niebloid is a catchy short hand named after Eric Niebler who crafted [range-v3](https://github.com/ericniebler/range-v3) and the Ranges TS, now officially `std::ranges` for C++20. It refers to a [set of requirements placed on algorithm invokables](http://eel.is/c++draft/algorithms.requirements#2). The effects written down in that clause are essentially only achievable by making a class that has an overloaded function call operator which is then instantiated as an object to use for the call. Alternatively, one can hold out hope for [Matt Calabrese's p1292](https://wg21.link/p1292) which -- I pray -- makes it for the C++23 cycle and saves us from having to go the long way around with function objects (a.k.a niebloids).
 
-Still, niebloids were seen as the silver bullet of function-call based customization points that utilize ADL and is employed heavily in range-v3. But, there are some problems with it. Some of it I go through in my presentation at C++Now, but there is one thing I did not get to talk about. It's a fairly minor interface thing, really, but something that I ended up valuing in my interface.
+Still, niebloids were seen as the silver bullet of function-call based customization points that utilize ADL and is employed heavily in range-v3. But, there are some problems with it. Some of it I go through in my presentation at C++Now 2019, but there is one thing I did not get to talk about. It's a fairly minor interface thing, really, but something that I ended up valuing.
 
 
 # Weakness: Explicit Templates
 
-In my talk, I didn't cover an incredibly important feature for me when I wrote [the new sol3 customization points](https://github.com/ThePhD/sol2/blob/develop/examples/source/customization_multiple.cpp) for my talk. Users need to be able to write `sol::stack::get<T>(...)`: notice the _template argument_ that needs to get specified and is not deduced at all. This means that it is impossible to use a function object call into extension point (a niebloid) for the customization points in sol3.
+In my talk, I didn't cover an incredibly important feature for me when I wrote [the new sol3 customization points](https://github.com/ThePhD/sol2/blob/develop/examples/source/customization_multiple.cpp). Users need to be able to write `sol::stack::get<T>(...)`: notice the _template argument_ that needs to get specified and is not deduced at all. This means that it is impossible to use a function object call into extension point (a niebloid) for the customization points in sol3.
 
 The only way to make it work is to have `get` be the result of instantiating a templated struct: more precisely, a C++ Variable Template Niebloid:
 
@@ -50,12 +50,12 @@ int main () {
 }
 ```
 
-Of course, this falls on its face when you want to sometimes specify template arguments, or otherwise not bother, as is the case with `sol::stack::push(lua_state, deduce_me);` and `sol::stack::push<MakeThisTypeInside>(lua_state, but, perfectly, forward, all, these, args, for, me);`. You would think this is a unicorn use case, but it actually [comes up in real usage](https://github.com/ThePhD/sol2/issues/814)! This is an additional parameter to consider when you want to use range-v3 style customization point design; does your customization point require template parameters?
+Of course, this falls on its face when you want to sometimes specify template arguments, or otherwise not bother, as is the case with `sol::stack::push(lua_state, deduce_me);` and `sol::stack::push<MakeThisTypeInside>(lua_state, but, perfectly, forward, all, these, args, for, me);`. You would think this is a unicorn use case, but it actually [comes up in real usage](https://github.com/ThePhD/sol2/issues/814)! This is an additional parameter to consider when you want to use range-v3 style customization point design; does your customization point require template parameters? Is it optional? And so on, so forth.
 
 
 ### Slight Aside: Unicorn Proxies since sol2
 
-As a side note, this is also why `sol::function`, `sol::protected_function`, and all of sol's table lookup functions have to return a proxy type that omni-converts to any type. If we could write `sol::function f = ...; f<T>(some, args, here);` and have the template arguments given to the `template <typename Ret, typename Args...> decltype(auto) operator()` and not just error, we would be able to avoid this problem entirely and niebloids would be sufficiently powerful to cover all of the use cases. But, alas, it's C++: things can't just work! There's rules. Regulations! And of course, parsing shenanigans that obstruct this kind of syntax.
+As a side note, this is also why `sol::function`'s function call operator, `sol::protected_function`'s function call operator, and all of sol's table lookup functions have to return a proxy type that omni-converts to any type. If we could write `sol::function f = ...; f<T>(some, args, here);` and have the template arguments given to the `template <typename Ret, typename Args...> decltype(auto) operator()(Args&&...);` and not just error, we would be able to avoid this problem entirely and niebloids would be sufficiently powerful to cover all of the use cases. But, alas, it's C++: things can't just work! There's rules. Regulations! And of course, parsing shenanigans that obstruct this kind of syntax.
 
 Granted, this isn't necessarily a problem: it's only a problem for _some_ use cases. Niebler's design space was for range-v3 and worked off of ideas behind things like `std::begin`, `std::swap`, etc. These types do not have template arguments passed explicitly to the call, so it's not something that could come up and not part of the surface area being managed by these customization points. Plus, like most things in C++, Niebler was essentially faced with creating a customization point design that could both defeat ADL and then leverage it: that's an exceedingly tall order, especially when several prominent voices in the Committee's Language Evolution group spend a lot of time shaking their heads at the Committee's Librarians when they talk about ADL being a problem.
 
