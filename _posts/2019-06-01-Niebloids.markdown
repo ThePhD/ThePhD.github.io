@@ -28,7 +28,7 @@ Still, niebloids were seen as the silver bullet of function-call based customiza
 
 In my talk, I didn't cover an incredibly important feature for me when I wrote [the new sol3 customization points](https://github.com/ThePhD/sol2/blob/develop/examples/source/customization_multiple.cpp). Users need to be able to write `sol::stack::get<T>(...)`: notice the _template argument_ that needs to get specified and is not deduced at all. This means that it is impossible to use a function object call into extension point (a niebloid) for the customization points in sol3.
 
-The only way to make it work is to have `get` be the result of instantiating a templated struct: more precisely, a C++ Variable Template Niebloid:
+The only way to make it work is to have `get` be the result of instantiating a struct template: more precisely, a C++ Variable Template Niebloid:
 
 ```cpp
 template <typename T>
