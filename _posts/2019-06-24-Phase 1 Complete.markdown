@@ -220,12 +220,12 @@ Part of this might also be offering a `<bit_range>` header that's non-standard a
 
 # Challenges
 
-There are some implementation challenges that need to be worked through over after the algorithms are optimized.
+There are some implementation challenges that need to be worked through after the algorithms are optimized.
 
 
 ### bit_view<std::reference_wrapper<std::vector<std::size_t>>>
 
-Or otherwise known as: the bane of library developers everywhere. It requires a bunch of really silly `unwrap_unref` calls everywhere and it's fairly exhausting to do, UGH. This is not explicit supported right now, but planned to as part of some Phase 3 if-there-is-time work.
+Or otherwise known as: the bane of library developers everywhere. It requires a bunch of really silly `unwrap_unref` calls everywhere and it's fairly exhausting to do, UGH. This is not explicitly supported right now, but planned to as part of some Phase 3 if-there-is-time work.
 
 
 ### Higher-Level Constructors
