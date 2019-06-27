@@ -8,7 +8,7 @@ tags: [C++, GSoC, bit, ⌨️, 📜]
 excerpt_separator: <!--more-->
 ---
 
-In an earlier post, I talked about getting into Summer of Code. Well, phase 1 of my Summer of Code project is now complete! The implementation of Dr. Vincent Reverdy's [P0237 - bit manupulation library](https://wg21.link/p0237) is done alongside some new views / containers, but that doesn't mean there isn't quite a few things left<!--more--> to discuss and a wide variety of additional support that needs to be worked out! But first...
+In an earlier post, I talked about getting into Summer of Code. Well, phase 1 of my Summer of Code project is now complete! The implementation of Dr. Vincent Reverdy's [P0237 - bit manipulation library](https://wg21.link/p0237) is done alongside some new views / containers, but that doesn't mean there isn't quite a few things left<!--more--> to discuss and a wide variety of additional support that needs to be worked out! But first...
 
 
 
