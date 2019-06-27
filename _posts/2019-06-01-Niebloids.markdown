@@ -64,4 +64,4 @@ Granted, this isn't necessarily a problem: it's only a problem for _some_ use ca
 
 Some, but those are contained in my slides / talk! Go read the slides or watch the talk (when it comes out) if you have a chance to!
 
-Ta-ta for now.  💚
+Ta-ta for now. 💚
