@@ -85,11 +85,15 @@ int main (int, char*[]) {
 	assert(!view_bits.none());
 	assert(!view_bits.all());
 	assert(view_bits.any());
-	```
 
-	Pretty standard stuff, and it all works. There are iterators too, to make one-by-one traversal easier:
+	/* continued below... */
+```
 
-	```cpp
+Pretty standard stuff, and it all works. There are iterators too, to make one-by-one traversal easier:
+
+```cpp
+	/* resumed from above... */
+
 	std::size_t iter_count     = 0;
 	std::size_t iter_on_count  = 0;
 	std::size_t iter_off_count = 0;
