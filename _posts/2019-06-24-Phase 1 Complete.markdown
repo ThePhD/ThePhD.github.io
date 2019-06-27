@@ -106,10 +106,10 @@ Pretty standard stuff, and it all works. There are iterators too, to make one-by
 			++iter_off_count;
 		}
 	}
-	REQUIRE(iter_count 
+	assert(iter_count 
 		== bitsy::binary_digits_v<std::size_t> * storage.size());
-	REQUIRE(iter_on_count == expected_on_bits);
-	REQUIRE(iter_off_count == (view_bits.size() - expected_on_bits));
+	assert(iter_on_count == expected_on_bits);
+	assert(iter_off_count == (view_bits.size() - expected_on_bits));
 
 	return 0;
 }
