@@ -2,51 +2,38 @@
     
     <!-- Logo and title -->
 	<div class="branding">
-		<a href="{{ site.baseurl }}/">
-			<img class="avatar" src="{{ site.baseurl }}/{{ site.theme_settings.avatar }}" alt=""/>
+		<a href="{{ '/' | relative_url }}">
+			<img alt="logo img" class="avatar" src="{{ site.theme_settings.avatar | relative_url }}" />
 		</a>
 
 		<h1 class="site-title">
-			<a href="{{ site.baseurl }}/">{{ site.theme_settings.title }}</a>
+			<a aria-label="{{ site.title }}" href="{{ '/' | relative_url }}">
+        {{ site.title }}
+      </a>
 		</h1>
 	</div>
     
     <!-- Toggle menu -->
     <nav class="clear">
-    <a id="pull" class="toggle" href="#">
+    <a aria-label="pull" id="pull" class="toggle" href="#">
     <i class="fa fa-bars fa-lg"></i>
     </a>
     
     <!-- Menu -->
     <ul class="hide">
-        <!-- Auto Generation of NORMAL pages in the navbar -->
         {% assign name_page = "" %}
         
         {% for page in site.pages %}
-        {% if page.title and page.hide != true %}
-        {% if name_page contains page.title %}
-        {% else %}
-        <li class="separator"> | </li>
-        <li>
-            <a class="clear" href="{{ page.url | relative_url }}">
-                {{ page.title }}
-            </a>
-        </li>
-        {% endif %}
-        {% assign name_page = page.title | append: name_page %}
-        {% endif %}
-        {% endfor %} 
-        
-        <!-- Auto Generation of SPECIAL pages in the navbar -->
-        {% for item in site.theme_settings.special_page %}
-          {% if item[1].enabled %}
+            {% unless page.title == null or page.hide or name_page contains page.title %}
             <li class="separator"> | </li>
             <li>
-                <a class="clear" href="{{ site.url }}{{ site.baseurl }}/{{ item[0] }}">
-                    <i class="fa fa-{{ item[1].icon }}" aria-hidden="true"></i>
+                <a class="clear" aria-label="{{ page.title }}" title="{{ page.title }}" href="{{ page.url | relative_url }}">
+                    {% if page.icon %} <i class="fa {{ page.icon }}" aria-hidden="true"></i>
+                    {% else %} {{ page.title }} {% endif%}
                 </a>
             </li>
-          {% endif %}
+            {% endunless %}
+            {% assign name_page = page.title | append: name_page %}
         {% endfor %}
     </ul>
         

@@ -16,7 +16,7 @@ theme_settings:
   header_text: "♡"
   header_feature_image: assets/img/pexels/triangular.jpeg
   footer_text: >
-   Copyright © 2018 ThePhD -- Powered by <a href="https://jekyllrb.com/">Jekyll</a> with a modified <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap!</a>
+   Copyright © 2018-2019 ThePhD -- Powered by <a href="https://jekyllrb.com/">Jekyll</a> with a modified <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap!</a>
 
   # Icons
   rss: true  # Make sure you created a feed.xml with feed.xml layout

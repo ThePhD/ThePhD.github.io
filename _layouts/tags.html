@@ -35,8 +35,8 @@ layout: page
     <div class="posts">
         {% for tag in tags %}
         <h3 id="{{ tag | cgi_escape }}" class="tag-anchor">
-            <a href="#{{ tag | cgi_escape }}"><i class="fas fa-tag fa-fw"></i> {{ tag }}</a>
-            <a href="#{{ page.title }}" style="float: right"><i class="fas fa-chevron-up" aria-hidden="true"> </i> </a>
+            <a href="#{{ tag | cgi_escape }}"><i class="fa fa-tag fa-fw"></i> {{ tag }}</a>
+            <a href="#{{ page.title }}" style="float: right"><i class="fa fa-chevron-up" aria-hidden="true"> </i> </a>
 
         </h3>
 
@@ -47,8 +47,8 @@ layout: page
             {% for page in site.pages %} 
                 {% if page.tags contains tag %}
                 <h5 class="tag-title">
-                    <a href="{{ page.url | prepend: site.baseurl }}">
-                        <i class="fas fa-file-image-o" aria-hidden="true"></i>
+                    <a href="{{ page.url | relative_url }}">
+                        <i class="fa fa-file-image-o" aria-hidden="true"></i>
                         {{ page.title }}
                     </a>
                     
@@ -63,8 +63,8 @@ layout: page
             {% for post in site.posts %} 
                 {% if post.tags contains tag %}
                 <h5 class="tag-title">
-                    <a href="{{ post.url | prepend: site.baseurl }}">
-                        <i class="fas fa-file-text-o" aria-hidden="true"></i>
+                    <a href="{{ post.url | relative_url }}">
+                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
                         {{ post.title }}
                     </a>
                     
@@ -79,8 +79,8 @@ layout: page
             {% for note in site.portfolio %} 
                 {% if note.tags contains tag %}
                 <h5 class="tag-title">
-                    <a href="{{ site.baseurl }}{{ note.url }}">
-                        <i class="fas fa-file-o" aria-hidden="true"></i>
+                    <a href="{{ note.url | relative_url }}">
+                        <i class="fa fa-file-o" aria-hidden="true"></i>
                         {{ note.title }}
                     </a>
                 

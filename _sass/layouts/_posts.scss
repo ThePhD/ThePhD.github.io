@@ -27,10 +27,7 @@ footer {
     display: inline-block;
     text-align: center;
     .meta {
-        color: rgba($text-color, .5);
-        letter-spacing: 0.1em;
         display: inline;
-        text-transform: uppercase;
     }
     a.button {
         margin-left: 1em;
@@ -44,13 +41,35 @@ header {
 }
 
 .meta {
-    color: rgba($text-color, .5);
-    font-size: 0.9em;
+    color: $meta; // rgba($text-color, .65);
     letter-spacing: 0.1em;
     margin: 0;
     text-transform: uppercase;
 }
 
+/* --- Post info --- */
+.post-info {
+    /* For border in author
+    border: 1px solid $border-color;
+    padding-left: 0.5em;
+    */
+    border-radius: 1em;
+    padding-right: 0.5em;
+    display: inline-flex;
+
+    a {
+        display: flex;
+        align-items: center;
+    }
+
+    img {
+        border-radius: 1em;
+        padding: 0px;
+        width: 1.5em;
+        height: 100%;
+        margin-right: 0.5em;
+    }
+}
 
 /* --- Feature image --- */
 .feature-image {
@@ -60,16 +79,10 @@ header {
     }
     header {
         color: $feature-image-text-color;
-        background-size: $feature-image-size;
         margin-bottom: 0;
         padding: $padding-large/2.5 $padding-large;
         .meta {
-            color: rgba($feature-image-text-color, 255);
-            font-size: 0.9em;
-            letter-spacing: 0.1em;
-            margin: 0;
-            text-shadow: 1px 0 0 rgba(0, 0, 0, 0.5), 0 -1px 0 rgba(0, 0, 0, 0.5), 0 1px 0 rgba(0, 0, 0, 0.5), -1px 0 0 rgba(0, 0, 0, 0.5);
-            text-transform: uppercase;
+            color: rgba($feature-image-text-color, .7);
         }
     }
     .post-content {
@@ -82,39 +95,21 @@ header {
     }
 }
 
-// Responsive scrolling
+/*-- feature-image Responsive scrolling --*/
 .feature-image header {
     @media screen and (max-width: $break) {
         padding: $padding-small $padding-small;
     }
-}
 
-/* --- Post navigation --- */
-#post-nav {
-    width: 100%;
-    border-bottom: 1px solid $border-color;
-    display: flex;
-    float: left;
-
-    a,
-    .page-title {
-        display: inline-block;
-    }
-
-    .page-title {
-        font-size: 1.2em;
-        margin-bottom: 1em;
-        width: 100%;
-    }
-
-    a {
-        padding: 2em 3em;
-        border: 1px solid rgba(255, 255, 255, 0);
-        text-align: center;
-        width: 50%;
-    }
-
-    i {
-        vertical-align: middle;
+    @media screen and (min-width: $break) {
+        background-size: 120% auto;
+    } 
+    
+    @media screen and (max-width: $break) {
+        background-size: 200% auto;
+    } 
+    
+    @media screen and (max-width: $sm-break) {
+        background-size: 400% auto;
     }
 }

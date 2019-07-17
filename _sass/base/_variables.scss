@@ -1,10 +1,12 @@
 // Typography
 $font-family-main: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $font-family-headings: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+$font-family-logo: 'Source Sans Pro', Helvetica, Arial, sans-serif;
 $font-size: 1.25em;
 
 
 // Padding
+$padding-x-large: 23%;
 $padding-large: 20%;
 $padding-medium: 6%;
 $padding-small: 4%;
@@ -17,7 +19,8 @@ $background-color: #fff;
 $border-color: rgba(0, 0, 0, 0.1); // rgba recommended if using feature images
 
 // Typography colours
-$text-color: #383838;
+$text-color: #262626;
+$meta: #595959; //lowest gray for accessible color
 $link-color: $theme-color; // #1ABC9C;
 $selection-color: #D4D4D4; // visible when highlighting text
 $blockquote-color: #EEF7FA; // $background-color;
@@ -41,7 +44,6 @@ $header-desc-text-color: #FFF;
 // Mobile display
 $break: 768px;
 $sm-break: 450px;
-
 
 /*  Syntax highlighting  */
 // Syntax typography

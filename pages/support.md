@@ -1,9 +1,10 @@
 ---
 layout: page
-title: Support
+title: Patronage
+subtitle: Growing Successful Projects
 permalink: /support/
 feature-img: "assets/img/pexels/artistic-blossom-bright-square.jpg"
-tags: [about, thank you]
+tags: [support, thank you, 💚]
 ---
 
 # Supporting the Projects

@@ -19,4 +19,11 @@
     #next-post {
         float: right;
     }
+    
+    @media screen and (max-width: $sm-break) {
+    a, p {
+        font-size: 0.8em;
+    }
 }
+}
+
