@@ -1,6 +1,6 @@
 --- 
 layout: page
-title : Portfolio 
+title : 📖 Portfolio
 permalink: /portfolio/
 subtitle: "Free-time Fun!" 
 feature-img: "assets/img/pexels/computer.jpeg"
