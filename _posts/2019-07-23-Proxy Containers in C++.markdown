@@ -37,7 +37,7 @@ If you look on [cppreference for std::vector<T, Alloc>::insert](https://en.cppre
 
 ... Uh oh.
 
-As you might have begun guessing from this error message (incredibly slimmed down with all the template spew thrown out the window), there is no way to convert from `const_iterator` to an `iterator`. This makes sense: that would violate `const` rules! but, why was _I_ getting these errors in my writing of `basic_dynamic_bitset`? The problem arose from, once again, dealing with the fact that I was presenting an interface that worked on bits, when I was really trying to modify whole words...
+As you might have begun guessing from this error message (incredibly slimmed down with all the template spew thrown out the window), there is no way to convert from `const_iterator` to an `iterator`. This makes sense: that would violate `const` rules! But, why was _I_ getting these errors in my writing of `basic_dynamic_bitset`? The problem arose from, once again, dealing with the fact that I was presenting an interface that worked on bits, when I was really trying to modify whole words...
 
 And this leads to very big problems.
 
@@ -58,8 +58,8 @@ iterator insert (const_iterator __pos, bool __val) {
 	// UGH ... disgusting!
 	__base_iterator __storage_first = begin(this->__storage);
 	auto __diff = ::std::distance(__base_const_iterator(__storage_first), __pos.base());
-	__storage_first = next(__storage_first, __diff);
-	// rest of the work on __insertion_position here...
+	__storage_first = next(::std::move(__storage_first), __diff);
+	// rest of the work on __storage_first here...
 	// ...
 }
 ```
@@ -71,7 +71,7 @@ What do we do?
 
 #### Option 1: Cheat
 
-Just go back to using `iterator`. Sure, nobody will be able to use the `insert` algorithm with a `const_iterator` (which will come from a lot of places), but it does eliminate the concern entirely. This is the lazy way to do it and likely will not go over well if put in a real C++ proposal to have these types standardized with LEWG.
+Just go back to using `iterator`. Sure, nobody will be able to use the `insert` algorithm with a `const_iterator` (which will come from a lot of places), but it does eliminate the concern entirely. This is the lazy way to do it and likely will not go over well if put in a real C++ proposal to have these types standardized. Library Evolution Working Group (+ Incubator) would have a field day kicking this kind of thing around ...!
 
 
 #### Option 2: Conform to the `std::` interface
@@ -134,8 +134,9 @@ And use it like so:
 
 ```cpp
 if constexpr (is_detected_v<is_iter_as_mutable, __base_const_iterator>) {
-	__base_iterator __mutable_pos = iter_as_mutable(std::move(__pos).base());
 	// yay!
+	__base_iterator __mutable_pos 
+		= iter_as_mutable(std::move(__pos).base());
 }
 ```
 
