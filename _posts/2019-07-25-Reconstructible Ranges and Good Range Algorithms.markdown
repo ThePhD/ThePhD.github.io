@@ -61,7 +61,9 @@ template <typename R>
 concept reconstructible-range =
 	std::range<R> &&
 	forwarding-range<std::remove_reference_t<R>> &&
-	std::constructible<R, std::ranges::subrange<std::iterator_t<R>, std::sentinel_t<R>>>;
+	std::constructible<R, std::ranges::subrange<
+		std::iterator_t<R>, std::sentinel_t<R>>
+	>;
 ```
 
 
@@ -73,7 +75,10 @@ As I stated before, the generic code way to solve the problem above is to return
 ```cpp
 int main () {
 	std::u16string_view input = u"Hey there!";
-	// std::ranges::subrange<std::u16string_view::iterator, std::u16string_view::iterator, ...>
+	// std::ranges::subrange<
+	// 	std::u16string_view::iterator, 
+	// 	std::u16string_view::iterator, 
+	// ...>
 	auto result = the_algorithm(input);
 	return std::ssize(result);
 }
@@ -113,10 +118,17 @@ using namespace std::ranges;
 
 std::vector v{1, 2, 3, 4, 5, 6, 7};
 std::span v_ref(v);
-// ranges::take_view<ranges::drop_view<ranges::drop_while_view<std::span<int, std::dynamic_extent>>>>
-auto unsimplified = v_ref | views::take(5) | views::drop(2) | views::drop_while(is_even_fn);
+// ranges::take_view<
+//	ranges::drop_view<
+//		ranges::drop_while_view<
+//	std::span<int, std::dynamic_extent>
+// >>>
+auto unsimplified = v_ref | views::take(5) 
+	| views::drop(2) 
+	| views::drop_while(is_even_fn);
 // explicitly simplify
-std::span<int> simplified = unsimplified | views::simplify;
+std::span<int> simplified = unsimplified 
+	| views::simplify;
 ```
 
 This is an interesting idea. Doing so means the majority of the onus of simplification is on the "simplify" operation. I am less okay with this approach, however: it requires us to explicitly opt-in to something that _most_ users would want by default. People building abstract syntax trees could create a `std::ranges::subrange`-like type or adaptor that is not a _`reconstructible-range`_ and thusly prevent any kind of optimization: I would rather we tag the Domain Specific Language and cool-AST-case with extra markup, rather than the default usage requiring `| views::simplify` everywhere.
