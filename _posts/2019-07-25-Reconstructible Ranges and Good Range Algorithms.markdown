@@ -106,7 +106,7 @@ To make it so that we need not have to individually justify each `iterator`/`sen
 
 ### Why Automatic Optimizations, though?
 
-Others have expressed a concern that automatically optimizing such expressions would get in the way of use cases wherein users would like to generate a long Abstract Syntax Tree of range actions / adaptions. Primarily, this would allow them to look at the flow of operations, rather than have it all folded down into the final type of e.g. a `std::string_view`, `std::span` or `std::empty_view`. They would be more comfortable with a `std::ranges::views::simplify`, which would be applied in an expression and would attempt to simply all the operations after-the-fact:
+Others have expressed a concern that automatically optimizing such expressions would get in the way of use cases wherein users would like to generate a long Abstract Syntax Tree of range actions / adaptations. Primarily, this would allow them to look at the flow of operations, rather than have it all folded down into the final type of e.g. a `std::string_view`, `std::span` or `std::empty_view`. They would be more comfortable with a `std::ranges::views::simplify`, which would be applied in an expression and would attempt to simply all the operations after-the-fact:
 
 ```cpp
 using namespace std::ranges;
@@ -116,7 +116,7 @@ std::span v_ref(v);
 // ranges::take_view<ranges::drop_view<ranges::drop_while_view<std::span<int, std::dynamic_extent>>>>
 auto unsimplified = v_ref | views::take(5) | views::drop(2) | views::drop_while(is_even_fn);
 // explicitly simplify
-std::span<int> simplified = views::unsimplified | views::simplify;
+std::span<int> simplified = unsimplified | views::simplify;
 ```
 
 This is an interesting idea. Doing so means the majority of the onus of simplification is on the "simplify" operation. I am less okay with this approach, however: it requires us to explicitly opt-in to something that _most_ users would want by default. People building abstract syntax trees could create a `std::ranges::subrange`-like type or adaptor that is not a _`reconstructible-range`_ and thusly prevent any kind of optimization: I would rather we tag the Domain Specific Language and cool-AST-case with extra markup, rather than the default usage requiring `| views::simplify` everywhere.
