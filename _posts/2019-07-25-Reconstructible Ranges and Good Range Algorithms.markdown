@@ -19,7 +19,7 @@ And so, from this, a concept emerges...
 
 `ReconstructibleRa`-- er. `reconstructible_range` is a concept that tells someone whether or not their view type can be pulled apart into its iterators, and then put back together into itself.
 
-I first ran into it when I began to develop the interfaces in [P1629 - Standard Text Encoding](/vendor/future_cxx/papers/d1664.html). There, I was creating range-based algorithms wherein someone would hand me a `std::u16string_view` or similar for an input. After performing some work with the iterators, I wanted to return the same `std::u16string_view` to the user, just with the view "changed". I was doing this in a generic algorithm, so I simply took the type name and used the same convention from containers:
+I first ran into it when I began to develop the interfaces in [P1629 - Standard Text Encoding](/vendor/future_cxx/papers/d1629.html). There, I was creating range-based algorithms wherein someone would hand me a `std::u16string_view` or similar for an input. After performing some work with the iterators, I wanted to return the same `std::u16string_view` to the user, just with the view "changed". I was doing this in a generic algorithm, so I simply took the type name and used the same convention from containers:
 
 ```cpp
 template <typename InputRange>
@@ -99,7 +99,7 @@ While not as foundational as Move-only Iterators / Ranges, Reconstructible Range
 
 Seeing as this stuff has consequences for the standard, I wrote [D1664 - Reconstructible Ranges](https://thephd.github.io/vendor/future_cxx/papers/d1664.html) (to be published post-Köln). It creates a (exposition only) concept similar to the concepts written above that capture the intent and makes it applicable to far more range types and adaptors, and gives us a solid and concrete design foundation with which to move forward.
 
-Speaking with Hannes and others about this, the design intent for ranges was that expressions would optimize inputs if at all possible. This is why `std::ranges::views::reverse(v);` will simply "undo" the `reverse_view` type wrapper if it detects that `v` is a view wrapped in a `reverse_view` type already. Hauswedell's paper codifies that into more views and ranges, and my paper provides the concept that his paper and several other papers -- including Corentin Jabot's and Casey Carter's [P1391](https://wg21.link/p1391) and [P1394](https://wg21.link/p1391) -- fix but do not provide any long-term, underlying guidance for.
+Speaking with Hannes and others about this, the design intent for ranges was that expressions would optimize inputs if at all possible. This is why `std::ranges::views::reverse(v);` will simply "undo" the `reverse_view` type wrapper if it detects that `v` is a view wrapped in a `reverse_view` type already. Hauswedell's paper codifies that into more views and ranges, and my paper provides the concept that his paper and several other papers -- including Corentin Jabot's and Casey Carter's [P1391](https://wg21.link/p1391) and [P1394](https://wg21.link/p1394) -- fix but do not provide any long-term, underlying guidance for.
 
 To make it so that we need not have to individually justify each `iterator`/`sentinel`-pair or `subrange`-based constructor when we add it to the standard, we create this exposition only concept. This keeps us thinking about this for all the new ranges and range adaptors we add we add. It also ensures that adaptors in the future will do basic folding of the types to prevent template spew and type bloat that really grinds on our compilers today.
 
