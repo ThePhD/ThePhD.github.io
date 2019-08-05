@@ -9,10 +9,11 @@ tags: [C++, proposals, standard, Portfolio, 🚌, ⌨️]
 
 I have quite a few C++ proposals I am working on and percolating through the C++ Standards Committee. You will find the submitted and unsubmitted ones below! Be sure to also check out the `proposals` and `standard` tags for any writeups related to C++ proposals!
 
-### Actively Pursued Proposals:
+### Actively Pursued Evolution Proposals:
 
 C++ | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/vendor/future_cxx/papers/d1629.html)
-C++ | p1664: Reconstructible Ranges | Not Published | [Latest Draft](/vendor/future_cxx/papers/d1664.html)
+C++ | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/vendor/future_cxx/papers/d1664.html)
+C++ | p1803: packexpr(args, I) -- compile-time friendly pack inspection | [Published](https://wg21.link/p1803) | [Latest Draft](/vendor/future_cxx/papers/d1803.html)
 C | cNNNN: [[nodiscard("should have a reason")]] | Not Published | [Latest Draft](/vendor/future_cxx/papers/source/cXXX2)
 
 
@@ -20,7 +21,7 @@ C | cNNNN: [[nodiscard("should have a reason")]] | Not Published | [Latest Draft
 
 C++ | Evolution Approved, in Core Wording | C++23 | p0330: Literal Suffixes for `ptrdiff_t` and `size_t` | [Published](https://wg21.link/p0330) | [Latest Draft](/vendor/future_cxx/papers/d0330.html)
 C++ | Library Evolution Approved, in Library Wording | C++23 | p1682: `std::to_underlying(T enum_value)` | [Published](https://wg21.link/p1682) | [Latest Draft](/vendor/future_cxx/papers/d1682.html)
-C++ | Library Evolution Approved, in Library Wording | C++20 (maybe) | p1132: out_ptr - a scalable output pointer abstraction | [Published](https://wg21.link/p1132) | [Latest Draft](/vendor/future_cxx/papers/d1132.html)
+C++ | Library Evolution Approved, in Library Wording | C++23 | p1132: out_ptr - a scalable output pointer abstraction | [Published](https://wg21.link/p1132) | [Latest Draft](/vendor/future_cxx/papers/d1132.html)
 
 
 ### Completed / Merged Proposals:
