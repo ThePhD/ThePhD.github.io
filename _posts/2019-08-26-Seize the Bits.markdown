@@ -10,7 +10,7 @@ excerpt_separator: <!--more-->
 
 It is finally time.<!--more-->
 
-After 3 months and quite a bit of hard work, I have finally finished the Google Summer of Code program. In it, I have finished an enhanced and improved implementation of [P0237](https://wg21.link/p0237) and [N2050](https://wg21.link/n2050). In my original proposal, I stated that I would implement a range-based `bit_view`, a container adaptor version of `dynamic_bitset`, all of the `bit_iterator`/`bit_reference`/`bit_value` types, and more. Going through the checklist of each phase:
+After 3 months and quite a bit of hard work, I have finally finished the Google Summer of Code program. In it, I have finished an enhanced and improved implementation of [P0237](https://wg21.link/p0237) and [N2050](https://wg21.link/n2050). In my original proposal, I stated that I would implement a range-based `bit_view`, a container adaptor version of `dynamic_bitset`, all of the `bit_iterator`/`bit_reference`/`bit_value` types, and more. The initial, completely patch is [out here](https://gcc.gnu.org/ml/gcc-patches/2019-08/msg01771.html) Going through the checklist of each phase:
 
 
 # Phase 1 - bit_iterator, bit_reference, bit_value and bit_view
@@ -123,7 +123,7 @@ I'm almost certain Alisdair Meredith and Vincent Reverdy would be proud to know 
 
 # You Can Have It Too
 
-While I implemented this for libstdc++ and for [itsy/bitsy](https://github.com/ThePhD/itsy_bitsy), the performance is not limited to the standard, or to itsy bitsy. The point is that the iterators are not an implementation-defined, private mess. Nor is it like `std::bitset`, where it has no iterators or `begin()`/`end()` at all. These are well-defined, public interfaces that are going to go into the standard. That means if you write a data structure that works with bits and opt to use `bitsy::bit_iterator` or `__gnu_cxx::bit_iterator`, you get the performance benefits when using `std::equal` and `std::find` and `std::copy` too. So rather than sinking the tiny handful of standard library maintainer time into optimizing a single container, they optimize the algorithm and every gets to benefit.
+While I implemented this for libstdc++ and for [itsy/bitsy](https://github.com/ThePhD/itsy_bitsy), the performance is not limited to the standard, or to itsy bitsy. The point is that the iterators are not an implementation-defined, private mess. Nor is it like `std::bitset`, where it has no iterators or `begin()`/`end()` at all. These are well-defined, public interfaces that are going to go into the standard. That means if you write a data structure that works with bits and opt to use `bitsy::bit_iterator` or `__gnu_cxx::bit_iterator`, you get the performance benefits when using `std::equal` and `std::find` and `std::copy` too. So rather than sinking the tiny handful of standard library maintainer time into optimizing a single container, they optimize the algorithm and everyone gets to benefit.
 
 This also has further downstream consequences: as [pretty as Conor Hoekstra's code](https://www.youtube.com/watch?v=48gV1SNm3WA) is, nobody who cares in performance critical areas is going to use that beautiful solution if it exhibits the `std::vector<bool>` levels of performance. Performance _is_ correctness, and if I can write a disgusting hand-optimized loop and get better performance, you had better believe I'm going to write that disgusting code that would probably make Conor barf.
 
@@ -137,4 +137,4 @@ Remember to optimize your algorithms, not your data structures, and hug your loc
 
 Catch you later. 💚
 
-P.S.: double underscores are ugly and I hate them with every fiber of my being.
+<sup><sup>P.S.: double underscores are ugly and I hate them with every fiber of my being.</sup></sup>
