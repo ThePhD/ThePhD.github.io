@@ -2,8 +2,8 @@
 layout: post
 title: Seizing the Bits of Production - GSoC 2019 Conclusion
 permalink: /seize-bits-production-gsoc-2019
-feature-img: "assets/img/2019-07-25/architecture-blue-build.jpg"
-thumbnail: "assets/img/2019-07-25/architecture-blue-build.jpg"
+feature-img: "assets/img/pexels/hammer-hand-tools-measuring-tape.jpg"
+thumbnail: "assets/img/pexels/hammer-hand-tools-measuring-tape.jpg"
 tags: [C++, GSoC, bit, ⌨️, 📜]
 excerpt_separator: <!--more-->
 ---
