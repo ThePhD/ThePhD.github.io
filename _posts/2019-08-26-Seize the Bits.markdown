@@ -33,8 +33,10 @@ We also added some serious utilities here that cover some of the use cases first
 ```cpp
 // 0xFBFF = (MSB) 0b‭1111101111111111‬ (LSB)
 std::vector<std::uint32_t> storage{ 0x0000FBFF, 0xFFFFFFFF };
-bitsy::bit_view<R, bitsy::static_bit_extents<10, 22>> truncated_view_bits(
-	storage.data(), storage.size());
+using Rng = std::span<std::uint32_t>;
+bitsy::bit_view<Rng, bitsy::static_bit_extents<10, 22>> truncated_view_bits(
+	storage.data(), storage.size()
+);
 assert(truncated_view_bits.size() == 12);
 // 0th bit of biew is 10th bit,
 // 10th bit of 0xFBFF is false
