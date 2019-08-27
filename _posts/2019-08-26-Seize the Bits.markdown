@@ -10,7 +10,9 @@ excerpt_separator: <!--more-->
 
 It is finally time.<!--more-->
 
-After 3 months and quite a bit of hard work, I have finally finished the Google Summer of Code program. In it, I have finished an enhanced and improved implementation of [P0237](https://wg21.link/p0237) and [N2050](https://wg21.link/n2050). In my original proposal, I stated that I would implement a range-based `bit_view`, a container adaptor version of `dynamic_bitset`, all of the `bit_iterator`/`bit_reference`/`bit_value` types, and more. Going through the checklist of each phase:
+After 3 months and quite a bit of hard work, I have finally finished the Google Summer of Code program. In it, I have created an enhanced and improved implementation of [P0237](https://wg21.link/p0237) and [N2050](https://wg21.link/n2050) from scratch. In my [original proposal to get the Summer of Code work-study](https://github.com/ThePhD/itsy_bitsy/blob/master/docs/gsoc/proposal/2019.08.17%20-%20ThePhD%20-%20Summer%20of%20Code%20Proposal%20-%20bit.pdf), I stated that I would implement a range-based `bit_view`, a container adaptor version of `dynamic_bitset`, all of the `bit_iterator`/`bit_reference`/`bit_value` types, and more.
+
+Let's go through the checklist of each phase and what we managed to implement and work on:
 
 
 # Phase 1 - bit_iterator, bit_reference, bit_value and bit_view
@@ -28,13 +30,13 @@ The only other change here is that our `bit_reference` type is a bit more involv
 
 This was covered by 2 previous articles, [here](/proxies-references-gsoc-2019) and [here](/container-adaptors-gsoc-2019). I won't recap absolutely everything, but it was a bit of a struggle getting most of the iterator constraints perfectly okay.
 
-We also added some serious utilities here that cover some of the use cases first brought up after completion of the first phase. [Jonathan Müller mentioned](https://www.reddit.com/r/cpp/comments/c6699n/stdbyte_me_bit_handling_in_a_future_standard/es6vuu0/) that he had some use cases for directly working with a potentially disjoint set of bits. [The `tiny/bit_view`](https://github.com/foonathan/tiny/blob/master/test/bit_view.cpp) class in his library does that. I added support for creating a view of a set of bits that could target precisely bits `[x, y)` by using the `Extents` class portion of the new `bit_view<Range, Extents>`:
+We also added some serious utilities here that cover some of the use cases first brought up after completion of the first phase. [Jonathan Müller mentioned](https://www.reddit.com/r/cpp/comments/c6699n/stdbyte_me_bit_handling_in_a_future_standard/es6vuu0/) that he had some use cases for directly working with a potentially disjoint set of bits. [The `tiny/bit_view`](https://github.com/foonathan/tiny/blob/master/test/bit_view.cpp) class in his library does that. I added support for creating a view of a set of bits that could target precisely bits `[x, y)` by using the `Bounds` class portion of the new `bit_view<Range, Bounds>`:
 
 ```cpp
 // 0xFBFF = (MSB) 0b‭1111101111111111‬ (LSB)
 std::vector<std::uint32_t> storage{ 0x0000FBFF, 0xFFFFFFFF };
 using Rng = std::span<std::uint32_t>;
-bitsy::bit_view<Rng, bitsy::static_bit_extents<10, 22>> truncated_view_bits(
+bitsy::bit_view<Rng, bitsy::bit_bounds<10, 22>> truncated_view_bits(
 	storage.data(), storage.size()
 );
 assert(truncated_view_bits.size() == 12);
@@ -43,7 +45,9 @@ assert(truncated_view_bits.size() == 12);
 assert(truncated_view_bits[0] == bitsy::bit0);
 ```
 
-Most people would wonder why I didn't take the stance of using a number directly like when they made `std::span<T, N>`. I believe taking a class template parameter is far more flexible than `span`'s single numeric `extent` value. It also allows for taking a `bitsy::dynamic_bit_extents` type as well, whose size can be calculated entirely at runtime. The default is a `bitsy::word_bit_extents`, which simply spans from 0 to the size of the container (which is, e.g., the extent of the words of the range). This was a severe improvement to the API that resulted in covering a much broader selection of use cases while still retaining the same abstraction powers.
+Most people would wonder why I didn't take the stance of using a number directly like when they made `std::span<T, N>`. I believe taking a class template parameter is far more flexible than `span`'s single numeric `bound` value. It also allows for taking a `bitsy::dynamic_bit_bounds` type as well, whose size can be calculated entirely at runtime. The default is a `bitsy::word_bit_bounds`, which simply spans from 0 to the size of the container (which is, e.g., the bounds encompassing the words of the range). This was a severe improvement to the API that resulted in covering a much broader selection of use cases while still retaining the same abstraction powers.
+
+It is also important to pass in 2 numbers: `span` does not need 2 numbers to describe its bounds/extents, because you can just increment the contiguous iterator being put into the `span`. You cannot increment "just 10 bits" from the iterator that goes into a `bit_view`: either the `bit_iterator` itself needs to be incremented, or an external abstraction applied to `bit_view` (like, e.g. `std::ranges::view::drop(10)`).
 
 Writing the algorithms was simple, really. It turns out most of the algorithms in C++ aren't too hard when you sit down with them and read the requirements and listen to conference talks and read text books about them.
 
