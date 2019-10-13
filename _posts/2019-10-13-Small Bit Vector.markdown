@@ -17,7 +17,7 @@ So, to make sure I knew the landscape well, I implemented it in my library [itsy
 All tests passed (3631334 assertions in 554 test cases)
 ```
 
-What it took to write all of this tests and get them to pass was really astounding. And even then, I can write even more tests across more a few more types and a few more cases: there's special ways to test exception safety, injecting purposefully failing allocators, and verifying `sizeof()` for various configurations of the container do not exceed e.g. its `std::vector` counterpart's size.
+What it took to write all of these tests and get them to pass was really astounding. And even then, I can write even more tests across more a few more types and a few more cases: there are special ways to test exception safety, injecting purposefully failing allocators, and verifying `sizeof()` for various configurations of the container do not exceed e.g. its `std::vector` counterpart's size.
 
 This was my first time building my own contiguous container with:
 - Strong exception guarantees
@@ -104,7 +104,7 @@ private:
 
 #include <iostream>
 
-struct non_trivial_unsigned {
+struct non_trivial {
 
 	non_trivial () {
 		std::cout << "AAAAH" << std::endl;
