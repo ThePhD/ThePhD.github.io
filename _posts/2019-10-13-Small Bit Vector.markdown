@@ -304,7 +304,7 @@ Just thinking about this makes my head spin, and worries me in the case of `cons
 
 ... Aaaaah! 😵
 
-These things worry me, perhaps more than it should. I'm sure some more clever applications inside of `constexpr` can make this technique work out better, though. I'm going to need to read over the Standard a lot more carefully to make sure I'm not digging myself a hole here during the `constexpr` container implementation wave in the next year or so.
+This worries me, perhaps more than it should. I'm sure some more clever applications inside of `constexpr` can make this technique work out better, though. I'm going to need to read over the Standard a lot more carefully to make sure I'm not digging myself a hole here during the `constexpr` container implementation wave in the next year or so.
 
 It also makes the size part of the special storage, robbing potential bits from a highly compact representation that wants to keep the same size as a `std::vector<T>`. It solves Strategy 0's problem of having to shrink to the `small` storage again when `.erase()` is called, because the bit size is no longer part of the discriminant that tells the class in which object of the `union` to look. This means it grows and it stays on the heap until an explicit request to `.shrink_to_fit()`. Iterators remain valid sans the case of `.insert()`/`.push_back()` and friends. But, that's par for the course with standard library containers and mostly expected by comfortable working programmers these days.
 
