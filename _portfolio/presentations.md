@@ -3,7 +3,7 @@ layout: post
 title: presentations
 feature-img: "assets/img/portfolio/presentations.png"
 img: "assets/img/portfolio/presentations.png"
-date: October 27th 2018
+date: October 12th, 2019
 tags: [C++, speaking, conferences, python, Portfolio, 🚌, ⌨️, 🤝, 📣, 🎧]
 ---
 
@@ -12,6 +12,27 @@ I have given presentations and spoken on several occasions! Here are the present
 
 
 # Video Presentations
+
+
+## CppCon 2019 - Invited Speaker
+
+<div style="text-align:center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/BdUipluIf1E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+[Slides](/presentations/unicode/CppCon/2019/2019.09.20 - Catching ⬆️ - The (Baseline) Unicode Plan for C++23 - ThePhD - CppCon 2019.pdf). The beginning of a series of talks on Text and how we should fix it for C++. This talk dives into why text inside of any of C++'s current components is a dead end task, the non-portability of `char` and `wchar_t`, as well as the problems with tackling encoding today in the Standard Library. It then proposes an overall framework for how to handle text encoding in C++ in the future. This is an ongoing talk series and part of a larger [project on text](/portfolio/text).
+
+
+## C++Now 2019 - Invited Speaker
+
+<div style="text-align:center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/aZNhSOIvv1Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+[Slides](/presentations/sol2/C++ Now/2019/The Plan for Tomorrow - Compile-Time Extension Points in C++.pdf). This talk came from a challenge by Eric Fiselier to research extension points in C++ for P1132 - std::out_ptr. I went further and decided to survey the entire landscape of C++ and its extension points, how we currently handle those extension points, and how we can, should and might handle them in the future. This covers the entire landscape of applicable compile-time extension points for libraries in C++. Runtime extension points (hot reloading, DLL/function hooking, inserting code in left-behind "bubbles" of space, RPath, and more) is still a talk yet to be given (perhaps, by you?!).
+
+
+## CppCon 2018 - Invited Speaker
+
+<div style="text-align:center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/xQAmGBfKnas" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+
+[Slides](/presentations/sol2/CppCon/2018/2018.09.28 - ThePhD - Scripting at the Speed of Thought.pdf). This is the (so far) last talk I have given about sol2 and its now-released additional version, sol3. It talks about the changes made to accommodate new ideas, performance improvements computed the very same day of the presentation, and even more! It was exciting to speak about sol3's future, and actually deliver on it. There's a lot more to do with sol3, but for now I am very happy where it ends up and this talk explores a lot of why I am happy with it.
 
 
 ## C++Now 2018 - Invited Speaker

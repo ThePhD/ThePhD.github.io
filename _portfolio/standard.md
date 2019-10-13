@@ -14,7 +14,8 @@ I have quite a few C++ proposals I am working on and percolating through the C++
 C++ | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/vendor/future_cxx/papers/d1629.html)
 C++ | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/vendor/future_cxx/papers/d1664.html)
 C++ | p1803: packexpr(args, I) -- compile-time friendly pack inspection | [Published](https://wg21.link/p1803) | [Latest Draft](/vendor/future_cxx/papers/d1803.html)
-C | cNNNN: [[nodiscard("should have a reason")]] | Not Published | [Latest Draft](/vendor/future_cxx/papers/source/cXXX2)
+C | n2430: [[nodiscard("should have a reason")]] | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2430.pdf) | [Latest Draft](/vendor/future_cxx/papers/source/n2430)
+C | n2440: Restartable and Non-Restartable Functions for Efficient Character Conversions | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2440.pdf) | [Latest Draft](/vendor/future_cxx/papers/source/n2440)
 
 
 ### Approved Proposals:
