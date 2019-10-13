@@ -89,7 +89,7 @@ private:
 
 Now, the user knows how much inline space they pay for any given `small_int_vector<N>`, modulo the `normal`, heap-based representation of 3 pointers! I defined a `bitsy::default_buffer_size_v<T, ...>` in my implementation to use as the default value that attempts to keep the SBO size within the triple pointer storage size, but that's just a default! So far, everything looks good.
 
-... Except, if you were at CppCon 2019 and saw CJ Johnson's talk _[How to Hold a T](https://cppcon2019.sched.com/event/Sfqr/how-to-hold-a-t)_ you would probably frown when seeing the above, unnerved by how _wrong_ the definition above is for a smaller buffer type. See how the internal inline buffer is just declared as a plain old C-style array? That's actually a problem. If you were to make this class above even more generic and insert a class in there, you'll notice something interesting:
+... Except, if you were at CppCon 2019 and saw CJ Johnson's talk _[How to Hold a T](https://www.youtube.com/watch?v=WX8FsrUbLjc)_ you would probably frown when seeing the above, unnerved by how _wrong_ the definition above is for a smaller buffer type. See how the internal inline buffer is just declared as a plain old C-style array? That's actually a problem. If you were to make this class above even more generic and insert a class in there, you'll notice something interesting:
 
 ```cpp
 template <typename T, std::size_t InlineN>
