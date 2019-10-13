@@ -8,7 +8,7 @@ tags: [C++, bit, ⌨️]
 excerpt_separator: <!--more-->
 ---
 
-Strap in for a wild ride of object lifetime, sizing, `constexpr`, and bits!<!--more--> This comes from my need to finish one of the work items I mentioned in my [last article](/seize-the-bits), which was that we needed a proper, dedicated `dynamic_bitset` type to squeeze out every potential bit. The reason for this is that if your container counts in elements -- not bits -- then you need to maintain an extra variable for your container to maintain the current "bit position", which is exactly what the generic `bitsy::bit_sequence<Container>` has [to do](https://github.com/ThePhD/itsy_bitsy/blob/9f4976a0fe1f846a895c5e13f5526a199923b6e1/include/itsy/detail/bit_sequence.hpp#L805).
+Strap in for a wild ride of object lifetime, sizing, `constexpr`, and bits!<!--more--> This comes from my need to finish one of the work items I mentioned in my [last article](/seize-the-bits), which was that we needed a proper, dedicated `dynamic_bitset` type to squeeze out every potential bit. The reason for this is that if your container counts in elements -- not bits -- then you need to maintain an extra variable for your container to maintain the current "bit position", which is exactly what the generic `bitsy::bit_sequence<Container>` [has to do](https://github.com/ThePhD/itsy_bitsy/blob/9f4976a0fe1f846a895c5e13f5526a199923b6e1/include/itsy/detail/bit_sequence.hpp#L805).
 
 So, to make sure I knew the landscape well, I implemented it in my library [itsy.bitsy 🕸️](https://github.com/ThePhD/itsy_bitsy). When I started this, I didn't expect it to be easy, but I also didn't expect it to be this hard:
 
