@@ -278,7 +278,7 @@ void push_back () {
 }
 ```
 
-No arguments just ends up calling `new (memory_ptr) value_type();`. There's no way -- generically -- to grease the allocator's palms and tell it to do `new (memory_ptr) value_type;` instead. But I was absolved! C++ didn't let me give you the performance! It was the allocator's fault! The same way it was the allocator model's fault that there was no `reallocate` function! C++'s fault, not my own; I wasn't responsible for Allocator Hell, I didn't make the rules! Just a cog in the machine. A rung on the ladder, a step on the stairs. And yet...
+No arguments just ends up calling `new (memory_ptr) value_type();`. There's no way -- generically -- to grease the allocator's palms and tell it to do `new (memory_ptr) value_type;` instead. C++ didn't let me give you the performance! It was the allocator's fault! The same way it was the allocator model's fault that there was no `reallocate` function! C++'s fault, not my own; I wasn't responsible for Allocator Hell, I didn't make the rules! Just a cog in the machine. A rung on the ladder, a step on the stairs. And yet...
 
 And _yet_.
 
@@ -289,7 +289,7 @@ And _yet_.
 
 There... there must be another way. Perhaps there was. There must be some trick, some way to do default, garbage initialization of the bits the user would work with. To get that last handful of %. It came to me, in the dead of the night. I sat right up in bed, with that little idea. There was no chatroom of C++ experts around this time. Even the Europeans were still sleeping at this ungodly hour. I shuffled to the desk and took a seat. The brightness of the monitor hurt my eyes for a brief moment.
 
-In my imagination, it grew. A far greater fire than those of having to implement the allocator. Fires much stronger than Allocator Hell could ever bring to task. After all, the casual conversation of Blessed Implementers and words from Arthur O'Dwyer could save me from that. This... this was a much more serious infraction. One that cut against the heart of the very abstract machine itself. The condemnation for doing this...
+In my imagination, it grew. Firey, burning condemnation that was much stronger than Allocator Hell could ever bring to task. After all, the casual conversation of Blessed Implementers and words from Arthur O'Dwyer could save me from that. This... this was a much more serious infraction. One that cut against the heart of the very abstract machine itself. The condemnation for doing this...
 
 I clicked on the `itsy.bitsy` shortcut. The comforting deep blue of VSCode came up, a sharp contrast to the condemnation I felt rising in my soul, my very spirit averse to what I was going to do. A consistent effort to always stay inside the rules, to always do things properly and correctly... and yet, here I now was. Contemplating engaging in something so heinous the action itself could beget demons into the world.
 
@@ -372,10 +372,10 @@ else {
 }
 ```
 
-It's just a tiny little bit of it, dear reader. And, well... come now. A little indeterminate value, a tiny tiny bit of "Undefined" Behavior...
+I finished the deed. My fingers left the keyboard for a moment as I stared. The fires in my imagination receded, and I was left with just the quiet of the night and the loud hum of my old computer's fan. I was not smote in my seat. My hard drive was not reformatted. It's just a tiny little bit of it, dear reader. And, well... come now. A little indeterminate value, a tiny tiny bit of "Undefined" Behavior...
 
 ![Save Button](/assets/img/2019-10-14/save.png)
 
-It'll never hurt anyone... 
+It'll never hurt anyone...
 
 💚
