@@ -269,8 +269,9 @@ One of the few Living C++ Compilers weighed in out of the blue when I expressed 
 That's a pretty fair assessment of the situation. But that still doesn't help _me_! The bits I let users access through `small_bit_vector` are well-defined because they had to be written to using one of the functions in order to be accessible. The problem at the core becomes that the following call does not let me differentiate between "I want indeterminate, default initialization" and "I want the default constructor to be called":
 
 ```cpp
-void small_bit_vector::push_back () {
-	// ...
+void push_back () {
+	internal_pointer_type memory_ptr = ...;
+	bool at_bit_boundary = ...;
 	if (at_bit_boundary) {
 		this_alloc_traits::construct(memory_ptr);
 	}
