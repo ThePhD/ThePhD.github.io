@@ -323,6 +323,8 @@ then storing the size in the most significant `log2(InlineN)` bits ("leftmost" b
 
 Still, it's completely possible and perhaps later I will go back in and [flip the switch](https://github.com/ThePhD/itsy_bitsy/blob/9f4976a0fe1f846a895c5e13f5526a199923b6e1/include/itsy/detail/small_bit_vector.hpp#L129) and guide myself through the process of vetting the entire implementation. I believe that MSVC's `std::string` also does this to get additional savings out of the string, leaving a `char` for count in its arrays and a null terminator too, leading to about ~7 `char`s worth of SBO space (for 32-bit, more for 64-bit if I remember correctly).
 
+So, I choose Strategy 1 here, and wait to finish cleaning up the code to enable strategy 2 at some point. The goal of this is to ensure that a `.erase` call does not trigger automatic shrinking (and iterator invalidation). Note that Strategy 2 also has a second, hidden tradeoff: bit-stealing makes it harder for a user to know when they've gone past SBO and triggered heap allocation, since it goes past `N` inline `T`s by bit stealing. This may frustrate a few users who were not anticipating the bit packing, but seems like it is worth the space tradeoff in this case. (Currently, in `itsy.bitsy`, I just specifying the difference with `packed_small_bit_vector<T, N, Allocator>` and `small_bit_vector<T, N, Allocator>`).
+
 
 
 
