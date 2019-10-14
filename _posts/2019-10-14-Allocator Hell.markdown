@@ -227,7 +227,7 @@ And what goes on inside the allocator would be something like this, given some "
 ```cpp
 int main () {
 	unsigned char well_defined_blob[sizeof(int)];
-	new int(&[well_defined_blob]) int (); // blob of 0
+	new int(&[well_defined_blob]) int ();
 	// value: 0
 	int& well_defined = *(int*)&well_defined_blob[0];
 
