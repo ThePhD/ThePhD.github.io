@@ -75,8 +75,10 @@ void foo ();
 You could later define it like this:
 
 ```cpp
-void foo () 
-	int a, long b, char* c
+void foo (a, b, c) 
+	int a;
+	long b;
+	char* c;
 {
 	// ...
 }
