@@ -32,7 +32,7 @@ I'm sorry, Zach. I should have listened to you, before I not only gazed but step
 
 ## The Siren's Call: `allocator_traits`
 
-In days gone by, allocators were truly a gnarly beast. From making sure all the `typedef`s were there to ensuring `rebind` properly swapped to the other allocator type, the complexity therein made it so implementing allocators was a chore the likes of which could not be taken by mere mortal creatures. Did you want a simple pool allocator? I hope you were ready to get snuggly with placement new, (pseudo-)destructors calls, object lifetime, trivial types, default initialization vs. default construction vs. aggregate initialization, and more. All on top of already trying to write a good way to put memory in the most cache-friendly places and keep fragmenting low.
+In days gone by, allocators were truly a gnarly beast. From making sure all the `typedef`s were there to ensuring `rebind` properly swapped to the other allocator type, the complexity therein made it so implementing allocators was a chore the likes of which could not be undertaken by mere mortal creatures. Did you want a simple pool allocator? I hope you were ready to get snuggly with placement new, (pseudo-)destructors calls, object lifetime, trivial types, default initialization vs. default construction vs. aggregate initialization, and more. All on top of already trying to write a good way to put memory in the most cache-friendly places and keep fragmenting low.
 
 Then, like an angel from the heavens, `allocator_traits` came down.
 
