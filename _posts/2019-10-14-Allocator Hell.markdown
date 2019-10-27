@@ -289,7 +289,7 @@ And _yet_.
 
 There... there must be another way. Perhaps there was. There must be some trick, some way to do default, garbage initialization of the bits the user would work with. To get that last handful of %. It came to me, in the dead of the night. I sat right up in bed, with that little idea. There was no chatroom of C++ experts around this time. Even the Europeans were still sleeping at this ungodly hour. I shuffled to the desk and took a seat. The brightness of the monitor hurt my eyes for a brief moment.
 
-In my imagination, it grew. Firey, burning damnation that was much stronger than Allocator Hell could ever bring to task. After all, the casual conversation of Blessed Implementers and words from Arthur O'Dwyer could save me from that. This... this was a much more serious infraction. One that cut against the heart of the very abstract machine itself. The consequences for doing this...
+In my imagination, it grew. Fire-y, burning damnation that was much stronger than Allocator Hell could ever bring to task. After all, the casual conversation of Blessed Implementers and words from Arthur O'Dwyer could save me from that. This... this was a much more serious infraction. One that cut against the heart of the very abstract machine itself. The consequences for doing this...
 
 I clicked on the `itsy.bitsy` shortcut. The comforting deep blue of VSCode came up, a sharp contrast to the burning condemnation I felt rising in my soul, my very spirit averse to what I was going to do. A consistent effort to always stay inside the rules, to always do things properly and correctly... and yet, here I now was. Contemplating engaging in something so heinous the action itself could beget demons into the world.
 
