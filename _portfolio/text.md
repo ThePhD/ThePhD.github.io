@@ -38,11 +38,15 @@ Specialized solutions for C++11 (or C++03) can be made. If you, your company or 
 
 Below are the published funding goals. Sponsors may pay into specific goals or, if given a large enough donation, create a new goal entirely; otherwise, funding falls into the categories in a top-to-bottom, linear fashion. Goals marked (_Stretch_) are not quite bare-minimum necessary, but would be absolutely wonderful to accomplish!
 
-_Current Goal: Get to Full Time Development_
+- Bootstrap Initial Development, to get library tested and released;
+- Reach Full-Time Text Development to reach 2020 Goal;
+- Cover C Standard Library development to reach maximum amount of users with basic functionality;
 
-$505 USD / $82,000 USD
+_Current Goal: Bootstrap Initial Development_
 
-[ ⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
+Current Goal Total: $650 USD / $24,000 USD
+
+[ ⣿⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
 
 
 
@@ -67,7 +71,7 @@ The C++ library submodules and builds on top of the C one for fast-path function
 The current spread of goals is as follows.
 
 
-### Ⅰ: Core Text Utilities [ 2% ] 
+### Ⅰ: Core Text Utilities [ 3% ] 
 
 - Encoding objects for one-by-one encoding and decoding.
   - `utf8`, `utf16`, `utf32`, `narrow_execution` and `wide_execution` Encoding Object types;
@@ -134,6 +138,7 @@ The current spread of goals is as follows.
 ### Ⅷ: (_Stretch_) C Library for Span-Based Conversions [ 0% ]
 
 - As detailed in proposal [N2440](/vendor/future_cxx/papers/source/C - Efficient Character Conversions.html): C functions for fast conversions.
+- Cover INCITS/ANSI fees.
 - Take functionality through all of WG14, put into C Libraries such as:
   - `musl`.
   - `glibc`.
