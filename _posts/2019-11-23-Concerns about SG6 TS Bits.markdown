@@ -53,9 +53,9 @@ Of course, it is not just me: Alisdair Meredith and Vincent Reverdy [already wro
 
 Drop the `std::string` constructors and stop strongly coupling the containers and a potential form of its serialization. Whether or not compilation times get worse because of the header is a secondary concern: modules or no, this kind of constructor is the pinnacle of mixing concerns and is not something that should show up in an API designed for today's use.
 
-Even a `std::string_view` constructor is of supremely bad form. These should be separate free functions and have no business on the interface of the class: that they exist is a symptom of not having a proper way to iterate over bits in the Standard Library, and as soon as Fix 0 is deployed the pressure of providing these serializing constructors decreases dramatically.
+Even a `std::string_view` constructor is of supremely bad form. These should be separate free functions and have no business on the interface of the class: that they exist is a symptom of not having a proper way to iterate over bits in the Standard Library.
 
-Serialization can be provided by a suite of functions similar to `to_string`. They can take this form:
+Nevertheless, serialization can be provided by a suite of functions similar to `std::to_string`. They can take this form:
 
 ```cpp
 template <typename Iterator, typename Sentinel>
@@ -94,7 +94,7 @@ It follows _better_ existing practice already in the Standard Library; let's not
 
 ## Fix 1: Proper Iterators
 
-In `itsy.bitsy` there are bit iterators, modeled after a paper already sent to the Standards Committee and on its 10th+ revision. There's no reason to not put those iterators on `std::bits` and `std::bitset<N>`. Not being able to use standard library algorithms with standard-like containers is something of an sad joke. itsy.bitsy also proves that by providing these iterators, you can optimize the standard library algorithms appropriately **and** make it so other people can use `std::bit_iterator`s properly and get the same performance benefits.
+In `itsy.bitsy` there are bit iterators, modeled after a paper already sent to the Standards Committee and on its 10th+ revision. There's no reason to not put those iterators on `std::bits` and `std::bitset<N>`. Not being able to use standard library algorithms with standard-like containers is something of an sad joke. One of the goals of itsy.bitsy was also to prove that by providing these iterators, you can optimize the standard library algorithms appropriately. This makes it so other people can use `std::bit_iterator`s with their containers and reap the same performance benefits.
 
 This is fundamental to having `std::bits` be generally accessible to all levels of programmers. It will unlock its use in many different contexts, far beyond the one-off uses of `std::bitset<N>`; creating types which are incompatible with the goals and creeds of the Standard Library at large is destined to make `std::bits` the equivalent of annoying vaporware, and far less powerful than `std::vector<bool>`.
 
