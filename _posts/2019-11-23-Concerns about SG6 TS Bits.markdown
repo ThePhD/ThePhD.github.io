@@ -104,7 +104,7 @@ This is fundamental to having `std::bits` be generally accessible to all levels 
 
 The siren's song of taking the template type off a container to save on compilation time is a lovely one to listen to.
 
-It's less lovely when during important project and the types you selected that underpin the data structure do not match my project's needs.
+It's less lovely during important projects to discover the types that underpin the standard data structure do not match my project's needs.
 
 At no point in my existence is "I reimplemented `std::bits` but with a different underlying type and allocator support" a good use of anyone's Engineering Time™. Even `boost::dynamic_bitset<Block>` takes a type which serves as the underlying value; writing a container which is strictly inferior to current standard containers and existing practice is not something to be standardized. `std::bits` should be templated on a type `T` to perform the underlying bit math on. This also ties into Fix 1: now developers can have constructors that always construct unambiguously from an `iterator, sentinel` pair that traverses `bool`eans, or developers can create an "extended" constructor [like is present in `itsy.bitsy`](https://github.com/ThePhD/itsy_bitsy#bit-sequence) to directly fill in `T` objects that represent the bits.
 
