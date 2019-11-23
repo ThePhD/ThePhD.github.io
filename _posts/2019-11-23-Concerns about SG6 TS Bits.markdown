@@ -15,7 +15,7 @@ _opinions_.
 
 
 
-# Repeating Old Mistakes: `bits`
+# Repeating Old Mistakes: `std::bits`
 
 The Numerics WIP paper [P1889](https://wg21.link/p1889) has a type called `bits`, which purports itself to be an "object that represents an unbounded set of bits" (§9.2). This is similar to `boost::dynamic_bitset` and many other versions that have come before it.
 
@@ -97,7 +97,7 @@ You can kill 2 birds with 1 stone, and provide a container which has strong vect
 
 # Is That It?
 
-Not really. For example, nowhere is there a type to view a set of bits that already exist with something like itsy.bitsy's `bit_view` type, making it hard to take pre-existing storage and "view" it as a sequence of bits to operate on. But, given that the paper only had `std::bits`, it felt appropriate to only tackle the problem of an unbounded bit container.
+Not really. For example, nowhere is there a type to view a set of bits that already exist with something like `itsy.bitsy`'s `bit_view` type, making it hard to take pre-existing storage and "view" it as a sequence of bits to operate on. But, given that the paper only had `std::bits`, it felt appropriate to only tackle the problem of an unbounded bit container.
 
 I will do my best to make sure we don't repeat these old mistakes. If we are going to find better replacements for `std::vector<bool>`, they better _actually_ be better replacements. We have enough exemplary work in the wild already showing that it is possible.
 
