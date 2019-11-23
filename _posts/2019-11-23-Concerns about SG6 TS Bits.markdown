@@ -29,10 +29,9 @@ Reading the specification makes it entirely easy to see this is just a slightly 
 	- `bits(initializer_list<uint32_least_t>)` is a slideware constructor. It does not help me with my data that may be 64 bits or larger for each element. This is likely thrown in as a bone for `bits{ 0xFF,0x560033, ... };` usages, but it's an extremely awkward way to do it.
 - There are no ways to control the underlying representation of what is stored.
 	- Is it `size_t`? `uint32_t`? `__uint128_t`? The standard library just picks something, and to hell with you or your thoughts on the subject or what's appropriate for your work load.
-	- Small buffer optimization is not a first class citizen. The push for `small_vector<T, N>` and other data structures has made it clear that being able to control an implementation's small buffer size is critical for high performance applications, and just vigorously shrugging our shoulders and saying "Quality of Implementation issue" is very much _not okay_.
+	- Small buffer optimization (SBO) is not a first class citizen. The push for `small_vector<T, N>` and other data structures has made it clear that being able to control an implementation's small buffer size is critical for high performance applications, and just vigorously shrugging our shoulders and saying "Quality of Implementation issue" is very much _not okay_.
 - There are no iterators.
 	- "You didn't need any of that algorithm stuff, let alone those Ranges thingies, right?"
-- There is no option for small buffer optimization.
 
 Given the size of the paper (and the many other things which they get right and focus on), I assume these oversights were mostly due to just following existing practice of `std::bitset<N>`. I am certainly glad that they published the work and are moving Numerics forward, but it will be over my cold, lifeless body that they repeat the mistakes for `std::bitset<N>` in a C++23-era Numerics type.
 
@@ -106,13 +105,13 @@ The siren's song of taking the template type off a container to save on compilat
 
 It's less lovely during important projects to discover the types that underpin the standard data structure do not match my project's needs.
 
-At no point in my existence is "I reimplemented `std::bits` but with a different underlying type and allocator support" a good use of anyone's Engineering Time™. Even `boost::dynamic_bitset<Block>` takes a type which serves as the underlying value; writing a container which is strictly inferior to current standard containers and existing practice is not something to be standardized. `std::bits` should be templated on a type `T` to perform the underlying bit math on. This also ties into Fix 1: now developers can have constructors that always construct unambiguously from an `iterator, sentinel` pair that traverses `bool`eans, or developers can create an "extended" constructor [like is present in `itsy.bitsy`](https://github.com/ThePhD/itsy_bitsy#bit-sequence) to directly fill in `T` objects that represent the bits.
+At no point in my existence is "I reimplemented `std::bits` but with a different underlying type and allocator support" a good use of anyone's Engineering Time™. Even `boost::dynamic_bitset<Block>` takes a type which serves as the underlying value; writing a container which is strictly inferior to current standard containers and existing practice is not something to be standardized. `std::bits` should be templated on a type `T` to perform the underlying bit math on. This also ties into Fix 1: now developers can have constructors that always construct unambiguously from an `iterator, sentinel` pair that traverses `bool`eans, or create an "extended" constructor [like is present in `itsy.bitsy`](https://github.com/ThePhD/itsy_bitsy#bit-sequence) to directly fill in `T` objects that represent the bits.
 
 
 
 ## Fix 3: Specify a small buffer optimization up front.
 
-Clearly, the type is meant to be a vector-like type. It has `operator[]`, `size()`, `reserve()`, `capacity()`, and `shrink_to_fit()`. We already have the problem in the standard library right now that `std::basic_string` is our only de-facto SSO container, and some people have already noticed that they can cheat and do `std::basic_string<double>` and get a mostly-working Small Buffer Optimized container. (That is not standards-mandated to work, but it sure as hell compiles on a lot of platforms).
+Clearly, the type is meant to be a vector-like type. It has `operator[]`, `size()`, `reserve()`, `capacity()`, and `shrink_to_fit()`. We already have the problem in the standard library right now that `std::basic_string` is our only de-facto SBO container, and some people have already noticed that they can cheat and do `std::basic_string<double>` and get a mostly-working Small Buffer Optimized container. (That is not standards-mandated to work, but it sure as hell compiles on a lot of platforms).
 
 Don't start with `std::bits<T, Allocator>`. Start with `std::small_bits<T, N, Allocator>`. Note that `std::bits<T, Allocator>`'s implementation becomes trivial after successfully implementing `std::small_bits`:
 
@@ -123,7 +122,7 @@ class bits : private ::std::small_bits<T, 0, Allocator> {
 };
 ```
 
-You can kill 2 birds with 1 stone, and provide a container which has strong vector-like iterator guarantees if `N == 0`: otherwise, you get the same iterator guarantees as `std::basic_string`.
+You can kill `0b10` birds with `0b01` stone, and provide a container which has strong vector-like iterator guarantees if `N == 0`: otherwise, you get the same iterator guarantees as `std::basic_string`.
 
 
 
