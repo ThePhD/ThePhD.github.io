@@ -43,27 +43,60 @@ Given the size of the paper (and the many other things which they get right and 
 
 I'm not a fan of complaining about stuff for the sake of complaining: providing solutions is necessary. While step 0 is to get noisy about it -- never let anyone tell you not to be noisy about broken things -- step 1 is to actually propose some fixes. Yelling from an ivory tower about a purely academic or theoretical design is not worth much, why is why
 
-[everything illustrated here will have implementation experience.](https://github.com/ThePhD/itsy_bitsy).
+[everything illustrated here will have implementation experience](https://github.com/ThePhD/itsy_bitsy).
 
-Of course, it is not just me: Alisdair Meredith and Vincent Reverdy already wrote papers to fix much of what is related to bits in the Standard Library, some of those papers dating back 13 years. While we have just blissfully twiddled our thumbs about the situation for binary work in the Standard Library, if we are going to bundle `std::bits` as a part of Numerics we should do it right.
+Of course, it is not just me: Alisdair Meredith and Vincent Reverdy [already wrote papers to fix much of what is related to bits in the Standard Library](/seize-bits-production-gsoc-2019), some of those papers dating back 13 years. While we have just blissfully twiddled our thumbs about the situation for binary workloads in the Standard Library, if we are going to bundle `std::bits` as a part of Numerics we should do it right.
 
 
 
-## Fix 0: Proper Iterators
+## Fix 0: Drop the String Constructors
+
+Drop the `std::string` constructors and stop strongly coupling the containers and a potential form of its serialization. Whether or not compilation times get worse because of the header is a secondary concern: modules or no, this kind of constructor is the pinnacle of mixing concerns and is not something that should show up in an API designed for today's use.
+
+Even a `std::string_view` constructor is of supremely bad form. These should be separate free functions and have no business on the interface of the class: that they exist is a symptom of not having a proper way to iterate over bits in the Standard Library, and as soon as Fix 0 is deployed the pressure of providing these serializing constructors decreases dramatically.
+
+Serialization can be provided by a suite of functions similar to `to_string`. They can take this form:
+
+```cpp
+template <typename Iterator, typename Sentinel>
+std::bits to_bits(Iterator first, Sentinel last);
+
+template <typename Iterator, typename Sentinel>
+std::bits to_bits(Iterator first, Sentinel last,
+	iter_value_t<Iterator> one_value,
+);
+
+template <typename Iterator, typename Sentinel>
+std::bits to_bits(Iterator first, Sentinel last,
+	iter_value_t<Iterator> one_value,
+	iter_value_t<Iterator> zero_value
+);
+```
+
+Note the templated free functions have no hard dependency on `basic_string_view` or `basic_string` is present, and also allows for a plethora of implementation strategies and better ways of defining what `zero` and `one` should be for the computed `value_type`s of the iterators. Furthermore, ranges we can shrink the argument count to just 1 in the simple case:
+
+```cpp
+template <typename Range>
+std::bits to_bits(Range firstlast);
+```
+
+This is a far better design that reduces coupling.
+
+
+
+## Fix 0a: Better Constructors
+
+Similarly, the absolute _lack_ of any of the modern container constructors on the entire class is extremely worrying. `itsy.bitsy` contains an example implementation with the full suite of `count, value`, `iterator, sentinel`, and `initializer_list<value_type>` constructors, as well as an extended set of constructors for all of these but with "bulk-copy the underlying values". This provides maximum flexibility for initialization **as well as** performance for people who know the most efficient way to initialize their data.
+
+It follows _better_ existing practice already in the Standard Library; let's not ignore a good thing.
+
+
+
+## Fix 1: Proper Iterators
 
 In `itsy.bitsy` there are bit iterators, modeled after a paper already sent to the Standards Committee and on its 10th+ revision. There's no reason to not put those iterators on `std::bits` and `std::bitset<N>`. Not being able to use standard library algorithms with standard-like containers is something of an sad joke. itsy.bitsy also proves that by providing these iterators, you can optimize the standard library algorithms appropriately **and** make it so other people can use `std::bit_iterator`s properly and get the same performance benefits.
 
 This is fundamental to having `std::bits` be generally accessible to all levels of programmers. It will unlock its use in many different contexts, far beyond the one-off uses of `std::bitset<N>`; creating types which are incompatible with the goals and creeds of the Standard Library at large is destined to make `std::bits` the equivalent of annoying vaporware, and far less powerful than `std::vector<bool>`.
-
-
-
-## Fix 1: Proper Constructors
-
-Drop the `std::string` constructors and stop strongly coupling the containers and a potential form of its serialization. Whether or not compilation times explode is a secondary concern: modules or no, this kind of constructor is the pinnacle of mixing concerns and is not something that should show up in an API designed for today's use.
-
-Even a `std::string_view` constructor is of supremely bad form. These should be separate free functions and have no business on the interface of the class: that they exist is a symptom of not having a proper way to iterate over bits in the Standard Library, and as soon as Fix 0 is deployed the pressure of providing these serializing constructors decreases dramatically.
-
-Similarly, the absolute _lack_ of any of the modern container constructors on the entire class is extremely worrying. `itsy.bitsy` contains an example implementation with the full suite of `count, value`, `iterator, sentinel`, and `initializer_list<value_type>` constructors, as well as an extended set of constructors for all of these but with "bulk-copy the underlying values". This provides maximum flexibility for initialization **as well as** performance for people who know the most efficient way to initialize their data. It follows _better_ existing practice already in the Standard Library; let's not ignore a good thing.
 
 
 
@@ -97,10 +130,8 @@ You can kill 2 birds with 1 stone, and provide a container which has strong vect
 
 # Is That It?
 
-Not really. For example, nowhere is there a type to view a set of bits that already exist with something like `itsy.bitsy`'s `bit_view` type, making it hard to take pre-existing storage and "view" it as a sequence of bits to operate on. But, given that the paper only had `std::bits`, it felt appropriate to only tackle the problem of an unbounded bit container.
+Not exactly. For example, nowhere is there a type to view a set of bits that already exist with something like `itsy.bitsy`'s `bit_view` type, making it hard to take pre-existing storage and "view" it as a sequence of bits to operate on. But, given that the paper only had `std::bits`, it felt appropriate to only tackle the problem of an unbounded bit container.
 
-I will do my best to make sure we don't repeat these old mistakes. If we are going to find better replacements for `std::vector<bool>`, they better _actually_ be better replacements. We have enough exemplary work in the wild already showing that it is possible.
+The old design got us out the front door, but it has been a very long time. While back then we did not know any better, we are better than our old mistakes. If we are going to find better replacements for `std::vector<bool>`, they better _actually_ be... well, better. We have enough exemplary work in the wild already showing that it is possible.
 
-Let's do it right.
-
-💚
+Let's do it right, okay? 💚
