@@ -41,9 +41,9 @@ Yeah, it is pretty magical, right? Not only do we get back the same type we put 
 - took your view's iterator and sentinel as `my_iterator, my_sentinel`;
 - or, took your view's `std::ranges::subrange<my_iterator, my_sentinel>`
 
-the ranges would always be reconstructible. This meant that everyone's ranges that obeyed the same rules for the constructors we were adding in the Standard would get the same flattening power. It also meant that we could advertise such as a way to enable your ranges, when put into Standard adaptors, to get flattened.
+the ranges would always be reconstructible. It meant that we could advertise such as a way to enable your ranges, when put into Standard adaptors, to get flattened. The standard would play by the same rules, too. Everyone would be on an equal playing field, with access to the same power.
 
-In the standard, this would be applied to ranges like `view::counted`, `view::take`, and `view::drop` at first: a good, limited set of ranges for C++20. As more ranges were going to be added in the Standard, I had a working list of things that would need to be reconstructible to avoid having to instantiate a `std::ranges::subrange<...>` of it and losing what type information the user gave me behind `iterator` and `sentinel` `subrange` template spew.
+For `std::ranges`, this would be applied to ranges like `view::counted`, `view::take`, and `view::drop` at first: a good, limited set of ranges for C++20. As more ranges were going to be added in the Standard, I had a working list of things that would need to be reconstructible to avoid having to instantiate a `std::ranges::subrange<...>` of it and losing what type information the user gave me behind `iterator` and `sentinel` `subrange` template spew.
 
 
 
