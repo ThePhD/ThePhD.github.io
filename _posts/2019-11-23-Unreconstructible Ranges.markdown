@@ -78,23 +78,25 @@ To which my immediate mental reaction was:
 Similarly, a Twitter DM hit me that night as well:
 
 > ... Consider the following view, which drops the first element of the range with which it is constructed:
-> 
->    struct pop_front_view {
->    	int *m_begin, *m_end;
->    
->    	pop_front_view() = default;
->    
->    	pop_front_view(int* begin, int* end)
->    	: m_begin(begin == end ? begin : begin + 1),
->    	  m_end(end)
->    	{
->    	}
->    
->    	int* begin() const { return m_begin; }
->    
->    	int* end() const { return m_end; }
->    };
-> 
+
+```cpp
+struct pop_front_view {
+	int *m_begin, *m_end;
+
+	pop_front_view() = default;
+
+	pop_front_view(int* begin, int* end)
+	: m_begin(begin == end ? begin : begin + 1),
+	  m_end(end)
+	{
+	}
+
+	int* begin() const { return m_begin; }
+
+	int* end() const { return m_end; }
+};
+```
+
 > The reconstructible-range machinery will erroneously use this constructor and give surprising and incorrect results...
 
 The above range **is** reconstructible, syntactically, but it fails the semantic requirements that it "puts the range back together". I also did not have wording that required that it must be semantically reconstructible. I will be perfectly honest: I've never seen someone write a range like this, but it's totally valid code that would break reconstructible ranges.
