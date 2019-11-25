@@ -62,17 +62,17 @@ std::bits to_bits(Iterator first, Sentinel last);
 
 template <typename Iterator, typename Sentinel>
 std::bits to_bits(Iterator first, Sentinel last,
-	iter_value_t<Iterator> one_value,
+	std::iter_value_t<Iterator> one_value,
 );
 
 template <typename Iterator, typename Sentinel>
 std::bits to_bits(Iterator first, Sentinel last,
-	iter_value_t<Iterator> one_value,
-	iter_value_t<Iterator> zero_value
+	std::iter_value_t<Iterator> one_value,
+	std::iter_value_t<Iterator> zero_value
 );
 ```
 
-Note the templated free functions have no hard dependency on `basic_string_view` or `basic_string` is present, and also allows for a plethora of implementation strategies and better ways of defining what `zero` and `one` should be for the computed `value_type`s of the iterators. Furthermore, ranges we can shrink the argument count to just 1 in the simple case:
+Note the templated free functions have no hard dependency on `basic_string_view` or `basic_string`, and also allows for a plethora of implementation strategies and better ways of defining what `zero` and `one` should be for the computed `value_type`s of the iterators. Furthermore, with ranges we can shrink the argument count to just 1 in the simple case:
 
 ```cpp
 template <typename Range>
@@ -93,7 +93,7 @@ It follows _better_ existing practice already in the Standard Library; let's not
 
 ## Fix 1: Proper Iterators
 
-In `itsy.bitsy` there are bit iterators, modeled after a paper already sent to the Standards Committee and on its 10th+ revision. There's no reason to not put those iterators on `std::bits` and `std::bitset<N>`. Not being able to use standard library algorithms with standard-like containers is something of a sad joke. One of the goals of itsy.bitsy was also to prove that by providing these iterators, you can optimize the standard library algorithms appropriately. This makes it so other people can use `std::bit_iterator`s with their containers and reap the same performance benefits.
+In `itsy.bitsy` there are bit iterators, modeled after a paper already sent to the Standards Committee and on its 10th+ revision. There's no reason to not put those iterators on `std::bits` and `std::bitset<N>`. Not being able to use standard library algorithms with standard-like containers is something of a sad joke. One of the goals of `itsy.bitsy` was also to prove that by providing these iterators, you can optimize the standard library algorithms appropriately. This makes it so other people can use `std::bit_iterator`s with their containers and reap the same performance benefits.
 
 This is fundamental to having `std::bits` be generally accessible to all levels of programmers. It will unlock its use in many different contexts, far beyond the one-off uses of `std::bitset<N>`; creating types which are incompatible with the goals and creeds of the Standard Library at large is destined to make `std::bits` the equivalent of annoying vaporware, and far less powerful than `std::vector<bool>`.
 
