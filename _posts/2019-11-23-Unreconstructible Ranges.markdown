@@ -34,6 +34,7 @@ auto v = s | views::drop(1) | views::take(10)
 
 
 
+
 # That's Awesome!
 
 Yeah, it is pretty magical, right? Not only do we get back the same type we put in our algorithms (`span<int>`), P1664 made it into an "exposition only" concept in the Standard. This meant that as long as you have a constructor on your type that:
@@ -114,7 +115,7 @@ The Saturday Plenary is not really a place where I have any authority or power. 
 
 I am not one of those members.
 
-This meant I could not do anything about P1664 being deferred to later, paper author or not. This is one of the dangers of being apart of the Committee but not officially under any organization's umbrella: when the **real** vote gets taken you have to rely on someone from a National Body or similar organization to take part. As given by the (soon to be observable) lack of P1664 in the C++ Working Draft,
+This meant I could not do anything about P1664 being deferred to later, paper author or not. This is one of the dangers of being a part of the Committee but not officially under any organization's umbrella: when the **real** vote gets taken you have to rely on someone from a National Body or similar organization to take part. As given by the (soon to be observable) lack of P1664 in the C++ Working Draft,
 
 no, P1664 didn't survive Plenary. It was deferred to Prague for re-litigation and reconsideration under a potentially new design.
 
@@ -162,7 +163,7 @@ Over my dead, non-National, non-ISO, non-Voting body would we force every single
 
 I didn't think I would ever pull something out of consideration for C++, especially something as useful as _`reconstructible-range`_. But compromising the design for a handful of ranges that exhibited special behavior was not acceptable to me. It was especially sad to me to require everyone to include/import `<ranges>`. Sure, this means `view::drop`, `view::take`, and other C++20 ranges might not get any reconstructible benefits from now until the end of time. Or -- as is currently being discussed -- maybe those benefits will be allowed for certain range adaptors, but strictly pinned to specific class types like `std::basic_string_view` and `std::span` only.
 
-I dislike the "specific types blessed here" option as well, because it reminds me of `std::invoke`. Specifically, `std::reference_wrapper` is blessed by `std::invoke` in the Standard's wording to behave like a "real reference" when performing overload resolution. Unfortunately, any other reference-wrapper type in your code base is essentially verboten and does not receive the same treatment. It may look, smell, and feel like a `std::reference_wrapper`, but it's not allowed. This means you `vector<int>*` + `int index` reference type? Doesn't work. Your pointer-bit-stealing reference type? Also doesn't work.
+I dislike the "specific types blessed here" option as well, because it reminds me of `std::invoke`. Specifically, `std::reference_wrapper` is blessed by `std::invoke` in the Standard's wording to behave like a "real reference" when performing overload resolution. Unfortunately, any other reference-wrapper type in your code base is essentially verboten and does not receive the same treatment. It may look, smell, and feel like a `std::reference_wrapper`, but it's not allowed. This means your `vector<int>*` + `int index` reference type? Doesn't work. Your pointer-bit-stealing reference type? Also doesn't work.
 
 `std::invoke`'s solution for `std::reference_wrapper` is non-generic. It does not scale and it's utterly worthless for the ecosystem as a whole: a small bandage on a much larger problem. Whatever they figure for `view::take` and `view::drop` might not be generic and might not scale at all. It could result in clean interfaces for the standard's own types (`std::span`, `std::string_view`), but throw you the middle finger for your own types (`llvm::StringRef`, `Corrade::ArrayView`, `my::md_span`). That really sucks, but in the grand scheme of things?
 
