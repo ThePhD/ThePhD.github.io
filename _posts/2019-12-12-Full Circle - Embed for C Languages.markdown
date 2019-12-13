@@ -66,9 +66,9 @@ You may be wondering what this question actually means, and what the hell a more
 
 Well, I was too.
 
-The general idea is that `std::embed` (and `#embed`) were hyper-focused ideas and only solved a "narrow" use case. Part of the reason this perception was in the room was because earlier in the day, a certain meta-language I had heard of but did not have the time to play with was stirring amongst meta-programming enthusiasts in the Committee. That language was [Circle](https://www.circle-lang.org/).
+The general idea is that `std::embed` (and `#embed`) were hyper-focused ideas and only solved a "narrow use case". A certain meta-language I had heard of but did not have the time to play stirred amongst meta-programming enthusiasts in the Committee, and that enthusiasm was spilling into wanting to change the current compile-time programming direction. The new language brewing up this change is [Circle](https://www.circle-lang.org/), by Sean Baxter.
 
-Promising the use of all of C++ at compile-time and with the idea that just running regular, right-proper C++ -- and not as part of AST computation using `constexpr` -- Circle set itself up as the new, awesome way to think about compile-time programming. A handful of other proposals got bodied in SG7 because people had been emphasizing we look into something Circle-like for our reflection needs, rather than go with the current way forward. `consteval` variables and constant evaluation side effects models got stalled, a "new direction for Reflection" was mentioned in relation to developing this Circle-like meta-language, and of course
+Promising the use of all of C++ at compile-time -- and not as part of AST computation using `constexpr` -- Circle set itself up as the new, awesome way to think about compile-time programming. It was founded on the idea that just running regular, right-proper C++ and having explicit demarcation when going from compile-time to run-time was a thing. A handful of other proposals got bodied in SG7 from this new way of thinking. Folks emphasized we look into something Circle-like for our reflection needs, rather than go with the current way forward. `consteval` variables and the constant evaluation side effects model got stalled, a "new direction for Reflection" was mentioned in relation to developing this Circle-like meta-language, and of course
 
 `std::embed` and `#embed` got hit by the bus.
 
@@ -79,11 +79,11 @@ And so now it lays quietly in critical condition, while we wait to see if this n
 
 # Patience is not a Virtue
 
-I battled the betentacled Necronomicon of GCC, with files that have Copyright notices dating back to the 70s as I shaped my own preprocessor directives and gnashed my teeth in pain with the C and C++ parsers. I cut myself on the Vorpal Blade of Clang's Constant Expression Evaluator as I struggled to understand the specific arcana to invoke the preprocessor and builtins correctly. I fielded e-mails from National Labs employees, spoke shop with static analysis tool vendors, handled Twitter posts from Game Devs and DMs from embedded developers, wondering why their requests were being ignored and their desires denied.
+I battled the betentacled Necronomicon of GCC, with files that have Copyright notices dating back to the 70s as I shaped my own preprocessor directives and gnashed my teeth in pain with the C and C++ parsers. I cut myself on the Vorpal Blade of Clang's Constant Expression Evaluator as I struggled to understand the specific arcana to invoke the preprocessor and built-ins correctly. I fielded e-mails from National Labs employees, spoke shop with static analysis tool vendors, handled Twitter posts from Game Devs and DMs from embedded developers, wondering why their requests were being ignored and their desires denied.
 
 Patience is not a virtue for what should have been a 40 year old feature.
 
-If SG7 was going to force us to consider Circle, then I would consider Circle myself. I set up a few tests, and took my greatest litmus test - embedded 50 MB of data in an executable - to test things out.
+If SG7 was going to force us to consider Circle, then by all means it was time to consider Circle myself. I set up a few tests, and took my greatest litmus test - embedded 50 MB of data in an executable - to give Circle a spin.
 
 
 ### Speed and Space is Everything
@@ -103,9 +103,9 @@ To give you an idea of the disparity between the speed of the implementations, h
 | `std::embed`               | 16 seconds  |
 | `xxd`-generated `#include` | 621 seconds |
 
-Yes, you can pay a 36x (or worse) time penalty for using `#include`-based programming.
+Yes, you can pay a 36x (or worse) time penalty for using `#include`-based binary data.
 
-During this time, `#embed` and `std::embed` took almost no memory overhead, while the `xxd` method happily chewed through **gigabytes** of memory to get its job done. With these timings, I then went to speak with the Developer of Circle so I could give the meta-language its fair shake in the work:
+During this time, `#embed` and `std::embed` took almost no memory overhead, while the `xxd` method happily gargled **gigabytes** of my memory to get its job done and slowed things to a crawl on my less powerful machines. With these timings, I then went to speak with the Developer of Circle so I could give the meta-language its fair shake:
 
 > @seanbax Hi!
 > 
