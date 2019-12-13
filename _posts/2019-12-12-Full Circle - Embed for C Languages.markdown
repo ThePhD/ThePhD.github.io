@@ -5,7 +5,6 @@ permalink: /full-circle-embed
 feature-img: "assets/img/2019-12-12/assorted-color-stained-glass-spiral.jpg"
 thumbnail: "assets/img/2019-12-12/assorted-color-stained-glass-spiral.jpg"
 tags: [C++, C, embed, Circle, 📜]
-hide: true
 excerpt_separator: <!--more-->
 ---
 
