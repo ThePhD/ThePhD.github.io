@@ -78,7 +78,7 @@ And so now it lays quietly in critical condition, while we wait to see if this n
 
 # Patience is not a Virtue
 
-I battled the betentacled Necronomicon of GCC, with files that have Copyright notices dating back to the 70s as I shaped my own preprocessor directives and gnashed my teeth in pain with the C and C++ parsers. I cut myself on the Vorpal Blade of Clang's Constant Expression Evaluator as I struggled to understand the specific arcana to invoke the preprocessor and built-ins correctly. I fielded e-mails from National Labs employees, spoke shop with static analysis tool vendors, handled Twitter posts from Game Devs and DMs from embedded developers, wondering why their requests were being ignored and their desires denied.
+I battled the betentacled Necronomicon of GCC, with files that have Copyright notices dating back to the 70s as I shaped my own preprocessor directives and gnashed my teeth in pain with the C and C++ parsers. I cut myself on the Vorpal Blade of Clang's Constant Expression Evaluator as I struggled to understand the specific arcana to invoke the preprocessor and built-ins correctly. I fielded e-mails from National Labs employees, spoke shop with static analysis tool vendors, handled Twitter posts from Game Developers and DMs from embedded developers, wondering why their requests were being ignored and their desires denied.
 
 Patience is not a virtue for what should have been a 40 year old feature.
 
@@ -139,7 +139,7 @@ AAAAAAAAAAAAAA-
 
 # Wow.
 
-Is this was hell is like? Am I forever condemned to roll this enormous boulder up the same hill side, over and over again, only to slip and have it roll down to the base of the hill so that I must force myself to start all over again?
+Is this what hell is like? Am I forever condemned to roll this enormous boulder up the same hill side, over and over again, only to slip and have it roll down to the base of the hill so that I must force myself to start all over again?
 
 What is even more hilarious is that Sean Baxter also has another form of this (undocumented) in Circle called `@array`, which takes a pointer + a size and turns that into an array for quick, spiffy use at runtime. Twice over, Circle has implemented exactly what I am trying to get into C++. Because C++ was so absolutely and utterly **bad** at handling large array literals and binary data, he worked something in to make simple things simple and not require a separate build step, like almost EVERY cross-platform solution -- Qt included -- does.
 
