@@ -3,7 +3,7 @@ layout: post
 title: Text for C++
 feature-img: "assets/img/pexels/adult-art-asia-engin-akyurt.jpg"
 img: "assets/img/pexels/adult-art-asia-engin-akyurt.jpg"
-date: October 15th, 2019
+date: December 14th, 2019
 tags: [C++, Unicode, Text, 🚌, ⌨️]
 ---
 
@@ -60,12 +60,25 @@ The work is ongoing in these repositories here:
 
 The C++ library submodules and builds on top of the C one for fast-path functions. Internally, the C library is implemented with C++ and -- hopefully soon in the future -- vectorization by hand or with [SIMD/`std::experimental::simd`](https://en.cppreference.com/w/cpp/experimental/simd/simd). The principals and inner workings of the implementation are detailed in a series of talks, slides and posts:
 
-- Catching ⬆️ - The (Baseline) Unicode Plan for C++23 - ThePhD; Friday, September 20th, 2018; CppCon 2019; Aurora, Colorado
-  - [Video](https://www.youtube.com/watch?v=BdUipluIf1E)
-  - [Slides](docs/presentations/2019.09.20%20-%20Catching%20⬆️%20-%20The%20(Baseline)%20Unicode%20Plan%20for%20C++23%20-%20ThePhD%20-%20CppCon%202019.pdf)
-  - [Comments](https://www.reddit.com/r/cpp/comments/de1jy9/cppcon_2019_jeanheyd_meneide_catch_unicode_for_c23/)
+1. Meeting C++ 2019  
+   _Catching ⬆️: Unicode for C++ in Greater Detail - 2 of 5_  
+   Saturday, November 16th, 2019  
+   Berlin, Germany  
+  - [Abstract](https://meetingcpp.com/2019/Talks/items/Catching_________Unicode_for_Cpp_in_Greater_Detail___2_of_5.html)
+  - Video (not yet available)
+  - [Slides](/presentations/unicode/Meeting C++/2019/Catching ⬆️ - Unicode for C++ in Greater Detail.pdf)
+2. CppCon 2019  
+   _Catching ⬆️: The (Baseline) Unicode Plan for C++23_  
+   Friday, September 20th, 2019  
+   Aurora, Colorado  
   - [Abstract](https://cppcon2019.sched.com/event/7823aebeede8d50e1daa70b5c22ab0a4)
-- A Rudimentary Unicode Abstraction - ThePhD; Wednesday, March 7th, 2018; Study Group 16; Boston, Massachusetts
+  - [Video](https://www.youtube.com/watch?v=BdUipluIf1E)
+  - [Slides](/presentations/unicode/CppCon/2019/2019.09.20 - Catching ⬆️ - The (Baseline) Unicode Plan for C++23 - ThePhD - CppCon 2019.pdf)
+  - [Comments](https://www.reddit.com/r/cpp/comments/de1jy9/cppcon_2019_jeanheyd_meneide_catch_unicode_for_c23/)
+3. Study Group 16 - Text and Unicode  
+   _A Rudimentary Unicode Abstraction_  
+   Wednesday, March 7th, 2018  
+   Boston, Massachusetts
   - [Slides](docs/presentations/2018.03.07%20-%20a%20rudimentary%20unicode%20abstraction%20-%20ThePhD%20-%20SG16%202018.pdf)
 
 The current spread of goals is as follows.
