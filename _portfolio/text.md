@@ -44,9 +44,9 @@ Below are the published funding goals. Sponsors may pay into specific goals or, 
 
 _Current Goal: Bootstrap Initial Development_
 
-Current Goal Total: $650 USD / $24,000 USD
+Current Goal Total: $1,248.87 USD / $24,000.00 USD
 
-[ ⣿⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
+[ ⣿⣿⣤⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
 
 
 
@@ -84,7 +84,7 @@ The C++ library submodules and builds on top of the C one for fast-path function
 The current spread of goals is as follows.
 
 
-### Ⅰ: Core Text Utilities [ 3% ] 
+### Ⅰ: Core Text Utilities [ 5% ] 
 
 - Encoding objects for one-by-one encoding and decoding.
   - `utf8`, `utf16`, `utf32`, `narrow_execution` and `wide_execution` Encoding Object types;
@@ -92,7 +92,7 @@ The current spread of goals is as follows.
 - `decode(...)`, `encode(...)`, and `transcode(...)` functions.
 - `decode_view<encoding, ...>`, `encode_view<encoding, ...>`, and `transcode_view<encoding, ...>` range types.
 
-[ ⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
+[ ⣿⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
 
 
 ### Ⅱ: Normalization Forms [ 0% ]
