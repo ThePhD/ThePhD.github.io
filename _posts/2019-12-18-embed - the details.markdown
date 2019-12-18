@@ -191,7 +191,7 @@ Right, yes. Let's go through some of them, starting with...
 
 At first, I was extremely concerned about this. Every time I brought up `std::embed`, somebody started in on security. It was hard to get them to articulate exactly what the security concerns would be. Opening arbitrary files? The compiler already does that. Reading in arbitrary data? Well, compile-time `fstream` or `FILE*` would behave much the same way, and those same people were asking for that too. Maybe it opens up compiler vulnerabilities...? Wait a second, compilers run a C++ parser on any old file you point at it, and it can literally pick up `/arbitrary/garbage.txt` from anywhere. You can even crash LLVM and GCC with `#include </dev/urandom>` already, but it doesn't segfault or create a security vulnerability: it just fails with Out of Memory. The more I dug into this and the more security experts I e-mailed and received responses from, I finally hit the truth.
 
-Nothing about `#embed` or `std::embed` is more or less secure than `#include`. The biggest fear about whether or not the compiler is allowed to open or access files... and, well. Spoiler alert:
+Nothing about `#embed` or `std::embed` is more or less secure than `#include`. The biggest fear about whether or not the compiler is allowed to open or access files is just not realistic or in-tune with the reality of how the compiler works. Spoiler alert:
 
 compilers have been reading and writing **tons** of files during builds for decades.
 
@@ -287,9 +287,9 @@ int main () {
 }
 ```
 
-In order to know which of `foo!tilde.txt` or `bar!tilde.txt` is used, _potentially_ every part of compilation needs to be run, save for code generation. That is, everything up through Compilation Phase 7, as determined by the Holy Standard™. Contrast that with `#embed`, which requires only up to Phase 4 preprocessing!
+In order to know which of `foo!tilde.txt` or `bar!tilde.txt` is used, _potentially_ every part of compilation needs to be run, save for code generation. That is, everything up through Compilation Phase 7, as determined by the Holy Standard™. Contrast that with `#embed`, which requires only up to Phase 4 preprocessing. That's a pretty big "oof". 😬
 
-The solution here is to provide in-source hints to the compiler about where we're going to pick up our data. This was originally what [P1130]() was written for, which presented a modular syntax for it:
+The solution here is to provide in-source hints to the compiler about where we're going to pick up our data. This was originally what [P1130](https://thephd.github.io/vendor/future_cxx/papers/d1130.html) was written for, which presented a modular syntax for it:
 
 ```cpp
 module bar requires "foo.txt";
@@ -307,7 +307,7 @@ This gives tooling the ability to know what files (or directories) files are bei
 
 ### I don't like that syntax.
 
-I care about the functionality, not the syntax. Feel free to make it `#resource requires "foo.txt" "bar/**"` if you like or anything else; suggestions welcome at all times of the day.
+I care about the functionality, not the syntax. Feel free to make it `#resource requires "foo.txt" "bar/**"` if you like or anything else; suggestions welcome at all times of the day from Twitter or by e-mail or any other way you can get it to me. The syntax was not liked by EWG either, but that was before they got to see a ready form of `std::embed` or `#embed` right in their laps.
 
 
 # Hey, hold on, there's still some questions!
@@ -316,21 +316,21 @@ Yes, yes; I said `#embed` was garbage near the top of this lengthy detailed disc
 
 but I made it not-garbage with a little effort.
 
-Originally, `#embed` performed exactly as bad as `xxd`-style brace initialization because that's exactly how I programmed it: it would encounter `#embed` and then just [vomit the data out into a bunch of tokens in braces](https://github.com/ThePhD/llvm-project/blob/1e3546cc1b7a8ea15374636fb6afe8eb9a2c6d22/clang/lib/Lex/PPDirectives.cpp#L2533). Despite a few optimizations made to the string representation for data size of the tokens (thanks, [nabijaczleweli](https://www.patreon.com/nabijaczleweli)), it still sucked. After some pointers from `nathan`, Jakub Jelinek and others on GCC development IRC (thank you!), I optimized it inside of GCC to not be so bad by using a special built-in I wrote called `__builtin_init_array`. When the compiler comes across the `#embed` directive it generates a built-in that writes out the built-in plus:
+Originally, `#embed` performed exactly as bad as `xxd`-style brace initialization because that's exactly how I programmed it: it would encounter `#embed` and then just [vomit the data out into a bunch of tokens in braces](https://github.com/ThePhD/llvm-project/blob/1e3546cc1b7a8ea15374636fb6afe8eb9a2c6d22/clang/lib/Lex/PPDirectives.cpp#L2533). Despite a few optimizations made to the string representation for data size of the tokens (thanks, [nabijaczleweli](https://www.patreon.com/nabijaczleweli)!), it still sucked. After some pointers from `nathan`, Jakub Jelinek, Richard Biener and others on GCC development IRC ([thank you!](https://gcc.gnu.org/ml/gcc/2019-12/msg00033.html)), I optimized it inside of GCC to not be so bad by using a special built-in I wrote called `__builtin_init_array`. When the compiler comes across the `#embed` directive it generates a built-in that writes out the built-in plus:
 
 - file name parameter;
-- null termination number;
-- number of expected final bytes;
-- and, base64 encoding of the data in a string literal.
+- null termination boolean value parameter;
+- number of expected final bytes parameter;
+- and, base64 encoding of the data in a string literal parameter.
 
 
-### ... ... BASE64?!
+### ... ... BASE64?! 🤨
 
 Okay, now, listen. _Before_ you revoke my C++ license and go tell me to be a web developer because BASE64 DATA IN MY SEA PLUS PLUUS?!, there's a good reason for base64-encoding the data. C++ has a large sea of many players and, perhaps surprisingly, a lot of people with preprocessing tools that work on preprocessed source only or similar.
 
 I had 2 problems: I needed first to have a built-in that, after `g++ -fdirectives-only` or `clang++ -frewrite-includes`, resulted in valid C++ code that could be picked up "at the other end" of, say, a `distcc` or `icecc` pipeline and still compile and be recognized by an existing compiler. The second is that there are tools which serve purely as intermediate steps and do preprocessor-based stuff only, which means someone could do the "rewrite includes/directives" flag, cram this into a bunch of intermediate tools (to downgrade some idioms the tools recognize, for example), and then pass that final result along to the real compiler.
 
-By having the preprocessor directive produce a base64 string, I only suffered a 33% size increase of data (compared to 3/4x for the rewriting of the tokens) and it could be rewritten, passed to a distributed build system, and work. This is one of the reasons why `#embed` in my tests started scaling linearly with the input data around 400 MB and 1 GB and was eventually outstripped by `phd::embed` despite the C++ parsing cost. There is a base64 encode and decode step to push out the data and then pick it up undisturbed after a bunch of savage tools ravage the preprocessed files. So, the web developer tricks to preserve data in hostile environments worked perfectly and provided minimal overhead! Thanks, web folks 👍.
+By having the preprocessor directive produce a base64 string, I only suffered a 33% size increase of data (compared to 3/4x for the rewriting of the tokens in a brace-init-list). And, it could be passed to a distributed build system and work just fine. This is one of the reasons why `#embed` in my tests started scaling linearly with the input data around 400 MB and 1 GB and was eventually outstripped by `phd::embed` despite the C++ parsing cost of including headers and templates. There is a base64 encode and decode step to push out the data and then pick it up undisturbed after a bunch of savage tools ravage the preprocessed files. So, the web developer tricks to preserve data in hostile environments worked perfectly and provided minimal overhead! Thanks, web folks 👍.
 
 Note that the only reason I did this is because I wanted to survive old, crusty, and unchanging tools. If this becomes a standard thing, then tools would have to respect the directive and there would be no need for suboptimal behavior and compilers could pick far better representations for rewriting the data.
 
@@ -338,18 +338,26 @@ Note that the only reason I did this is because I wanted to survive old, crusty,
 
 # Will it be Standard?
 
-... I mean, maybe. I'll try my best which is really all I can do. If the Standard's Committee says no, there is always attempting to submit it as Clang, GCC and MSVC extensions and make it "de-facto" standard. But, as evidenced by compiler authors and people close to the GCC, Clang and libstdc++ metal:
+... I mean, maybe. I'll try my best which is really all I can do. If the Standard Committees (C and C++) says no, there is always attempting to submit it as Clang, GCC and MSVC extensions and make it "de-facto" standard. But, as evidenced by compiler authors and people close to the GCC, Clang, and MSVC metal:
 
 > ... until it's pretty certain to get into the standard, 50:50 at best... there is a much higher barrier for getting non-standard extensions in than there used to be.
 
 > Most compiler communities (including msvc) don't really love implementing extensions like this. It undermines the committee and that, in turn, undermines one of the big things c++ has going for it.
 
-The world for nonstandard stuff has shrank vastly, thanks to a gold rush of people putting all their favorite nonstandard things in the early compilers and [people paying the cost of backwards compatibility](https://devblogs.microsoft.com/oldnewthing/20190830-00/?p=102823) for sometimes poorly thought out extensions. This also makes me mildly upset with my predecessors: in the age of adding whatever nonstandard crap you wanted to a compiler or library, all of the people writing FQAs and ranting about C and C++ on comp.lang.* and in e-mails and mailing lists could have just shut up and wrote a patch. Even the so-called "Academics" that developers (game, embedded, and others) like to reference with such _derision_ and _vitriol_, saying that these "perfect and pure" types are "ruining the Standard" were smarter than the Professionals.
+The world for nonstandard stuff has shrank vastly, thanks to a gold rush of people putting all their favorite nonstandard things in the early compilers and [people paying the cost of backwards compatibility](https://devblogs.microsoft.com/oldnewthing/20190830-00/?p=102823) for (sometimes poorly thought out) extensions. This also makes me mildly upset with my predecessors: in the age of adding whatever nonstandard crap you wanted to a compiler or library, all of the people writing FQAs and ranting about C and C++ on comp.lang.* and in e-mails and mailing lists could have just shut up and wrote a patch. Even the so-called "Academics" that developers (game, embedded, and otherwise) like to reference with such _derision_ and _vitriol_, saying that these "perfect and pure" types are "ruining the Standard", were smarter than the Professionals.
 
-To get around the rule limitations of their competitive programming competitions, "Academics" submitted _Policy Based Data Structures_ extension to libstdc++ in 2004/2005. 15 years later, Red Hat maintainers can't even get rid of it without vocal kickback preventing them from doing so. Had any of the "Old Guard" of "Professional" developers who are currently now complaining about C and C++ just contributed to the community rather than sitting in their ivory tower and complaining about the world, I wouldn't have to write a 20 page paper and 3 blog posts and 2 separate optimized implementations with corroboration from the author of a C++ meta-language compiler to make progress on a bloody simple feature. I'd just say "standardize this existing practice".
+Really.
 
-But instead of standing on the shoulders of giants, I have to instead struggle not to be crushed beneath the booted heel of their glib inaction, old frustrations, and callous indifference. That they should dry up the oasis of useful extensions and extended functionality while the last of us ration the water we bleed out of already dying cactuses. But, it's fine dear reader! I can't control everything -- or anything, really -- but I do know that if I can get even just a few of these things in my hands, I know what I am capable of. I know what I can fix.
+To get around the rule limitations of their competitive programming competitions, "Academics" submitted _Policy Based Data Structures_ extensions to libstdc++ in 2004/2005. This allowed them to use hand-rolled data structures and kick untold amount of ass in programming competitions, because they had several ready-made data structures that could allow them to smoke their competition in speed just by having the mandated GCC compiler available.
 
-And I won't mess it up, for me or my programming successors.
+Talk about 200 IQ plays!
+
+15 years later, Red Hat maintainers can't even get rid of `#include <ext/pb_ds/...>` without vocal kickback. Can you imagine if any of the "Old Guard" of Professional developers who are currently now complaining about C and C++ just contributed to the community during the gold rush? If they had been as forward-thinking as the Academics who literally **hacked the damn standard library**, rather than sitting in their so-called ivory tower and complaining about the world? What if the old game devs who @ me and other young Committee members with complaints had done what would have likely been a weekend's worth of work at most "back in the day"? Well, just maybe I wouldn't have to write a 20 page paper (plus 2 secondary papers going to 2 different ISO Committees) and 3 blog posts and 2 separate optimized implementations with corroboration from the author of a C++ meta-language compiler to make progress on a bloody simple feature. I'd just say "standardize this existing practice".
+
+But not in this timeline.
+
+Instead of standing on the shoulders of giants, I have to instead struggle not to be crushed beneath the booted heel of their glib inaction, old frustrations, and callous indifference. That they should dry up the oasis of useful extensions and extended functionality while the last of us ration the water we bleed out of already dying cactuses! But it's fine, dear reader. I can't control everything -- or anything, really -- but I do understand that if I can get even just a few of these things in my hands, I know what I am capable of. I know what I can fix.
+
+And I won't mess it up, for me or the ones who come after me.
 
 See you in 2020. 💚
