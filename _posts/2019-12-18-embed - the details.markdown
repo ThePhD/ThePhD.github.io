@@ -45,7 +45,7 @@ int main () {
 }
 ```
 
-I used the `NAME` macro so I can use the flag `-DNAME=_4Mib_bin` and similar to the compiler when computing the results below. Timings were done several times in a row (despite some timings taken forever) and averages were computed on a Intel Core i7 @ 2.59 GHz with 8 Logical Cores (4 Physical) and 24.0 GB of RAM.
+I used the `NAME` macro so I can use the flag `-DNAME=_4Mib_bin` and similar to the compiler when computing the results below. Timings were done several times in a row (despite some timings taking forever) and averages were computed on a Intel Core i7 @ 2.59 GHz with 8 Logical Cores (4 Physical) and 24.0 GB of RAM.
 
 
 ### Results
@@ -75,7 +75,7 @@ I used the `NAME` macro so I can use the flag `-DNAME=_4Mib_bin` and similar to 
 | `objcopy` (linker) |                22.654 s                  |                 58.204 s                  |
 | Circle `@array`    |                 2.655 s                  |                  6.023 s                  |
 | Circle `@embed`    |                 1.886 s                  |                  4.762 s                  |
-| `xxd`-generated    | [OoM 😆](/assets/img/2019-12-16/xD.png)  | [OoM 😝](/assets/img/2019-12-16/xD.png)  |
+| `xxd`-generated    | [OoM 😆](/assets/img/2019-12-18/xD.png)  | [OoM 😝](/assets/img/2019-12-18/xD.png)  |
 
 
 To no one's surprise, `xxd`-style generated includes do not scale up to larger and larger file sizes and end up being straight garbage past 4 MB. 4 MB is the barest minimum for an uncompressed texture asset. Even for 4 MB it starts to tax developers; this can easily wreck users who try to embed multiple textures and other baseline assets -- even compressed -- into their executables.
@@ -289,7 +289,7 @@ int main () {
 
 In order to know which of `foo!tilde.txt` or `bar!tilde.txt` is used, _potentially_ every part of compilation needs to be run, save for code generation. That is, everything up through Compilation Phase 7, as determined by the Holy Standard™. Contrast that with `#embed`, which requires only up to Phase 4 preprocessing. That's a pretty big "oof". 😬
 
-The solution here is to provide in-source hints to the compiler about where we're going to pick up our data. This was originally what [P1130](https://thephd.github.io/vendor/future_cxx/papers/d1130.html) was written for, which presented a modular syntax for it:
+The solution here is to provide in-source hints to the compiler about where we're going to pick up our data. This was originally what [P1130](/vendor/future_cxx/papers/d1130.html) was written for, which presented a modular syntax for it:
 
 ```cpp
 module bar requires "foo.txt";
