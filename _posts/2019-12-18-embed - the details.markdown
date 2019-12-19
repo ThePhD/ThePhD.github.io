@@ -220,7 +220,7 @@ In other words, `#embed` is a hygienic preprocessor directive. While I understan
 
 # Dependency Management
 
-This is the most important piece of criticism levied at `std::embed` and `#embed`. Dependency management in C++ is a sore topic for the typical build engineer, but we are going to focus specifically on "how do identify all the dependencies of `#embed` and `std::embed`. Thankfully, I'm happy to report that...
+This is the most important piece of criticism levied at `std::embed` and `#embed`. Dependency management in C++ is a sore topic for the typical build engineer, but we are going to focus specifically on "how do I identify all the dependencies of `#embed` and `std::embed`". Thankfully, I'm happy to report that...
 
 
 ### `#embed` requires no extra work.
