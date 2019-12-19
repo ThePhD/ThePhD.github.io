@@ -296,18 +296,18 @@ module bar requires "foo.txt";
 module mega_bar requires { "qux.txt", "meow.jpg", "uuids.csv" };
 ```
 
-I also had plans to expand the syntax usage to allow for blobs, since listing every shader, icon, splash and similar is really just an excellent way to piss of every developer. So, this would work:
+I also had plans to expand the syntax usage to allow for globs, since listing every shader, icon, splash and similar is really just an excellent way to piss of every developer. So, this would work:
 
 ```cpp
 module bar requires { "../../icons/*", "../assets/**" };
 ```
 
-This gives tooling the ability to know what files (or directories) files are being pulled from, without requiring to track every call to `std::embed` at constant evaluation time. There's still a question of whether it's a hard error to `std::embed` a file not under these "blessed" areas or not. My current feeling is that it should not be a hard error, only perhaps a warning. Others will probably feel that it should be a hard "file not found" error, even if the file exists at `"../../../../foo.txt"` but you never specified it in the `requires` clause.
+This gives tooling the ability to know what files (or directories) resources are being pulled from, without requiring to track every call to `std::embed` at constant evaluation time. There's still a question of whether it's a hard error to `std::embed` a file not under these "blessed" areas. My current feeling is that it should not be a hard error, only perhaps a warning. Others will probably feel that it should be a hard "file not found" error, even if the file exists at `"../../../../foo.txt"` but you never specified it in the `requires` clause.
 
 
 ### I don't like that syntax.
 
-I care about the functionality, not the syntax. Feel free to make it `#resource requires "foo.txt" "bar/**"` if you like or anything else; suggestions welcome at all times of the day from Twitter or by e-mail or any other way you can get it to me. The syntax was not liked by EWG either, but that was before they got to see a ready form of `std::embed` or `#embed` right in their laps.
+I care about the functionality, not the syntax. Feel free to make it `#resource requires "foo.txt" "bar/**"` if you like or anything else; suggestions welcome at all times of the day from Twitter or by e-mail or any other way you can get it to me. The syntax was not liked by EWG either, but that was before they got to see a ready form of `std::embed` or `#embed` sitting right in their laps.
 
 
 # Hey, hold on, there's still some questions!
