@@ -65,8 +65,9 @@ The C++ library submodules and builds on top of the C one for fast-path function
    Saturday, November 16th, 2019  
    Berlin, Germany  
   - [Abstract](https://meetingcpp.com/2019/Talks/items/Catching_________Unicode_for_Cpp_in_Greater_Detail___2_of_5.html)
-  - Video (not yet available)
-  - [Slides](/presentations/unicode/Meeting C++/2019/Catching ⬆️ - Unicode for C++ in Greater Detail.pdf)
+  - [Video](https://www.youtube.com/watch?v=FQHofyOgQtM)
+  - [Slides](/presentations/unicode/Meeting C++/2019/2019.11.16 - Catching ⬆️ - Unicode for C++ in Greater Detail - ThePhD - Meeting C++.pdf)
+
 2. CppCon 2019  
    _Catching ⬆️: The (Baseline) Unicode Plan for C++23_  
    Friday, September 20th, 2019  
@@ -75,6 +76,7 @@ The C++ library submodules and builds on top of the C one for fast-path function
   - [Video](https://www.youtube.com/watch?v=BdUipluIf1E)
   - [Slides](/presentations/unicode/CppCon/2019/2019.09.20 - Catching ⬆️ - The (Baseline) Unicode Plan for C++23 - ThePhD - CppCon 2019.pdf)
   - [Comments](https://www.reddit.com/r/cpp/comments/de1jy9/cppcon_2019_jeanheyd_meneide_catch_unicode_for_c23/)
+
 3. Study Group 16 - Text and Unicode  
    _A Rudimentary Unicode Abstraction_  
    Wednesday, March 7th, 2018  

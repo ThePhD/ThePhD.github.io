@@ -23,7 +23,7 @@ Now that I have a final Circle build, I can present the numbers here after havin
 
 ### Methodology
 
-The methodology is as follows. For each strategy, we simply embedded a single file of varying sizes and reported the cost to compile that file and return the second byte from the embedded data. All data was kept the same for each strategy. The final code -- sans the linker -- looked very much like so:
+The methodology is as follows. For each strategy, we simply embedded a single file of varying sizes and reported the cost to compile that file and return the third byte from the embedded data. All data was kept the same for each strategy. The final code -- sans the linker -- looked very much like so:
 
 ```cpp
 int main () {
