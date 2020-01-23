@@ -1,4 +1,13 @@
 {
+	"C_Cpp.configurationWarnings": "Disabled",
+	"spellright.language": [
+		"en"
+	],
+	"spellright.documentTypes": [
+		"markdown",
+		"latex",
+		"plaintext"
+	],
 	"[html]": {
 		"editor.formatOnSave": false,
 		"editor.formatOnPaste": false
