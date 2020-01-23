@@ -6,9 +6,10 @@ feature-img: "assets/img/2020-01-22/WusWisWusDat Comic Eye.jpg"
 thumbnail: "assets/img/2020-01-22/WusWisWusDat Comic Eye.jpg"
 tags: [C++, C, optional, references, semantics, ⌨️, 📜]
 excerpt_separator: <!--more-->
+hide: true
 ---
 
-... It is unfortunate that this must be done. But it **must** be done.<!--more-->
+... Let's talk about something that has haunted me for over a year now.<!--more-->
 
 Seeing discussion after discussion, paper after paper, point after point being made about references inside nullable types like `variant<T&, monostate>`, `optional<T&>`, `expected<T&>` and its friends, I am now beyond compelled to speak. The straws that finally tipped me from my year+ hiatus on this subject were [a paper by Professor Peter Sommerlad](https://wg21.link/p2070) in the latest C++ mailing, asking for a simplified `optional<T&>` (and `object_ptr`) in the interest of safety for MISRA C++-type folk, as well as another paper by James Berrow, who pursued his [objections to the 2D Graphics Proposal with a thorough scholarship](https://wg21.link/p2005) that demanded both respect and attention.
 
