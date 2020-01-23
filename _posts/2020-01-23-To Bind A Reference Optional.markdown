@@ -33,7 +33,7 @@ In late 2018, I was one meeting fresh of being a "Committee Member". Brimming wi
 
 ### A Deafening Silence
 
-After attending your first Committee Meeting, dear reader, you get access to what is called "The Reflector". It's a fancy name for "private e-mail lists for Committee Members to discuss technical stuff". Post-Rapperswil I joined the reflector, verified my access, and then posted my very first message on the Reflector to some 100+ people:
+After attending your first Committee Meeting, dear reader, you get access to what is called "The Reflector". It's a fancy name for "private e-mail lists for Committee Members to discuss technical stuff". Post-Rapperswil I joined the Reflector, verified my access, and then posted my very first message on the Reflector to some 100+ people:
 
 > Dear LEWG,
 >
@@ -52,7 +52,11 @@ Nobody replied.
 
 # "brutal"
 
-Ha! If only I had known that the descriptor 'brutal' was, in fact, taking it easy on me. I completed the survey with just shy of 130ish participants. 110 responded to the survey directly, 20ish people and companies -- including the original author of Boost.Tuple, Boost `reference_wrapper`, `std::reference_wrapper`, and more -- replied either on a public mailing list to certain pieces / direct inquiries, or VIA private e-mail. As I reviewed the results, a steady drip of indignation slowly filled me. The reason, dear reader, was that I had been lied to. Everyone was lied to for at least 13 years by counting to the November 2018 San Diego meeting, and nearly 15 years to today's very date.
+Ha! If only I had known that the descriptor 'brutal' was, in fact, taking it easy on me. In doing my survey, I journeyed to the dark and unlit places in C++ and gathered information:
+
+![Journeying through the C++ Dark Woods](/assets/img/2020-01-23/WusDisWusDat - Mythical Lies - Page 0.jpg)
+
+I completed the survey with just shy of 130ish participants. 110 responded to the survey directly, 20ish people and companies -- including the original author of Boost.Tuple, Boost `reference_wrapper`, `std::reference_wrapper`, and more -- replied either on a public mailing list to certain pieces / direct inquiries, or VIA private e-mail. As I reviewed the results, a steady drip of indignation slowly filled me. The reason, dear reader, was that I had been lied to. Everyone was lied to for at least 13 years by counting to the November 2018 San Diego meeting, and nearly 15 years to today's very date.
 
 
 
@@ -110,7 +114,7 @@ Imagine this code has a value for `maybe_obj` in the 95% case. You test it and i
 
 In a rebinding world, that code is _always_ wrong, and _always_ gets rejected. Not by the compiler, no, but by Code Review, the [upcoming `-Wlifetime`](https://twitter.com/Cor3ntin/status/1219897942343081986), and other tools. Static analyzers can sniff this in a heartbeat and issue a _hard_ error, telling you to fix your mistake. If you have any degree of code auditing, testing, or checking, this will blow up right quick and can always be flagged down as "this is wrong, stop".
 
-In an assign-through world, dear reader, no static analyzer can diagnose that code with 100% certainty because Maybe That Is What You Intended But Why On God's Holy Green Earth Would You Write Code To Do This?! But there is an even more sinister way of writing this that looks correct, smells correct, and behaves mostly correct until it does not:
+In an assign-through world, dear reader, no static analyzer can diagnose that code with 100% certainty because Maybe That Is What You Intended But Why On God's Holy Green Goddamned Earth Would You Write Code To Do This?! But there is an even more sinister way of writing this that looks correct, smells correct, and behaves mostly correct until it does not:
 
 ```cpp
 std::optional<int&> cache::retrieve (std::uint64_t key) {
@@ -138,7 +142,9 @@ Myself included.
 
 # A Personal History Lesson
 
-To go forward, sometimes we must look back.
+To go forward and talk about the magical unicorn that is assign-through optionals, we must first look backwards.
+
+![Journeying through the C++ Dark Woods](/assets/img/2020-01-23/WusDisWusDat - Mythical Lies - Page 1.jpg)
 
 In late 2013, after a series of lucky events, I exchanged e-mails with an astounding library implementer. Back then, I was absolutely more (fortunately more??) oblivious and way less smart than I am now. I asked for compiler riddles and other things, to improve my skills by being exposed to real-world, first hand shenanigans that people ran into with the compilers they used. As part of this self-driven training with The Great Library Implementer, I saw the proposal going around for `optional<T>`. After submitting the implementation (and getting feedback about things I had never considered before, like "protect against self-assignment"), I decided it was time to put my implementation to the test.
 
@@ -177,7 +183,7 @@ How naïve of me.
 
 I assigned over all sorts of materials in my complex geometry scenes due to reflections. Over and over and over, each pre-filled `optional` another target for the recently-returned reference from my (thankfully correct) BVH code. Like so much chaff, each engaged `optional` was plowed over the others. Phong models changed, texture IDs were stolen, colors were paved over like Eminent Domain was in style. I had found my problem. `optional<T&>` was, in all my code until that point, empty or only written to once. When first constructed and when assigned from an empty value, my assign-through optional always rebound. It created an inconsistent mental model. And the moment I took it beyond its simple uses -- beyond the simplicity of my basic scenes -- that mental model created from experience broke down completely. There was no consistency for a nullable type for the semantics as I had understood them from the paper.
 
-I didn't e-mail the library implementer back about this particular detail from using my `optional`. I kept my deep embarrassment to myself. When I checked `boost::optional<T&>` it just rebound. It was __me__ that as the problem. I was just a dumb dumb: how dare I try to implement what the Boost and Standard Library Gods of today had already done, but without the specific attention to detail necessary to understand such a nuance?
+I didn't e-mail the library implementer back about this particular detail from using my `optional`. I kept my deep embarrassment to myself. When I checked `boost::optional<T&>` it just rebound. It was __me__ that was the problem. I was just a dumb dumb: how dare I try to implement what the Boost and Standard Library Gods of today had already done, but without the specific attention to detail necessary to understand such a nuance?
 
 In 2013, I had no idea how hard Fernando Cacciola had fought for exactly this behavior: it was simply as it was, set in stone by the Powers of Boost and C++. I hung my head in shame and did not read those standard papers again. Clearly, I was the one who was not ready.
 
@@ -192,12 +198,13 @@ the same crushing humiliation.
 
 But people _insisted_ that `std::optional<T&>` could very well assign-through and that it was a good, consistent thing. My mistake was from 2013 and was from an inexperienced novice with poor understanding of C++. I assumed that my experience was invalid and that the Committee was objectively correct. But, just to be sure, I set out with that survey I mentioned earlier to find evidence supporting the Committee's stand-still over this. It was only as I gathered the result that indignation rose in me.
 
-Assign-through?
+Assign-through? That magical, majestic unicorn that I swore I could find even in the darkest corners of the C++ World?
 
+### It. Didn't. Exist.
 
-### It. Doesn't. Exist.
+![Journeying through the C++ Dark Woods](/assets/img/2020-01-23/WusDisWusDat - Mythical Lies - Page 2.jpg)
 
-Oh _yes_. 🙃
+Oh _yes_.
 
 Soak it in, dear reader. In a nearly 15 year period, under "intense scrutiny" from C++ experts all over the world over multiple shipped standards, nobody noticed -- or nobody cared to notice -- that the people who claimed that assign-through optional references were "consistent", "the obvious way to do things", the "contentious, completely valid other choice" were fudging it. We were debating a magical unicorn that did not -- and dare I say, maybe never -- existed on any scale larger than a private C++ hobby project.
 
@@ -223,11 +230,15 @@ Assign-through had no concrete anything, and the people who _did_ do the work --
 I fell for it too like an idiot with [p1175](/vendor/future_cxx/papers/d1175.html).
 
 
+
+
 # "Just be Neutral"
 
-Everything I am writing now, I knew before I walked into the LEWG room during the November San Diego 2018 Committee Meeting.
+Everything I am writing now, I knew before I walked into the LEWG room during the November San Diego 2018 Committee Meeting. I knew this Unicorn never existed. I knew it was just an illusion. And yet, as I gazed upon my research, I realized that even if assign-through never existed, the pontificating and posturing over 13 years served as a ritual. And from that ritual and the sacrifice of Due Diligence, the Committee spawned into this world an unholy aberration composed solely of an undead idea and its own force of will, allowed to graft itself together in the shadowy corners of our blind faith in others.
 
-But I was filled with anxiety.
+![Journeying through the C++ Dark Woods](/assets/img/2020-01-23/WusDisWusDat - Mythical Lies - Page 3.jpg)
+
+And I was filled with anxiety and fear.
 
 Scared and afraid of the Committee and what a big divisive paper might do, knowing we were duped out of a proper `std::optional` by an unchecked lie, and yet not wanting to "burn bridges" or "ruffle feathers", I sent e-mails to a few Committee members and Directly Messaged others. I showed them the paper early, I explained my fears and uncertainties: I wanted to quell any indignation, however righteous, and present the paper in the best light. And in this Committee Newbie,
 
@@ -320,3 +331,6 @@ At least we have people like TartanLlama, willing to make [high quality implemen
 I can only wish you, dearest reader, Professor Peter Sommerlad, and MISRA C++ the best in this entrenched battle. You will not wrestle against flesh and blood. Yours is a battle of changing the direction of a community, poisoned from a high place by those who skipped on the Engineering portion of their Engineering work. You will stand against a Regular Status Quo. In whatever decision you make, be diligent. Take [my research](https://github.com/ThePhD/future_cxx/tree/04370836748fcae65f898a817a9977a466a8ac6f/references/raw), your research, and your experience to heart, so that you may speak boldly, as you ought to speak. May your cause be blessed,
 
 and may it bring comfort to your hearts. 💚
+
+
+P.S.: With my Greatest Thanks to the talented and wonderful artist Anett ([@WusdisWusdat](https://twitter.com/WusdisWusdat)), whose terrifying art brought a tangible form to this lingering, festering psychological plague inflicted upon me and let me face up to what had been done. [Buy her a coffee, y'all](https://www.buymeacoffee.com/WusdisWusdat), or just pay for a slice of her pretty amazing artwork.
