@@ -1,14 +1,11 @@
 ---
 layout: post
-title: To Bind a Reference
+title: To Bind and Loose a Reference
 permalink: /to-bind-a-reference-optional
-feature-img: "assets/img/2020-01-23/WusDisWusDat Comic Eye.jpg"
-thumbnail: "assets/img/2020-01-23/WusDisWusDat Comic Eye.jpg"
+feature-img: "assets/img/2020-01-24/WusDisWusDat Comic Eye.jpg"
+thumbnail: "assets/img/2020-01-24/WusDisWusDat Comic Eye.jpg"
 tags: [C++, C, optional, references, semantics, ⌨️, 📜]
 excerpt_separator: <!--more-->
-hidden: true
-hide: true
-visibility: false
 ---
 
 ... Let's talk about something that has haunted me for over a year now.<!--more-->
