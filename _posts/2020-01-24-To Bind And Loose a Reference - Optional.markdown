@@ -120,7 +120,7 @@ std::optional<int&> cache::retrieve (std::uint64_t key) {
 	auto found_a_thing = this->lookup_resource(key);
 	if (found_a_thing) {
 		int& resource = 
-		  this->get_specific_resource(found_marker);
+		  this->get_specific_resource(found_a_thing);
 		// do stuff with resource, return
 		opt = resource;
 	}
@@ -178,6 +178,8 @@ The ray casts into the scene that missed returned the "default background materi
 
 How naïve of me.
 
+My `optional<T&>` -- by following the specification of the normal `T` from the Standard's paper and just doing the literal "how references totally should behave!" implementation -- assigned-through. I did not know this or understand this, but that's what the words on the paper were telling me to do.
+
 I assigned over all sorts of materials in my complex geometry scenes due to reflections. Over and over and over, each pre-filled `optional` another target for the recently-returned reference from my (thankfully correct) BVH code. Like so much chaff, each engaged `optional` was plowed over the others. Phong models changed, texture IDs were stolen, colors were paved over like Eminent Domain was in style. I had found my problem. `optional<T&>` was, in all my code until that point, empty or only written to once. When first constructed and when assigned from an empty value, my assign-through optional always rebound. It created an inconsistent mental model. And the moment I took it beyond its simple uses -- beyond the simplicity of my basic scenes -- that mental model created from experience broke down completely. There was no consistency for a nullable type for the semantics as I had understood them from the paper.
 
 I didn't e-mail the library implementer back about this particular detail from using my `optional`. I kept my deep embarrassment to myself. When I checked `boost::optional<T&>` it just rebound. It was __me__ that was the problem. I was just a dumb dumb: how dare I try to implement what the Boost and Standard Library Gods of today had already done, but without the specific attention to detail necessary to understand such a nuance?
@@ -231,7 +233,7 @@ I fell for it too like an idiot with [p1175](/vendor/future_cxx/papers/d1175.htm
 
 # "Just be Neutral"
 
-Everything I am writing now, I knew before I walked into the LEWG room during the November San Diego 2018 Committee Meeting. I knew this Unicorn never existed. I knew it was just an illusion. And yet, as I gazed upon my research, I realized that even if assign-through never existed, the pontificating and posturing over 13 years served as a ritual. And from that ritual and the sacrifice of Due Diligence, the Committee spawned into this world an unholy aberration composed solely of an undead idea and its own force of will, allowed to graft itself together in the shadowy corners of our blind faith in others.
+Everything I am writing now, I knew before I walked into the LEWG room during the November San Diego 2018 Committee Meeting. I knew this Unicorn never existed. I knew it was just an illusion. And yet, as I gazed upon my research, I realized that even if assign-through never existed, the pontificating and posturing over 13 years served as a ritual. And from that ritual and the sacrifice of Due Diligence, the Committee spawned into this world an unholy aberration. Composed solely of an undead idea, this thing became its own force of will and grafted itself together in the shadowy corners of our blind faith in others.
 
 ![Journeying through the C++ Dark Woods](/assets/img/2020-01-24/WusDisWusDat - Mythical Lies - Page 3.jpg)
 
@@ -308,7 +310,7 @@ Still, at least some others had more sound design decisions for why references o
 
 > tombstone is needed. most of types has spare parts to implement invalid. so `optional<T, optional_traits<T> > {}` is good idea. never, ever want `optional<T&>`, or any `container<T&>` (including `tuple<T&,U&>`). Reference are for parameter passing & returning purpose. For storing purpose use value semantics like `optional<reference_wrapper<T> >`. perhaps give a short standard alias to `reference_wrapper` 
 
-Much of these I have spent time in the technical part of my paper, discussing what they are and why they end up being poor choices in practice and implications it can have on wider system architecture. Of course, one person was like me in 2013:
+Much of these I have spent time in the technical part of the above-mentioned [d1683](/vendor/future_cxx/papers/d1683.html), discussing what they are and why they end up being poor choices in practice and implications it can have on wider system architecture. Of course, one person was like me in 2013:
 
 > I don't think there were any unusual implementation choices
 
