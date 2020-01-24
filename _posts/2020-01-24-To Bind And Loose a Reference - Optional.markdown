@@ -239,7 +239,7 @@ And I was filled with anxiety and fear.
 
 Scared and afraid of the Committee and what a big divisive paper might do, knowing we were duped out of a proper `std::optional` by an unchecked lie, and yet not wanting to "burn bridges" or "ruffle feathers", I sent e-mails to a few Committee members and Directly Messaged others. I showed them the paper early, I explained my fears and uncertainties: I wanted to quell any indignation, however righteous, and present the paper in the best light. And in this Committee Newbie,
 
-they found someone easy to propagate their ideas and agendas on how to interact with the Committee.
+they found an easy target to propagate their ideas and agendas on how to interact with the Committee.
 
 "Don't go too hard." "You'll ruin it if you go in guns blazing." "Just take the neutral option." [p1175](/vendor/future_cxx/papers/d1175.html) was not the paper I wanted it to be: it was the result of those e-mails and DMs coming back with that singular idea: don't rock the boat too hard. For the sake of acceptance, I not only emaciated and emasculated my own paper: I took out the research, data points, survey data, and left nothing but a hollow husk and shell behind. A weak, watery compromise of a paper driven by doe-eyed compliance and cowardice. I betrayed my instincts, padded my fists, painted a smile on my face, put a frail bend in my back, and poured water on my brightly burning hunger for rigor and completeness in my work.
 
