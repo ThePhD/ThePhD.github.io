@@ -1,7 +1,7 @@
 ---
 layout: post
 title: To Bind and Loose a Reference
-permalink: /to-bind-a-reference-optional
+permalink: /to-bind-and-loose-a-reference-optional
 feature-img: "assets/img/2020-01-24/WusDisWusDat Comic Eye.jpg"
 thumbnail: "assets/img/2020-01-24/WusDisWusDat Comic Eye.jpg"
 tags: [C++, C, optional, references, semantics, ⌨️, 📜]
