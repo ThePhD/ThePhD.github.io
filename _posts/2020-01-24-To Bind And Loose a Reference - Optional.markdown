@@ -51,7 +51,7 @@ Nobody replied.
 
 Ha! If only I had known that the descriptor 'brutal' was, in fact, taking it easy on me. In doing my survey, I journeyed to the dark and unlit places in C++ and gathered information:
 
-![Journeying through the C++ Dark Woods](/assets/img/2020-01-23/WusDisWusDat - Mythical Lies - Page 0.jpg)
+![Journeying through the C++ Dark Woods](/assets/img/2020-01-24/WusDisWusDat - Mythical Lies - Page 0.jpg)
 
 I completed the survey with just shy of 130ish participants. 110 responded to the survey directly, 20ish people and companies -- including the original author of Boost.Tuple, Boost `reference_wrapper`, `std::reference_wrapper`, and more -- replied either on a public mailing list to certain pieces / direct inquiries, or VIA private e-mail. As I reviewed the results, a steady drip of indignation slowly filled me. The reason, dear reader, was that I had been lied to. Everyone was lied to for at least 13 years by counting to the November 2018 San Diego meeting, and nearly 15 years to today's very date.
 
@@ -141,7 +141,7 @@ Myself included.
 
 To go forward and talk about the magical unicorn that is assign-through optionals, we must first look backwards.
 
-![Journeying through the C++ Dark Woods](/assets/img/2020-01-23/WusDisWusDat - Mythical Lies - Page 1.jpg)
+![Journeying through the C++ Dark Woods](/assets/img/2020-01-24/WusDisWusDat - Mythical Lies - Page 1.jpg)
 
 In late 2013, after a series of lucky events, I exchanged e-mails with an astounding library implementer. Back then, I was absolutely more (fortunately more??) oblivious and way less smart than I am now. I asked for compiler riddles and other things, to improve my skills by being exposed to real-world, first hand shenanigans that people ran into with the compilers they used. As part of this self-driven training with The Great Library Implementer, I saw the proposal going around for `optional<T>`. After submitting the implementation (and getting feedback about things I had never considered before, like "protect against self-assignment"), I decided it was time to put my implementation to the test.
 
@@ -199,7 +199,7 @@ Assign-through? That magical, majestic unicorn that I swore I could find even in
 
 ### It. Didn't. Exist.
 
-![Journeying through the C++ Dark Woods](/assets/img/2020-01-23/WusDisWusDat - Mythical Lies - Page 2.jpg)
+![Journeying through the C++ Dark Woods](/assets/img/2020-01-24/WusDisWusDat - Mythical Lies - Page 2.jpg)
 
 Oh _yes_.
 
@@ -233,7 +233,7 @@ I fell for it too like an idiot with [p1175](/vendor/future_cxx/papers/d1175.htm
 
 Everything I am writing now, I knew before I walked into the LEWG room during the November San Diego 2018 Committee Meeting. I knew this Unicorn never existed. I knew it was just an illusion. And yet, as I gazed upon my research, I realized that even if assign-through never existed, the pontificating and posturing over 13 years served as a ritual. And from that ritual and the sacrifice of Due Diligence, the Committee spawned into this world an unholy aberration composed solely of an undead idea and its own force of will, allowed to graft itself together in the shadowy corners of our blind faith in others.
 
-![Journeying through the C++ Dark Woods](/assets/img/2020-01-23/WusDisWusDat - Mythical Lies - Page 3.jpg)
+![Journeying through the C++ Dark Woods](/assets/img/2020-01-24/WusDisWusDat - Mythical Lies - Page 3.jpg)
 
 And I was filled with anxiety and fear.
 
