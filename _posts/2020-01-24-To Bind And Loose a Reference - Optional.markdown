@@ -143,7 +143,7 @@ To go forward and talk about the magical unicorn that is assign-through optional
 
 ![Journeying through the C++ Dark Woods](/assets/img/2020-01-24/WusDisWusDat - Mythical Lies - Page 1.jpg)
 
-In late 2013, after a series of lucky events, I exchanged e-mails with an astounding library implementer. Back then, I was absolutely more (fortunately more??) oblivious and way less smart than I am now. I asked for compiler riddles and other things, to improve my skills by being exposed to real-world, first hand shenanigans that people ran into with the compilers they used. As part of this self-driven training with The Great Library Implementer, I saw the proposal going around for `optional<T>`. After submitting the implementation (and getting feedback about things I had never considered before, like "protect against self-assignment"), I decided it was time to put my implementation to the test.
+In late 2013, after a series of lucky events, I exchanged e-mails with an astounding library implementer. Back then, I was absolutely more (fortunately more??) oblivious and way less smart than I am now. I asked for compiler riddles and other things, to improve my skills by being exposed to real-world, first hand shenanigans that people ran into with the compilers they used. As part of this self-driven training with The Great Library Implementer, I saw the proposal going around for `optional<T>`. I implemented it, and e-mailed it to them. After getting feedback about things I had never considered before (like "protect against self-assignment"), I decided it was time to put my implementation to the test.
 
 I used it in building my Computer Graphics final, a ray tracer.
 
