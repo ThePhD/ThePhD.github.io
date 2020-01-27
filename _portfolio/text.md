@@ -3,7 +3,7 @@ layout: post
 title: Text for C++
 feature-img: "assets/img/pexels/adult-art-asia-engin-akyurt.jpg"
 img: "assets/img/pexels/adult-art-asia-engin-akyurt.jpg"
-date: December 14th, 2019
+date: January 27th, 2020
 tags: [C++, Unicode, Text, 🚌, ⌨️]
 ---
 
@@ -19,7 +19,7 @@ This project is the push to reach that goal.
 
 # Current Funding
 
-The project has the goal of being fully funded by mid 2020 so that all users can have a high quality solution of text that is not kept within one company or ecosystem, but ported to the Standard Library for use by everyone. Work hours are laid out [in this proposal here](https://github.com/ThePhD/text/blob/develop/docs/funding/2019.09.21%20-%20Towards%20Text%20in%20the%20Standard%20Library%20-%20ThePhD.pdf).
+The project has the goal of being fully funded by mid 2020 so that all users can have a high quality solution of text that is not kept within one company or ecosystem, but ported to the Standard Library for use by everyone. If you want the proposal, please e-mail me.
 
 Funding goes toward:
 
@@ -53,12 +53,9 @@ Current Goal Total: $1,348.87 USD / $24,000.00 USD
 
 # Technical Details
 
-The work is ongoing in these repositories here:
+The work is ongoing.
 
-- [C++](https://github.com/ThePhD/text);
-- and, [C](https://github.com/ThePhD/cuneicode).
-
-The C++ library submodules and builds on top of the C one for fast-path functions. Internally, the C library is implemented with C++ and -- hopefully soon in the future -- vectorization by hand or with [SIMD/`std::experimental::simd`](https://en.cppreference.com/w/cpp/experimental/simd/simd). The principals and inner workings of the implementation are detailed in a series of talks, slides and posts:
+The C++ library submodules and builds on top of the C one for fast-path functions. Internally, the C library is implemented with C++ and -- hopefully soon in the future -- vectorized by hand or with [SIMD/`std::experimental::simd`](https://en.cppreference.com/w/cpp/experimental/simd/simd). The principals and inner workings of the implementation are detailed in a series of talks, slides and posts:
 
 1. Meeting C++ 2019  
    _Catching ⬆️: Unicode for C++ in Greater Detail - 2 of 5_  
