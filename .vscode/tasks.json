@@ -754,8 +754,8 @@
 				"--highlight-style",
 				"tango",
 				"-o",
-				"papers/C - embed.html",
-				"papers/source/C - embed.md"
+				"vendor/future_cxx/papers/C - embed.html",
+				"vendor/future_cxx/papers/source/C - embed.md"
 			],
 			"isBackground": false,
 			"presentation": {
