@@ -8,7 +8,7 @@ tags: [C++, Unicode, Text, 🚌, ⌨️]
 ---
 
 
-There does not exist a good, flexible, backwards-compatible solution for Text in C++. Choosing a library either requires taking the entire thing (Qt), getting involved in a very complex interface (ICU), dealing with sometimes limiting API choices (CopperSpice), or having a well-done but very opinionated design set (the proposed Boost.Text).
+There does not exist a good, flexible, backwards-compatible solution for Text in C++. Choosing a library either requires taking the entire thing (Qt), getting involved in a very complex interface (ICU), dealing with sometimes limiting API choices (CopperSpice), or having a well-done but very opinionated design set (the proposed-for-Boost Boost.Text library).
 
 Where is the standard library-friendly, maximum performance solution for handling text encoding and decoding in C++ and C?
 
@@ -30,7 +30,7 @@ Funding goes toward:
 - and, Attending WG14 (C Committee) and WG21 (C++ Committee) meetings.
 
 
-Specialized solutions for C++11 (or C++03) can be made. If you, your company or organization is interested in helping or need special features/early access to features listed below, please [contact me](phdofthehouse@gmail.com).
+Specialized solutions for C++11 (or C++03) can be made. If you, your company or organization is interested in helping or need special features/early access to features listed below, please [get in touch](shepherd@soasis.org).
 
 
 

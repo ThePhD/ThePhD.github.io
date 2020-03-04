@@ -9,14 +9,15 @@ tags: [C++, proposals, standard, Portfolio, 🚌, ⌨️]
 
 I have quite a few C++ proposals I am working on and percolating through the C++ Standards Committee. You will find the submitted and unsubmitted ones below! Be sure to also check out the `proposals` and `standard` tags for any writeups related to C++ proposals!
 
+
 ### Actively Pursued Evolution Proposals:
 
 C++ | p1040: std::embed | [Published](https://wg21.link/p1040) | [Latest Draft](/vendor/future_cxx/papers/d1040.html)
 C++ | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/vendor/future_cxx/papers/d1629.html)
 C++ | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/vendor/future_cxx/papers/d1664.html)
+C++ and C | n2470 + p1967: Preprocessor embed - Binary Resource Inclusion | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2470.pdf) | [Latest Draft](/vendor/future_cxx/papers/source/n2470)
 C | n2430: [[nodiscard("should have a reason")]] | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2430.pdf) | [Latest Draft](/vendor/future_cxx/papers/source/n2430)
 C | n2440: Restartable and Non-Restartable Functions for Efficient Character Conversions | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2440.pdf) | [Latest Draft](/vendor/future_cxx/papers/source/n2440)
-C  and C++| n2470 + p1967: Preprocessor embed - Binary Resource Inclusion | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2470.pdf) | [Latest Draft](/vendor/future_cxx/papers/source/n2470)
 
 
 ### Approved Proposals:
@@ -39,11 +40,18 @@ C++ | p1039: I got you, FAM - Flexible Array Members for C++| [Published](https:
 C++ | p1378: `consteval is_string_literal(T*)` | Not Published | [Latest Draft](/vendor/future_cxx/papers/d1378.html)
 
 
-### Expiring / Expired:
+### Educational
 
-These proposals are being published one more time to summarize current standing, and then left for someone else to pick up:
+These proposals are educational in nature only and, while making recommendations, will not see additional pursuit or wording.
 
-C++ | p1683: A Survey of References for Standard Library Types - A Survey of Optionals | Not Published | [Latest Draft](/vendor/future_cxx/papers/d1129.html)
+C++ | p1683: A Survey of References for Standard Library Types - A Survey of Optionals | [Published](https://wg21.link/p1683) | [Latest Draft](/vendor/future_cxx/papers/d1683.html)
+
+
+### Expired:
+
+These proposals are dead and will not be picked up again.
+
+
 C++ | p1175: A simple and practical optional reference for C++ | [Published](https://wg21.link/p1175) | [Latest Draft](/vendor/future_cxx/papers/d1175.html)
 C++ | p1130: Module Resource Requirement Propagation | [Published](https://wg21.link/p1130) | [Latest Draft](https://thephd.github.io/vendor/future_cxx/papers/d1130.html)
 
