@@ -710,8 +710,8 @@
 				"--highlight-style",
 				"kate",
 				"-o",
-				"papers/C - nodiscard.html",
-				"papers/source/C - nodiscard.md"
+				"${workspaceFolder}/vendor/future_cxx/papers/C - nodiscard.html",
+				"${workspaceFolder}/vendor/future_cxx/papers/source/C - nodiscard.md"
 			],
 			"isBackground": false,
 			"presentation": {
@@ -732,8 +732,8 @@
 				"--highlight-style",
 				"tango",
 				"-o",
-				"papers/C - Efficient Character Conversions.html",
-				"papers/source/C - Efficient Character Conversions.md"
+				"${workspaceFolder}/vendor/future_cxx/papers/C - Efficient Character Conversions.html",
+				"${workspaceFolder}/vendor/future_cxx/papers/source/C - Efficient Character Conversions.md"
 			],
 			"isBackground": false,
 			"presentation": {
@@ -754,8 +754,8 @@
 				"--highlight-style",
 				"tango",
 				"-o",
-				"vendor/future_cxx/papers/C - embed.html",
-				"vendor/future_cxx/papers/source/C - embed.md"
+				"${workspaceFolder}/vendor/future_cxx/papers/C - embed.html",
+				"${workspaceFolder}/vendor/future_cxx/papers/source/C - embed.md"
 			],
 			"isBackground": false,
 			"presentation": {
