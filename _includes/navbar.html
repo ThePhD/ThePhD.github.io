@@ -21,10 +21,11 @@
     
     <!-- Menu -->
     <ul class="hide">
-        {% assign name_page = "presentations" %}
-        
+        {% assign name_page = "" %}
+        {% assign forbidden_pages = "presentations/" %}
+
         {% for page in site.pages %}
-            {% unless page.title == null or page.hide or name_page contains page.title %}
+            {% unless page.title == null or page.hide or name_page contains page.title or page.url contains forbiddin_pages %}
             <li class="separator"> | </li>
             <li>
                 <a class="clear" aria-label="{{ page.title }}" title="{{ page.title }}" href="{{ page.url | relative_url }}">
