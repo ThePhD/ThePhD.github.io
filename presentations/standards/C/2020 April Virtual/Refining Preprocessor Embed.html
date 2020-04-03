@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Refining Preprocessor Embed</title>
+
+	<link rel="stylesheet" href="../../../../vendor/reveal.js/css/reset.css">
+	<link rel="stylesheet" href="../../../../vendor/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../../vendor/reveal.js/css/theme/moon.css">
+
+	<style>
+		a:link {
+			color: #4499FF;
+		}
+		a:visited {
+			color: #C3C;
+		}
+		a:hover {
+			color: #88FF88;
+		} 
+
+		.reveal pre code {
+			box-shadow: 7px 7px #888;
+			border-radius: 7px;
+			padding: 7px;
+			max-height: 600px !important;
+		}
+
+		div.footer {
+			z-index: 1;
+			font-size: small;
+			font-style: italic;
+			color: lightgray;
+			position: absolute;
+			bottom: 0.5em;
+			text-align: center;
+			box-shadow: 2px 2px 2px #111;
+			border-radius: 5px;
+			padding: 10px !important;
+		}
+	</style>
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="../../../../vendor/reveal.js/lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '../../../../vendor/reveal.js/css/print/pdf.css' : '../../../../vendor/reveal.js/css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-markdown="source/00 - 00 Title.md" 
+				data-background-image="resources/man-lifting-hot-metal.jpg" data-background-opacity="0.25" 
+				data-separator="^\r?\n\r?\n\r?\n\r?\n"
+				data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-markdown="source/01 - 00 Goals.md" 
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-markdown="source/02 - 00 Features.md" 
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-markdown="source/03 - 00 Speed.md"
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-markdown="source/04 - 00 Syntax.md" 
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-markdown="source/05 - 00 Questions.md" 
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+		</div>
+	</div>
+
+	<div class="footer">
+		&copy; <a href="mailto:shepherd@soasis.org?Subject=Preprocessor Embed">Shepherd's Oasis, LLC</a> 2020, All Rights Reserved.<br>
+	</div>
+
+	<script src="../../../../vendor/reveal.js/js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			history: true,
+			slideNumber: true,
+			width: 1280,
+			height: 720,
+			autoPlayMedia: true,
+			markdown: {
+				smartypants: true,
+			},
+			dependencies: [
+				{src: '../../../../vendor/reveal.js/plugin/markdown/marked.js'},
+				{src: '../../../../vendor/reveal.js/plugin/markdown/markdown.js'},
+				{src: '../../../../vendor/reveal.js/plugin/notes/notes.js', async: true},
+				{
+					src: '../../../../vendor/reveal.js/plugin/highlight/highlight.js',
+					async: true,
+					callback: () => hljs.initHighlightingOnLoad()
+				}
+			]
+		});
+	</script>
+</body>
+
+</html>
