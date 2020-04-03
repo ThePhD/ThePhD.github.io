@@ -7,17 +7,15 @@
 
 `#embed ...`
 
+April 2020 Decision: Unanimous Consent for NO `pragma`!
+
 
 # Feature Choice?
 
-Basic:
-- `#embed [limit] <header.name>`
-
-Type-based, Limited to Keyword Tokens:
+Type-based, Implementation-defined if tokens are not Keywords (+2 Votes):
 - `#embed keyword-tokens [limit] <header.name>`
 
-Type-based, Implementation-defined if tokens are not Keywords:
-- `#embed keyword-tokens [limit] <header.name>`
-
-Bit-based:
+Bit-based (+10 Votes):
 - `#embed bits-constant-expression [limit] <header.name>`
+
+April 2020 Decision: Prefer Bit-based approach!
