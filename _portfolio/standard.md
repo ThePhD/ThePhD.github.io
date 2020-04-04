@@ -15,8 +15,7 @@ I have quite a few C++ proposals I am working on and percolating through the C++
 C++ | p1040: std::embed | [Published](https://wg21.link/p1040) | [Latest Draft](/vendor/future_cxx/papers/d1040.html)
 C++ | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/vendor/future_cxx/papers/d1629.html)
 C++ | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/vendor/future_cxx/papers/d1664.html)
-C++ and C | n2470 + p1967: Preprocessor embed - Binary Resource Inclusion | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2470.pdf) | [Latest Draft](/vendor/future_cxx/papers/source/n2470)
-C | n2430: [[nodiscard("should have a reason")]] | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2430.pdf) | [Latest Draft](/vendor/future_cxx/papers/source/n2430)
+C++ and C | n2499 + p1967: Preprocessor embed - Binary Resource Inclusion | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2499.pdf) | [Latest Draft](/vendor/future_cxx/papers/source/n2499)
 C | n2440: Restartable and Non-Restartable Functions for Efficient Character Conversions | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2440.pdf) | [Latest Draft](/vendor/future_cxx/papers/source/n2440)
 
 
@@ -30,7 +29,8 @@ C++ | Library Evolution Approved, in Library Wording | C++23 | p1132: out_ptr - 
 
 C++ | p1025: Update References to the Unicode Standard | [Published](https://wg21.link/p1025) | [Accepted!](https://wg21.link/p1025)
 C++ | p1301: nodiscard should have a reason | [Published](https://wg21.link/p1301) | [Accepted!](/vendor/future_cxx/papers/d1301.html)
-C++ | Pre-approved for C++23 | C++23 | p0330: Literal Suffixes for `ptrdiff_t` and `size_t` | [Published](https://wg21.link/p0330) | [Latest Draft](/vendor/future_cxx/papers/d0330.html)
+C | n2448: [[nodiscard("should have a reason")]] | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2448.pdf) | [Accepted!](/vendor/future_cxx/papers/source/n2448)
+C++ | Pre-approved for C++23 | C++23 | p0330: Literal Suffixes for `ptrdiff_t` and `size_t` | [Published](https://wg21.link/p0330) | [Accepted!](/vendor/future_cxx/papers/d0330.html)
 
 
 ### Being Reworked from Feedback:

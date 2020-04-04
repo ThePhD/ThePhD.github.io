@@ -5,22 +5,24 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>Refining Preprocessor Embed</title>
+	<title>P1040 - std::embed</title>
 
 	<link rel="stylesheet" href="../../../../vendor/reveal.js/css/reset.css">
 	<link rel="stylesheet" href="../../../../vendor/reveal.js/css/reveal.css">
-	<link rel="stylesheet" href="../../../../vendor/reveal.js/css/theme/moon.css">
+	<link rel="stylesheet" href="../../../../vendor/reveal.js/css/theme/serif.css">
 
 	<style>
 		a:link {
 			color: #4499FF;
 		}
+
 		a:visited {
 			color: #C3C;
 		}
+
 		a:hover {
 			color: #88FF88;
-		} 
+		}
 
 		.reveal pre code {
 			box-shadow: 7px 7px #888;
@@ -44,7 +46,7 @@
 	</style>
 
 	<!-- Theme used for syntax highlighting of code -->
-	<link rel="stylesheet" href="../../../../vendor/reveal.js/lib/css/zenburn.css">
+	<link rel="stylesheet" href="../../../../vendor/reveal.js/lib/css/monokai.css">
 
 	<!-- Printing and PDF exports -->
 	<script>
@@ -59,29 +61,33 @@
 <body>
 	<div class="reveal">
 		<div class="slides">
-			<section data-markdown="source/00 - 00 Title.md" 
+			<section data-markdown="source/00 - Title.md" 
 				data-background-image="resources/man-lifting-hot-metal.jpg" data-background-opacity="0.25" 
 				data-separator="^\r?\n\r?\n\r?\n\r?\n"
 				data-separator-vertical="^\r?\n\r?\n\r?\n"
 				data-separator-notes="^Note:" data-charset="utf8">
 			</section>
-			<section data-markdown="source/01 - 00 Goals.md" 
+			<section data-markdown="source/01 - Two Features.md" 
 				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
 				data-separator-notes="^Note:" data-charset="utf8">
 			</section>
-			<section data-markdown="source/02 - 00 Features.md" 
+			<section data-markdown="source/02 - Preprocessor Embed.md" 
 				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
 				data-separator-notes="^Note:" data-charset="utf8">
 			</section>
-			<section data-markdown="source/03 - 00 Speed.md"
+			<section data-markdown="source/03 - std embed.md"
 				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
 				data-separator-notes="^Note:" data-charset="utf8">
 			</section>
-			<section data-markdown="source/04 - 00 Syntax.md" 
+			<section data-markdown="source/04 - Infinity.md" 
 				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
 				data-separator-notes="^Note:" data-charset="utf8">
 			</section>
-			<section data-markdown="source/05 - 00 Questions.md" 
+			<section data-markdown="source/05 - Need Both.md" 
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-markdown="source/06 - Questions.md" 
 				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
 				data-separator-notes="^Note:" data-charset="utf8">
 			</section>
