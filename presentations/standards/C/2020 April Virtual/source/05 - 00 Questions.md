@@ -7,7 +7,7 @@
 
 `#embed ...`
 
-April 2020 WG16 Vote:
+April 2020 WG14 Vote:
 - Unanimous Consent for NO `pragma`!
 
 
