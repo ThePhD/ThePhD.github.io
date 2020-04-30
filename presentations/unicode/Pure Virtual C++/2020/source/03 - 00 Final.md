@@ -12,9 +12,9 @@ struct utf8 {
 	static constexpr inline std::size_t max_code_points = 1;
 	static constexpr inline std::size_t max_code_units  = 4;
 	
-	u8_encode_result encode_one(u8_span input, u32_span output,
+	u8_encode_result encode_one(u32_span input, u8_span output,
 		state& current, u8_encode_error_handler error_handler);
-	u8_decode_result decode_one(u32_span input, u8_span output,
+	u8_decode_result decode_one(u8_span input, u32_span output,
 		state& current, u8_decode_error_handler error_handler);
 };
 ```
