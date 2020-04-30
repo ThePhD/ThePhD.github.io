@@ -13,22 +13,13 @@ Part 2 (Catch it [here](https://www.youtube.com/watch?v=FQHofyOgQtM))
 
 ### `char` is Bad
 
-```cpp
-#include <string>
-#include <utility>
-
-int main (int argc, char* argv[]) {
-	std::string totally_utf8{argv[1]};
-	my_utf8_function(std::move(totally_utf8)); // lol xd
-}
-```
-
-
-#### `char` is Bad, Part 2
+Encoding is ... ??
 
 ```cpp
 #include <string>
 #include <utility>
+
+#include <my/lib.hpp>
 
 int main (int argc, char* argv[]) {
 	std::string totally_utf8{argv[1]};
@@ -70,9 +61,19 @@ Fixed in C++20 🎉!
 (Thanks, Robot 💚)
 
 
-### Proposed fixes
+### C and C++ Support for Unicode
 
-- Get a new API that does not have the above issues?
-  - (I am working on it)
+
+_[This slide intentionally left blank]_
+
+
+
+### Produces frustration and desire
+
+![E-mail about THE Locale MPV Commit](resources/Wants.png)
+
+
+## "Well, just, like, fix it!"
+
 - "Just make `char` UTF-8 and use UTF-8!"
   - "Just do it."

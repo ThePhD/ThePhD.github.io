@@ -12,7 +12,7 @@ Transcoding, Validation, and Counting oh my!
 
 Have: `from_encoding`/`to_encoding` that are `encoding` objects
 
-Objects have`encode_one`/`decode_one` functions, so:
+Objects have `encode_one`/`decode_one` functions, so:
 
 - have a common `code_point` between them?
 - and, can represent all the same values?
@@ -139,7 +139,9 @@ bool validate (utf_ebcdic encoding, c_span input) {
 	detail::pass_through_handler handler{};
 
 	code_point_t buf[max_code_points_v<utf_ebcdic>];
+	code_point_t out_buf[max_code_units_v<utf_ebcdic>];
 	std::span<code_point_t> intermediate(buf);
+	std::span<code_unit_t> output(out_buf);
 	// ...
 ```
 
@@ -147,7 +149,7 @@ bool validate (utf_ebcdic encoding, c_span input) {
 ```cpp
 	// ...
 	for (;;) {
-		auto result = encoding.decode_one(input,
+		auto from_result = encoding.decode_one(input,
 			intermediate, handler, from_state);
 		if (result.error_code != encoding_error::ok) {
 			return false;
@@ -156,9 +158,24 @@ bool validate (utf_ebcdic encoding, c_span input) {
 			intermediate.data(),
 			from_result.output.data(),
 		);
-		auto result = encoding.encode_one(used,
+		auto to_result = encoding.encode_one(used,
 			output, handler, to_state);
-		if (result.error_code != encoding_error::ok) {
+		if (from_result.error_code != encoding_error::ok) {
+			return false;
+		}
+		// ...
+```
+
+
+```cpp
+		// ...
+		c_span mirror_input(
+			output.data(),
+			to_result.output.data()
+		);
+		bool is_equal = std::equals(mirror_input.cbegin(),
+			mirror_input.cend(), input.cbegin());
+		if (!is_equal) {
 			return false;
 		}
 		input = std::move(result.input);
@@ -193,7 +210,7 @@ bool validate (utf_ebcdic encoding, c_span input) {
 	std::span<code_unit_t> output(output_buffer);
 
 	auto result = transcode(input, encoding,
-		output_buffer, encoding);
+		output, encoding);
 
 	return result.error_code == encoding_error::ok
 		&& std::equals(input.cbegin(), input.cend(),
@@ -298,7 +315,7 @@ int main (int, char*[]) {
 		"the final executable cannot handle hearts. "
 		"Where is the love?! 😭");
 
-	std::u8string ascii_emoji =
+	std::u8string utf8_emoji =
 		std::text::encode(U“🐶”);
 	// generally assume you want to go to UTF-8
 
@@ -310,3 +327,8 @@ int main (int, char*[]) {
 	return 0;
 }
 ```
+
+
+### But...
+
+Most importantly, about all of this...

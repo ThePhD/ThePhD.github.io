@@ -19,14 +19,20 @@ struct utf8 {
 };
 ```
 
-Add more if you want speed. But 7 is the magic number.
+Add more if you want speed, safety, etc.  
+But 7 is the magic number.
 
 
 ### All Yours
 
-No Committee telling you what to do.  
-No standard libraries saying its not important enough to be added.  
-No politics.
+- Each encoding object is its own type
+- Strongly control its semantics and representation
+
+
+### All Yours
+
+- No Committee telling you what to do.
+- No standard libraries saying its not important enough to be added.
 
 
 ### The Other Magical Bit Here?
