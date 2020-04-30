@@ -63,10 +63,10 @@ ue_u8_transcode_result transcode (utf_ebcdic from_encoding,  c_span input,
 ```cpp
 		// ...
 		auto from_result = from_encoding.decode_one(input,
-			intermediate, handler, to_state);
+			intermediate, handler, from_state);
 		input = std::move(from_result.input);
-		if (result.error_code != encoding_error::ok) {
-			return { input, output,
+		if (from_result.error_code != encoding_error::ok) {
+			return { std::move(input), std::move(output),
 				...,
 				from_result.error_code,
 				...
@@ -151,7 +151,7 @@ bool validate (utf_ebcdic encoding, c_span input) {
 	for (;;) {
 		auto from_result = encoding.decode_one(input,
 			intermediate, handler, from_state);
-		if (result.error_code != encoding_error::ok) {
+		if (from_result.error_code != encoding_error::ok) {
 			return false;
 		}
 		std::span<code_point_t> used(
@@ -160,7 +160,7 @@ bool validate (utf_ebcdic encoding, c_span input) {
 		);
 		auto to_result = encoding.encode_one(used,
 			output, handler, to_state);
-		if (from_result.error_code != encoding_error::ok) {
+		if (to_result.error_code != encoding_error::ok) {
 			return false;
 		}
 		// ...
@@ -178,7 +178,7 @@ bool validate (utf_ebcdic encoding, c_span input) {
 		if (!is_equal) {
 			return false;
 		}
-		input = std::move(result.input);
+		input = std::move(to_result.input);
 		if (input.empty()) {
 			break;
 		}
