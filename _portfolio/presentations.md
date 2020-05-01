@@ -13,9 +13,16 @@ I have given presentations and spoken on several occasions! Here are the present
 
 # Video Presentations
 
-## CppCon 2019 - Invited Speaker
+## Pure Virtual C++ 2020 - Invited Speaker
 
-<div style="text-align:center"><iframe width="560" height="315" src="https://youtu.be/FQHofyOgQtM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div style="text-align:center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/w4qYf2pvPg4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+[Slides](/presentations/unicode/Pure%20Virtual%20C++/2020/Lucky%207%20–%20Designing%20Text%20Encodings%20for%20C++.html). This talk is one of the most important talks on Text Encoding in C++; it explains the basis operations and how they can be extrapolated out to provide a fully-fledged text encoding API. This is an ongoing talk series and part of a larger [project on text](/portfolio/text).
+
+
+## Meeting C++ 2019 - Invited Speaker
+
+<div style="text-align:center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/FQHofyOgQtM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 [Slides](/presentations/unicode/Meeting C++/2019/2019.11.16 - Catching ⬆️ - Unicode for C++ in Greater Detail - ThePhD - Meeting C++.pdf). This is the next talk in the series of talks on Unicode. Some of the uses of the benefits of error handling are explained here, progress with the C Standard, as well as some other tenants of the library. This is an ongoing talk series and part of a larger [project on text](/portfolio/text).
 
