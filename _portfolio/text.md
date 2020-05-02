@@ -30,7 +30,7 @@ Funding goes toward:
 - and, Attending WG14 (C Committee) and WG21 (C++ Committee) meetings.
 
 
-Specialized solutions for C++11 (or C++03) can be made. If you, your company or organization is interested in helping or need special features/early access to features listed below, please [get in touch](shepherd@soasis.org).
+Specialized solutions for C++11 (or C++03) can be made. If you, your company or organization is interested in helping or need special features/early access to features listed below, please [get in touch](mailto:shepherd@soasis.org).
 
 
 
