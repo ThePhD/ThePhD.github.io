@@ -4,3 +4,4 @@
 [submodule "vendor/reveal.js"]
 	path = vendor/reveal.js
 	url = https://github.com/hakimel/reveal.js.git
+	branch = dev
