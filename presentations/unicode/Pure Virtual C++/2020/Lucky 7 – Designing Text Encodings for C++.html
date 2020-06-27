@@ -11,7 +11,19 @@
 	<link rel="stylesheet" href="../../../../vendor/reveal.js/css/reveal.css">
 	<link rel="stylesheet" href="../../../../vendor/reveal.js/css/theme/sky.css">
 
-	<style>	
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="../../../../vendor/reveal.js/lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '../../../../vendor/reveal.js/css/print/pdf.css' : '../../../../vendor/reveal.js/css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<style>
 		.reveal pre code {
 			box-shadow: 7px 7px #888;
 			border-radius: 7px;
@@ -31,18 +43,6 @@
 			padding: 10px !important;
 		}
 	</style>
-
-	<!-- Theme used for syntax highlighting of code -->
-	<link rel="stylesheet" href="../../../../vendor/reveal.js/lib/css/zenburn.css">
-
-	<!-- Printing and PDF exports -->
-	<script>
-		var link = document.createElement('link');
-		link.rel = 'stylesheet';
-		link.type = 'text/css';
-		link.href = window.location.search.match(/print-pdf/gi) ? '../../../../vendor/reveal.js/css/print/pdf.css' : '../../../../vendor/reveal.js/css/print/paper.css';
-		document.getElementsByTagName('head')[0].appendChild(link);
-	</script>
 </head>
 
 <body>
@@ -92,7 +92,6 @@
 	</div>
 
 	<script src="../../../../vendor/reveal.js/js/reveal.js"></script>
-
 	<script>
 		// More info about config & dependencies:
 		// - https://github.com/hakimel/reveal.js#configuration
