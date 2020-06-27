@@ -66,9 +66,9 @@ else {
 
 
 
-# Others?
+### Step 2: Enable Bulk
 
-What about `validate`, `encode`, `decode`, ...?
+Bulk `validate`, `encode`, `decode`, etc. improvements?
 
 - same principal, use an extension point!
 

@@ -1,11 +1,18 @@
 # ✨ You ✨
 
-For listening.
+Thanks listening.
 
 
 
 
-# Giving Thanks
+## Giving Thanks
+
+🏆 The wonderful individual patrons and sponsors! 🏆
+
+<img src="resources/Sponsors-Old.png" alt="GitHub Sponsors"/>
+
+
+## Giving Thanks
 
 🏆 The wonderful individual patrons and sponsors! 🏆
 
@@ -14,7 +21,7 @@ For listening.
 
 ### Thanks: NEN
 
-[NEN - Netherlands helped onboard me for Standards Work for the C Committee](https://www.nen.nl/About-NEN.htm)
+[NEN - Netherlands helped onboard me for the C Committee](https://www.nen.nl/About-NEN.htm)
 
 [![NEN About Page Website](resources/NEN.png)](https://www.nen.nl/About-NEN.htm)
 
@@ -26,7 +33,9 @@ For listening.
   - [Matheus Natan](https://twitter.com/theunatan)
   - [James Wheeler](https://twitter.com/souvenirpixels)
   - [Miguel Á. Padriñán](https://twitter.com/padrinan)
-- Video & Slide Images: [LaBeouf, Rönkkö & Turner - #INTRODUCTIONS](http://labeoufronkkoturner.com/projects/introductions/)
+  - [ArtHouse Studio](https://instagram.com/nickbondarev)
+  - [Vova Krasilnikov](https://instagram.com/vovaflame)
+  - [Admiral Bahroo](https://www.twitch.tv/admiralbahroo)
 
 
 ### We Need Your Help
@@ -35,6 +44,7 @@ Support a vision for fluid text handling in C++ and C:
 
 - See the plan [here - https://thephd.github.io/portfolio/text](https://thephd.github.io/portfolio/text)
 - Support the plan [here - https://thephd.github.io/support/](https://thephd.github.io/support/)
+- Watch the struggle [here -  https://www.twitch.tv/shepherdsoasis/](https://www.twitch.tv/shepherdsoasis/)
 
 
 ### Contracting & Consulting

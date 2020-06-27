@@ -101,10 +101,10 @@ struct big5_encode_result { // u8_encode_result for utf-8
 ### Supporting Types - Error Handlers
 
 ```cpp
-using u8_decode_error_handler = std::function_ref<
+using u8_decode_error_handler = std::function<
 	u8_decode_result(const utf8&, u8_decode_result, u8_span)
 >;
-using u8_encode_error_handler = std::function_ref<
+using u8_encode_error_handler = std::function<
 	u8_encode_result(const utf8&, u8_encode_result, u32_span)
 >;
 using big5_decode_error_handler = std::function<
@@ -171,7 +171,7 @@ for text `input` and writable `output` with objects `α` and `β`:
 
 ### The Lucky 7 Basis Can Build Everything 
 
-[Part 3](https://www.youtube.com/watch?v=w4qYf2pvPg4) successfully described a Lucky 7 definition to build...
+[Part 3](https://www.youtube.com/watch?v=w4qYf2pvPg4) successfully proved Lucky 7 can build...
 
 - `encode(...)`
 - `decode(...)`

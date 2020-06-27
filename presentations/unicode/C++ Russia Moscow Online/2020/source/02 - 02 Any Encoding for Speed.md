@@ -76,8 +76,64 @@ A one-to-one relationship; always prefers your implementation over internals
 - `validate`/`validate_as` ➡ `text_validate`/`text_validate_as`
 
 
+### Everyone Speaks the same language
+
+```cpp
+class session {
+	// ... init with proper encoding earlier...
+	txt::any_encoding from_encoding_;
+	std::vector<std::byte> res_body_;
+	// ...
+
+	void session::on_read(beast::error_code ec, std::size_t bytes_transferred) {
+		/* … skip boilerplate */
+		std::span<std::byte> input_bytes(this->res_body_.data(), bytes_transferred);
+		std::ranges::unbounded_view output(
+			std::back_inserter(this->converted_body_)
+		);
+
+		txt::utf8 to_encoding{};
+
+		// This will call YOUR extension points, if they are there!!
+		txt::transcode(input_bytes, output, this->from_encoding_, to_encoding);
+
+		std::clog << this->converted_body_ << std::endl;
+};
+```
+
+
+### Yours, or Someone Else's
+
+Open ecosystem!
+
+- No longer tied to (proprietarily controlled) standard library
+- Someone can make a bucket of encodings they want
+  - e.g.: WHATWG has dozens of encodings for e-mail interchange
+  - Can make them fast for encoding pairs you care about, once
+  - EVERYONE benefits
+
+
 ### Usages?
 
 [Fast validation with Daniel Lemire](https://lemire.me/blog/2018/10/19/validating-utf-8-bytes-using-only-0-45-cycles-per-byte-avx-edition/)
 
-<a href="https://youtu.be/FQHofyOgQtM?t=1561"><img src="resources/daniel-lemire.png" alt="Linked Picture of Daniel Lemire's blog post on Fast UTF-8 Validation" width="55%" height="55%" /></a>
+<a href="https://lemire.me/blog/2018/10/19/validating-utf-8-bytes-using-only-0-45-cycles-per-byte-avx-edition/"><img src="resources/Lemire.png" alt="Linked Picture of Daniel Lemire's blog post on Fast UTF-8 Validation" width="55%" height="55%" /></a>
+
+
+### Usages?
+
+[Fast UTF-8 Conversion with DFAs](https://www.youtube.com/watch?v=5FQ87-Ecb-A)
+
+<a href="https://www.youtube.com/watch?v=5FQ87-Ecb-A"><img src="resources/Steagall.jpg" alt="Linked Picture of Bob Stegall's CppCon 2019 Fast UTF-8 Conversion talk" width="65%" height="65%" /></a>
+
+
+### Usages?
+
+Platform specific APIs
+
+<a href="https://developer.apple.com/documentation/coreservices/1433517-convertfromtexttounicode"><img src="resources/doc-apple-ConvertFromTextToUnicode.png" alt="Linked Picture of Apple Conversion Function Documentation" width="30%" height="30%" /></a>
+<a href="https://docs.microsoft.com/en-us/windows/win32/api/stringapiset/nf-stringapiset-multibytetowidechar"><img src="resources/doc-win-multibytetowidechar.png" alt="Linked Picture of Windows Conversion Function Documentation" width="30%" height="30%" /></a>
+<a href="https://www.gnu.org/savannah-checkouts/gnu/libiconv/documentation/libiconv-1.15/iconv.3.html"><img src="resources/doc-iconv.png" alt="Linked Picture of iconv conversion function" width="30%" height="30%" /></a>
+
+
+### And More
