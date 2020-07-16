@@ -1,5 +1,6 @@
 # The Final Problem
 
+
 ![Picture of the Encoding Loop from the YouTube Unicode for C++23 Video CppCon 2019 Presentation](resources/SimpleIdea.jpg)
 
 
@@ -13,7 +14,7 @@
 
 ### 🙏 Pouring out a Blessing 🙏
 
-If you transcode from your encoding to:
+If you transcode from your encoding to a blessed:
 - UTF-32, UTF-16, UTF-8; or
 - a surrogate-allowing, "unchecked" version of the above
 

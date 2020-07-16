@@ -35,6 +35,7 @@ Thanks for listening.
   - [Scott Webb](https://instagram.com/scottwebb)
   - [Pia Bercic](https://instagram.com/pspov)
 
+
 ### We Need Your Help
 
 Support a vision for fluid text handling in C++ and C:
