@@ -46,7 +46,7 @@ if constexpr (has_adl_transcode_one_v<Input, FromEncoding, ...>) {
 	auto result = text_transcode_one(input, from_encoding,
 		output, to_encoding,
 		from_handler, to_handler,
-		to_state, from_state);
+		from_state, to_state);
 	if (result.error_code != encoding_error::ok) {
 		// something went wrong, bail
 		return ...;
@@ -62,7 +62,7 @@ else {
 ### Covers one-at-a-time `transcode`
 
 - Improves speed of basic loop
-- Helps `txt::transcode_view<utf8, bigs5_hkscs>` work faster
+- Helps `txt::transcode_view<utf8, big5_hkscs>` work faster
 
 
 

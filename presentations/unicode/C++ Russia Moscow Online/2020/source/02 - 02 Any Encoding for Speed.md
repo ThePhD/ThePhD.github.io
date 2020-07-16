@@ -41,7 +41,7 @@ Think about `decode_one` for `any_encoding` with 1,000,000 code points.
 
 ### Can do better!
 
-Check if `text_decode` function exists on object:
+Check if `text_decode` function exists:
 
 - If it does, call that instead of running `enc.decode_one` in a loop
   - Unwrap

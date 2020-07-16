@@ -12,7 +12,7 @@ Nope.
 for text `input` and writable `output` with objects `α` and `β`:
 
 - if `input` is empty, return. otherwise: (⚠!!)
-  - call `α.decode_one` on `withinput` into `span` over  
+  - call `α.decode_one` on `input` into `span` over  
   `code_point intermediate[max_code_points]`; (⚠!!)
   - if error occurred, bail with error;
   - call `β.encode_one` with `intermediate` into `output`;
