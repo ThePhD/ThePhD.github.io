@@ -264,7 +264,7 @@ And that's it; that's the way to do it unless you're interested in supporting ol
 #endif
 ```
 
-The C++ Committee also went far, far back in time to give every single macro a proper name. There's the ones [in the `<version>` header](https://en.cppreference.com/w/cpp/utility/feature_test), and ones that [belong to the language proper](https://en.cppreference.com/w/cpp/feature_test).
+The C++ Committee also went far, far back in time to give every single macro a proper name. There's the ones [in the `<version>` header](https://en.cppreference.com/w/cpp/utility/feature_test), and ones that [belong to the language proper](https://en.cppreference.com/w/cpp/feature_test). You can grab a more complete list by [visiting Standard Document 6 (SD-6)](https://isocpp.org/std/standing-documents/sd-6-sg10-feature-test-recommendations) from the C++ Standards Committee (scroll close to the bottom to get to the part with the list of numbers you are interested in).
 
 As you have noticed, my examples came from a mythical library called `std0`. But, well, it's not [exactly a myth](https://twitter.com/thephantomderp/status/1270042822738153480). I've been making a lot of claims lately about performance, finding a lower level library, and being backwards compatible. And so next, we're going to talk about how we leveraged the above -- and more -- to build a `std::vector` that's better than `std::vector` in a backwards-compatible, standards-compliant, drop-in replaceable way for C++. Well,
 
