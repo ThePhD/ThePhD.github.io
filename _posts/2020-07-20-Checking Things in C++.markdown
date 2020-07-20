@@ -97,7 +97,7 @@ error: missing binary operator before token "SOL_SAFE_REFRENCES"
 
 Nice. It's obviously not the most clear error, but it stops your code from compiling when you do a silly, like I had done a silly.
 
-Now, the _final_ approach I have been using is a little different; this is mostly because I want to be explicit about whether I want the thing on or off. Using my shenanigans library called `std0` as an example, here is how a full example of how I set things up:
+Now, the _final_ approach I have been using is a little different; this is mostly because I want to be explicit about whether I want the thing on or off. Using my shenanigans library called `std0` as an example, here is a full example of how I set things up:
 
 ```cpp
 #define STD0_IS_ON(_ON_OFF_SYMBOL)  ((1 _ON_OFF_SYMBOL 1) != 0)
@@ -161,7 +161,7 @@ fatal error C1012: unmatched parenthesis: missing ')'
 		\std0_dynamic_array_profiling_shrink_to_fit.vcxproj]
 ```
 
-This is great! Messing up the usage of `STD0_EXCEPTIONS_` means unhappy customers, and we're not here for those noisy bug reports. It also helps when I accidentally spell `STD0_LIVE_FREE_OR_DIE_HARD_` as `STD0_LIVE_FREE_DIE_HARD_`, wherein a single conjunction turns the macro from an action movie plot to the U.S.'s general outlook on everything concerning poor people. This can result in the user getting the UB under the specified, or not, and is not something I should "accidentally" fudge in my library. It also prevents me from defining it to be a number or a string or something equally silly, or depending on the fact that I accidentally defined it to one of those things and then "fixing" it only to get weird bug reports of "well, like, it just worked, keep it that way!!".
+This is great! Messing up the usage of `STD0_EXCEPTIONS_` means unhappy customers, and we're not here for those noisy bug reports. It also helps when I accidentally spell `STD0_LIVE_FREE_OR_DIE_HARD_` as `STD0_LIVE_FREE_DIE_HARD_`, wherein a single conjunction turns the macro from an action movie plot to the U.S.'s general outlook on everything concerning poor people. This can result in the user getting the UB under the specified macro, or not, and is not something I should "accidentally" fudge in my library. It also prevents me from defining it to be a number or a string or something equally silly, or depending on the fact that I accidentally defined it to one of those things and then "fixing" it only to get weird bug reports of "well, like, it just worked, keep it that way!!".
 
 
 ### Not for the End User
