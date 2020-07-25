@@ -77,8 +77,8 @@ Registry is dynamic, and therefore requires memory; embedded folk hate uncontrol
 typedef struct __conv_heap {
 	allocate_function allocate;
 	reallocate_function reallocate;
-	allocation_expand_function shrink;
-	allocation_shrink_function expand;
+	allocation_expand_function expand;
+	allocation_shrink_function shrink;
 	deallocate_function deallocate;
 	void* user_data;
 } conv_heap;
@@ -88,7 +88,7 @@ typedef struct __conv_heap {
 ### open/close function?
 
 ```cpp
-enum conv_error {
+enum open_error {
 	OPEN_ERR_OKAY = 0,
 	OPEN_ERR_NO_CONVERSION_PATH = -1,
 	OPEN_ERR_INVALID_CODE = -2,

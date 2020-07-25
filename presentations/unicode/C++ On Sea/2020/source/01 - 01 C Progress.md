@@ -160,10 +160,8 @@ int main (int argc, char* argv[]) {
 
 	size_t r0 = mbrtowc(wide_output, input, 1, &state);
 	assert(r0 == -2);
-	ptr += 1;
 	size_t r1 = mbrtowc(wide_output, input + 1, 1, &state);
 	assert(r1 == 2); // ???
-	ptr += 1;
 	size_t r2 = mbrtowc(wide_output + 1, input + 2, 1, &state);
 	assert(r2 == 0);
 

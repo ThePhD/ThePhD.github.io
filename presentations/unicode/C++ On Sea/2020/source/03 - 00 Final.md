@@ -26,6 +26,7 @@ Registry automatically "connects" to other encodings through intermediates above
 ```cpp
 int main (int argc, char* argv[]) {
 	conversion_registry* reg;
+	/* ... */
 	// connect encodings
 	add_to_registry(reg, "𝔓𝔥𝔣𝔱𝔞𝔤𝔫-72", "UTF-32",
 		&𝔓𝔥𝔣𝔱𝔞𝔤𝔫72s_to_u32s, NULL, NULL);
@@ -34,7 +35,7 @@ int main (int argc, char* argv[]) {
 
 	conversion* conv;
 	open_error r = conversion_open(&conv, "𝔓𝔥𝔣𝔱𝔞𝔤𝔫-72", "utf-8");
-	assert(r == OPEN_ERROR_OKAY); // works!!
+	assert(r == OPEN_ERR_OKAY); // works!!
 	
 	/* ... */
 	return 0;

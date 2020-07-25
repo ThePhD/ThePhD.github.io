@@ -44,9 +44,9 @@ Below are the published funding goals. Sponsors may pay into specific goals or, 
 
 _Current Goal: Bootstrap Initial Development_
 
-Current Goal Total: $3,040.64 USD / $24,000.00 USD
+Current Goal Total: $4,375.64 USD / $24,000.00 USD
 
-[ ⣿⣿⣿⣿⣿⣿⣤⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
+[ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
 
 
 
@@ -63,14 +63,28 @@ The C++ library submodules and builds on top of the C one for fast-path function
 
 The principles and inner workings of the implementation are detailed in a series of talks, slides and posts:
 
-0. Pure Virtual C++ 2020  
+0. C++ on Sea 2020
+   _🤿 Deep C Diving - Fast and Scalable Text Interfaces at the Bottom 🤿_
+   July 16th, 2019  
+   Virtual Conference  
+   - [Video](https://www.youtube.com/watch?v=X-FLGsa8LVc)
+   - [Slides](/presentations/unicode/C++%20On%20Sea/2020/Deep%20C%20Diving.html)
+
+1. C++ Russia  
+   _🏎 Burning Silicon - Speed for Transcoding in C++23_  
+   June 30th, 2020  
+   Virtual Conference  
+   - (No Public Video yet, recording available to patrons/supporters!)
+   - [Slides](/presentations/unicode/C++%20Russia%20Moscow%20Online/2020/Burning%20Silicon%20-%20Speed%20for%20Transcoding.html)
+
+2. Pure Virtual C++ 2020  
    _Lucky 7 - Designing Text Encodings for C++_  
    April 30th, 2020  
    Virtual Conference  
    - [Video](https://www.youtube.com/watch?v=w4qYf2pvPg4)
    - [Slides](/presentations/unicode/Pure%20Virtual%20C++/2020/Lucky%207%20–%20Designing%20Text%20Encodings%20for%20C++.html)
 
-1. Meeting C++ 2019  
+3. Meeting C++ 2019  
    _Catching ⬆️: Unicode for C++ in Greater Detail - 2 of 5_  
    Saturday, November 16th, 2019  
    Berlin, Germany  
@@ -78,7 +92,7 @@ The principles and inner workings of the implementation are detailed in a series
   - [Video](https://www.youtube.com/watch?v=FQHofyOgQtM)
   - [Slides](/presentations/unicode/Meeting C++/2019/2019.11.16 - Catching ⬆️ - Unicode for C++ in Greater Detail - ThePhD - Meeting C++.pdf)
 
-2. CppCon 2019  
+4. CppCon 2019  
    _Catching ⬆️: The (Baseline) Unicode Plan for C++23_  
    Friday, September 20th, 2019  
    Aurora, Colorado  
@@ -87,7 +101,7 @@ The principles and inner workings of the implementation are detailed in a series
   - [Slides](/presentations/unicode/CppCon/2019/2019.09.20 - Catching ⬆️ - The (Baseline) Unicode Plan for C++23 - ThePhD - CppCon 2019.pdf)
   - [Comments](https://www.reddit.com/r/cpp/comments/de1jy9/cppcon_2019_jeanheyd_meneide_catch_unicode_for_c23/)
 
-3. Study Group 16 - Text and Unicode  
+5. Study Group 16 - Text and Unicode  
    _A Rudimentary Unicode Abstraction_  
    Wednesday, March 7th, 2018  
    Boston, Massachusetts
@@ -96,7 +110,7 @@ The principles and inner workings of the implementation are detailed in a series
 The current spread of goals is as follows.
 
 
-### Ⅰ: Core Text Utilities [ 24% ] 
+### Ⅰ: Core Text Utilities [ 36% ] 
 
 - Encoding objects for one-by-one encoding and decoding.
   - `utf8`, `utf16`, `utf32`, `narrow_execution` and `wide_execution` Encoding Object types;
@@ -104,7 +118,7 @@ The current spread of goals is as follows.
 - `decode(...)`, `encode(...)`, and `transcode(...)` functions.
 - `decode_view<encoding, ...>`, `encode_view<encoding, ...>`, and `transcode_view<encoding, ...>` range types.
 
-[ ⣿⣿⣿⣿⣿⣿⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
+[ ⣿⣿⣿⣿⣿⣿⣿⣿⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
 
 
 ### Ⅱ: Normalization Forms [ 0% ]
