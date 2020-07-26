@@ -3,7 +3,7 @@ layout: post
 title: Text for C++
 feature-img: "assets/img/pexels/adult-art-asia-engin-akyurt.jpg"
 img: "assets/img/pexels/adult-art-asia-engin-akyurt.jpg"
-date: May 1st, 2020
+date: July 26th, 2020
 tags: [C++, Unicode, Text, 🚌, ⌨️]
 ---
 
@@ -64,7 +64,7 @@ The C++ library submodules and builds on top of the C one for fast-path function
 The principles and inner workings of the implementation are detailed in a series of talks, slides and posts:
 
 0. C++ on Sea 2020
-   _🤿 Deep C Diving - Fast and Scalable Text Interfaces at the Bottom 🤿_
+   _🤿 Deep C Diving - Fast and Scalable Text Interfaces at the Bottom 🤿_  
    July 16th, 2019  
    Virtual Conference  
    - [Video](https://www.youtube.com/watch?v=X-FLGsa8LVc)
