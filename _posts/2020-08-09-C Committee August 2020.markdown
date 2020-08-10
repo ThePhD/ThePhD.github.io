@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Why the C Language will Never Stop You From Making Mistakes
+title: Why the C Language Will Never Stop You from Making Mistakes
 permalink: /your-c-compiler-and-standard-library-will-not-help-you
 feature-img: "assets/img/2020-08-09/pexels-energepiccom.jpg"
 thumbnail: "assets/img/2020-08-09/pexels-artyom-kulakov.jpg"
