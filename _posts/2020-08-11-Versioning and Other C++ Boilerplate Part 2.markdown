@@ -8,7 +8,7 @@ tags: [C++, C, ⌨️]
 excerpt_separator: <!--more-->
 ---
 
-This is a smaller article to make sure I don't forget a fun extra property I've learned [about the system we discussed last time](/versioning-and-other-boilerplate), dear reader!<!--more-->.
+This is a smaller article to make sure I don't forget a fun extra property I've learned [about the system we discussed last time](/versioning-and-other-boilerplate), dear reader!<!--more-->
 
 
 
