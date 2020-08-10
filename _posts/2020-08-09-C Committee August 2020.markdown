@@ -20,12 +20,12 @@ The C Committee meeting -- originally scheduled for Freiburg, Germany but not ha
 
 As a side note I've also become the Project Editor for C so before you take this as an uninformed rant of a person too lazy to "make things better", let me assure that I am, indeed, incredibly invested in making sure C can begin to meet the needs of developers without needing 50 vendor-specific extensions to build remotely nice/usable libraries and applications.
 
-Still, I made a claim (the C Language will never stop you from making mistakes), and therefore I need to substantiate it. We could look at the thousands of CVEs and the inherent issues with tons of C Code, or the need for MISRA to vigorously police every last bit potential C feature to prevent misuse ([hello, K&R prototype declarations](https://twitter.com/thephantomderp/status/1290824683399663616)...), or other more intricate and fun bugs related to portability and undefined behavior. But instead, we are just going to take the words from the horse's mouth: the Committee itself.
+Still, I made a claim (the C Language will never stop you from making mistakes), and therefore I need to substantiate it. We could look at the thousands of CVEs and the inherent issues with tons of C Code, or the need for MISRA to vigorously police every last little potential C feature to prevent misuse ([hello, K&R prototype declarations](https://twitter.com/thephantomderp/status/1290824683399663616)...), or other more intricate and fun bugs related to portability and undefined behavior. But instead, we are just going to take the words from the horse's mouth: the Committee itself.
 
 
 # Ooh, 🍿 time?!
 
-No, dear reader, put the popcorn away. As with all ISO proceedings, I am not allowed to quote anyone verbatim, and this is not a name-and-shame article. It will, however, explain why things that we can easily diagnose and identify as bad behavior in Standards-conforming ISO C will never go away. And we will start with a paper by Dr. Philip K. Krause:
+No, dear reader, put the popcorn away. As with all ISO proceedings, I am not allowed to quote anyone verbatim, and this is not a name-and-shame article. It will, however, explain why things that we can easily diagnose and identify as bad behavior in Standards-conforming ISO C will never go away. And we will start with a paper by Dr. Philipp Klaus Krause:
 
 [N2526, use const for data from the library that shall not be modified](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2526.htm)
 
