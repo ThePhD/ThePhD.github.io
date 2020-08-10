@@ -27,7 +27,7 @@ Still, I made a claim (the C Language will never stop you from making mistakes),
 
 No, dear reader, put the popcorn away. As with all ISO proceedings, I am not allowed to quote anyone verbatim, and this is not a name-and-shame article. It will, however, explain why things that we can easily diagnose and identify as bad behavior in Standards-conforming ISO C will never go away. And we will start with a paper by Dr. Philipp Klaus Krause:
 
-[N2526, use const for data from the library that shall not be modified](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2526.htm)
+[N2526, use const for data from the library that shall not be modified](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2526.htm).
 
 N2526 is a very simple paper. "Some data returned by the library is `const` morally, spiritually, and in fact even by its implementation. It's undefined behavior and wrong to write into it, so let's stop teasing each other about it and put a ring on that finger bad boy!" ... Okay, that's not exactly what it says, but I'm sure the idea makes sense to you, dear reader. Originally, when the vote for this paper was taken, there was almost no votes against the paper. Then, a few people voiced their _strong_ objections to the paper because it breaks old code. And, well, of course that's bad: even my breath caught and I strained to think about this -- adding `const`? C has no ABI that could be affected by this, C doesn't even respect qualifiers, how are we breaking things?! So, let's talk about why this would be a breaking change in the eyes of certain folk.
 
@@ -149,6 +149,4 @@ Make no mistake: no matter what programmers tell you or what people whisper in y
 
 We will let the compiler lie to you. We will lie to your code. And when things do go bad -- a mistake, an "oopsie kapoopsie", a leak of data -- we will shake our heads solemnly. We will offer our thoughts and prayers and say "well, that's a shame". A shame, indeed...
 
-... Well. Maybe it doesn't have to be?
-
-But that's for another time, dear reader. 💚
+Maybe we'll fix it another day, dear reader. 💚
