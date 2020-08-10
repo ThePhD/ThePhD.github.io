@@ -25,11 +25,11 @@ Still, I made a claim (the C Language will never stop you from making mistakes),
 
 # Ooh, 🍿 time?!
 
-No, dear reader, put the popcorn away. As with all ISO proceedings, I am not allowed to quote anyone verbatim, and this is not a name-and-shame article. It will, however, explain why things that we can easily diagnose and identify as bad behavior in Standards-conforming ISO C will never go away. And we will start with a paper by Dr. Philipp Klaus Krause:
+No, dear reader, put the popcorn away. As with all ISO proceedings, I am not allowed to quote anyone verbatim, and this is not a name-and-shame article. It will, however, explain why things that we can easily diagnose and identify as bad behavior in standards-conforming ISO C will never go away. And we will start with a paper by Dr. Philipp Klaus Krause:
 
 [N2526, use const for data from the library that shall not be modified](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2526.htm).
 
-N2526 is a very simple paper. "Some data returned by the library is `const` morally, spiritually, and in fact even by its implementation. It's undefined behavior and wrong to write into it, so let's stop teasing each other about it and put a ring on that finger bad boy!" ... Okay, that's not exactly what it says, but I'm sure the idea makes sense to you, dear reader. Originally, when the vote for this paper was taken, there was almost no votes against the paper. Then, a few people voiced their _strong_ objections to the paper because it breaks old code. And, well, of course that's bad: even my breath caught and I strained to think about this -- adding `const`? C has no ABI that could be affected by this, C doesn't even respect qualifiers, how are we breaking things?! So, let's talk about why this would be a breaking change in the eyes of certain folk.
+N2526 is a very simple paper. "Some data returned by the library is `const` morally, spiritually, and in fact even by its implementation. It's undefined behavior and wrong to write into it, so let's stop teasing each other about it and put a ring on that finger bad boy!" ... Okay, that's not exactly what it says, but I'm sure the idea makes sense to you, dear reader. Originally, when the vote for this paper was taken, there was almost no votes against the paper. Then, a few people voiced their _strong_ objections to the paper because it breaks old code. And, well, of course that's bad: even my breath caught and I strained to think about this -- adding `const`? C has no ABI that could be affected by this, C (their implementations) doesn't even respect qualifiers, how are we breaking things?! So, let's talk about why this would be a breaking change in the eyes of certain folk.
 
 
 
@@ -89,7 +89,7 @@ int main (int argc, char* argv[]) {
 f̵̞͟͞o̷r̰͇͎̞ ̡̝͍͍̥̗̖͖̲̮i͕͔̭̹̪̳͙͍̩ͅ ̷͖̙͈̗̯̙͓̲̻̩̱͖̺a̧̪̳̠̰̱͎̖̙̳̱͎̯̦̟͟m̶͓͔͉̺̩̙̖̞̼͈̖͇͇͇ ͇̘̬͕̯̕͢d͚o̢̳̱̙͠ͅg̴̨̦̬̥͓̯̩͞,̷̬͕͖͎̺͈̰̳̮͓̞ ͚d͎̀̕͢es̵̱͙̪͓͖͇̩̳̻͉͉̹̣͈͜͝t͖͈͉̩̭̙̺̬r̤̟̫͔̩̰̗̤͔̭̰̞̦̺ͅo̝̹̻ͅy̸͎͎͚̖̤̣̥̭̼̳͎e̘̟̰̣̫̹͇͍̦͓ͅr̙̙̳̠͔̙̖̯̺ͅ ̸̜̫̫̩̫̝͎̩̠̦̭̠̟o҉̛͢f̫̝͇ ҉̣̞̟a̪̲͎͇̣̠͖͖̮̥ͅl̷̛͈̦̰̜͍̲̟̬̘̝͕̰̮͠l̮̯̘͉̦͔̘̲̰̤͔̬̲͔
 
 <br/><br/>
-Yes, two entirely unrelated pointer types can be set to one another in standards conforming C. Most compilers warn, but this is standards-conforming ISO C code that is required to not be rejected unless you crank up the `-Werror` `-Wall` `-Wpedantic` etc. etc. etc.
+Yes, two entirely unrelated pointer types can be set to one another in standards-conforming C. Most compilers warn, but it is standards-conforming to accept this code unless you crank up the `-Werror` `-Wall` `-Wpedantic` etc. etc. etc.
 
 In fact, other pointer-related things the compiler can accept without an explicit cast are:
 
@@ -101,7 +101,7 @@ Now, note I am not arguing that you should not be able to do these things at all
 
 All someone has to do is strip the build of `-Werror` `-Wall` `-Wpedantic` and you'll be off to the races in committing multithreading, read-only, and hardware register crimes.
 
-Now, this is fair, right? If someone strips off all of these warning/error flags, they obviously do not care about whatever faux pas or silly gaffe you've committed. Which means that, at the end of the day, these warnings are ultimately irrelevant and harmless as far as Standards-conforming, ISO C is concerned. And yet...
+Now, this is fair, right? If someone strips off all of these warning/error flags, they obviously do not care about whatever faux pas or silly gaffe you've committed. Which means that, at the end of the day, these warnings are ultimately irrelevant and harmless as far as standards-conforming, ISO C is concerned. And yet...
 
 
 
