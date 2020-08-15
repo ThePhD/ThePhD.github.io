@@ -315,7 +315,7 @@ How dare you! You make these suggestions with a straight face and send me, a per
 
 How much more could I fill an ENTIRE C++ paper with, over this shoddy construction of an idea? How much Committee member time do I need to waste making them read that paper -- to listen to it and to present it and to vote on it -- as if our time is not limited and it will not stop us from doing other things?
 
-How many times am I going to go in bright eyed and bushy tailed, believing the words that come out of your mouth? How many times will it [turn out to be a lie wherein none of you sat down and researched the consequences](/to-bind-and-lose-a-reference-optional) of your suggestions and actions?
+How many times am I going to go in bright eyed and bushy tailed, believing the words that come out of your mouth? How many times will it [turn out to be a lie wherein none of you sat down and researched the consequences](/to-bind-and-loose-a-reference-optional) of your suggestions and actions?
 
 You are the Committee. Your words have weight, people will remodel codebases in pursuit of the ideals you set forth. When you say "pause", [engineers take heed and caution](http://lists.llvm.org/pipermail/cfe-dev/2018-July/058448.html) because they trust you.
 
