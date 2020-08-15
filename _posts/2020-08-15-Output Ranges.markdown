@@ -64,7 +64,7 @@ ranges::copy(R&& r, O result);
 and make it safe with an output range:
 
 ```cpp
-template<input_­range R, output_range O>
+template<input_­range R, output_range<range_reference_t<R>> O>
 	requires indirectly_­copyable<iterator_t<R>, iterator_t<O>>
 constexpr ranges::copy_result<borrowed_iterator_t<R>, borrowed_iterator_t<O>>
 ranges::copy(R&& in_range, O&& out_range);
@@ -135,8 +135,8 @@ std::ranges::copy(source, destination);
 The answer I chose is neither (1) or (2): instead, I define a concept called `output_view`. We piggyback off the `view` concept, adding to it that it should be an `output_range` as well:
 
 ```cpp
-template<class T>
-concept output_view = std::ranges::output_range<T>
+template<class R, class T>
+concept output_view = std::ranges::output_range<R, T>
 	&& std::ranges::view<T>;
 ```
 
@@ -149,7 +149,7 @@ std::vector<int> destination_data{};
 // very clear what I want out of my code here
 try {
 	std::ranges::unbounded_view destination(
-		std::back_inserter(destination)
+		std::back_inserter(destination_data)
 	);
 	std::ranges::copy(source, destination);
 }
