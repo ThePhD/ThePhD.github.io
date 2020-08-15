@@ -27,9 +27,9 @@ Given the title of this article it should surprise nobody that I think output ra
 
 
 
-# Narrator: Everyone Did Not Think Sinks Were a Horrible Idea
+# Narrator: Not Everyone Thought Sinks Were a Horrible Idea
 
-People are Very Seriously Considering this. Because of that Very Serious Consideration plus a question of "what happens with containers like `std::vector`", we did not use `output_range`s in the standard library despite [having the concept ready to go](https://eel.is/c++draft/range.req#range.refinements-1). `std::copy`, and all those functions that older versions of Visual Studio 2017 and below used to S C R E E C H about loudly when you didn't define `_SCL_SECURE_NO_WARNINGS`, take an input range and an output **iterator**. We, once again, decided not to deliver on the promise of a safer, better API because we had some hand wringing to do.
+People are Very Seriously Considering this. Because of that Very Serious Consideration plus a question of "what happens with containers like `std::vector`", we did not use `output_range`s in the standard library despite [having the concept ready to go](https://eel.is/c++draft/range.req#range.refinements-1). `std::copy`, and all those functions that older versions of Visual Studio 2017 and below used to S&nbsp;C&nbsp;R&nbsp;E&nbsp;E&nbsp;C&nbsp;H about loudly when you didn't define `_SCL_SECURE_NO_WARNINGS`, take an input range and an output **iterator**. We, once again, decided not to deliver on the promise of a safer, better API because we had some hand wringing to do.
 
 While there is a sense of familiarity and comfort that buffer overruns will continue to survive into the "modern" and "ambitious" language by API choice (and not just because The Language Hates You A Lot), let's get to the nitty-gritty: iterators and ranges -- particularly `output_range` -- are superior for three distinct reasons:
 
@@ -217,11 +217,11 @@ I then apply this to 3 separate styles of writing the `copy_` code:
 - `iterator_sink` (iterator sources, but sink function calls)
 - `source_sink` (using 2 function calls)
 
-The operation timed is a copy operation from one `std::vector<std::size_t>` to another `std::vector<std::size_t`. The source vector is generated from a random distribution, contains 10000 elements, and is the same between all benchmarks. Now, let's give it a try:
+The operation timed is a copy operation from one `std::vector<std::size_t>` to another `std::vector<std::size_t>`. The source vector is generated from a random distribution, contains 10000 elements, and is the same between all benchmarks. Now, let's give it a try:
 
 ![Microsoft Visual C++ Benchmarks about Output Iterators and Ranges versus Sources and Sinks](assets/img/2020-08-15/vc++%20-%20Release%20-%20output%20range%20benchmarks%20data.png)
 
-Okay, so the Stepanov iterator + iterator, direct write with `*destination_iterator = *source_iterator;`, remains the absolute best. Unfortunately, this benchmark is cheating because it's done on Visual Studio 2019 Release, x86_64, Release on an AMD Ryzen 3600. The cheating is because Visual Studio 2019's optimizer is, for some reason, complete garbage at optimizing these function calls, even when specifically passed special flags to ensure maximum performance and inlining (`/Ob3` and friends).
+Okay, so the Stepanov iterator + iterator, direct write with `*destination_iterator = *source_iterator;`, remains the absolute best. Unfortunately, this benchmark is cheating because it's done on Visual Studio 2019 Release IDE (not the Preview IDE), x86_64, built in Release mode on an AMD Ryzen 3600. The cheating is because Visual Studio 2019's optimizer is, for some reason, complete garbage at optimizing these function calls, even when specifically passed special flags to ensure maximum performance and inlining (`/Ob3` and friends).
 
 Let's look at GCC instead, given the same benchmarks, with `-O3`:
 
@@ -244,7 +244,7 @@ That's right: pointers! Or, more specifically: `contiguous_iterator`s and `conti
 
 > No, even if you don't (e.g. grow). I know it because we have a highly optimized sink-based format and a it's nowhere near {fmt} in perf. You really need direct writes. – [Victor Zverovich, `fmt` Author, April 25, 2020](https://twitter.com/vzverovich/status/1254030259109781504)
 
-MSVC running in a circle, pissing itself, and then passing out in a drunken stupor for many of the benchmarks (on its best settings!!) should also be indicative here of "optimizer divergence". The only benchmark case that consistently delivered high-quality performance is the `iterator_iterator_copy_direct`, e.g. the direct writes Victor speaks of. I am not here to gamble with the compiler, forever writing [variations of this "peak", cursed memcpy](https://twitter.com/jfbastien/status/1288232681432440834) for the sake of performance. I am going to call `std::copy` or `std::ranges::copy`, and I am going to get my `memcpy` for free because Stephan T. Lavavej can write `if constexpr (_Is_contiguous_meow<_It, _DestIt>) { /* meowmcopy :3 */ }` and not depend on how the stochastic stream processor in my CPU or the optimizer feels today. My performance will not plummet because I turned on the [Jessica Paquette's amazing outliner to save code space](https://www.youtube.com/watch?v=yorld-WSOeU) for my Apple builds. I can have speed. I can save space. And, you know what else?
+MSVC running in a circle, pissing itself, and then passing out in a drunken stupor for many of the benchmarks (on its best settings!!) should also be indicative here of "optimizer divergence". The only benchmark case that consistently delivered high-quality performance is the `iterator_iterator_copy_direct`, e.g. the direct writes Victor speaks of. I am not here to gamble with the compiler, forever writing [variations of this "peak", cursed memcpy](https://twitter.com/jfbastien/status/1288232681432440834) for the sake of performance. I am going to call `std::copy` or `std::ranges::copy`, and I am going to get my `memcpy` for free because Stephan T. Lavavej can write `if constexpr (_Is_contiguous_meow<_It, _DestIt>) { /* meowmcpy :3 */ }` and not depend on how the stochastic stream processor in my CPU or the optimizer feels today. My performance will not plummet because I turned on [the one and only Jessica Paquette's amazing outliner to save code space](https://www.youtube.com/watch?v=yorld-WSOeU) for my Apple builds. I can have speed. I can save space. And, you know what else?
 
 I can also have Sources and Sinks, without needing to butcher Stepanov's foundational work.
 
