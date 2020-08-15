@@ -288,7 +288,12 @@ While we're here, check out these graphs of GCC in Release, and GCC in Release b
 
 Turns out, LTO makes the performance worse and adds a few microseconds to almost every functions runtime. (Sorry about the fact that the graphs look nearly identical here. I automatically size the graphs based on the data spread, but if you read the x-axis it turns out LTO gives nearly every function some sort of penalty, which is kind of awful!)
 
-This all brings me to my final point. If you were just here to go on this journey with me and learned something (like to not trust MSVC's optimizer), then you can stop reading here, dear reader, because the rest of this is absolutely not required reading. But for damn sure, it is required writing on my part given what I have had to invest in this article and many other things related to C++ Standardization.
+
+### To Be Clear
+
+I think that `std::ranges` and C++ ranges, as they are now, is the absolute right direction to go in. It's the sources and sink discussion, plus the declaration that we should just use output iterators, that was pushed onto me when authoring and working on [P1629](/vendor/future_cxx/papers/d1629.html) by multiple folks inside and outside of the Committee that made my eyebrows go up. It was then the subsequent discussion about the lack of security in `format_to_n` that drove me to specifically address this weakness in the API, and that we should absolutely NOT try to paper over it with Sink functions.
+
+This all brings me to my final point. If you were just here to go on this journey with me and learned something (like to not trust MSVC's optimizer), then you can stop reading here, dear reader, because the rest of this is absolutely not required reading. But for damn sure, it is required writing on my part given what I have had to invest in this article and many other things related to C++ Standardization; especially, the multiple folks who have tried to nudge me towards a function-only approach to input / output.
 
 
 
