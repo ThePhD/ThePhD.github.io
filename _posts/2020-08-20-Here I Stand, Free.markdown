@@ -111,7 +111,7 @@ The fix to this is to basically force a `noexcept`-cast on the function. You, de
 ```cpp
 template <typename T>
 T* alloc<T>::allocate (std::size_t element_count) noexcept {
-	using f_ptr_ne = void(*)(std::size_t) noexcept;
+	using f_ptr_ne = void*(*)(std::size_t) noexcept;
 	// we will pretend alignment isn't
 	// a thing, for the moment
 	std::size_t byte_count = element_count * sizeof(T);
