@@ -106,7 +106,7 @@ We use `std::terminate()` here, but as Paul Pedriana's EASTL paper (and many pap
 
 There is also one slight adjustment to be made here: some compilers do not recognize `malloc` as a `noexcept`-like function, and upon seeing this code are tempted to vomit their own version of `try { /* blah */ } catch (...) { std::terminate(); }` in. This is mostly because compilers like Clang and GCC both mark their respective `malloc` "library builtins" as [throw-capable](https://github.com/llvm/llvm-project/blob/6c18f7db73a08f1ae39a76a86b414c5b0c24ee86/clang/include/clang/Basic/Builtins.def#L911) (e.g., it is not marked with the string `"fn"` in its builtin definition). An internally-C++ implementation of `malloc` or `free` can indeed throw through the C boundary, however toxic and wrong many might consider that to be; no, it can't be generally `noexcept`.
 
-The fix to this is to basically force a `noexcept`-cast on the function. You, dear reader, [can pick up Hana Dusiková's handy utility](https://twitter.com/hankadusikova/status/1276828584179642368) to [do that](https://godbolt.org/z/6oxS3d), or if you're a hairy, jaded, dysphoric Neanderthal like me just cast and call:
+The fix to this is to basically force a `noexcept`-cast on the function. You, dear reader, [can pick up Hana Dusíková's handy utility](https://twitter.com/hankadusikova/status/1276828584179642368) to [do that](https://godbolt.org/z/6oxS3d), or if you're a hairy, jaded, dysphoric Neanderthal like me just cast and call:
 
 ```cpp
 template <typename T>
