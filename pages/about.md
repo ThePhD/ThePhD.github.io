@@ -8,9 +8,9 @@ tags: [about, hello, 👋]
 
 # Hey there!
 
-My name is JeanHeyd Meneide, but my online moniker is ThePhantomDerpstorm/ThePhD. It's a `std::promise` on my `std::future`. I am an Undergraduate studying at Columbia University's Fu School of Engineering (currently on a Medical Leave of Absence). My degree will be in Computer Science, specifically concentrating in Graphics, Software Engineering, and Application Development with a minor in East Asian Languages and Culture.
+My name is JeanHeyd Meneide. I am a Software Engineer and the Project Editor for ISO/IEC JTC1 SC22 WG14 - Programming Languages, C. I specialize in ergonomic library design and performance tuning. My favorite work includes programming that enables even the newest programmers to produce high-quality code that pushes them and others towards the pit of success.
 
-C++ is my first love, wheel house, and primary jam. But! I've worked in several other languages (Lua, JavaScript, Python, C#, C, Java, the usual C-family of languages alongside OCaml) and performed fun things with others (TypeScript, ActionScript 3, Elm, and a tiny bit of Haskell).
+You can send inquiries for work to [Shepherd](shepherd@soasis.org) of Shepherd's Oasis!
 
 In my free time I try to write and draw, which has naturally led me to creating this place here! I'll be posting... well, anything and everything that comes to mind that I think might be worth sharing. Feel free to poke around and examine things!
 
