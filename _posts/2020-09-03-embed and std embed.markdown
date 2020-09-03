@@ -8,7 +8,7 @@ tags: [C++, C, embed, preprocessor, ⌨️, 📜]
 excerpt_separator: <!--more-->
 ---
 
-`#embed` was reviews by Evolution Working Group (EWG) September 2nd, 2020 and good progress was made to get the paper in shape to get it into C++23. The resulting directive, however,<!--more--> is a lot less powerful than people might have wanted.
+`#embed` was reviewed by Evolution Working Group (EWG) September 2nd, 2020 and good progress was made to get the paper in shape to get it into C++23. The resulting directive, however,<!--more--> is a lot less powerful than people might have wanted.
 
 
 
