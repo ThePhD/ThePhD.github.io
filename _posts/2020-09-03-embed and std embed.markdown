@@ -172,7 +172,7 @@ This was not exactly unintentional on my part. I wanted both C and C++ to have f
 
 I distinctly knew this opportunity could fail, but I was okay with that failure because it only makes the motivation for a proper, `consteval`, C++-based `std::embed` even beefier. People have already begun to do things thought impossible with [patches and the available `phd::embed`](https://github.com/ThePhD/embed), from vetting typical GLSL shaders (and pulling out `location` directives) at `constexpr` time to parsing `protobuf` files. With `#embed` relegated to being simple, preprocessor-friendly and C compatible, we can now afford to really invest in greater C++ infrastructure such as an advanced `std::bit_cast` and `std::embed`.
 
-It's unfortunate for the C Committee, but as part of their charter it is explicitly that "we want to leave the ambitious, fun, and clever things up to C++". So, well, they'll need to use something similar to the "union trick" (this does not compile, it's just a dream):
+It's unfortunate for the C Committee, but part of their charter is explicitly "we want to leave the ambitious, fun, and clever things up to C++". So, well, they'll need to use something similar to the "union trick" (this does not compile, it's just a dream):
 
 ```cpp
 int main(int argc, char* argv[]) {
@@ -184,7 +184,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-There is more work that would have to be done here to ensure that compilers like GCC and Clang and SDCC could constant fold this is they wanted to. But, honestly, this is what C wants for itself: verbose, explicit spelling and very little "we take care of it for you" obviousness.
+There is more work that would have to be done here to ensure that compilers like GCC and Clang and SDCC could constant fold this if they wanted to. But, honestly, this is what C wants for itself: verbose, explicit spelling and very little "we take care of it for you" obviousness.
 
 Nevertheless, I cannot exactly go screaming ahead with `std::embed`. There are some additional challenges for `std::embed` thanks to the last Committee direction votes it underwent at Prague, but that
 
