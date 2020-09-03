@@ -15,9 +15,44 @@ excerpt_separator: <!--more-->
 
 # From the Top - What is "Embed"?
 
-If you have not read my continual speculations/rants about the subject (or you missed the Tweets before my Twitter deactivated), I was doing a lot of work with 2 things. They were `#embed` and `std::embed`, and they were able to produce performance fixes and throughput gains of several orders of magnitude compared to stuffing incrementally larger files into binaries through a variety of means. These also provide a close to some of the oldest C and C++ frontend bugs/complaints in GCC, Clang, and MSVC including artificial string limitations and more.
+If you have not read my continual speculations/rants about the subject (or you missed the Tweets before my Twitter deactivated), I was doing a lot of work with 2 things. They were `#embed` and `std::embed`, and they were able to produce performance fixes and throughput gains of several orders of magnitude compared to stuffing incrementally larger files into binaries through a variety of means. These also provide a close to some of the oldest C and C++ frontend bugs/complaints in GCC, Clang, and MSVC including artificial string limitations and more. The gist of it is as follows:
 
-What [was discussed during the Virtual EWG C++ Meeting](https://thephd.github.io/presentations/standards/C++/2020%20September/p1967/Flexible%20and%20Extensible%20Preprocessor%20Embed.html) was strictly preprocessor `#embed`. The goal was to get comfortable with a syntax and also address a big issue with providing types or other shenanigans in the preprocessor. The long and short of it is:
+```cpp
+#include <cassert>
+
+int main (int, char*[]) {
+    const unsigned char jmp_sound[] = {
+#embed <sdk/jump.wav>
+    };
+
+    // verify PCM WAV signature
+    assert(jmp_sound[0] == 'R');
+    assert(jmp_sound[1] == 'I');
+    assert(jmp_sound[2] == 'F');
+    assert(jmp_sound[3] == 'F');
+
+    return 0;
+}
+```
+
+In its simplest form, it just splats a bunch of integral values out as an _`initializer-list`_ (fancy C++ Standard Wording way to say a comma-delimited list). Note that it's just a piece of a list, and so you can add more elements between the brackets. For example, using C instead of C++:
+
+```cpp
+#include <stdio.h>
+
+int main () {
+	const unsigned char str_data[] = {
+#embed "art.txt"
+		, 0 // your own null termination to the data!
+	};
+
+	// just like any old string...
+	puts(str_data);
+	return 0;
+}
+```
+
+It's a nearly 40 year old feature request with -- in general -- completely unsurprising semantics. Unfortunately, the actual details can get really hairy. What [was discussed during the Virtual EWG C++ Meeting](https://thephd.github.io/presentations/standards/C++/2020%20September/p1967/Flexible%20and%20Extensible%20Preprocessor%20Embed.html) was strictly preprocessor `#embed`. The goal was to get comfortable with a syntax and also address a big issue with providing types or other shenanigans in the preprocessor. The long and short of it is:
 
 - The preprocessor is too simple to handle type information, and implementation experience from some vendors has made it clear that `sizeof()` support in the preprocessor is not impossible but very much a suicide mission
 - The preprocessor is exactly simple enough to make vomiting out a sequence of initializer lists work nicely;
@@ -99,7 +134,7 @@ int main(int argc, char *argv[]) {
 
 The ability to pass this to function calls is less cool if you cannot specify your own types, but it is still nice to know that this compiles, runs, and returns the expected values in my test implementation in Clang. It solidifies the expectation that even though I implemented the internals of `#embed` using a compiler built-in for compilation speed and memory size, it is still usable in other locations. (Of course, I expect the implementation to break if I tried it in other places; I'm a librarian, not a compiler engineer.)
 
-For the people I work with and the companies that early-adopted `#embed` and my various derpjob patches, this covers about 75% of the landscape they care about. The other folks are going to have to write `constexpr` parsers for `unsigned char` data.
+For the people I work with and the companies that early-adopted `#embed` and my various derpjob patches, this covers about 75% of the landscape they care about. The other folks are going to have to write `constexpr` parsers for `unsigned char` data. Sorry, I tried my best, dear reader!
 
 
 ### Well, if we are stuck with only one type, why not `std::byte`?
@@ -108,7 +143,7 @@ For the people I work with and the companies that early-adopted `#embed` and my 
 
 Furthermore, while I think C++ absolutely needs `std::byte`, it's utility as a "strong type" that prevents basic math operations but requires lots of casting and pointer-punning otherwise makes its utility dubious in C. Not to mention that `std::byte` can alias, meaning it takes the same performance penalties as `char` and `unsigned char`. That is, doing byte shenanigans with `char8_t` or your own `enum class octect : unsigned char {};` can result in better assembly because the compiler will be less careful about accidentally aliasing something (but please don't do byte work with `char8_t` because we need that for Unicode, I beg you).
 
-Nevertheless, despite being "less powerful", having a simpler `#embed` **doubles** the motivational power of a feature like `std::embed`!
+Nevertheless, despite being "less flexible", having a simpler `#embed` **doubles** the motivational power of a feature like `std::embed`!
 
 
 
@@ -123,16 +158,35 @@ constexpr std::span<hardware_entry> my_data_span =
 	std::embed<hardware_entry>("mx22_hwell_ppc32.nv");
 ```
 
-is absolutely on the table as a way to spell "get this data and make sure it's stuck in the right place and give me a `span` of `hardware_entry`s pointing to that location while you're at it". With `#embed` unable to use special types intrinsically, `std::embed` has TWO distinct advantages over `#embed`:
+is absolutely on the table as a way to spell "get this data and make sure it's stuck in the right place and give me a `span` of `hardware_entry`s pointing to that location while you're at it". With `#embed` unable to use special types intrinsically, `std::embed` now gets _two_ distinct advantages over `#embed`:
 
-- Ability to use any type that is considered _`trivially-copiable`_ (`std::is_trivially_copiable_v<T>` is true);
-- Ability to parse recursively, using the contents of the file to call `std::embed` again;
+- Ability to use any type that is considered _`trivially-copiable`_ (`std::is_trivially_copiable_v<T>` is true); and,
+- Ability to parse recursively, using the contents of the file to call `std::embed` again.
+
+This also comes alongside the obvious benefits that are similar to `#embed`:
+
 - Ability to apply arbitrary attributes to the function call that the implementation is free to interpret to serve the needs of high performance computing and embedded users; and,
 - Always available at `consteval` time.
 
-This was not exactly unintentional on my part. I wanted both C and C++ to have feature-parity and similar strengths. C has no way to express the above in a simple way without sacrificing the ability of the compiler to perform constant folding and/or exiting any blessing given by the C Standard. I did my best to very carefully maneuver and push for a `#embed` that was exactly as strong as `std::embed` (save for the ability to be called "recursively" (e.g., can parse an arbitrary number of `#include` files inside of a shader, and even the content of those `#include`s from the shader)).
+This was not exactly unintentional on my part. I wanted both C and C++ to have feature-parity and similar strengths. C has no way to express what `std::embed` could do in a simple way without sacrificing the ability of the compiler to perform constant folding and/or exiting any blessing given by the C Standard. I did my best to very carefully maneuver and push for a `#embed` that was exactly as strong as `std::embed` (save for the ability to be called "recursively" (e.g., can parse an arbitrary number of `#include` files inside of a shader, and even the content of those `#include`s from the shader)).
 
-I distinctly knew this opportunity could fail, but I was okay with that failure because it only makes the motivation for a proper, `consteval`, C++-based `std::embed` even beefier. People have already begun to do things thought impossible with [patches and the available `phd::embed`](https://github.com/ThePhD/embed), from vetting typical GLSL shaders (and pulling out `location` directives) at `constexpr` time to parsing `protobuf` files. With `#embed` relegated to being simple, preprocessor-friendly and C compatible, we can now afford to really invest in greater C++ infrastructure such as an advanced `std::bit_cast` and `std::embed`. There are some additional challenges for `std::embed` thanks to the last Committee direction votes it underwent at Prague, but that
+I distinctly knew this opportunity could fail, but I was okay with that failure because it only makes the motivation for a proper, `consteval`, C++-based `std::embed` even beefier. People have already begun to do things thought impossible with [patches and the available `phd::embed`](https://github.com/ThePhD/embed), from vetting typical GLSL shaders (and pulling out `location` directives) at `constexpr` time to parsing `protobuf` files. With `#embed` relegated to being simple, preprocessor-friendly and C compatible, we can now afford to really invest in greater C++ infrastructure such as an advanced `std::bit_cast` and `std::embed`.
+
+It's unfortunate for the C Committee, but as part of their charter it is explicitly that "we want to leave the ambitious, fun, and clever things up to C++". So, well, they'll need to use something similar to the "union trick" (this does not compile, it's just a dream):
+
+```cpp
+int main(int argc, char* argv[]) {
+	double d[] = ((union { unsigned char arr[8]; double d[2]; })(
+		{ #embed "foo/bar/baz.binary" }
+	)).d;
+
+	return 0;
+}
+```
+
+There is more work that would have to be done here to ensure that compilers like GCC and Clang and SDCC could constant fold this is they wanted to. But, honestly, this is what C wants for itself: verbose, explicit spelling and very little "we take care of it for you" obviousness.
+
+Nevertheless, I cannot exactly go screaming ahead with `std::embed`. There are some additional challenges for `std::embed` thanks to the last Committee direction votes it underwent at Prague, but that
 
 is a story for another time!
 
