@@ -19,7 +19,7 @@ Let me not mince words, dear reader: functions ("sinks") are not only a pessimiz
 
 # "Throwing More Gasoline on More Fires, Are We?"
 
-Absolutely, dear reader! A small while back (an eternity in Pandemic Time™) I got into a [miniature twitter debate](https://twitter.com/thephantomderp/status/1253867585151606789) about how the `std::ranges` API commits the cardinal sin of being just as unsafe as its non-ranges counterpart despite having the technology to do better. This arose -- as you can see at the top of that twitter thread -- because the Standards Committee [demanded that we have an unsafe output iterator operation](http://eel.is/c++draft/format#functions-8) for `format_to_n`, and then the Standards Committee subsequently had a nice, long discussion about said operation being unsafe and dangerous. (Which, as a Committee Member, I got to 🍿 and watch as the e-mails rolled by.)
+Absolutely, dear reader! A small while back (an eternity in Pandemic Time™) I got into a miniature twitter debate about how the `std::ranges` API commits the cardinal sin of being just as unsafe as its non-ranges counterpart despite having the technology to do better. This arose -- as you can see at the top of that twitter thread -- because the Standards Committee [demanded that we have an unsafe output iterator operation](http://eel.is/c++draft/format#functions-8) for `format_to_n`, and then the Standards Committee subsequently had a nice, long discussion about said operation being unsafe and dangerous. (Which, as a Committee Member, I got to 🍿 and watch as the e-mails rolled by.)
 
 I'm surprised Victor Zverovich's forehead does not have a permanent palm imprint on it having to deal with that noise.
 

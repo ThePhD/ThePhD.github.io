@@ -109,12 +109,12 @@ During this time, `#embed` and `std::embed` took almost no memory overhead, whil
 > @seanbax Hi!
 > 
 > I wanted to vomit out a large amount of static data that I read in from an fstream at compile-time using circle. I wanted to have that data available for some constexpr calculations. What is the most optimal way to do this in Circle for a 40-50 MB file?
-> – [Me](https://twitter.com/thephantomderp/status/1205175444091392001)
+> – Me
 
 The twitter thread continues, with him discovering slowly what I was doing and why I was doing it. Lo and behold, the conclusion Sean Baxter comes to:
 
 > I'll add a new @embed keyword that takes a type and a file path and loads the file and embeds it into an array prvalue of that type. This will cut out the interpreter and it'll run at max speed. Feed back like this is good. This is super low-hanging fruit.
->  – [Sean Baxter](https://twitter.com/thephantomderp/status/1205175444091392001)
+>  – Sean Baxter
 
 ...
 

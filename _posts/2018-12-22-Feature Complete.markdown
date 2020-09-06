@@ -177,7 +177,7 @@ Note that the code reduction is literally chopping out the namespaces and a bunc
 
 Ah, you got me. It's Feature Complete, but it's not Release-Ready. The code is fine, but:
 
-- Documentation needs to be updated for how the new usertype stuff is done. This includes tutorials and API reference documentation. All examples are built as part of the tests though, which are passing! This means that the examples can serve as decent-enough documentation for the time being. Remember you can pop into the sol2 Discord: we're a pretty helpful bunch and help people not only get started but solve complex problems too! You can also [@thephantomderp](https://twitter.com/thephantomderp) on Twitter if you're a dork.
+- Documentation needs to be updated for how the new usertype stuff is done. This includes tutorials and API reference documentation. All examples are built as part of the tests though, which are passing! This means that the examples can serve as decent-enough documentation for the time being. Remember you can pop into the sol2 Discord: we're a pretty helpful bunch and help people not only get started but solve complex problems too!
 - The API reference documentation features me copy-pasting or hand-writing code that properly indicates the semantics of sol2. It would probably be better if I could just reference the actual block of constructors in the code, rather than creating (typo-filled) markup.
 - I want to make a shiny sol3 logo. ... But I suck at drawing. So, that's a thing.
 - The testing infrastructure sucks. Because my CMake skills suck.

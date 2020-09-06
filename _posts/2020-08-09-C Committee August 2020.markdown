@@ -20,7 +20,7 @@ The C Committee meeting -- originally scheduled for Freiburg, Germany but not ha
 
 As a side note I've also become the Project Editor for C so before you take this as an uninformed rant of a person too lazy to "make things better", let me assure that I am, indeed, incredibly invested in making sure C can begin to meet the needs of developers without needing 50 vendor-specific extensions to build remotely nice/usable libraries and applications.
 
-Still, I made a claim (the C Language will never stop you from making mistakes), and therefore I need to substantiate it. We could look at the thousands of CVEs and the inherent issues with tons of C Code, or the need for MISRA to vigorously police every last little potential C feature to prevent misuse ([hello, K&R prototype declarations](https://twitter.com/thephantomderp/status/1290824683399663616)...), or other more intricate and fun bugs related to portability and undefined behavior. But instead, we are just going to take the words from the horse's mouth: the Committee itself.
+Still, I made a claim (the C Language will never stop you from making mistakes), and therefore I need to substantiate it. We could look at the thousands of CVEs and the inherent issues with tons of C Code, or the need for MISRA to vigorously police every last little potential C feature to prevent misuse (hello, K&R prototype declarations...), or other more intricate and fun bugs related to portability and undefined behavior. But instead, we are just going to take the words from the horse's mouth: the Committee itself.
 
 
 # Ooh, 🍿 time?!

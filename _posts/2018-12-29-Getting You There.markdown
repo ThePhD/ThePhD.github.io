@@ -8,7 +8,7 @@ tags: [C++, standardization, logistics, ✈️, 👛]
 excerpt_separator: <!--more-->
 ---
 
-As part of a series of "[I open my big mouth](https://twitter.com/thephantomderp/status/1079001746402365440) and [volunteer to do more things](https://twitter.com/thephantomderp/status/1079164306137235457)", I am going to do my best to be brief and do more than just give observations about the C++ Standards Committee, but give you some of the tools on<!--more--> how to get there. This also comes in the wake of [a big conversation a lot of folk started](https://twitter.com/_Felipe/status/1078932775103803393) over on how exactly we can influence the C++ Standards Committee's direction better by getting our voices heard and being present when decisions are made.
+As part of a series of "I open my big mouth and volunteer to do more things", I am going to do my best to be brief and do more than just give observations about the C++ Standards Committee, but give you some of the tools on<!--more--> how to get there. This also comes in the wake of [a big conversation a lot of folk started](https://twitter.com/_Felipe/status/1078932775103803393) over on how exactly we can influence the C++ Standards Committee's direction better by getting our voices heard and being present when decisions are made.
 
 I won't talk about [SG14](https://github.com/WG21-SG14/SG14) and such, but you should know that SG14 is the Low-Latency / Games group and they do a _lot_ of work to try and handle where a good chunk of these concerns come from. At the bottom of this post are a bunch of links to Study Groups I have personally participated in at least twice, and can direct you to some of their resources.
 

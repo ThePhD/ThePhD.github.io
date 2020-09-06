@@ -19,7 +19,7 @@ To my utter embarrassment, I did not realize it was Scott Meyers. I had tried al
 
 ![... Wot.](/assets/img/2018-11-26/surprised-cat.jpg "u wot, m8?")
 
-I maybe had a little [fanboy mental short circuit](https://twitter.com/thephantomderp/status/1043715145061416960). I even misspelled the location like a champ. Thankfully, this was a good run-in! I even got to talk a little bit about my future with him and he even shared some of how his life went, which definitely gave me quite the perspective.
+I maybe had a little fanboy mental short circuit. I even misspelled the location like a champ when I tweeted about it. Thankfully, this was a good run-in! I even got to talk a little bit about my future with him and he even shared some of how his life went, which definitely gave me quite the perspective.
 
 It wasn't just Scott Meyers, though. I got to see even more C++ legends, and I handled it a lot better because I got the super fanboy out of my system! I met Kate Gregory, Patricia Aas, Nicole Mazzuca, Isabella Muerte, Simon Brand, Andrei Alexandrescu and **quite** a few other really amazing folks. There were also individuals who only after meeting them did I realize the full weight of how lucky I was to shake their hand: from Rob Maynard (of CMake fame) to Rob Irving (of CppCast!) to Hubert Tong (who I saw at Core in Rapperswil!) and countless others, I couldn't believe the sheer concentration of individuals there who had this vast pool of C++ (and C++-related) knowledge.
 
