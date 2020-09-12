@@ -54,11 +54,11 @@ If your hands shake at the thought of not using BEAUTIFUL, LAYOUT-POWERFUL, HAND
 
 ### The C Standard is Mostly Nice
 
-Don't get me wrong: LaTeX is garbage, but the Standard I was handed is of pretty good quality for a LaTeX document. It was easy to build and edit, I did not get lost once I had all the proper things installed (I did not decide to try to figure out the "minimum required distribution" and instead just shotgun `apt get install`d `texlive-full`), and the files were orderly. Referencing things is kind of terrible but that's more of a LaTeX problem than a structure problem. I am also lucky to even be getting a LaTeX document: the standard used to be written in some God Awful Rotten Badness by the name of "TROFF". I don't know too much about it,
+Don't get me wrong: LaTeX is garbage, but the Standard I was handed is of pretty good quality for a LaTeX document. It was easy to build and edit, I did not get lost once I had all the proper things installed (I did not decide to try to figure out the "minimum required distribution" and instead just shotgun `apt get install`d `texlive-full`), and the files were orderly. Referencing things is kind of terrible but that's more of a LaTeX problem than a structure problem. I am also lucky to even be getting a LaTeX document: the standard used to be written in some God Awful Rotten Badness by the name of "TROFF". I don't know too much about it, and from the little that I did learn
 
-and I plan to keep it that way.
+I plan to keep it that way. 😄
 
-There's also the use of `latexdiff` and other things to produce nice diffmarks. It works out pretty decently, albeit some of the difference marks are incredibly noisy. Not that it matters: as long as it highlights the general area of changes, it produces a pretty good proxy of "places to look for things that have changed". It does ignore new added files, which is why the lists at the beginning of the Working Paper that detail the list of documents added from each meeting. Having a nice LaTeX document with some really nice organization left to me by the last editor made the next part of this article the easiest...
+There's also the use of `latexdiff` and other things to produce nice diffmarks. It works out pretty decently, some of the marks are incredibly noisy. Still: as long as it highlights the general area of changes, it produces a pretty good proxy of "places to look for things that have changed". It does ignore newly added files, which is why the lists at the beginning of the Working Paper -- which detail the list of documents added from each meeting -- are not all blue-highlighted. Having a nice LaTeX document with some really nice organization left to me by the last editor made the next part of this article the easiest...
 
 
 
@@ -70,12 +70,14 @@ Sweet, You Wrote a [Sick-Nasty Rad Paper](http://www.open-std.org/jtc1/sc22/wg14
 > RECOMMENDATION: 3.4.3p4 should use a different example of undefined behavior, such as:
 > > EXAMPLE An example of undefined behavior is the behavior on dereferencing a null pointer.
 
-I then take these recommendations/instructions/suggestions and then go beat the LaTeX up on your behalf. One of the biggest benefits of this is that you don't have to know LaTeX. Or how to build the standard, or any part of that. The Project Editor is the "Layer of Indirection" between you and the actual text of the standard. This also means that I could, in theory, rewrite the entire Standard as a Microsoft Word Document, or rewrite the entire thing in restructuredText and not one of you would know the difference. Or, so that's the ideal situation, anyhow. Unfortunately, following people's Standard-editing directives not always the most straight forward...
+I then take these recommendations/instructions/suggestions and then go beat the LaTeX up on your behalf. One of the biggest benefits of this is that you don't have to know LaTeX. Or how to build the standard, or any part of that. The Project Editor is the "Layer of Indirection" between you and the actual text of the standard. This also means that I could, in theory, rewrite the entire Standard as a Microsoft Word Document, or rewrite the entire thing in restructuredText and not one of you would know the difference. Or, so that's the ideal situation, anyhow. Unfortunately, following people's Standard-editing directives are not always the most straight forward...
 
 
 ### Instructions Unclear?!
 
-What the hell does "3.4.3p4" mean? Well, I have to build the standard (or go look at the old one), figure out what section/paragraph you're referring to, and then fix it. Normally, the C standard evolves at such a devastatingly snail-like pace that this is normally not a problem. However, doing this was a bit tough because of 3 meetings of backlogged changes. There were lots of overlaps between papers, and also just out-and-out strange descriptions. Weird nesting in the recent C Floating Point Group's changes to the standard have been all sorts of fun to integrate.
+Accidentally blew off foot.
+
+What the hell does "3.4.3p4" mean? Well, I have to build the standard (or go look at an older one), figure out what section/paragraph you're referring to, and then fix it. Normally, the C standard evolves at such a devastatingly snail-like pace that this is normally not a problem. However, doing this was a bit tough because of 3 meetings of backlogged changes. There were lots of overlaps between papers, and also just out-and-out strange descriptions for how to change some things that I did not understand at first. Weird nesting in the recent C Floating Point Group's changes to the standard have been all sorts of fun to integrate.
 
 "Delete these paragraphs, then add some here" okay, is that before or after the stuff you just asked me to destroy? Oh, I just applied a paper that deletes half of what you're asking me to edit. Uh, well, I guess we're going to have to brew up some interesting words on the fly...!
 
@@ -83,7 +85,7 @@ What the hell does "3.4.3p4" mean? Well, I have to build the standard (or go loo
 
 It's an interesting bucket of challenges, really. I think one of the ways to help make it so I can more reliably know what sections to edit are by adding stable tags to the standard. C++ has done this and it means when someone says "edit `[alg.any.of]`", you know where to go no matter what happens to the section and paragraph numbers. `25.6.2`... what's that, what am I doing again?
 
-Some frustrations go beyond just the papers themselves, though.
+Some frustrations go beyond just the papers' contents, though.
 
 
 ### N2481? Nooo, you mean N2553!
@@ -92,7 +94,7 @@ One of the biggest problems in both the C and C++ Committees are history. C++ be
 
 How do you track revision history? You hope the author puts it in the paper title or inside the paper itself. It's basically up to the author to do this, and not all authors do it. This is a larger problem that is more strictly outside of my purview as Project Editor, but it is something that I am going to tackle anyways.
 
-I had some inspiration thanks to the work done by Lynn Kirby, wherein Lynn created a [wg14.link website, similar to the wg21.link website](https://wg14.link). This has given me a lot of insight into what people want out of a service like this, and how I should book keep papers and their metadata. Hopefully before Summer of 2021, I will be able to unveil a new way to track these papers and keep title, author, abstract, and history information and make the Paper Submission Process far more friendly to the wider C Community!
+I had some inspiration thanks to the [work done by LynnKirby](https://github.com/LynnKirby/wg14-link), wherein Lynn created a [wg14.link website, similar to the wg21.link website](https://wg14.link). This has given me a lot of insight into what people want out of a service like this, and how I should book keep papers and their metadata. Hopefully before Summer of 2021, I will be able to unveil a new way to track these papers and keep title, author, abstract, and history information and make the Paper Submission Process far more friendly to the wider C Community!
 
 Still, this is a lot of rambling and anymore stuff will start to get way off topic to what it means to actually edit the C Standard. Hopefully this gave you a nice little look into the world of paper/proposal wrangling!
 
