@@ -10,6 +10,9 @@ excerpt_separator: <!--more-->
 
 ... I did it. I survived the Paper Blitz.<!--more-->
 
+
+
+
 # Huh?
 
 For those of you who saw one of my earlier posts about [why most C implementations will purposefully blow your leg off even in the simplest of scenarios](/your-c-compiler-and-standard-library-will-not-help-you), you may have noticed that I said I became the Project Editor for C. That's a fancy way of saying I glue the standard together and produce both the Working Drafts/Working Papers (WDs/WPs), an Editor's Report, and a Diffmark of the WD against the last published WD.
@@ -55,7 +58,7 @@ Don't get me wrong: LaTeX is garbage, but the Standard I was handed is of pretty
 
 and I plan to keep it that way.
 
-Having a nice LaTeX document with some really nice organization left to me by the last editor made the next part of this article the easiest...
+There's also the use of `latexdiff` and other things to produce nice diffmarks. It works out pretty decently, albeit some of the difference marks are incredibly noisy. Not that it matters: as long as it highlights the general area of changes, it produces a pretty good proxy of "places to look for things that have changed". It does ignore new added files, which is why the lists at the beginning of the Working Paper that detail the list of documents added from each meeting. Having a nice LaTeX document with some really nice organization left to me by the last editor made the next part of this article the easiest...
 
 
 
@@ -67,12 +70,12 @@ Sweet, You Wrote a [Sick-Nasty Rad Paper](http://www.open-std.org/jtc1/sc22/wg14
 > RECOMMENDATION: 3.4.3p4 should use a different example of undefined behavior, such as:
 > > EXAMPLE An example of undefined behavior is the behavior on dereferencing a null pointer.
 
-I then take these recommendations/instructions/suggestions and then go beat the LaTeX up on your behalf. One of the biggest benefits of this is that you don't have to know LaTeX. Or how to build the standard, or any part of that. The Project Editor is the Layer of Indirection™ between you and the actual text of the standard. Unfortunately, it's not always the most straight forward...
+I then take these recommendations/instructions/suggestions and then go beat the LaTeX up on your behalf. One of the biggest benefits of this is that you don't have to know LaTeX. Or how to build the standard, or any part of that. The Project Editor is the "Layer of Indirection" between you and the actual text of the standard. This also means that I could, in theory, rewrite the entire Standard as a Microsoft Word Document, or rewrite the entire thing in restructuredText and not one of you would know the difference. Or, so that's the ideal situation, anyhow. Unfortunately, following people's Standard-editing directives not always the most straight forward...
 
 
 ### Instructions Unclear?!
 
-What the hell does "3.4.3p4" mean? Well, I have to build the standard (or go look at the old one), figure out what section/paragraph you're referring to, and then fix it. Normally, the C standard evolves at such a devastatingly snail-like pace that this is normally not a problem. However, doing this was a bit tough because of 3 meetings of backlogged changes. There were lots of overlaps between papers, and also just out-and-out strange descriptions and weird nesting in the recent C Floating Point Group's changes to the standard have been all sorts of fun.
+What the hell does "3.4.3p4" mean? Well, I have to build the standard (or go look at the old one), figure out what section/paragraph you're referring to, and then fix it. Normally, the C standard evolves at such a devastatingly snail-like pace that this is normally not a problem. However, doing this was a bit tough because of 3 meetings of backlogged changes. There were lots of overlaps between papers, and also just out-and-out strange descriptions. Weird nesting in the recent C Floating Point Group's changes to the standard have been all sorts of fun to integrate.
 
 "Delete these paragraphs, then add some here" okay, is that before or after the stuff you just asked me to destroy? Oh, I just applied a paper that deletes half of what you're asking me to edit. Uh, well, I guess we're going to have to brew up some interesting words on the fly...!
 
