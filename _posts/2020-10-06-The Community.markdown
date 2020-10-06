@@ -24,7 +24,7 @@ It wasn't really their fault, but it was clear nothing I could say in the presen
 
 there was really nothing I could do to get through to them about this, could I?
 
-No matter what I did, I was just another SJW, getting triggered by the ever level-headed moderates of our time. Nothing wrong with how they approach or think about the problem, nothing wrong in the way they engage a massively-scaled systemic bias. Nope, just gotta be more neutral and center about it all... there was never going to be a place for me in there, I was just prolonging an inevitability. Anyways,
+No matter what I did. I was just another SJW, getting triggered by the ever level-headed moderates of our time. Nothing wrong with how they approach or think about the problem, nothing wrong in the way they engage a massively-scaled systemic bias. Nope, just gotta be more neutral and center about it all... there was never going to be a place for me in there, I was just prolonging an inevitability. Anyways,
 
 you can watch the talk here by clicking on the extremely concerned sheep:
 
@@ -37,7 +37,7 @@ There is one point that I feel that I have not expanded upon enough, even if I h
 
 Is this an act of exclusion on par with U.S. Jim Crow, South Africa Apartheid, or other forms of detrimental discrimination?
 
-My friends contended that yes, yes it was. As it was, morally, it is a reprehensible thing to do. And that is agreeable, until you view the context and the world in which these spaces are being created. As I hinted at in the presentation, this is the state of Black role models and Black speakers in Systems Programming conferences:
+My friends contended that yes, yes it was. Morally, it is a reprehensible thing to do. And that is agreeable, until you view the context and the world in which these spaces are being created. As I hinted at in the presentation, this is the state of Black role models and Black speakers in Systems Programming conferences:
 
 [![Representation of Conferences](assets/img/2020-10-06/Preview0.png)](https://youtu.be/vaLKm9FE8oo?t=3748)
 
@@ -68,3 +68,10 @@ Until the other conferences reach a strict equal meritocracy -- as people +1 and
 You don't want to see these specific conferences and their speaker lineups look so lopsided, just like literally every conference you have put together in the past 20 years? Alright. Fulfill your stated mission. Create the strict equal meritocracy that does not so grotesquely violate the tenants of your own community. I'll be happy to sing your praises,
 
 when you do. 💚
+
+
+### P.S.
+
+Yes, I nuked the sol2 Discord server. Some of the quotes and things I said came right out of there. I can't control other servers and some others are thankfully private, but people would notice if certain folk suddenly got banned. Scorched and Salted Earth was the best way to ensure that these quotes would not be used against the people in question in the future.
+
+Let's hope I made the right decision in thinking they were nice enough people not to say or DM me that kind of shit again, and that I did not ruin some other minority's day or week with what they'd do come the days after the days of tomorrow...
