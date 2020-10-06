@@ -74,4 +74,6 @@ when you do. 💚
 
 Yes, I nuked the sol2 Discord server. Some of the quotes and things I said came right out of there. I can't control other servers and some others are thankfully private, but people would notice if certain folk suddenly got banned. Scorched and Salted Earth was the best way to ensure that these quotes would not be used against the people in question in the future.
 
+The goal is not a witch hunt or a dog pile. The goal is **systemic improvement**. Taking the piss out of a single person does nothing to address the actual immense problem of why the **entire community** kept trudging along like this whole setup was okay for ages.
+
 Let's hope I made the right decision in thinking they were nice enough people not to say or DM me that kind of shit again, and that I did not ruin some other minority's day or week with what they'd do come the days after the days of tomorrow...
