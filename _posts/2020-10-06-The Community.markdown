@@ -30,7 +30,7 @@ you can watch the talk here by clicking on the extremely concerned sheep:
 
 [![YouTube Video by ThePhD titled "The... Community?"](assets/img/2020-10-06/Thumbnail.png)](https://www.youtube.com/watch?v=vaLKm9FE8oo)
 
-There is one point that I feel that I have no expanded upon enough, even if I hinted at it towards the end of the video. That is, the following:
+There is one point that I feel that I have not expanded upon enough, even if I hinted at it towards the end of the video. That is, the following:
 
 
 ### Making Your Own Spaces
