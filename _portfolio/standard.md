@@ -12,13 +12,13 @@ I have quite a few C++ proposals I am working on and percolating through the C++
 
 ### Actively Pursued Evolution Proposals:
 
-C++ | p1040: std::embed | [Published](https://wg21.link/p1040) | [Latest Draft](/vendor/future_cxx/papers/d1040.html)
-C++ | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/vendor/future_cxx/papers/d1629.html)
-C++ | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/vendor/future_cxx/papers/d1664.html)
+C++       | p1040: std::embed | [Published](https://wg21.link/p1040) | [Latest Draft](/vendor/future_cxx/papers/d1040.html)
+C++       | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/vendor/future_cxx/papers/d1629.html)
+C++       | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/vendor/future_cxx/papers/d1664.html)
 C++ and C | n2592 + p1967: Preprocessor embed - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/vendor/future_cxx/papers/source/n2592)
-C | n2593: Not-So-Magic: `typeof()` for C | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2593.pdf) | [Latest Draft](/vendor/future_cxx/papers/source/n2593)
-C | n2594: Mixed Wide String Literal Concatenation | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2594.pdf) | [Latest Draft](/vendor/future_cxx/papers/source/n2594)
-C | n2595: Restartable and Non-Restartable Functions for Efficient Character Conversions | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2595.pdf) | [Latest Draft](/vendor/future_cxx/papers/source/n2595)
+C         | n2593: Not-So-Magic: `typeof()` for C | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2593.htm) | [Latest Draft](/vendor/future_cxx/papers/source/n2593)
+C         | n2594: Mixed Wide String Literal Concatenation | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2594.htm) | [Latest Draft](/vendor/future_cxx/papers/source/n2594)
+C         | n2595: Restartable and Non-Restartable Functions for Efficient Character Conversions | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2595.pdf) | [Latest Draft](/vendor/future_cxx/papers/source/n2595)
 
 
 ### Approved Proposals:
@@ -39,7 +39,6 @@ C++ | p0330: Literal Suffixes for `ptrdiff_t` and `size_t` | [Published](https:/
 
 C++ | p1214: Callables Cleanup! - Overloading and Pointer-to-Members | [Published](https://wg21.link/p1214) | [Latest Draft](/vendor/future_cxx/papers/d1214.html)
 C++ | p1039: I got you, FAM - Flexible Array Members for C++| [Published](https://wg21.link/p1039) | [Latest Draft](/vendor/future_cxx/papers/d1039.html)
-C++ | p1378: `consteval is_string_literal(T*)` | Not Published | [Latest Draft](/vendor/future_cxx/papers/d1378.html)
 
 
 ### Educational
@@ -65,3 +64,4 @@ These proposals are challenging and may require significant rework or language e
 C++ | p0051: `std::overload` | Not Published | [Latest Draft](/vendor/future_cxx/papers/d0051.html)
 C++ | p1803: packexpr(args, I) -- compile-time friendly pack inspection | [Published](https://wg21.link/p1803) | [Latest Draft](/vendor/future_cxx/papers/d1803.html)
 C++ | p1193: Explicitly Specified Returns for (Implicit) Conversions | [Published](https://wg21.link/p1193) | [Latest Draft](/vendor/future_cxx/papers/d1193.html)
+C++ | p1378: `consteval is_string_literal(T*)` | Not Published | [Latest Draft](/vendor/future_cxx/papers/d1378.html)
