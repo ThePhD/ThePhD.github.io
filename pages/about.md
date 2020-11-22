@@ -8,9 +8,11 @@ tags: [about, hello, 👋]
 
 # Hey there!
 
-My name is JeanHeyd Meneide. I am a Software Engineer and the Project Editor for ISO/IEC JTC1 SC22 WG14 - Programming Languages, C. I specialize in ergonomic library design and performance tuning. My favorite work includes programming that enables even the newest programmers to produce high-quality code that pushes them and others towards the pit of success.
+My name is JeanHeyd Meneide. I am a Software Engineer and the [Project Editor for ISO/IEC JTC1 SC22 WG14 - Programming Languages, C](http://www.open-std.org/jtc1/sc22/wg14/www/contacts). I specialize in ergonomic library design and performance tuning. My favorite work includes programming that enables even the newest programmers to produce high-quality code that pushes them and others towards the pit of success.
 
-You can send inquiries for work to [Shepherd](mailto:shepherd@soasis.org) of Shepherd's Oasis!
+Add me on [LinkedIn](https://www.linkedin.com/in/thephd/), follow me on [Twitter](https://twitter.com/__phantomderp/), and keep track of what I'm doing on [GitHub](https://github.com/ThePhD)!
+
+You can send inquiries for work to [Shepherd of Shepherd's Oasis](https://soasis.org/contact)! Don't forget to [follow the company on LinkedIn as well](https://www.linkedin.com/company/shepherdsoasis) and [at GitHub](https://github.com/soasis). (You should also totally bother Shepherd for nudging me back onto LinkedIn as well by [connecting and following them](https://www.linkedin.com/in/shepherdsoasis-founder/), too!)
 
 In my free time I try to write and draw, which has naturally led me to creating this place here! I'll be posting... well, anything and everything that comes to mind that I think might be worth sharing. Feel free to poke around and examine things!
 
