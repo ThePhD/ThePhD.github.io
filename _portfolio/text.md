@@ -58,7 +58,7 @@ The work is ongoing.
 The C++ library submodules and builds on top of the C one for fast-path functions. Internally, the C library is implemented with C++ and -- hopefully soon in the future -- vectorized by hand or with [SIMD/`std::experimental::simd`](https://en.cppreference.com/w/cpp/experimental/simd/simd). Document trails:
 
 - [Latest Draft C++](/vendor/future_cxx/papers/d1629)
-- [Latest Draft, C](/vendor/future_cxx/papers/source/n2440)
+- [Latest Draft, C](/vendor/future_cxx/papers/source/n2595)
 
 
 The principles and inner workings of the implementation are detailed in a series of talks, slides and posts:
