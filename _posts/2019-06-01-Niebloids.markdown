@@ -14,7 +14,7 @@ I had a C++Now 2019 talk on extension points called "The Plan for Tomorrow".
 
 ![The Plan for Tomorrow - a C++Now 2019 talk on Extension Points](/assets/img/2019-06-01/The Plan for Tomorrow.jpg)
 
-While the video is not out yet, the slides are available [here](/presentations/sol2/C%2B%2B%20Now/2019/The%20Plan%20for%20Tomorrow%20-%20Compile-Time%20Extension%20Points%20in%20C%2B%2B.pdf). Before the video comes out, there's one topic I alluded to in my [C++Now 2019 Trip Report](/c++now-2019-trip-report) that I need to write down since at the time on stage I had forgotten to speak about it (not that I think I would have: I was just barely under time, and people already said I was talking fast)!
+While the video is not out yet, the slides are available [here](/_presentations/sol2/C%2B%2B%20Now/2019/The%20Plan%20for%20Tomorrow%20-%20Compile-Time%20Extension%20Points%20in%20C%2B%2B.pdf). Before the video comes out, there's one topic I alluded to in my [C++Now 2019 Trip Report](/c++now-2019-trip-report) that I need to write down since at the time on stage I had forgotten to speak about it (not that I think I would have: I was just barely under time, and people already said I was talking fast)!
 
 
 # But first: Niebloid?!

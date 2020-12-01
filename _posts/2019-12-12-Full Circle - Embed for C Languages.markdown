@@ -24,7 +24,7 @@ Weeks of carving through the compiler against the advisement of several people (
 
 I finished it for the November 2019 Belfast C++ Standards Meeting. I was overjoyed: this timing meant that lulls in the NB Comment processing could allow for P1040 to be reviewed. At the request of Hana Dusíková and her eternal wisdom, I created a presentation for it overnight. The goal was to present to Evolution Working Group (EWG) - the main Language Design group of the C++ Committee - and Study Group 7 (SG7) - the Compile-Time Programming group - during the week and get their ideas.
 
-[Equipped](/presentations/standards/C++/2019%20November%20Belfast/p1040/P1040%20-%20std%20embed.html) as best I could with Wording, Implementation, and fixes for various complaints, I did my presentation first in EWG.
+[Equipped](/_presentations/standards/C++/2019%20November%20Belfast/p1040/P1040%20-%20std%20embed.html) as best I could with Wording, Implementation, and fixes for various complaints, I did my presentation first in EWG.
 
 It went well.
 

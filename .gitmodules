@@ -1,7 +1,7 @@
-[submodule "vendor/future_cxx"]
-	path = _vendor/future_cxx/future_cxx
+[submodule "_vendor/future_cxx"]
+	path = _vendor/future_cxx
 	url = https://github.com/ThePhD/future_cxx.git
-[submodule "vendor/reveal.js"]
+[submodule "_vendor/reveal.js"]
 	path = _vendor/reveal.js
 	url = https://github.com/hakimel/reveal.js.git
 	branch = dev
