@@ -40,6 +40,9 @@ collections:
 
 # BUILD SETTINGS
 plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed, jekyll-redirect-from]
+collections:
+  top_pages:
+    output: true
 whitelist:
   - jekyll-redirect-from
 exclude:
@@ -55,21 +58,22 @@ exclude:
   - "gulpfile.js"
   - ".idea/*"
   - ".github/*"
-  - "vendor/future_cxx/vendor/*"
-  - "vendor/reveal.js/node_modules/*"
-  - "vendor/reveal.js/test/*"
-  - "vendor/reveal.js/*.json"
-  - "vendor/reveal.js/*.md"
-  - "vendor/reveal.js/demo.html"
-  - "vendor/reveal.js/gruntfile.js"
-  - "vendor/reveal.js/LICENSE"
+  - "_vendor/future_cxx/vendor/*"
+  - "_vendor/reveal.js/node_modules/*"
+  - "_vendor/reveal.js/test/*"
+  - "_vendor/reveal.js/*.json"
+  - "_vendor/reveal.js/*.md"
+  - "_vendor/reveal.js/demo.html"
+  - "_vendor/reveal.js/gruntfile.js"
+  - "_vendor/reveal.js/LICENSE"
 include:
-  - "vendor/future_cxx/papers/*"
-  - "vendor/reveal.js/lib/*"
-  - "vendor/reveal.js/plugin/*"
-  - "vendor/reveal.js/css/*"
-  - "vendor/reveal.js/js/*"
-  - "vendor/reveal.js/index.html"
+  - "_vendor"
+  - "_vendor/future_cxx/papers"
+  - "_vendor/reveal.js/lib"
+  - "_vendor/reveal.js/plugin"
+  - "_vendor/reveal.js/css"
+  - "_vendor/reveal.js/js"
+  - "_vendor/reveal.js/index.html"
 
 # theme: type-on-strap                                  # if using the theme as a jekyll theme gem
 remote_theme: sylhare/Type-on-Strap                     # If using as a remote_theme in github
