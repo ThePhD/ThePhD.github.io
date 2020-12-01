@@ -218,6 +218,17 @@
 </li>
 {% endif %}
 
+{% if site.theme_settings.telegram %}
+<li>
+	<a href="https://t.me/{{ site.theme_settings.telegram }}" title="Telegram" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-telegram fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+{% endif %}
+
 {% if site.theme_settings.vimeo %}
 <li>
 	<a href="https://vimeo.com/{{ site.theme_settings.vimeo }}" title="{{ site.theme_settings.str_follow_on }} Vimeo" class="type">
