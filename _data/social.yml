@@ -1,0 +1,42 @@
+# Icons on the footer
+rss: true
+email_address:
+  - phdofthehouse@gmail.com
+github: "ThePhD"
+linkedin: https://www.linkedin.com/in/thephd/ # Full URL
+reddit: __phantomderp
+telegram: thephantomderp
+twitter: __phantomderp # "twitter username"
+youtube: UCbPn0sw5rIgfT0vlSBvCWlA # Youtube channel token like: UCqECaJ8Gagnn7YCbPEzWH6g
+behance:
+bitbucket:
+dribbble:
+facebook:
+flickr:
+gitlab:
+instagram:
+keybase:
+pinterest:
+soundcloud:
+stack_overflow:
+stack_exchange:   # Full URL
+steam:
+tumblr:
+vimeo:
+wordpress:
+
+# rss specify feed path
+feed:
+  path: feed.xml
+
+# Share button options
+share:
+  facebook: true
+  twitter: true
+  reddit: true
+  linkedin: true
+  email: true
+  tumblr:
+  pinterest:
+  pocket:
+  wordpress:

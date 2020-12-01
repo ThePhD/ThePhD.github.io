@@ -1,32 +1,29 @@
 <header class="site-header">
-    
+
     <!-- Logo and title -->
 	<div class="branding">
+        {% if site.avatar %}
 		<a href="{{ '/' | relative_url }}">
-			<img alt="logo img" class="avatar" src="{{ site.theme_settings.avatar | relative_url }}" />
+			<img alt="logo img" class="avatar" src="{{ site.avatar | relative_url }}" />
 		</a>
-
-		<h1 class="site-title">
-			<a aria-label="{{ site.title }}" href="{{ '/' | relative_url }}">
+        {% endif %}
+        <a class="site-title" aria-label="{{ site.title }}" href="{{ '/' | relative_url }}">
         {{ site.title }}
-      </a>
-		</h1>
+		</a>
 	</div>
-    
+
     <!-- Toggle menu -->
     <nav class="clear">
     <a aria-label="pull" id="pull" class="toggle" href="#">
     <i class="fa fa-bars fa-lg"></i>
     </a>
-    
+
     <!-- Menu -->
     <ul class="hide">
         {% assign name_page = "" %}
-        {% assign forbidden0 = "/presentations/" %}
-        {% assign forbidden1 = "/vendor/reveal.js/" %}
 
         {% for page in site.pages %}
-            {% unless page.title == null or page.hide or name_page contains page.title or page.url contains forbidden0 or page.url contains forbidden1 %}
+            {% unless page.title == null or page.hide or name_page contains page.title %}
             <li class="separator"> | </li>
             <li>
                 <a class="clear" aria-label="{{ page.title }}" title="{{ page.title }}" href="{{ page.url | relative_url }}">
@@ -38,6 +35,6 @@
             {% assign name_page = page.title | append: name_page %}
         {% endfor %}
     </ul>
-        
+
 	</nav>
 </header>

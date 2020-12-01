@@ -6,3 +6,5 @@ _site
 Gemfile.lock
 .vscode/tasks.json
 .vscode
+.jekyll-cache
+.jekyll-metadata

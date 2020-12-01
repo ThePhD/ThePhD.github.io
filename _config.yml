@@ -1,104 +1,36 @@
 # SITE CONFIGURATION
 baseurl: ""
 url: "https://thephd.github.io"
-title: The Pasture # site's title
-description: "The musings, ideas, discussions, and sometimes silly words from a programming sheep & shepherd" # used by search engines
-
 
 # THEME-SPECIFIC CONFIGURATION
-theme_settings:
-  # Meta
-  title: The Pasture # blog's title
-  avatar: assets/img/thephd.png
-  favicon: assets/favicon.ico
-  gravatar: # Email MD5 hash
-  # Header and footer text
-  header_text: "♡"
-  header_feature_image: assets/img/pexels/triangular.jpeg
-  footer_text: >
-   Copyright © 2018-2020 ThePhD -- Powered by <a href="https://jekyllrb.com/">Jekyll</a> with a modified <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap!</a>
+title: The Pasture
+description: "The musings, ideas, discussions, and sometimes silly words from a programming sheep & shepherd"
+avatar: assets/img/thephd.png
+favicon: assets/favicon.png
 
-  # Icons
-  rss: true  # Make sure you created a feed.xml with feed.xml layout
-  email_address: phdofthehouse@gmail.com # Full email address, e.g. "sam@example.com"
-  behance:
-  bitbucket:
-  dribbble:
-  facebook:
-  flickr:
-  gitlab:
-  github: "ThePhD"
-  google_plus:
-  instagram:
-  keybase:
-  linkedin: thephd
-  patreon: soasis
-  pinterest:
-  reddit:
-  soundcloud:
-  stack_exchange:  # Full URL
-  steam:
-  telegram: thephantomderp
-  tumblr:
-  twitter: __phantomderp
-  vimeo:
-  wordpress:
-  youtube:
-  
-  # Sharing options
-  share_buttons:
-    facebook: false
-    twitter: true
-    google_plus: false
-    tumblr:
-    pinterest:
-    pocket:
-    reddit: true
-    linkedin: true
-    wordpress:
-    email: true
+# Header and footer text
+header_text: ♡
+header_feature_image: assets/img/pexels/triangular.jpeg
+footer_text: >
+  Copyright © 2018-2020 ThePhD -- Powered by <a href="https://jekyllrb.com/">Jekyll</a> with a modified <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap!</a>
 
-  # Scripts / Features 
-  google_analytics: # Tracking ID, e.g. "UA-000000-01"
-  disqus_shortname:
-  katex: true # Enable if using math markup
-  
-  special_page:
-    search: 
-      icon: "search"
-      enabled: true
-    tags:
-      icon: "tags"
-      enabled: true
-  
-  # Localization strings
-  str_follow_on: "Follow on"
-  str_rss_follow: "Follow RSS feed"
-  str_share_on: "Share on"
-  str_add_to: "Add to"
-  str_email: "Email"
-  str_tweet: "Tweet"
-  str_become_patron: "Become a Patron"
-  str_pin_it: "Pin it"
-  str_next_post: "Next post"
-  str_previous_post: "Previous post"
-  str_next_page: "Next"
-  str_previous_page: "Prev"
-  str_continue_reading: "Continue reading"
-  str_javascript_required_disqus: "Please enable JavaScript to view comments."
+# Blog
+excerpt: true                                           # Or "truncate" (first 250 characters), "false" to disable
+post_navigation: true
+color_image: /assets/img/lineart.png                    # A bit transparent for color posts.
 
-  # Colours, typography and padding
-  # Open the "_sass > base" folder, and open "_variables.scss"
-  google_fonts: "Source+Sans+Pro:400,700,700italic,400italic"
+# Features
+# More in the _data folder for social icons, share buttons, author and language
+# For layout customization, go to the "_sass > base" folder, and check "_variables.scss"
+katex: true                                             # Enable if using math markup
+mermaid: true                                           # Enable mermaid-js for sequence and diagrams
+google_analytics:                                       # Tracking ID, e.g. "UA-000000-01"
+cookie_consent: false                                   # To respect the usage of cookies
+disqus_shortname:                                       # Your discus shortname for comments
 
-  # Post navigation
-  post_navigation: true
-  
-  
 # PAGINATION
 paginate: 5
-paginate_path: "blog/page:num"
-
+paginate_path: "/blog/page:num"
 
 # PORTFOLIO
 collections:
@@ -106,15 +38,38 @@ collections:
     output: true
     permalink: /:collection/:name
 
-
 # BUILD SETTINGS
-markdown: kramdown
-highlighter: rouge
-sass:
-  sass_dir: _sass
-  style: :compressed
-plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-redirect-from]
+plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed, jekyll-redirect-from]
 whitelist:
   - jekyll-redirect-from
-#theme: type-on-strap # Uncomment if using the theme as a jekyll theme gem
-exclude: ["Gemfile", "Gemfile.lock", "type-on-strap.gemspec", "*.gem", "LICENSE", "README.md", "screenshot.png", "package.json", "node_modules", "gulpfile.js", ".idea/*", ".github/*", "vendor/future_cxx/vendor/*", "vendor/reveal.js/test/*", "vendor/reveal.js/plugin/markdown/example.md", "vendor/reveal.js/css/theme/README.md"]
+exclude:
+  - ".jekyll-cache"
+  - ".idea"
+  - "assets/node_modules"
+  - "*.gem"
+  - "LICENSE"
+  - "README.md"
+  - "screenshot.png"
+  - "package.json"
+  - "node_modules"
+  - "gulpfile.js"
+  - ".idea/*"
+  - ".github/*"
+  - "vendor/future_cxx/vendor/*"
+  - "vendor/reveal.js/node_modules/*"
+  - "vendor/reveal.js/test/*"
+  - "vendor/reveal.js/*.json"
+  - "vendor/reveal.js/*.md"
+  - "vendor/reveal.js/demo.html"
+  - "vendor/reveal.js/gruntfile.js"
+  - "vendor/reveal.js/LICENSE"
+include:
+  - "vendor/future_cxx/papers/*"
+  - "vendor/reveal.js/lib/*"
+  - "vendor/reveal.js/plugin/*"
+  - "vendor/reveal.js/css/*"
+  - "vendor/reveal.js/js/*"
+  - "vendor/reveal.js/index.html"
+
+# theme: type-on-strap                                  # if using the theme as a jekyll theme gem
+remote_theme: sylhare/Type-on-Strap                     # If using as a remote_theme in github
