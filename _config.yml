@@ -32,17 +32,16 @@ disqus_shortname:                                       # Your discus shortname 
 paginate: 5
 paginate_path: "/blog/page:num"
 
-# PORTFOLIO
+# COLLECTIONS (e.g. PORTFOLIO)
 collections:
+  top_pages:
+    output: true
   portfolio:
     output: true
     permalink: /:collection/:name
 
 # BUILD SETTINGS
 plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed, jekyll-redirect-from]
-collections:
-  top_pages:
-    output: true
 whitelist:
   - jekyll-redirect-from
 exclude:
