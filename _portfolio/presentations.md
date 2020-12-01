@@ -3,7 +3,7 @@ layout: post
 title: presentations
 feature-img: "assets/img/portfolio/presentations.png"
 img: "assets/img/portfolio/presentations.png"
-date: December 21st, 2019
+date: December 1st, 2020
 tags: [C++, speaking, conferences, python, Portfolio, 🚌, ⌨️, 🤝, 📣, 🎧]
 ---
 
