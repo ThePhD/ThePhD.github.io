@@ -19,7 +19,7 @@ The talk is already online (holy cow, Sy Brand and the Visual C++ team as FAST):
 
 [Slides are here](/_presentations/unicode/Pure%20Virtual%20C++/2020/Lucky%207%20–%20Designing%20Text%20Encodings%20for%20C++.html).
 
-In it, I describe what is essentially the fundamental basis operations for text encoding. Particularly, why a paper I wrote for C++ Standardization -- [p1629](https://thephd.github.io/vendor/future_cxx/papers/d1629.html) -- chooses the 7 base required elements -- the "Lucky 7" -- to unlock all of the encoding operations required for an end-user. You can catch up on previous talks, current collective patron and sponsorship progress, papers, and more at the [portfolio page](/portfolio/text).
+In it, I describe what is essentially the fundamental basis operations for text encoding. Particularly, why a paper I wrote for C++ Standardization -- [p1629](https://thephd.github.io/_vendor/future_cxx/papers/d1629.html) -- chooses the 7 base required elements -- the "Lucky 7" -- to unlock all of the encoding operations required for an end-user. You can catch up on previous talks, current collective patron and sponsorship progress, papers, and more at the [portfolio page](/portfolio/text).
 
 
 

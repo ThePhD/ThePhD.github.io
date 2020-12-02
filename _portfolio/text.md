@@ -57,8 +57,8 @@ The work is ongoing.
 
 The C++ library submodules and builds on top of the C one for fast-path functions. Internally, the C library is implemented with C++ and -- hopefully soon in the future -- vectorized by hand or with [SIMD/`std::experimental::simd`](https://en.cppreference.com/w/cpp/experimental/simd/simd). Document trails:
 
-- [Latest Draft C++](/vendor/future_cxx/papers/d1629)
-- [Latest Draft, C](/vendor/future_cxx/papers/source/n2595)
+- [Latest Draft C++](/_vendor/future_cxx/papers/d1629)
+- [Latest Draft, C](/_vendor/future_cxx/papers/source/n2595)
 
 
 The principles and inner workings of the implementation are detailed in a series of talks, slides and posts:
@@ -177,7 +177,7 @@ The current spread of goals is as follows.
 
 ### Ⅷ: (_Stretch_) C Library for Span-Based Conversions [ 0% ]
 
-- As detailed in proposal [N2440](/vendor/future_cxx/papers/source/C - Efficient Character Conversions.html): C functions for fast conversions.
+- As detailed in proposal [N2440](/_vendor/future_cxx/papers/source/C - Efficient Character Conversions.html): C functions for fast conversions.
 - Cover INCITS/ANSI fees.
 - Take functionality through all of WG14, put into C Libraries such as:
   - `musl`.

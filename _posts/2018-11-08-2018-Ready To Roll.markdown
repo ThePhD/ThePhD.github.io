@@ -17,7 +17,7 @@ Sections marked with 🛡️ means I've either been voluntold or volunteered to 
 
 The Committee has ~~factions~~groups, as I detailed in [a previous blogpost](/rapperswil-2018-c++-committee-trip-report). The ~~Uruk'Hai~~ EWG put a new splinter Study Group to help deal with the unprecedented paper volume, ~~Orcs~~ EWGI, or Evolution Working Group, Incubator. It is apparently pronounced "oogie", as in "oogie boogie". EWG is one of the hardest groups to get through, with many papers often dying in Evolution and then staying dead for a good while. As put by someone else: "I can get the hang of every room in the Standards Committee. I generally know what they all want... except for EWG." To get things through here, your best game has to be on the table; and maybe a little luck, too. EWGI will hopefully be a tad easier...!
 
-### [p0330: Literal Suffixes for size_t and ptrdiff_t (🛡️)](/vendor/future_cxx/papers/d0330.html)
+### [p0330: Literal Suffixes for size_t and ptrdiff_t (🛡️)](/_vendor/future_cxx/papers/d0330.html)
 
 This paper should have been in C++17 but the original author lost motivation to continue the work. I picked it up at the behest of someone else. I've essentially become its champion and now I need to shepherd it through. The change is fairly simple, but I anticipate WAY more bikeshed than is necessary about the actual suffixes. _Some_ individuals are hellbent on having `uz` mean `size_t`, and `t` mean `ptrdiff_t`. That leaves the problem of what `z` means (is it like POSIX'S `ssize_t`? Which, by the way, is not part of the Standard right now) and what `ut` means (`unsigned ptrdiff_t`? What is that type? Who knows.) I proposed `uz`/`zu` and `z` for consistency with the core language, but some people have a nice little hill about `t` that they would like to die on.
 
@@ -25,7 +25,7 @@ As is usual, the simpler papers generate the most ~~awful~~ bikeshed, so I antic
 
 This is not one of those times.
 
-### [p1040: std::embed](/vendor/future_cxx/papers/d1040.html)
+### [p1040: std::embed](/_vendor/future_cxx/papers/d1040.html)
 
 Not really much to say here. Everybody, and their cat/dog/guinea pig/mouse/zebra/tiger, wants this. It was supposed to be seen in Rapperswil by EWG but it ended up losing out. Now it's in EWGI's hands.
 
@@ -43,11 +43,11 @@ If I cannot receive a good answer to this question, then the change is essential
 
 A thing to note is that in prior discussions everyone was talking about how to extend `initializer_list` or add a new type, not to just fix the current definition. There are, as always, concerns about doing this but I think there are far too many people who are extremely annoyed about `initializer_list`'s behaviors and do not have dependencies on its `const`-ness to begin with. Fixing this makes `initializer_list`s far more suitable with their desired usage.
 
-### [p1214: Pointer to Member Functions and Member Objects are just Callables!](/vendor/future_cxx/papers/d1214.html)
+### [p1214: Pointer to Member Functions and Member Objects are just Callables!](/_vendor/future_cxx/papers/d1214.html)
 
 I like this paper. I was not sure I was going to write it before quite a few people encouraged me to. I think this paper helps bring a lot of useful syntax into the language that people have wanted for quite some time. I also think it is incredibly important that we do not need to `std::invoke` for everything, and that the language can reasonably handle some of this without excessive amounts of template spew.
 
-### [p1301: nodiscard should have a reason (🛡️)](/vendor/future_cxx/papers/d1301.html)
+### [p1301: nodiscard should have a reason (🛡️)](/_vendor/future_cxx/papers/d1301.html)
 
 This was not my paper; I borrowed it from someone to lighten their paper load. It's a dirt-simple paper: let library authors provide a reason why they do not want you to discard this return value. You can even put something like `"this is a legacy work around and okay to (void)"`. Not really too bent out of shape about this going through or not, but it would be nice.
 
@@ -59,7 +59,7 @@ And then this group appears.
 
 The absolute madlads did it. They created a group whose acronym is actually said loogie! Feelings of prophetic joy aside, LEWGI is the ~~Half-Humans~~ Library Evolution Working Group Incubator. Again, it's meant to handle all sorts of proposals and try to filter out the good ones to either forward to LEWG or -- with some approval from LEWG's chair -- send it right to the ~~Elves~~ LWG.
 
-### [p1132: out_ptr - An Output Pointer Abstraction](/vendor/future_cxx/papers/d1132.html)
+### [p1132: out_ptr - An Output Pointer Abstraction](/_vendor/future_cxx/papers/d1132.html)
 
 This paper paves the way for getting rid of people overloading unary address-of operator `&` and violating a fundamental C++-ism: that every object has a (unique) address that you can get to. Of course, this does not help when you have a smart pointer that you want to `&my_ptr` into a C API that takes `T**`. So, this proposal steps in.
 
@@ -67,7 +67,7 @@ The one known case of someone overloading unary operator `&` is `CComPtr`. The s
 
 It has wording now, and I fully intend to get it to LWG by the end of the week.
 
-### [p1175: A Simple and Practical optional reference for C++](/vendor/future_cxx/papers/d1175.html)
+### [p1175: A Simple and Practical optional reference for C++](/_vendor/future_cxx/papers/d1175.html)
 
 I wrote about this paper in [one of my other posts](/sandiego-2018-pregame-optional) so there's no reason to go over it a lot. But, I really believe this one needs to reach LEWG and LWG this cycle. It is critical we do not make our lives worse.
 
@@ -75,9 +75,9 @@ I wrote about this paper in [one of my other posts](/sandiego-2018-pregame-optio
 
 These are papers headed for the Nowhere Study Group, SG0. They're for the dark void of my imagination, and will probably take C++23 or C++26 to see the light of day.
 
-- [p1039: I got you, FAM - Flexible Array Members for C++](/vendor/future_cxx/papers/d1039.html)
-- [p1193: Explicitly Specified Returns for (Implicit) Conversions](/vendor/future_cxx/papers/d1193.html)
-- [p1129: The Holy War](/vendor/future_cxx/papers/d1129.html)
+- [p1039: I got you, FAM - Flexible Array Members for C++](/_vendor/future_cxx/papers/d1039.html)
+- [p1193: Explicitly Specified Returns for (Implicit) Conversions](/_vendor/future_cxx/papers/d1193.html)
+- [p1129: The Holy War](/_vendor/future_cxx/papers/d1129.html)
 - pXXXX: string_literal and basic_c_string_view (just an idea I'm toying with for now)
 
 That's all for now!

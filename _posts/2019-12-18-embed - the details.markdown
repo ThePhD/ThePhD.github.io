@@ -289,7 +289,7 @@ int main () {
 
 In order to know which of `foo!tilde.txt` or `bar!tilde.txt` is used, _potentially_ every part of compilation needs to be run, save for code generation. That is, everything up through Compilation Phase 7, as determined by the Holy Standard™. Contrast that with `#embed`, which requires only up to Phase 4 preprocessing. That's a pretty big "oof". 😬
 
-The solution here is to provide in-source hints to the compiler about where we're going to pick up our data. This was originally what [P1130](/vendor/future_cxx/papers/d1130.html) was written for, which presented a modular syntax for it:
+The solution here is to provide in-source hints to the compiler about where we're going to pick up our data. This was originally what [P1130](/_vendor/future_cxx/papers/d1130.html) was written for, which presented a modular syntax for it:
 
 ```cpp
 module bar requires "foo.txt";

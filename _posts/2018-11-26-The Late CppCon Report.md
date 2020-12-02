@@ -25,7 +25,7 @@ It wasn't just Scott Meyers, though. I got to see even more C++ legends, and I h
 
 I also got to meet some other really cool people that weren't "legends", but honestly were well on their way there! One of the poster presenters Peter Goodman from Trail of Bits. He talked to me in detail over the pre-Registration dinner, where I learned all about the work he did and the Remill library. It's actually open source: [so check it out yourself](https://github.com/trailofbits/remill)! It's not my area of expertise but it was fascinating to learn about it from Peter.
 
-I also got to meet Todor, who was part of VMWare's team. We didn't get to speak much to each other after registration night, unfortunately, despite working together on the [std::out_ptr](/vendor/future_cxx/papers/d1132.html) paper. This is actually a bit of a cautionary tale: you can come to CppCon and if you spend a lot of time just trying to meet every single person, you will not be able to without extreme dedication! I did not get a chance to talk to Todor again, and I missed talking with Michael Caisse after the very first night of registration too...!
+I also got to meet Todor, who was part of VMWare's team. We didn't get to speak much to each other after registration night, unfortunately, despite working together on the [std::out_ptr](/_vendor/future_cxx/papers/d1132.html) paper. This is actually a bit of a cautionary tale: you can come to CppCon and if you spend a lot of time just trying to meet every single person, you will not be able to without extreme dedication! I did not get a chance to talk to Todor again, and I missed talking with Michael Caisse after the very first night of registration too...!
 
 
 # Right, The Talks

@@ -20,7 +20,7 @@ It does not always teach us why, but identifying that and writing it out into a 
 
 Grab a shovel and dig.
 
-Sometimes, tons of gold is struck: [std::embed](/vendor/future_cxx/papers/d1040.html) and [std::out_ptr](/vendor/future_cxx/papers/d1132.html) are examples of this. Both of these have tons of prior experience in various different forms. Standardizing them is (going to be) easy because there is a huge momentum and need for such tools in the standard. Figuring out the minutiae will be part of the job but fret not: if it's standard practice its less about design and more about just making sure the final result crafted fits the intended needs. Remember that covering 90% of uses is fairly good.
+Sometimes, tons of gold is struck: [std::embed](/_vendor/future_cxx/papers/d1040.html) and [std::out_ptr](/_vendor/future_cxx/papers/d1132.html) are examples of this. Both of these have tons of prior experience in various different forms. Standardizing them is (going to be) easy because there is a huge momentum and need for such tools in the standard. Figuring out the minutiae will be part of the job but fret not: if it's standard practice its less about design and more about just making sure the final result crafted fits the intended needs. Remember that covering 90% of uses is fairly good.
 
 # There Need Not Be Wording
 

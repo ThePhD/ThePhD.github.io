@@ -245,7 +245,7 @@ API provides all of this!
 - C++ Committee Paper version -  
   [https://wg21.link/p1629](https://wg21.link/p1629)
 - Latest working draft -  
-  [https://thephd.github.io/vendor/future_cxx/papers/d1629.html](https://thephd.github.io/vendor/future_cxx/papers/d1629.html)
+  [https://thephd.github.io/_vendor/future_cxx/papers/d1629.html](https://thephd.github.io/_vendor/future_cxx/papers/d1629.html)
 
 
 ```cpp

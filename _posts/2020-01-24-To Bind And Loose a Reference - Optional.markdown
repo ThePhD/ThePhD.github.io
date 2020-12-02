@@ -14,7 +14,7 @@ Seeing discussion after discussion, paper after paper, point after point being m
 
 `optional<T&>` (and `object_ptr`) are minefields. Since MISRA's paper cites my old paper -- [p1175](https://wg21.link/p1175) -- it seems I can no longer blissfully turn a blind eye and pretend what went down at the November 2018 San Diego meeting just didn't happen. During that meeting, I explicitly told the room that I would not bring another paper forward to help resolve this issue. I will not be... but I did promise that I would fully vet the design space.
 
-That vetting is done in a yet-unpublished C++ paper [d1683](/vendor/future_cxx/papers/d1683.html), a secret paper I have been never quite been able to force myself to finish writing. I could not write it because I feel I grossly misled myself and walked into a trap. In fact, I still do feel that way. It makes me feel sick that I am even picking up my pen to once more write about this utter travesty of a topic, most certainly not for the reasons you may expect. In an effort to do a good job and not sabotage Professor Sommerlad's generally excellent work and consideration, I have bottled (nearly) all of the purely technical observations into [d1683](/vendor/future_cxx/papers/d1683.html).
+That vetting is done in a yet-unpublished C++ paper [d1683](/_vendor/future_cxx/papers/d1683.html), a secret paper I have been never quite been able to force myself to finish writing. I could not write it because I feel I grossly misled myself and walked into a trap. In fact, I still do feel that way. It makes me feel sick that I am even picking up my pen to once more write about this utter travesty of a topic, most certainly not for the reasons you may expect. In an effort to do a good job and not sabotage Professor Sommerlad's generally excellent work and consideration, I have bottled (nearly) all of the purely technical observations into [d1683](/_vendor/future_cxx/papers/d1683.html).
 
 The rest of this reading is for those of you who can stomach messy, non-technical humanity that birthed the fullness of the viscerally methodical and mechanical understanding I leave for you in the paper. You may stop here if you wish,
 
@@ -226,7 +226,7 @@ Everyone except the assign-through pundits on the Committee had done their homew
 
 Assign-through had no concrete anything, and the people who _did_ do the work -- like myself and that one lone person out of 110 in the survey -- participated in good faith while people who had no intention of being fair or honest waved a single code snippet in everyone's face and spooked the entire community about references in types like `variant`, `expected` and `optional`. Others who did not like assign-through still saw it as a means to an end: they wielded the same utterly disingenuous rhetoric. They wanted to leave it as a pointer, or they wanted to only have value-only wrappers, no reference, etc. etc.: as long as optional references remained in this supposed moral deadlock, they would never have to discuss or reason about the benefits or inadequacy of their approaches.
 
-I fell for it too like an idiot with [p1175](/vendor/future_cxx/papers/d1175.html).
+I fell for it too like an idiot with [p1175](/_vendor/future_cxx/papers/d1175.html).
 
 
 
@@ -243,7 +243,7 @@ Scared and afraid of the Committee and what a big divisive paper might do, knowi
 
 they found an easy target to propagate their ideas and agendas on how to interact with the Committee.
 
-"Don't go too hard." "You'll ruin it if you go in guns blazing." "Just take the neutral option." [p1175](/vendor/future_cxx/papers/d1175.html) was not the paper I wanted it to be: it was the result of those e-mails and DMs coming back with that singular idea: don't rock the boat too hard. For the sake of acceptance, I not only emaciated and emasculated my own paper: I took out the research, data points, survey data, and left nothing but a hollow husk and shell behind. A weak, watery compromise of a paper driven by doe-eyed compliance and cowardice. I betrayed my instincts, padded my fists, painted a smile on my face, put a frail bend in my back, and poured water on my brightly burning hunger for rigor and completeness in my work.
+"Don't go too hard." "You'll ruin it if you go in guns blazing." "Just take the neutral option." [p1175](/_vendor/future_cxx/papers/d1175.html) was not the paper I wanted it to be: it was the result of those e-mails and DMs coming back with that singular idea: don't rock the boat too hard. For the sake of acceptance, I not only emaciated and emasculated my own paper: I took out the research, data points, survey data, and left nothing but a hollow husk and shell behind. A weak, watery compromise of a paper driven by doe-eyed compliance and cowardice. I betrayed my instincts, padded my fists, painted a smile on my face, put a frail bend in my back, and poured water on my brightly burning hunger for rigor and completeness in my work.
 
 In the dark, I knifed my integrity of work in the back, whispering praises to the others' devotion to neutrality and compromise.
 
@@ -310,7 +310,7 @@ Still, at least some others had more sound design decisions for why references o
 
 > tombstone is needed. most of types has spare parts to implement invalid. so `optional<T, optional_traits<T> > {}` is good idea. never, ever want `optional<T&>`, or any `container<T&>` (including `tuple<T&,U&>`). Reference are for parameter passing & returning purpose. For storing purpose use value semantics like `optional<reference_wrapper<T> >`. perhaps give a short standard alias to `reference_wrapper` 
 
-Much of these I have spent time in the technical part of the above-mentioned [d1683](/vendor/future_cxx/papers/d1683.html), discussing what they are and why they end up being poor choices in practice and implications it can have on wider system architecture. Of course, one person was like me in 2013:
+Much of these I have spent time in the technical part of the above-mentioned [d1683](/_vendor/future_cxx/papers/d1683.html), discussing what they are and why they end up being poor choices in practice and implications it can have on wider system architecture. Of course, one person was like me in 2013:
 
 > I don't think there were any unusual implementation choices
 

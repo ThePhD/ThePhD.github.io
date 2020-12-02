@@ -13,7 +13,7 @@ Is consumption of content high in irony dangerous? In this post, we find out!<!-
 
 # Let's Talk About It
 
-`std::embed` is [a proposal for a magical library](/vendor/future_cxx/papers/d1040.html) function that will take a "resource name" and load it up for use at compile-time. It was conceived over a year ago with the help of Lilly (LilyPad), Arvid Gerstmann, Nicole Mazzuca, Agustín Bergé and a few others. It looked like fanciful -- but simple -- magic back then, but a year later I found out that `std::embed` is very real. I know this not as a matter of faith and the heart, but of carnal physicality. That is, because I
+`std::embed` is [a proposal for a magical library](/_vendor/future_cxx/papers/d1040.html) function that will take a "resource name" and load it up for use at compile-time. It was conceived over a year ago with the help of Lilly (LilyPad), Arvid Gerstmann, Nicole Mazzuca, Agustín Bergé and a few others. It looked like fanciful -- but simple -- magic back then, but a year later I found out that `std::embed` is very real. I know this not as a matter of faith and the heart, but of carnal physicality. That is, because I
 
 _[made it real](https://godbolt.org/z/HLTuci)_ with my own two goddamn hands.
 

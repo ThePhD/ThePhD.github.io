@@ -7,9 +7,9 @@
 
 	<title>Refining Preprocessor Embed</title>
 
-	<link rel="stylesheet" href="../../../../vendor/reveal.js/css/reset.css">
-	<link rel="stylesheet" href="../../../../vendor/reveal.js/css/reveal.css">
-	<link rel="stylesheet" href="../../../../vendor/reveal.js/css/theme/moon.css">
+	<link rel="stylesheet" href="../../../../_vendor/reveal.js/css/reset.css">
+	<link rel="stylesheet" href="../../../../_vendor/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../../_vendor/reveal.js/css/theme/moon.css">
 
 	<style>
 		a:link {
@@ -44,14 +44,14 @@
 	</style>
 
 	<!-- Theme used for syntax highlighting of code -->
-	<link rel="stylesheet" href="../../../../vendor/reveal.js/lib/css/zenburn.css">
+	<link rel="stylesheet" href="../../../../_vendor/reveal.js/lib/css/zenburn.css">
 
 	<!-- Printing and PDF exports -->
 	<script>
 		var link = document.createElement('link');
 		link.rel = 'stylesheet';
 		link.type = 'text/css';
-		link.href = window.location.search.match(/print-pdf/gi) ? '../../../../vendor/reveal.js/css/print/pdf.css' : '../../../../vendor/reveal.js/css/print/paper.css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '../../../../_vendor/reveal.js/css/print/pdf.css' : '../../../../_vendor/reveal.js/css/print/paper.css';
 		document.getElementsByTagName('head')[0].appendChild(link);
 	</script>
 </head>
@@ -92,7 +92,7 @@
 		&copy; <a href="mailto:shepherd@soasis.org?Subject=std embed">Shepherd's Oasis, LLC</a> & <a href="mailto:phdofthehouse@gmail.com?Subject=std embed">JeanHeyd Meneide</a> 2019, All Rights Reserved.<br>
 	</div>
 
-	<script src="../../../../vendor/reveal.js/js/reveal.js"></script>
+	<script src="../../../../_vendor/reveal.js/js/reveal.js"></script>
 
 	<script>
 		// More info about config & dependencies:
@@ -108,11 +108,11 @@
 				smartypants: true,
 			},
 			dependencies: [
-				{src: '../../../../vendor/reveal.js/plugin/markdown/marked.js'},
-				{src: '../../../../vendor/reveal.js/plugin/markdown/markdown.js'},
-				{src: '../../../../vendor/reveal.js/plugin/notes/notes.js', async: true},
+				{src: '../../../../_vendor/reveal.js/plugin/markdown/marked.js'},
+				{src: '../../../../_vendor/reveal.js/plugin/markdown/markdown.js'},
+				{src: '../../../../_vendor/reveal.js/plugin/notes/notes.js', async: true},
 				{
-					src: '../../../../vendor/reveal.js/plugin/highlight/highlight.js',
+					src: '../../../../_vendor/reveal.js/plugin/highlight/highlight.js',
 					async: true,
 					callback: () => hljs.initHighlightingOnLoad()
 				}
