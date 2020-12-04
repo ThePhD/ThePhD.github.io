@@ -42,6 +42,8 @@ collections:
 
 # BUILD SETTINGS
 plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed, jekyll-redirect-from]
+redirect_from:
+  json: false
 whitelist:
   - jekyll-redirect-from
 exclude:

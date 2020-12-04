@@ -84,7 +84,7 @@ I have given presentations and spoken on several occasions! Here are the present
 
 <div style="text-align:center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/EG5v7CSmO3s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
 
-[Slides](/_presentations/standards/C++ Now/2018/std.embed - a poem.pdf). This was a short little poem about the upcoming [std::embed proposal](vendor/future_cxx/papers/d1040.html). Was fun to do, delivery was decent!
+[Slides](/_presentations/standards/C++ Now/2018/std.embed - a poem.pdf). This was a short little poem about the upcoming [std::embed proposal](/_vendor/future_cxx/papers/d1040.html). Was fun to do, delivery was decent!
 
 
 
