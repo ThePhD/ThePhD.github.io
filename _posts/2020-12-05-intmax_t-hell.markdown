@@ -70,7 +70,7 @@ Consider the following scenario:
 2. You have an application. Your code was not changed or updated, so it was not recompiled. It calls `imaxabs`. The argument it passes is a `long long`, because that was the type at the time you last compiled and shipped your software.
 3. The `imaxabs` used to lookup the function to call finds the version that takes a `__int256_t` in the new `libc`.
 4. Different registers are used to pass and return the function value than expected by the `imaxabs` function call in the `libc` binary, because your application is in `long long` mode but glibc expects a `__int256_t`.
-5. All hell breaks lose.
+5. All hell breaks loose.
 
 This is one of the manifestations of what is called an "Application Binary Interface (ABI) Break". ABI Breaks are generally undetectable, silent breaks that occur within the runtime of a program that completely destroy any dependency your program has on that functionality for correctness. It typically happens when a subtle detail -- the registers used to negotiate a large integral value between a shared library and its application, the amount of padding a structure might have on a certain build, the ordering and layout of class members, the interpretation of bits even if the layout or passing convention of a type never changes, and even more -- changes.
 
