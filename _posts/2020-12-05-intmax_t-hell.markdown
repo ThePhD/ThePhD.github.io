@@ -246,7 +246,7 @@ namespace std {
 }
 ```
 
-Unfortunately, we C++ tied itself to C compatibility. That means we will never take a step like this, because that means the C Library's definition of `intmax_t` on your system would differ from your C++ library. Ensue shenanigans, etc. etc. Note that it's not impossible for C++ to do this even still, because of this wording:
+Unfortunately, we tied C++ itself to C compatibility. That means we will never take a step like this, because that means the C Library's definition of `intmax_t` on your system would differ from your C++ library. Ensue shenanigans, etc. etc. Note that it's not impossible for C++ to do this even still, because of this wording:
 
 > The C++ standard library also makes available the facilities of the C standard library, suitably adjusted to ensure static type safety.
 > — [C++ Working Draft, §16.2 The C standard library ([library.c/1])](http://eel.is/c++draft/library.c#1)
