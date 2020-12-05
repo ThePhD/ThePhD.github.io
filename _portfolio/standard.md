@@ -16,9 +16,9 @@ C++       | p1040: std::embed | [Published](https://wg21.link/p1040) | [Latest D
 C++       | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/_vendor/future_cxx/papers/d1629.html)
 C++       | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/_vendor/future_cxx/papers/d1664.html)
 C++ and C | n2592 + p1967: Preprocessor embed - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed.html)
-C         | n2593: Not-So-Magic: `typeof()` for C | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2593.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20typeof.html)
-C         | n2594: Mixed Wide String Literal Concatenation | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2594.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Mixed%20Wide%20String%20Literal%20Concatenation.html)
-C         | n2595: Restartable and Non-Restartable Functions for Efficient Character Conversions | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2595.pdf) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
+C         | n2619: Not-So-Magic: `typeof()` for C | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2593.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20typeof.html)
+C         | n2620: Restartable and Non-Restartable Functions for Efficient Character Conversions | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2595.pdf) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
+C         | n26X1: Restartable and Non-Restartable Functions for Efficient UTF Character Conversions | Not Yet Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20UTF%20Character%20Conversions.html)
 
 
 ### Approved Proposals:
@@ -33,6 +33,7 @@ C++ | p1025: Update References to the Unicode Standard | [Published](https://wg2
 C++ | p1301: [[nodiscard("should have a reason")]] | [Published](https://wg21.link/p1301) | [Accepted!](/_vendor/future_cxx/papers/d1301.html)
 C   | n2448: [[nodiscard("should have a reason")]] | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2448.pdf) | [Accepted!](/_vendor/future_cxx/papers/C%20-%20nodiscard.html)
 C++ | p0330: Literal Suffixes for `ptrdiff_t` and `size_t` | [Published](https://wg21.link/p0330) | [Accepted!](/_vendor/future_cxx/papers/d0330.html)
+C   | n2594: Mixed Wide String Literal Concatenation | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2594.htm) | [Accepted!](/_vendor/future_cxx/papers/C%20-%20Mixed%20Wide%20String%20Literal%20Concatenation.html)
 
 
 ### Being Reworked from Feedback:
