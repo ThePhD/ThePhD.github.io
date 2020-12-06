@@ -54,7 +54,7 @@ Taking `intmax_t`, let's do a no-brainer usage case: calling a function with `in
 
 int main () {
 	intmax_t original = (intmax_t)-2;
-	intmax_t val = imaxabs(val);
+	intmax_t val = imaxabs(original);
 	return (int)val;
 }
 ```
