@@ -17,6 +17,8 @@ You can find me on [LinkedIn](https://www.linkedin.com/in/thephd/), follow me on
 
 If you'd like to get down to business, you can send inquiries for work to [Shepherd of Shepherd's Oasis](https://soasis.org/contact)! Don't forget to [follow the company on LinkedIn as well](https://www.linkedin.com/company/shepherdsoasis) and [at GitHub](https://github.com/soasis).
 
+There's also a [newsletter](https://soasis.org/newsletter/) you can check out that I write to!
+
 In my free time I try to write and draw, which has naturally led me to creating this place here! I'll be posting... well, anything and everything that comes to mind that I think might be worth sharing. Feel free to poke around and examine things!
 
 
