@@ -105,7 +105,7 @@ For now, you should know that I and others can provide the internal beta release
 
 ![Shepherd's Oasis, LLC Consulting Presentation Slide](/assets/img/2020-05-01/soasis-consulting-presentation.png)
 
-If you need something done -- some annoying bugs related to Unicode or Text or Encoding squashed in your code base, employ us for jobs around anything related to C, C++, Scripting on Embedded Devices (Lua or otherwise), and more -- drop us a line at [shepherd@soasis.org](mailto:shepherd@soasis.org) or visit [our website](https://soasis.org).
+If you need something done -- some annoying bugs related to Unicode or Text or Encoding squashed in your code base, employ us for jobs around anything related to C, C++, Scripting on Embedded Devices (Lua or otherwise), and more -- drop us a line at [inquiries@soasis.org](mailto:inquiries@soasis.org) or visit [our website](https://soasis.org).
 
 If you are just an individual, you can also just be a regular sponsor or a patron or a donator by going [here and selecting an option that works for you](/support), with the added benefit that private musings, API beta tests, and more are available to higher-tier patrons. To those of you already contributing: thank you, for helping Shepherd's Oasis make C++ a better place. And for those of you yet to come,
 

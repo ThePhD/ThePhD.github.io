@@ -50,7 +50,7 @@ Support a vision for fluid text handling in C++ and C:
 <img src="resources/soasis.png" alt="Shepherd's Oasis" width="250px" height="250px" style="border: 0; background: none; box-shadow : none;"/>
 <br/>
 
-Send an e-mail to [shepherd@soasis.org](mailto:shepherd@soasis.org)!
+Send an e-mail to [inquiries@soasis.org](mailto:inquiries@soasis.org)!
 
 - System profiling, hardening and testing, performance
 - "The text people", Scripting on small devices, and more!
