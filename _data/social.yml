@@ -3,7 +3,7 @@ rss: true
 email_address:
   - phdofthehouse@gmail.com
 github: "ThePhD"
-linkedin: https://www.linkedin.com/in/thephd/ # Full URL
+linkedin: # Full URL
 reddit: __phantomderp
 telegram: thephantomderp
 twitter: __phantomderp # "twitter username"
