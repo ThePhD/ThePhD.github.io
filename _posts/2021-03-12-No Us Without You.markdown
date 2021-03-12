@@ -10,7 +10,7 @@ excerpt_separator: <!--more-->
 
 The C Meeting has ended officially as of like less than 2 hours ago. I will write all about what happened in a later post, but I wanted to talk specifically<!--more--> about something that happened on Monday, during the meeting, with [proposal n2645](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2645.pdf).
 
-N2654 is Melanie Blower's paper for `#elifdef` and `#elifndef`, a long-standing hole in the preprocessor and a constant consistency footgun. Even I experienced this pain, and I was grateful to see Melanie put it forward. We don't often to get to do simple things, so Melanie is doing the Lord's Work, here.
+N2654 is Melanie Blower's paper for `#elifdef` and `#elifndef`, a long-standing hole in the preprocessor and a constant consistency footgun. Even I experienced this pain, and I was grateful to see Melanie put it forward. We don't often get to do simple things, so Melanie is doing the Lord's Work, here.
 
 I took to Twitter on Monday and wanted to [shout OUT to the very FIRMAMENT of HEAVEN](https://twitter.com/__phantomderp/status/1368972508817395728) about what happened, but ISO and its various sub/working-groups have rules. So I specifically can't reveal anything until the actual adjournment of the meeting. But the meeting is over now so, let's get right to it:
 
@@ -50,7 +50,7 @@ Some of us were, very much, going to exhibit Big Huge Designer Brain. We were sa
 
 > ``#if defined(THING)`` was good enough for my ancestors, it's good enough for me!
 
-all while shaking our canes from our Committee rocking chairs. It's easy to stuck in this. We have to be simple and **fundamental**. We have to be **safe**. We can't just go adding things willy-nilly to the Standard. So what if it's "helpful", or "teachable", or "consistent", it's not a great **value add**. We get curmudgeonly. We get _conservative_. We oppose change, because change itself can introduce risk and responsibility, and we especially oppose small changes because it is "not worth it". We don't want to make C compiler implementations complicated. Ease of it all.
+all while shaking our canes from our Committee rocking chairs. It's easy to stuck in this. We have to be simple and **fundamental**. We have to be **safe**. We can't just go adding things willy-nilly to the Standard. So what if it's "helpful", or "teachable", or "consistent", it's not a great **value add**. We get curmudgeonly. We get _conservative_. We oppose change, because change itself can introduce risk and responsibility, and we especially oppose small changes because it is "not worth it". We don't want to make C compiler implementations complicated. Ease of use, of implementation, of understanding, all that jazz.
 
 But those e-mails -- that connection to you, the developer -- centered us. It gave those of us on the Committee fighting for the paper side the strength to persist. And being able to share your tangible and direct ask for this feature with the Committee in real-time turned around what would have likely ended up as a razor-thin rejection into a pass. Can you imagine?
 
