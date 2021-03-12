@@ -1,6 +1,6 @@
 ---
 layout: post
-title: No Us Without You - elfifdef and elifndef
+title: No Us Without You - elifdef and elifndef
 permalink: /no-us-without-you-elifdef-elifndef-c-n2645
 feature-img: "/assets/img/2021/03/pinky-promise.jpg"
 thumbnail: "/assets/img/2021/03/pinky-promise.jpg"
@@ -62,7 +62,7 @@ We try our best to be careful and pragmatic and consider the literal gigaverse o
 
 It's a lot of details to sift through and a lot of details to get right, and it's easy to become reflexively conservative when you're not just asking for _that one feature_ from the outside, but sit in the central nexus of every single potential feature that can be added and every single potential tweak.
 
-we **do** get lost in the vastness and inertia!
+We **do** get lost in the vastness and inertia!
 
 But advocacy from developers – from our constituents, e-mails no longer than 4 short sentences and sent sincerely + enthusiastically — tipped the scales away from that cold, crushing conservatism that plagues any long-lived Thing.
 
