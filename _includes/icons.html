@@ -239,7 +239,7 @@
 {% if site.data.social.mastodon or site.theme_settings.mastodon %}
     {% for mastodon in site.data.social.mastodon %}
     <li>
-        <a class="type" href="https://{{ mastodon.host }}/@{{ mastodon.name }}"
+        <a rel="me" class="type" href="https://{{ mastodon.host }}/@{{ mastodon.name }}"
         title="{{ site.data.language.str_follow_on }} the '{{ mastodon.host }}' Mastodon instance">
             <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
