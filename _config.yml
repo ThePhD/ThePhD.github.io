@@ -12,7 +12,7 @@ favicon: assets/favicon.png
 header_text: ♡
 header_feature_image: assets/img/pexels/triangular.jpeg
 footer_text: >
-  Copyright © 2018-2020 ThePhD -- Powered by <a href="https://jekyllrb.com/">Jekyll</a> with a modified <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap!</a>
+  Copyright © 2018-2021 ThePhD -- Powered by <a href="https://jekyllrb.com/">Jekyll</a> with a modified <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap!</a>
 
 # Blog
 excerpt: true                                           # Or "truncate" (first 250 characters), "false" to disable
@@ -59,6 +59,7 @@ exclude:
   - "gulpfile.js"
   - ".idea/*"
   - ".github/*"
+  - ".git/*"
   - "_vendor/future_cxx/vendor/*"
   - "_vendor/reveal.js/node_modules/*"
   - "_vendor/reveal.js/test/*"
@@ -77,5 +78,4 @@ include:
   - "_vendor/reveal.js/js"
   - "_vendor/reveal.js/index.html"
 
-# theme: type-on-strap                                  # if using the theme as a jekyll theme gem
-remote_theme: sylhare/Type-on-Strap                     # If using as a remote_theme in github
+theme: type-on-strap
