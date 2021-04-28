@@ -4,9 +4,7 @@
 .sass-cache
 _site
 Gemfile.lock
-.vscode/
+.vscode/*
 !.vscode/spellright.dict
-.vscode/tasks.json
-.vscode/settings.json
 .jekyll-cache
 .jekyll-metadata
