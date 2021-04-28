@@ -18,22 +18,27 @@ C++       | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664)
 C++ and C | n2592 + p1967: Preprocessor embed - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed.html)
 C         | n2619: Not-So-Magic: `typeof()` for C | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2593.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20typeof.html)
 C         | n2620: Restartable and Non-Restartable Functions for Efficient Character Conversions | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2595.pdf) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
-C         | n26X1: Restartable and Non-Restartable Functions for Efficient UTF Character Conversions | Not Yet Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20UTF%20Character%20Conversions.html)
+C         | n27XX: Consistent, Warningless, and Intuitive Initialization | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Consistent,%20Warningless,%20and%20Intuitive%20Initialization%20with%20%7B%7D.html)
+C         | n27XX: `_Imaginary_I` and `_Complex_I` Qualifiers | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Imaginary_I%20and%20_Complex_I%20Qualifiers.html)
+C         | n27XX: `char16_t` & `char32_t` string literals shall be UTF-16 and UTF-32 | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20char16_t%20&%20char32_t%20string%20literals%20shall%20be%20UTF-16%20&%20UTF-32.html)
+C         | n27XX: Transparent Function Aliases | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Function%20Aliases.html)
 
 
 ### Approved Proposals:
 
-C++ | Library Evolution Approved, in Library Wording | C++23 | p1682: `std::to_underlying(T enum_value)` | [Published](https://wg21.link/p1682) | [Latest Draft](/_vendor/future_cxx/papers/d1682.html)
-C++ | Library Evolution Approved, in Library Wording | C++23 | p1132: out_ptr - a scalable output pointer abstraction | [Published](https://wg21.link/p1132) | [Latest Draft](/_vendor/future_cxx/papers/d1132.html)
+Most have been completed / merged at this point! The rest of the work is up above!
 
 
 ### Completed / Merged Proposals:
 
-C++ | p1025: Update References to the Unicode Standard | [Published](https://wg21.link/p1025) | [Accepted!](https://wg21.link/p1025)
-C++ | p1301: [[nodiscard("should have a reason")]] | [Published](https://wg21.link/p1301) | [Accepted!](/_vendor/future_cxx/papers/d1301.html)
-C   | n2448: [[nodiscard("should have a reason")]] | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2448.pdf) | [Accepted!](/_vendor/future_cxx/papers/C%20-%20nodiscard.html)
-C++ | p0330: Literal Suffixes for `ptrdiff_t` and `size_t` | [Published](https://wg21.link/p0330) | [Accepted!](/_vendor/future_cxx/papers/d0330.html)
-C   | n2594: Mixed Wide String Literal Concatenation | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2594.htm) | [Accepted!](/_vendor/future_cxx/papers/C%20-%20Mixed%20Wide%20String%20Literal%20Concatenation.html)
+C++ | p1025: Update References to the Unicode Standard | [Published](https://wg21.link/p1025) | [Accepted, C++20!](https://wg21.link/p1025)
+C++ | p1301: [[nodiscard("should have a reason")]] | [Published](https://wg21.link/p1301) | [Accepted, C++20!](/_vendor/future_cxx/papers/d1301.html)
+C   | n2448: [[nodiscard("should have a reason")]] | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2448.pdf) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20nodiscard.html)
+C++ | p0330: Literal Suffixes for `ptrdiff_t` and `size_t` | [Published](https://wg21.link/p0330) | [Accepted, C++23!](/_vendor/future_cxx/papers/d0330.html)
+C   | n2594: Mixed Wide String Literal Concatenation | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2594.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Mixed%20Wide%20String%20Literal%20Concatenation.html)
+C++ | p1682: `std::to_underlying(T enum_value)` | [Published](https://wg21.link/p1682) | [Accepted, C++23!](/_vendor/future_cxx/papers/d1682.html)
+C++ | p1132: out_ptr - a scalable output pointer abstraction | [Published](https://wg21.link/p1132) | [Accepted, C++23!](/_vendor/future_cxx/papers/d1132.html)
+
 
 
 ### Being Reworked from Feedback:

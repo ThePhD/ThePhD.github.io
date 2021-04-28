@@ -1,8 +1,10 @@
 # Icons on the footer
 rss: true
 email_address:
-  - { address: phdofthehouse@gmail.com, description: regular::me }
-  - { address: wg14@soasis.org, description: standard::c }
+  - address: "phdofthehouse@gmail.com"
+    description: "regular::me"
+  - address: "wg14@soasis.org"
+    description: "standard::c"
 github: "ThePhD"
 linkedin: # Full URL
 reddit: __phantomderp
@@ -10,7 +12,8 @@ telegram: thephantomderp
 twitter: __phantomderp # "twitter username"
 youtube: UCbPn0sw5rIgfT0vlSBvCWlA # Youtube channel token like: UCqECaJ8Gagnn7YCbPEzWH6g
 mastodon:
-  - { host: chaos.social, name: __phantomderp }
+  - host: chaos.social
+    name: __phantomderp
 behance:
 bitbucket:
 dribbble:
