@@ -79,3 +79,4 @@ include:
   - "_vendor/reveal.js/index.html"
 
 theme: type-on-strap
+remote_theme: sylhare/type-on-strap
