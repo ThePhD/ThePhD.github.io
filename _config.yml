@@ -62,21 +62,24 @@ exclude:
   - ".git/*"
   - "_vendor/future_cxx/vendor/*"
   - "_vendor/reveal.js/node_modules/*"
+  - "_vendor/reveal.js/examples/*"
   - "_vendor/reveal.js/test/*"
+  - "_vendor/reveal.js/.github/*"
   - "_vendor/reveal.js/*.json"
   - "_vendor/reveal.js/*.md"
+  - "_vendor/reveal.js/gulpfile.js"
+  - "_vendor/reveal.js/.npmignore"
+  - "_vendor/reveal.js/.gitignore"
+  - "_vendor/reveal.js/index.html"
   - "_vendor/reveal.js/demo.html"
-  - "_vendor/reveal.js/gruntfile.js"
   - "_vendor/reveal.js/LICENSE"
 include:
   - "_presentations"
   - "_vendor"
   - "_vendor/future_cxx/papers"
-  - "_vendor/reveal.js/lib"
+  - "_vendor/reveal.js/dist"
   - "_vendor/reveal.js/plugin"
-  - "_vendor/reveal.js/css"
   - "_vendor/reveal.js/js"
-  - "_vendor/reveal.js/index.html"
 
 theme: type-on-strap
 remote_theme: sylhare/type-on-strap
