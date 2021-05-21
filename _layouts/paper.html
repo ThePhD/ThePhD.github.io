@@ -2,6 +2,8 @@
 layout: default
 ---
 
+<link rel="stylesheet" href="resources/css/wording.css">
+
 <article {% if page.feature-img %}class="feature-image"{% endif %}>
   <header id="main" style="background-image: url('{{ page.feature-img | relative_url }}')">
     <h1 id="{{ page.title | default: "" | cgi_escape }}" class="title">
@@ -23,9 +25,5 @@ layout: default
   {% endif %}
   </section>
     
-    
-  <!-- Tag list for portfolio -->
-  {% capture tag_list %}{{ page.tags | join: "|"}}{% endcapture %}
-  {% include tags_list.html tags=tag_list %}
     
 </article>
