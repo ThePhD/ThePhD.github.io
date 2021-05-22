@@ -3,7 +3,7 @@ layout: post
 title: Standard C and C++ Proposals
 feature-img: "assets/img/portfolio/standard.png"
 img: "assets/img/portfolio/standard.png"
-date: January 5th, 2020
+date: May 21st, 2021
 tags: [C, C++, proposals, standard, Portfolio, 🚌, ⌨️]
 ---
 
@@ -21,7 +21,7 @@ C         | n2620: Restartable and Non-Restartable Functions for Efficient Chara
 C         | n27XX: Consistent, Warningless, and Intuitive Initialization | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Consistent,%20Warningless,%20and%20Intuitive%20Initialization%20with%20%7B%7D.html)
 C         | n27XX: `_Imaginary_I` and `_Complex_I` Qualifiers | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Imaginary_I%20and%20_Complex_I%20Qualifiers.html)
 C         | n27XX: `char16_t` & `char32_t` string literals shall be UTF-16 and UTF-32 | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20char16_t%20&%20char32_t%20string%20literals%20shall%20be%20UTF-16%20&%20UTF-32.html)
-C         | n27XX: Transparent Function Aliases | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Function%20Aliases.html)
+C         | n27XX: Transparent Function Aliases | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Function%20Aliases.html)
 
 
 ### Approved Proposals:

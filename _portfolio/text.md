@@ -3,7 +3,7 @@ layout: post
 title: Text for C++
 feature-img: "assets/img/pexels/adult-art-asia-engin-akyurt.jpg"
 img: "assets/img/pexels/adult-art-asia-engin-akyurt.jpg"
-date: July 26th, 2020
+date: May 21st, 2021
 tags: [C++, Unicode, Text, 🚌, ⌨️]
 ---
 
@@ -17,9 +17,18 @@ This project is the push to reach that goal.
 
 
 
-# Current Funding
+# Publicly Available Implementation
 
-The project has the goal of being fully funded by mid 2020 so that all users can have a high quality solution of text that is not kept within one company or ecosystem, but ported to the Standard Library for use by everyone. If you want the proposal, please e-mail me.
+The Publicly-Available Implementation is [here: https://ztdtext.rtfd.io](https://ztdtext.rtfd.io). You can track progress on this page, through the documentation's ["Progress & Future Work" section](https://ztdtext.readthedocs.io/en/latest/future.html), or at the [the GitHub Repository](https://github.com/soasis/text).
+
+[![Liberate your text using the ztd.text library.](/assets/img/portfolio/ztd.text.documentation.png)](https://ztdtext.rtfd.io)
+
+The C Library implementation — Cuneicode — will be made publicly available as funding, scholarship, and sponsorship goals are reached.
+
+
+
+
+# Current Funding
 
 Funding goes toward:
 
@@ -30,7 +39,7 @@ Funding goes toward:
 - and, Attending WG14 (C Committee) and WG21 (C++ Committee) meetings.
 
 
-Specialized solutions for C++11 (or C++03) can be made. If you, your company or organization is interested in helping or need special features/early access to features listed below, please [get in touch](mailto:inquiries@soasis.org).
+Specialized solutions for C++11 (or C++03) can be made. If you, your company or organization is interested in helping or need special features/early access to features listed below, please [get in touch with these folk through their website](https://soasis.org/contact/opensource/) or [by e-mail](mailto:inquiries@soasis.org).
 
 
 
@@ -38,22 +47,24 @@ Specialized solutions for C++11 (or C++03) can be made. If you, your company or 
 
 Below are the published funding goals. Sponsors may pay into specific goals or, if given a large enough donation, create a new goal entirely; otherwise, funding falls into the categories in a top-to-bottom, linear fashion. Goals marked (_Stretch_) are not quite bare-minimum necessary, but would be absolutely wonderful to accomplish!
 
-- Bootstrap Initial Development, to get library tested and released;
-- Reach Full-Time Text Development to reach 2020 Goal;
+- [🎊 Accomplished!] Bootstrap Initial Development, to get library tested and released;
+- Normalization Forms and C-based Span Implementation (Cuneicode C Library)
+- WHATWG and CJK Encoding Tests
 - Cover C Standard Library development to reach maximum amount of users with basic functionality;
+- Reach Full-Time Text Development to reach 2022 Goal;
 
-_Current Goal: Bootstrap Initial Development_
+_Current Goal: Normalization Forms and C-based Span Implementation_
 
-Current Goal Total: $4,375.64 USD / $24,000.00 USD
+Current Goal Total: $1,275.55 USD / $20,000.00 USD
 
-[ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
+[ ⣿⣿⣤⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
 
 
 
 
 # Technical Details
 
-The work is ongoing.
+The work is ongoing. The latest public documentation for the released library can be found [here: https://ztdtext.rtfd.io](https://ztdtext.rtfd.io).
 
 The C++ library submodules and builds on top of the C one for fast-path functions. Internally, the C library is implemented with C++ and -- hopefully soon in the future -- vectorized by hand or with [SIMD/`std::experimental::simd`](https://en.cppreference.com/w/cpp/experimental/simd/simd). Document trails:
 
@@ -62,6 +73,13 @@ The C++ library submodules and builds on top of the C one for fast-path function
 
 
 The principles and inner workings of the implementation are detailed in a series of talks, slides and posts:
+
+0. !!Con 2021
+  _😱 Oh, No! 😱 The Lowest-level‡ Programming Language is Unicode-aware and I have no excuses?!_  
+  May 20th, 2021  
+  Virtual Conference  
+  - [Video](https://www.youtube.com/watch?v=eqtZuHveQMU&t=508s)
+  - [Slides](/_presentations/unicode/!!Con/2021/Oh%20No%20Unicode.html)
 
 0. C++ on Sea 2020
   _🤿 Deep C Diving - Fast and Scalable Text Interfaces at the Bottom 🤿_  
@@ -106,12 +124,12 @@ The principles and inner workings of the implementation are detailed in a series
   _A Rudimentary Unicode Abstraction_  
   Wednesday, March 7th, 2018  
   Boston, Massachusetts
-  - [Slides](/_presentations/unicode/sg16/2018.03.07%20-%20ThePhD%20-%20a%20rudimentary%20unicode%20abstraction.pdf)
+  - [Slides](/_presentations/unicode/sg16/2018.03.07/2018.03.07%20-%20ThePhD%20-%20a%20rudimentary%20unicode%20abstraction.pdf)
 
 The current spread of goals is as follows.
 
 
-### Ⅰ: Core Text Utilities [ 36% ] 
+### Ⅰ: Core Text Utilities [ 🎉 COMPLETE 🎉 ] 
 
 - Encoding objects for one-by-one encoding and decoding.
   - `utf8`, `utf16`, `utf32`, `narrow_execution` and `wide_execution` Encoding Object types;
@@ -119,10 +137,24 @@ The current spread of goals is as follows.
 - `decode(...)`, `encode(...)`, and `transcode(...)` functions.
 - `decode_view<encoding, ...>`, `encode_view<encoding, ...>`, and `transcode_view<encoding, ...>` range types.
 
-[ ⣿⣿⣿⣿⣿⣿⣿⣿⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
+[ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ]
 
 
-### Ⅱ: Normalization Forms [ 0% ]
+### Ⅱ: User Extensibility Hooks for (User) Encodings [ 🎉 COMPLETE 🎉 ]
+
+[Finished and documented here: https://ztdtext.readthedocs.io/en/latest/design/lucky%207%20extensions/speed.html](https://ztdtext.readthedocs.io/en/latest/design/lucky%207%20extensions/speed.html)
+
+[ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ]
+
+
+### Ⅲ: Byte Buffers and Streaming [ 🎉 COMPLETE 🎉 ]  
+
+[Finished and Documented here: https://ztdtext.readthedocs.io/en/latest/api/encodings/encoding_scheme.html](https://ztdtext.readthedocs.io/en/latest/api/encodings/encoding_scheme.html)
+
+[ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ]
+
+
+### Ⅳ: Normalization Forms [ 5% ]
 
 - All four Unicode Normalization Forms, as specified in [UAX #15](https://unicode.org/reports/tr15/).
   - Canonical Form `nfc`
@@ -132,22 +164,7 @@ The current spread of goals is as follows.
 - `text_view<Encoding, NormalizationForm, Container>`
 - `text<Encoding, NormalizationForm, Container>`
 
-[ ⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
-
-
-### Ⅲ: User Extensibility Hooks for (User) Encodings [ 0% ]
-
-- `text_encode`, `text_decode`, `text_transcode`, and `text_transcode_one` free function ADL hooks
-
-[ ⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
-
-
-### Ⅳ: Byte Buffers and Streaming [ 0% ]  
-
-- `encoding_scheme<Encoding, endian, Byte>` - transformative encoding that always presents its code unit type as `Byte` (defaults to `std::byte`).
-- `incomplete_handler<Handler>` - finish incomplete sequences and execute underlying handler if sequence is incomplete.
-
-[ ⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
+[ ⣿⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
 
 
 ### Ⅴ: CJK Encoding Tests [ 0% ]

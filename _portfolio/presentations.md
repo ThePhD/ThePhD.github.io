@@ -3,7 +3,7 @@ layout: post
 title: presentations
 feature-img: "assets/img/portfolio/presentations.png"
 img: "assets/img/portfolio/presentations.png"
-date: December 1st, 2020
+date: May 21st, 2021
 tags: [C++, speaking, conferences, python, Portfolio, 🚌, ⌨️, 🤝, 📣, 🎧]
 ---
 
@@ -13,6 +13,12 @@ I have given presentations and spoken on several occasions! Here are the present
 
 
 # Video Presentations
+
+## !!Con - Invited Speaker
+
+<div style="text-align:center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/eqtZuHveQMU?start=508" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+[Slides](/_presentations/unicode/!!Con/2021/Oh%20No%20Unicode.html). This talk isn't so much about the technical details, but about the human aspect and what Unicode support means in the real world. It starts with a small technical primer to catch moderately technically literate folk up as to what is happening, and then quickly illustrates the impact of the work I am doing with Unicode for C and C++. This is an ongoing talk series and part of a larger [project on text](/portfolio/text).
 
 
 
@@ -113,7 +119,7 @@ Below are some slide decks for various presentations I've given that were not re
 
 ## Study Group 16: Unicode - March 2018
 
-[![A Rudimentary Unicode Abstraction - Attempting to wrangle unicode and more](/assets/img/thumbnails/rudimentary-unicode.png)](/_presentations/unicode/sg16/2018.03.07 - ThePhD - a rudimentary unicode abstraction.pdf)
+[![A Rudimentary Unicode Abstraction - Attempting to wrangle unicode and more](/assets/img/thumbnails/rudimentary-unicode.png)](/_presentations/unicode/sg16/2018.03.07/2018.03.07%20-%20ThePhD%20-%20a%20rudimentary%20unicode%20abstraction.pdf)
 
 A presentation done for SG16 - Unicode when I first joined the group and some of the design decisions I made. Covers encoding and having an abstraction that sits on top of other containers, and the evolution of how I got there.
 

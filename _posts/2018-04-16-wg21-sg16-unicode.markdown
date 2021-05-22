@@ -22,6 +22,6 @@ Please lend your voice and ideas for improving C++ support for Unicode and text 
 - [The C++ Slack](https://cpplang.slack.com/messages/sg16-unicode)
 - [The GitHub](https://github.com/sg16-unicode)
 
-It's time to get Unicode into C++, and to do it right with SG-16. I'm very excited about this, and have already presented my [earlier Unicode abstraction to the group](/_presentations/unicode/sg16/2018.03.07 - ThePhD - a rudimentary unicode abstraction.pdf). I've begun to work on understanding what a useful `Encoding` concept for C++ would look like, and how we can use it to further advance operations like Transcoding, Normalization, Segmentation and other necessary Unicode algorithms.
+It's time to get Unicode into C++, and to do it right with SG-16. I'm very excited about this, and have already presented my [earlier Unicode abstraction to the group](/_presentations/unicode/sg16/2018.03.07%20-%20ThePhD%20-%20a%20rudimentary%20unicode%20abstraction.pdf). I've begun to work on understanding what a useful `Encoding` concept for C++ would look like, and how we can use it to further advance operations like Transcoding, Normalization, Segmentation and other necessary Unicode algorithms.
 
 If you have ideas and thoughts, please do bring them to the GitHub Organization / Repositories and to the mailing list! We have a decent core membership but it is always great to hear what the use cases of others are.

@@ -7,21 +7,12 @@
 
 	<title>Lucky 7 – Designing Text Encodings for C++</title>
 
-	<link rel="stylesheet" href="../../../../_vendor/reveal.js/css/reset.css">
-	<link rel="stylesheet" href="../../../../_vendor/reveal.js/css/reveal.css">
-	<link rel="stylesheet" href="../../../../_vendor/reveal.js/css/theme/sky.css">
+	<link rel="stylesheet" href="../../../../_vendor/reveal.js/dist/reset.css">
+	<link rel="stylesheet" href="../../../../_vendor/reveal.js/dist/reveal.css">
+	<link rel="stylesheet" href="../../../../_vendor/reveal.js/dist/theme/sky.css">
 
 	<!-- Theme used for syntax highlighting of code -->
-	<link rel="stylesheet" href="../../../../_vendor/reveal.js/lib/css/zenburn.css">
-
-	<!-- Printing and PDF exports -->
-	<script>
-		var link = document.createElement('link');
-		link.rel = 'stylesheet';
-		link.type = 'text/css';
-		link.href = window.location.search.match(/print-pdf/gi) ? '../../../../_vendor/reveal.js/css/print/pdf.css' : '../../../../_vendor/reveal.js/css/print/paper.css';
-		document.getElementsByTagName('head')[0].appendChild(link);
-	</script>
+	<link rel="stylesheet" href="../../../../_vendor/reveal.js/plugin/highlight/zenburn.css">
 
 	<style>
 		.reveal pre code {
@@ -91,30 +82,19 @@
 		&copy; <a href="https://soasis.org">Shepherd's Oasis, LLC</a> and <a href="https://thephd.github.io/">JeanHeyd "ThePhD" Meneide</a> 2020, All Rights Reserved.<br>
 	</div>
 
-	<script src="../../../../_vendor/reveal.js/js/reveal.js"></script>
+	<script src="../../../../_vendor/reveal.js/dist/reveal.js"></script>
+	<script src="../../../../_vendor/reveal.js/plugin/notes/notes.js"></script>
+	<script src="../../../../_vendor/reveal.js/plugin/markdown/markdown.js"></script>
+	<script src="../../../../_vendor/reveal.js/plugin/highlight/highlight.js"></script>
 	<script>
-		// More info about config & dependencies:
-		// - https://github.com/hakimel/reveal.js#configuration
-		// - https://github.com/hakimel/reveal.js#dependencies
 		Reveal.initialize({
 			history: true,
 			slideNumber: true,
 			width: 1280,
 			height: 720,
 			autoPlayMedia: true,
-			markdown: {
-				smartypants: true,
-			},
-			dependencies: [
-				{src: '../../../../_vendor/reveal.js/plugin/markdown/marked.js'},
-				{src: '../../../../_vendor/reveal.js/plugin/markdown/markdown.js'},
-				{src: '../../../../_vendor/reveal.js/plugin/notes/notes.js', async: true},
-				{
-					src: '../../../../_vendor/reveal.js/plugin/highlight/highlight.js',
-					async: true,
-					callback: () => hljs.initHighlightingOnLoad()
-				}
-			]
+			hash: true,
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 		});
 	</script>
 </body>
