@@ -39,6 +39,8 @@ collections:
   portfolio:
     output: true
     permalink: /:collection/:name
+  presentations:
+    output: false
 
 # BUILD SETTINGS
 plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed, jekyll-redirect-from]
