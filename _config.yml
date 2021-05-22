@@ -39,15 +39,13 @@ collections:
   portfolio:
     output: true
     permalink: /:collection/:name
-  presentations:
-    output: false
 
 # DEFAULTS
 defaults:
   -
     scope:
-      path: ""
-      type: "presentations" # previously `page` in Jekyll 2.2.
+      path: "_presentations/*"
+      type: ""
     values:
       hide: true
 

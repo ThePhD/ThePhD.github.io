@@ -1,0 +1,17 @@
+{% if include.isDisplayed %}
+{% assign follow = include.follow | default: include.social %}
+{% assign follow_on = follow | prepend: site.data.language.str_follow_on %}
+{% assign follow_title = include.followTitle | default: follow_on %}
+{% assign downcase_social = include.social | downcase %}
+{% assign default_icon = "fab fa-" | append: downcase_social %}
+{% assign icon = include.icon | default: default_icon %}
+<li>
+    <a href="{{ include.url }}"
+       title="{{ follow_title }}">
+		<span class="fa-stack fa-lg">
+            <i class="fas fa-circle fa-stack-2x"></i>
+            <i class="{{ icon }} fa-stack-1x fa-inverse"></i>
+        </span>
+    </a>
+</li>
+{% endif %}
