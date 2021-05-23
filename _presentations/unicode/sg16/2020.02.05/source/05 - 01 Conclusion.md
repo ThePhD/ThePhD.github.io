@@ -26,7 +26,7 @@ For listening.
 
 Support a vision for fluid text handling in C++ and C:
 
-- See the plan [here - https://thephd.github.io/portfolio/text](https://thephd.github.io/portfolio/text)
-- Support the plan [here - https://thephd.github.io/support/](https://thephd.github.io/support/)
+- See the plan [here - https://thephd.dev/portfolio/text](https://thephd.dev/portfolio/text)
+- Support the plan [here - https://thephd.dev/support/](https://thephd.dev/support/)
 
 Any questions?

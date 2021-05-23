@@ -131,11 +131,9 @@ The current spread of goals is as follows.
 
 ### Ⅰ: Core Text Utilities [ 🎉 COMPLETE 🎉 ] 
 
-- Encoding objects for one-by-one encoding and decoding.
-  - `utf8`, `utf16`, `utf32`, `narrow_execution` and `wide_execution` Encoding Object types;
-  - and, `basic_utf8<char_type>`, `basic_utf16<char_type>`, and `basic_utf32<char_type>` types.
-- `decode(...)`, `encode(...)`, and `transcode(...)` functions.
-- `decode_view<encoding, ...>`, `encode_view<encoding, ...>`, and `transcode_view<encoding, ...>` range types.
+Finished and documented here:
+- [View Types - https://ztdtext.readthedocs.io/en/latest/api.html#views](https://ztdtext.readthedocs.io/en/latest/api.html#views)
+- [Encoding Objects - https://ztdtext.readthedocs.io/en/latest/encodings.html](https://ztdtext.readthedocs.io/en/latest/encodings.html)
 
 [ ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ]
 

@@ -15,13 +15,13 @@ I have quite a few C++ proposals I am working on and percolating through the C++
 C++       | p1040: std::embed | [Published](https://wg21.link/p1040) | [Latest Draft](/_vendor/future_cxx/papers/d1040.html)
 C++       | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/_vendor/future_cxx/papers/d1629.html)
 C++       | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/_vendor/future_cxx/papers/d1664.html)
-C++ and C | n2592 + p1967: Preprocessor embed - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed.html)
-C         | n2619: Not-So-Magic: `typeof()` for C | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2593.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20typeof.html)
-C         | n2620: Restartable and Non-Restartable Functions for Efficient Character Conversions | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2595.pdf) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
-C         | n27XX: Consistent, Warningless, and Intuitive Initialization | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Consistent,%20Warningless,%20and%20Intuitive%20Initialization%20with%20%7B%7D.html)
-C         | n27XX: `_Imaginary_I` and `_Complex_I` Qualifiers | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Imaginary_I%20and%20_Complex_I%20Qualifiers.html)
-C         | n27XX: `char16_t` & `char32_t` string literals shall be UTF-16 and UTF-32 | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20char16_t%20&%20char32_t%20string%20literals%20shall%20be%20UTF-16%20&%20UTF-32.html)
-C         | n27XX: Transparent Function Aliases | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Function%20Aliases.html)
+C++ and C | n2725 + p1967: Preprocessor embed - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed.html)
+C         | n2725: Not-So-Magic: `typeof()` for C | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2593.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20typeof.html)
+C         | n2730: Restartable and Non-Restartable Functions for Efficient Character Conversions | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2595.pdf) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
+C         | n2727: Consistent, Warningless, and Intuitive Initialization | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Consistent,%20Warningless,%20and%20Intuitive%20Initialization%20with%20%7B%7D.html)
+C         | n2726: `_Imaginary_I` and `_Complex_I` Qualifiers | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Imaginary_I%20and%20_Complex_I%20Qualifiers.html)
+C         | n2728: `char16_t` & `char32_t` string literals shall be UTF-16 and UTF-32 | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20char16_t%20&%20char32_t%20string%20literals%20shall%20be%20UTF-16%20&%20UTF-32.html)
+C         | n2729: Transparent Function Aliases | Not Published | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Function%20Aliases.html)
 
 
 ### Approved Proposals:
@@ -60,7 +60,7 @@ These proposals are dead and will not be picked up again.
 
 
 C++ | p1175: A simple and practical optional reference for C++ | [Published](https://wg21.link/p1175) | [Latest Draft](/_vendor/future_cxx/papers/d1175.html)
-C++ | p1130: Module Resource Requirement Propagation | [Published](https://wg21.link/p1130) | [Latest Draft](https://thephd.github.io/_vendor/future_cxx/papers/d1130.html)
+C++ | p1130: Module Resource Requirement Propagation | [Published](https://wg21.link/p1130) | [Latest Draft](https://thephd.dev/_vendor/future_cxx/papers/d1130.html)
 
 
 ### Cannot Pursue

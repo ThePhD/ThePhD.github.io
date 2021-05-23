@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
 baseurl: ""
-url: "https://thephd.github.io"
+url: "https://thephd.dev"
 
 # THEME-SPECIFIC CONFIGURATION
 title: The Pasture
@@ -39,6 +39,8 @@ collections:
   portfolio:
     output: true
     permalink: /:collection/:name
+  presentations:
+    output: false
 
 # DEFAULTS
 defaults:

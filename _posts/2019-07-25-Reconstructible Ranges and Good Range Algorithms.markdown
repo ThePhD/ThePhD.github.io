@@ -102,7 +102,7 @@ While not as foundational as Move-only Iterators / Ranges, Reconstructible Range
 
 # So What Now?
 
-Seeing as this stuff has consequences for the standard, I wrote [D1664 - Reconstructible Ranges](https://thephd.github.io/_vendor/future_cxx/papers/d1664.html) (to be published post-Köln). It creates a (exposition only) concept similar to the concepts written above that capture the intent and makes it applicable to far more range types and adaptors, and gives us a solid and concrete design foundation with which to move forward.
+Seeing as this stuff has consequences for the standard, I wrote [D1664 - Reconstructible Ranges](https://thephd.dev/_vendor/future_cxx/papers/d1664.html) (to be published post-Köln). It creates a (exposition only) concept similar to the concepts written above that capture the intent and makes it applicable to far more range types and adaptors, and gives us a solid and concrete design foundation with which to move forward.
 
 Speaking with Hannes and others about this, the design intent for ranges was that expressions would optimize inputs if at all possible. This is why `std::ranges::views::reverse(v);` will simply "undo" the `reverse_view` type wrapper if it detects that `v` is a view wrapped in a `reverse_view` type already. Hauswedell's paper codifies that into more views and ranges, and my paper provides the concept that his paper and several other papers -- including Corentin Jabot's and Casey Carter's [P1391](https://wg21.link/p1391) and [P1394](https://wg21.link/p1394) -- fix but do not provide any long-term, underlying guidance for.
 

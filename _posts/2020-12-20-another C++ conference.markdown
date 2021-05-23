@@ -180,7 +180,7 @@ Yet, I'm supposed to sell marginalized folk on the most elite of the C and C++ c
 
 One of the most prominent developments one can see during a power imbalance is what is known as a "Whisper Network". It's different from the traditional "rumor mill" or "gossip vine" in that it exists as a tool of the weak to protect themselves and, maybe others, from a usually abusive strongperson. The organizational structure, for some reason, has given outsize power to the abuser and they use their standing and community-afforded protections against their victims without reproach. The reaction of the abused is to crystallize their trauma and, when they feel safest, hand that information out to others.
 
-This is, strangely enough, how [my first conversation around `optional<T&>` went in the Committee](https://thephd.github.io/to-bind-and-loose-a-reference-optional#a-deafening-silence):
+This is, strangely enough, how [my first conversation around `optional<T&>` went in the Committee](https://thephd.dev/to-bind-and-loose-a-reference-optional#a-deafening-silence):
 
 >  I was perplexed and confused. Despite probing a few people here and there to verify did my e-mail actually send?!, I received little to no information about why everyone was so quiet… until a sudden DM later after the survey was published:
 >

@@ -52,7 +52,7 @@ int main () {
 }
 ```
 
-It's a nearly 40 year old feature request with -- in general -- completely unsurprising semantics. Unfortunately, the actual details can get really hairy. What [was discussed during the Virtual EWG C++ Meeting](https://thephd.github.io/_presentations/standards/C++/2020%20September/p1967/Flexible%20and%20Extensible%20Preprocessor%20Embed.html) was strictly preprocessor `#embed`. The goal was to get comfortable with a syntax and also address a big issue with providing types or other shenanigans in the preprocessor. The long and short of it is:
+It's a nearly 40 year old feature request with -- in general -- completely unsurprising semantics. Unfortunately, the actual details can get really hairy. What [was discussed during the Virtual EWG C++ Meeting](https://thephd.dev/_presentations/standards/C++/2020%20September/p1967/Flexible%20and%20Extensible%20Preprocessor%20Embed.html) was strictly preprocessor `#embed`. The goal was to get comfortable with a syntax and also address a big issue with providing types or other shenanigans in the preprocessor. The long and short of it is:
 
 - The preprocessor is too simple to handle type information, and implementation experience from some vendors has made it clear that `sizeof()` support in the preprocessor is not impossible but very much a suicide mission
 - The preprocessor is exactly simple enough to make vomiting out a sequence of initializer lists work nicely;
