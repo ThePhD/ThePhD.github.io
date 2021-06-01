@@ -50,7 +50,6 @@ defaults:
       type: ""
     values:
       hide: true
-      published: false
 
 # BUILD SETTINGS
 plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed, jekyll-redirect-from]

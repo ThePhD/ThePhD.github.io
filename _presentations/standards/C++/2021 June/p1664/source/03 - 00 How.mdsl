@@ -26,7 +26,6 @@ auto result_y = std::ranges::reconstruct(iter, sent);
 - Otherwise, return `std::ranges::subrange(iter, sent)`
 
 
-
 ### Properties
 
 What does this buy us?
