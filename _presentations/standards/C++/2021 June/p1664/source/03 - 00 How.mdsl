@@ -95,7 +95,7 @@ namespace mylib {
     const CharT* ptr_first,
     const c_string_sentinel sentinel)
   {
-    return basic_c_string_view<CharT, Traits>(ptr_first, ptr_last);
+    return basic_c_string_view<CharT, Traits>(ptr_first, sentinel);
   }
 }
 ```
