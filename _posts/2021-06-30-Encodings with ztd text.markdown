@@ -40,7 +40,7 @@ int main (int argv, char* argv[]) {
 
 	// dump to stdout
 	std::cout.write(
-		reintrepret_cast<const char*>(utf16_output.data()),
+		reinterpret_cast<const char*>(utf16_output.data()),
 		utf16_output.size() * sizeof(char16_t)
 	);
 	// flush + newline
@@ -270,7 +270,7 @@ The second parameter gives you the result object. The type of the second paramet
 - throw failures as errors ([like this one](https://ztdtext.readthedocs.io/en/latest/api/error%20handlers/throw_handler.html));
 - and more!
 
-I even gave a presentation where I talked about skipping over invalid bytes, when an error is encountered in a Unicode-stream, to get to the next known good byte (timestamped video link in the picture):
+I even gave a presentation where I talked about skipping over invalid bytes, when an error is encountered in a Unicode-stream, to get to the next known good byte (timestamped video link with the picture):
 
 [!["Find First Normal Sequence" Screenshot of Meeting C++ 2019 Presentation called "Catching ⬆: Unicode for C++ in Greater Detail"](/assets/img/2021/06/meeting%20c++%20presentation.png)](https://youtu.be/FQHofyOgQtM?t=2616)
 
@@ -317,7 +317,7 @@ Now, the last bit is actually implementing the functions!
 
 Even as I say "implementing the functions", I'm not going to actually walk you through implementing all of a `shift_jis` encoder and decoder: just a few bits. This is mostly because the lovely folks at the WHATWG (Web Hypertext Application Technology Working Group) have written up [a good, normal, mostly-plain-English, technical description on how to encode or decode these data streams](https://encoding.spec.whatwg.org/#shift_jis).
 
-Perhaps the only surprising thing here would be the use of an "output range", since most people are only used to using a single "output iterator" (e.g., `std::copy` which only takes a single "destination" iterator or `memcpy` which only takes a single "destination" pointer). Reading from an input is still similar to breaking something down into its iterators and walking through it, one by one. Safety is expected to be taken care of by the `encode_one` or `decode_one` function, e.g. if the input is empty you are expected to bail, not just start reading garbage. This is one of the chief benefits of dealing with ranges: the fact that we get to check our data accesses against an "end" or, if we're just using input/output ranges directly, we get to use common functions like `.empty()` or similar. Here is the first bit of the `shift_jis::encode_one` function, responsible for some brief checking and checking if the first byte fits in the "ASCII" part of Shift JIS:
+Perhaps the only surprising thing here would be the use of an "output range", since most people are only used to using a single "output iterator" (e.g., `std::copy` which only takes a single "destination" iterator or `memcpy` which only takes a single "destination" pointer). Reading from an input is still similar to breaking something down into its iterators and walking through it, one by one. Safety is expected to be taken care of by the `encode_one` or `decode_one` function, e.g. if the input is empty you are expected to bail, not just start reading garbage. This is one of the chief benefits of dealing with ranges: the fact that we get to check our data accesses against an "end" or, if we're just using input/output ranges directly, we get to use common functions like `.empty()` or similar. Here is the first bit of the `shift_jis::encode_one` function, responsible for some brief checking and serializing the first byte if it fits in the "ASCII" part of Shift JIS:
 
 ```cpp
 struct shift_jis {
@@ -399,7 +399,7 @@ Assuming that you finish up the implementation (or just copy-paste [from this ex
 > 
 > 仕事　プログラミングです。
 
-We load that file into a `std::ifstream`, read the bytes into a `std::vector<char>`, `ztd::text::transcode`'d it, and then try to vomit the UTF-8 into a terminal. We use the replacement error handlers to give me an idea of whether or not any replacement characters (`'�'`) would show up to show that our known-correct Shift JIS was fraudulent and would come out bad anywhere:
+We load that file into a `std::ifstream`, read the bytes into a `std::vector<char>`, `ztd::text::transcode`'d it, and then try to vomit the UTF-8 into a terminal. We use the replacement error handlers to give me an idea of whether or not any replacement characters (`'�'`) would show up to display that our known-correct Shift JIS was fraudulent and would come out bad anywhere:
 
 ```cpp
 #include "shift_jis.hpp"
@@ -511,7 +511,7 @@ Now, the immediate reaction to this is "MySQL sucks". And I certainly concede, M
 
 ## "I am Willfully Unqualified to Solve This Problem"
 
-In what universe is it fair that you — part of the Committee, the original sinners that created this disgusting ecosystem and all of horrific problems with your failed `wchar_t` and `char`-based localization that you crammed into every possible API — condemn everyone? You lead every programmer right to the gates of hell after over 200+ encodings are created and many attached at the language-level to my machine. And when the curse is at its worst and it's massive mechanism ominously **KA-CHNK**s open and its gaping maw drools with the screams of the damned, you just give a little peace sign and run off into your Unicode-only heaven, leaving us to fight the licking, devouring flame and save ourselves? With all due respect,
+In what universe is it fair that you — part of the Committee, the original sinners that created this disgusting ecosystem and all of horrific problems with your failed `wchar_t` and `char`-based localization that you crammed into every possible API — condemn everyone? You lead every programmer right to the gates of hell after over 200+ encodings are created and many attached at the language-level to my machine. And when the curse is at its worst and hell's massive opening mechanism ominously **KA-CHNK**s open and its gaping maw drools with the screams of the damned, you just give a little peace sign and run off into your Unicode-only heaven. And thus, we stand here to fight the licking, devouring flame and save ourselves as you cavort into paradise? With all due respect,
 
 what the hell is wrong with you?
 
@@ -527,7 +527,7 @@ You cannot cop out with such excuses, because your choices have REAL WORLD impac
 
 [![A package transcribed with Mojibake by a Postal Worker, that is then hand-translated by to the Cyrillic it was meant to use, on its way to Russia from Paris.](/assets/img/2021/06/ztd.text%20docs%20-%20bad%20package.png)](https://ztdtext.readthedocs.io/en/latest/design/loss.html)
 
-I'm not going to spend the next 30 years of my life apologizing and bowing my head in shame to a bunch of developers, postal workers, people whose names come out as "MichaÅ‚", and other shenanigans because we decided the only encoding that matters is Unicode and everyone else who needs to get to Unicode can pound sand.
+I'm not going to spend the next 30 years of my life apologizing and bowing my head in shame to a bunch of developers, postal workers, people whose names come out as "MichaÅ", and other shenanigans because we decided the only encoding that matters is Unicode and everyone else who needs to get to Unicode can pound sand. If you wanted the cheap way out you should have went to go play with a new programming language ecosystem, where everything is new and fresh and untainted and you don't have to give a damn about legacy and your strings can be UTF-8 all the time. But this is for C and C++, and it's painful and burdened with legacy and you don't just get to tell everyone whose been investing in your programming languages for decades to Go Eat Shit Because It's Unicode Only Time Babyyyy!!
 
 Daiko Ueno, Bruno Haible, rmf, and several others already paved the way and proved out this design decades ago when they released their library (iconv, libogonek, and more). People with legacy encodings need a way out too, and denying them that way out because "boo hoo, complexity!" is the worst design cop out I've ever had the extreme displeasure of listening to. I refuse to suffer such claims from a body that fashions itself is the pinnacle of Library Designers for code that is meant to Sit Beneath All Devices And Work For Everyone. Do it right, with empathy and conviction for the people YOU put in this situation, or don't bother at all. I am not asking for liberation for handling text in C and C++: I am demanding it. It will be given to me and my peers. If not because someone else decided to do it,
 
