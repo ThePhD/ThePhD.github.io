@@ -25,7 +25,7 @@ I've spent the overwhelming part of 2 years talking, advocating, and riffing abo
 #include <string>
 #include <string_view>
 
-int main (int argv, char* argv[]) {
+int main (int argc, char* argv[]) {
 	if (argc < 2) {
 		return 1;
 	}
@@ -64,7 +64,7 @@ I thought of you many years in advance, don't you worry:
 #include <string>
 #include <string_view>
 
-int main (int argv, char* argv[]) {
+int main (int argc, char* argv[]) {
 	if (argc < 2) {
 		return 1;
 	}
