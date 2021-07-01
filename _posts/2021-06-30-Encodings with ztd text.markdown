@@ -31,7 +31,7 @@ int main (int argv, char* argv[]) {
 	}
 	// get input as UTF-8
 	std::u8string_view utf8_input(
-		reinterpret_cast<const char8_t*>(argv[1]
+		reinterpret_cast<const char8_t*>(argv[1])
 	);
 	std::u16string utf16_output = ztd::text::transcode(
 		utf8_input, // input
