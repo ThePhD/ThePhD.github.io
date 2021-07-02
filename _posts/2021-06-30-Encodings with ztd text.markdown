@@ -79,7 +79,7 @@ int main (int argc, char* argv[]) {
 
 	// dump to stdout
 	std::cout.write(
-		reintrepret_cast<const char*>(utf16_output.data()),
+		reinterpret_cast<const char*>(utf16_output.data()),
 		utf16_output.size() * sizeof(char16_t)
 	);
 	// flush + newline
