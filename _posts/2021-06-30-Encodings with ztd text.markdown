@@ -256,7 +256,7 @@ For example, the `error_code` is how a low-level API knows not to continue proce
 Both of these are just type definitions for `std::function`, since we want to take any callable that can handle the required parameters and return to us the desired information. Error handler function takes 3 parameters, in this particular order:
 
 - the `Encoding` typed parameter that is calling the error handler (`*this`);
-- the `encode_result` or `decode_result` typed parameter, depending on which operation (`encode_result` or `decode_result`) is being performed; and,
+- the `encode_result` or `decode_result` typed parameter, depending on which operation (`encode_one` or `decode_one`) is being performed; and,
 - a contiguous range (usually a `std::span`) representing any data read from the input but that cannot be put back into the input.
 
 The last parameter means almost nothing to most people, and only comes in handy for dealing with very special kinds of non-copyable `input_range` types when they are the `input` parameter to `encode_one` or `decode_one`. Since we are dealing with `span` inputs, we can ignore it. The first parameter is just the encoding type. In this case, it's `shift_jis`: we don't really worry about this parameter either, since we'll just pass `*this`. But the second parameter?
@@ -374,7 +374,7 @@ struct shift_jis {
 			++out_it;
 			return sjis_encode_result(
 				// re-construct the input and output, using
-				// the updated iterators, since we were successfuly!
+				// the updated iterators, since we were successful!
 				input_span(std::move(in_it), std::move(in_last)),
 				output_span(std::move(out_it), std::move(out_last)),
 				current_state,
