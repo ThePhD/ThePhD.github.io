@@ -4,7 +4,7 @@ email_address:
   - address: "phdofthehouse@gmail.com"
     description: "[[ regular::me ]]"
   - address: "wg14@soasis.org"
-    description: "[[ standard::c]] "
+    description: "[[ standard::c ]]"
 github: "ThePhD"
 linkedin: # Full URL
 reddit: __phantomderp
