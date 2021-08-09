@@ -117,7 +117,7 @@ Open ecosystem!
 
 [Fast validation with Daniel Lemire](https://lemire.me/blog/2018/10/19/validating-utf-8-bytes-using-only-0-45-cycles-per-byte-avx-edition/)
 
-<a href="https://lemire.me/blog/2018/10/19/validating-utf-8-bytes-using-only-0-45-cycles-per-byte-avx-edition/"><img src="resources/Lemire.png" alt="Linked Picture of Daniel Lemire's blog post on Fast UTF-8 Validation" width="55%" height="55%" /></a>
+<a href="https://lemire.me/blog/2018/10/19/validating-utf-8-bytes-using-only-0-45-cycles-per-byte-avx-edition/"><img src="../../../../assets/img/2020/04/Lemire.png" alt="Linked Picture of Daniel Lemire's blog post on Fast UTF-8 Validation" width="55%" height="55%" /></a>
 
 
 ### Usages?

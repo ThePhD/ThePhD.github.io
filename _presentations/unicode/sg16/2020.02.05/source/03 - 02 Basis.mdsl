@@ -85,7 +85,7 @@ ue_u8_encode_result transcode (utf_ebcdic from_encoding,  c_span input,
 - First row: `intermediate`
 - Second row: `from_result.output`
 
-<img src="resources/Used.png" alt="Filled-in Boxes representing used space." />  
+<img src="../../../../assets/img/2020/04/Used.png" alt="Filled-in Boxes representing used space." />  
 
 
 #### Output: Encode into new Code Units...

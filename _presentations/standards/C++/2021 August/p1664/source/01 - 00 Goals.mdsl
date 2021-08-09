@@ -1,0 +1,22 @@
+# Goals 🥅
+
+"I took my range apart, how do I put it back together again?"
+
+Answer: with `std::ranges::reconstruct(...)`
+
+
+## Verifying the Design 🔍
+
+- 1 name (`reconstruct`)
+- 1 CPO (`std::ranges::reconstruct`)
+- 4 overloads with varying levels of information
+
+
+## Addressing LEWG Review Feedback 💬
+
+- "What happens if we need the original range to reconstruct properly?"
+- "What happens if you can reconstruct the original range, but do it BETTER with more information?"
+- "How do you deal with the iterator/sentinel-only overload and ADL problems?"
+
+
+## (Also, the Wording was Bad, so we Fixed That Too.)

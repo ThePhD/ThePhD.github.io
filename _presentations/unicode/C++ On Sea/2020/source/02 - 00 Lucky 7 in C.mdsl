@@ -200,7 +200,7 @@ XsrtoYs(NULL, &out, &in_size, &in, &state);
 
 ### ... Still; one small issue
 
-![From N2440 - Current Function Definitions for transcoding between types shown as a matrix with proposed functions there.](resources/C%20-%20proposed%20functions.png)
+![From N2440 - Current Function Definitions for transcoding between types shown as a matrix with proposed functions there.](../../../../assets/img/2020/04/C%20-%20proposed%20functions.png)
 
 
 ### Where's Big5-HKSCS ...?
