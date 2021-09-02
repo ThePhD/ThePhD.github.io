@@ -1,0 +1,33 @@
+# Questions
+
+
+## Is This Direction Good?
+
+- Do we want to pursue this direction for C? (Not C23)
+
+(It is implied that a fix will be figured out for redeclarations of standard functions, but that this vote is not an endorsement of said figuring out)
+
+
+## typedef-like vs. assignment-like
+
+- typedef-like: `ALIAS-TOKEN old-identifier identifer;`
+- initialization-like: `ALIAS-TOKEN identifer = old-identifier;`
+
+
+## `ALIAS-TOKEN` ?
+
+Right now going with `_Alias` + `<stdalias.h>`. Here's a list of plausible alternatives:
+
+- `using_alias`
+- `alternate_alias`
+- `_Alias`, with a `<stdalias.h>` header and a #define alias _Alias in it
+- `sameysameynamename` (fun from Compiler Explorer's Creator, Matt Godbolt)
+
+
+
+
+# ~~Existential Crisis~~ Philosophical Question
+
+Are we… never allowed to fix things if an ABI gets in the way?
+
+How do we improve the C standard library …?

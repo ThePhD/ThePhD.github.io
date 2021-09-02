@@ -1,0 +1,70 @@
+# Feature Set
+
+"What are we looking for?"
+
+
+### Prior Art
+
+There is a strong presence of prior tools:
+
+- `int old_name (void) asm("new_name");` declarations (GCC, Clang, etc.)
+- `#pragma redefine_extname "{old name}" "{new name}"` (Oracle)
+- `__attribute__ ((alias ("foo")))` (GCC, Keil ARM, etc.)
+- `#pragma comment(linker, "/export:OldName=_NewName")` (Microsoft)
+- hot-patching DLLs / symbols after-the-fact (weak symbols and friends, various)
+
+
+### The Basic Idea
+
+```cpp
+extern long long __glibc_imaxabs228(long long);
+extern __int128_t __glibc_imaxabs229(__int128_t);
+
+/* ... */
+
+#if __GNU_LIBC <= 228
+	typedef long long intmax_t;
+	_Alias imaxabs = __glibc_imaxabs228; // !!
+#else
+	typedef __int128_t intmax_t;
+	_Alias imaxabs = __glibc_imaxabs229; // !!
+#endif
+
+/* ... */
+
+int main () {
+	intmax_t x = imaxabs(-50);
+	return (int)x;
+}
+```
+
+
+## Solves §7.1.4 "Use of Library Functions", p1
+
+- Standard library must provide concrete symbol
+- Standard library allows a user to use macro-suppression to call function
+
+```cpp
+// stdfoo.h
+_Alias stdc_foo = __internal_foo;
+```
+
+```cpp
+// main.c
+int main () {
+	int x = (stdc_foo)(1, 2); // legal, suppsoed to work
+	#undef stdc_foo // legal
+	int x = stdc_foo(1, 2); // legal
+	return 0;
+}
+```
+
+
+## No Linkage
+
+These are not redeclarations / things with linkage
+
+- "Typedefs, but for Functions"
+
+
+# One Last Problem: paragraph 2

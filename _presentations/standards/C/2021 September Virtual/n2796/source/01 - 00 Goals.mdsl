@@ -1,0 +1,42 @@
+# Goals
+
+- Get an Opinion Vote So I Can Fight With Every Existing Implementation
+
+
+
+## Why?
+
+> "libstdc++ and GCC are not your playground"
+> 
+> — GCC/libstdc++ implementer informal policy (word of mouth)
+
+> "There must be an active proposal undergoing consideration in order to consider your extension"
+> 
+> — LLVM/Clang Official Policy
+
+
+## Why? Part II
+
+> I am unreasonably angry about this, because the intmax_t situation has kept me from enabling completely-working first-class int128 support out of clang for a decade. In that decade, I personally would have used 128b literals more times in personal and professional projects than the entire world has used intmax_t to beneficial effect, ever, in total.
+>
+> — [Steve Canon, Mathematician, Clang Developer, Floating Point Guy™](https://twitter.com/stephentyrone/status/1329796144193556482)
+
+
+## Why? Part III
+
+Severe ecosystem problems (take e.g `intmax_t`)
+
+- `intmax_t` used to print any integer of any size safely **and securely**
+- `intmax_t` used by preprocessor to determine maximum allowed integer size
+- `intmax_t` hurts downstream folks in other languages (C++: liaison issue?!)
+- `intmax_t` in existing libraries where C library == POSIX OS (ABI lock-in!)
+
+
+## One part solved
+
+Robert Seacord's [N2680 - Specific Width Length Modifier](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2680.pdf)
+
+Can print out numbers better without an ABI break: great! 🎉
+
+
+# How do we solve the rest?
