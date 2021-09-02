@@ -67,4 +67,51 @@ These are not redeclarations / things with linkage
 - "Typedefs, but for Functions"
 
 
+## Front-end only
+
+- We do not want an attribute (they can be ignored)
+- We do not want a special linker / binary directive (not all implementations are binary)
+- We are trying for a front-end, standard feature that can have the desired effect
+
+
+## Best of Existing Features
+
+Combining best of `int bar () asm("foo");` and `int bar () __attribute__((alias("foo")))`:
+
+```cpp
+#if 0
+extern inline int foo () { return 1; }
+#endif
+
+int bar () __attribute__((alias("foo")));
+// <source>:5:27: error: alias must point to a defined variable or function
+// int bar () __attribute__((alias("foo")));
+//                           ^
+
+int main () {
+	return bar();
+}
+```
+
+
+## With `_Alias`
+
+```cpp
+#if 0
+extern int foo ();
+#endif
+
+_Alias bar = foo;
+// <source>:5:27: error: alias must point to an existing declaration
+// _Alias bar = foo;
+//              ^
+
+int main () {
+	return bar();
+}
+
+int foo () { return 1; }
+```
+
+
 # One Last Problem: paragraph 2
