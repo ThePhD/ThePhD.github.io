@@ -36,6 +36,26 @@ int stdc_sleep(int requested_sleep_time); // 😱
 ```
 
 
+## Oh No...!!
+
+- `<inttypes.h>`
+
+```cpp
+__int128_t __imaxabs_229(__int128_t value);
+
+_Alias imaxabs = __imaxabs_229;
+```
+
+- `main.c`
+
+```cpp
+#include <inttypes.h>
+
+intmax_t imaxabs(intmax_t value); // 😱
+// ... Aw shucks.
+```
+
+
 ## Put Bluntly
 
 - This solves my personal ABI problems 🥳!

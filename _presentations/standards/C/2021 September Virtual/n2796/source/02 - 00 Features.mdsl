@@ -80,10 +80,10 @@ Combining best of `int bar () asm("foo");` and `int bar () __attribute__((alias(
 
 ```cpp
 #if 0
-extern inline int foo () { return 1; }
+extern inline int foo (void) { return 1; }
 #endif
 
-int bar () __attribute__((alias("foo")));
+int bar (void) __attribute__((alias("foo")));
 // <source>:5:27: error: alias must point to a defined variable or function
 // int bar () __attribute__((alias("foo")));
 //                           ^
@@ -98,7 +98,7 @@ int main () {
 
 ```cpp
 #if 0
-extern int foo ();
+extern int foo (void);
 #endif
 
 _Alias bar = foo;
@@ -106,12 +106,9 @@ _Alias bar = foo;
 // _Alias bar = foo;
 //              ^
 
-int main () {
+int main (void) {
 	return bar();
 }
 
-int foo () { return 1; }
+int foo (void) { return 1; }
 ```
-
-
-# One Last Problem: paragraph 2
