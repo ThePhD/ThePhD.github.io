@@ -64,7 +64,7 @@ It looks pretty great now, nice! It also matches C++'s syntax, so we thankfully 
 
 ## N2630 - Formatted input/output of binary integer numbers
 
-This paper allows us to print binary numbers using the `"%b"` specifier. This is a thing people have also needed from time to time and it made sense after we received binary literals. It applies to `scanf` family of functions, `strto*` family of functions, and the `printf` family of functions. Small caveat: since some implementations already stole `"%B"` for themselves (implementations were allowed to do this, yes!), we do not have a print specification for `"%B"` which would print out the prefix. You're going to need to make do with `"0b%b"` for now. Sorry: blame the existing implementations ¯\\\_(ツ)\_/¯.
+This paper allows us to print binary numbers using the `"%b"` specifier. This is a thing people have also needed from time to time and it made sense after we received binary literals. It applies to `scanf` family of functions, `strto*` family of functions, and the `printf` family of functions. Small caveat: since some implementations already stole `"%B"`/`"%#B"` for themselves (implementations were allowed to do this with capital letters not in use by the standard, yes!), we do not have a print specification for `"%#B"` which would print out the prefix with a capital letter, or a `"%B"` at all! You're going to need to make do with `"0B%b"` for now. Sorry: blame the existing implementations ¯\\\_(ツ)\_/¯.
 
 But, even if that has you feeling a bit down, we've also got another formatting feature which is actually pretty great!
 
