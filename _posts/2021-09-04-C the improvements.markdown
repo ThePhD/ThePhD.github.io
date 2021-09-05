@@ -40,7 +40,7 @@ Remember, keeping an open communication channel (Twitter, Slack, E-Mail, Literal
 
 ## N2626 - Digit Separators
 
-Have you ever written 4958409583ull as a numeric constant and felt your eyes cross when trying to read it over and over again? Have you ever wanted things to be a little easier to read when you make complex chunks of bits (separate it into bytes, separate it [into nybbles](https://en.wikipedia.org/wiki/Nibble))? Now you can! Introducing: digit separators! Because we didn't want any cultures getting the idea we loved them anymore than any other culture, we chose a digit separator everyone can ~~hate~~love equally, so it looks like this:
+Have you ever written `8314056565186323712ull` as a numeric constant and felt your eyes cross when trying to read it over and over again? Have you ever wanted things to be a little easier to read when you make complex chunks of bits (separate it into bytes, separate it [into nybbles](https://en.wikipedia.org/wiki/Nibble))? Now you can! Introducing: digit separators! Because we didn't want any cultures getting the idea we loved them anymore than any other culture, we chose a digit separator everyone can ~~hate~~love equally, so it looks like this:
 
 ```cpp
 const unsigned magical_number = 1'633'902'946;
