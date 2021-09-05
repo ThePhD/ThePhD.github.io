@@ -122,13 +122,15 @@ int x[(int)+1.0];
 
 were considered constant arrays because the parsers by [the Pillar Compilers](https://www.youtube.com/watch?v=XUhVCoTsBaM) was too amazing.
 
-Meme music aside, while it was nice that their constant expression parsers were exceptionally good, unfortunately that declaration should have been considered a Variable Length Array. While the compiler backend is free to lower it down to being a static array because it's so smart and capable, other far simpler compilers declared it a VLA because the C Standard's constant expression rules are incredibly limited. So, even if the compiler can turn it into a normal C array on its backend, it has to be considered a VLA, at least for the purposes of consuming the code and conforming to ISO C. (This means, among other things, that you cannot do `= {24}` on the above array as an initializer, because VLAs cannot be initialized with elements. This was where some code was tripped up when it tried to port between compilers, resulting in unnecessary breakage.)
+Meme music aside, while it was nice that their constant expression parsers were exceptionally good, unfortunately that declaration should have been considered a Variable Length Array (VLA). While the compiler backend is free to lower it down to being a static array because it's so smart and capable, other far simpler compilers declared it a VLA because the C Standard's constant expression rules are incredibly limited. Seriously: a lot of what is computed at translation / compile time is actually extremely implementation-specific: there's a lot of people relying on a constant folder / constant parser that is way more beefy than the one in the C standard, which can make for a lot of problems when you're working with someone's home-grown C implementation.
+
+So, even if the compiler can turn it into a normal C array on its backend, it has to be considered a VLA, at least for the purposes of consuming the code in the "front end" and conforming to ISO C. (This means, among other things, that you cannot do `= {24}` on the above array as an initializer, because VLAs cannot be initialized with elements. This was where some code was tripped up when it tried to port between compilers, resulting in unnecessary breakage.)
 
 
 
 ## N2686 - `#warning` directive
 
-Have you ever wanted to issue a diagnostic but let the user keep on compiling the code, because it was more of a "hey, this thing might go wrong, it might not, just letting you know" sort of problem? Did you want to put something in your library that amounted to a "hey, you're doing great, keep it up, love you!" printout in your user's console without ending their compilation, dear reader? Well, look no more, because C23 is going to have a `#warning` directive! Let your users keep on compiling but guide them towards better solutions by adding well-explained deprecation warnings for headers, telling someone that `CHAR_BIT != 0` is not really supported but "best of luck!!", and all sorts of things that `#error` was just WAY too annoying for!
+Have you ever wanted to issue a diagnostic but let the user keep on compiling the code, because it was more of a "hey, this thing might go wrong, it might not, just letting you know" sort of problem? Did you want to put something in your library that amounted to a "hey, you're doing great, keep it up, love you!" printout in your user's console without ending their compilation, dear reader? Well, look no more, because C23 is going to have a `#warning` directive! Let your users keep on compiling but guide them towards better solutions by adding well-explained deprecation warnings for headers, telling someone that `CHAR_BIT != 8` is not really supported but "best of luck!!", and all sorts of things that `#error` was just WAY too annoying for!
 
 This feature had been floated around WG21 (C++) a few times and people always got grumpy about it, but here WG14 is leading the way by standardizing existing practice and letting developers talk to their users and give them helpful information (or, perhaps, a well-warranted pat on the back).
 
@@ -160,7 +162,7 @@ String literals and string processing with `u8""`, `u""`, and `U""` will not be 
 
 
 
-## `__has_include`
+## N2799 - `__has_include`
 
 What can I say about this proposal except:
 
@@ -168,7 +170,7 @@ finally.
 
 It's a shame that, for a lot of really good preprocessor features, C++ is getting them first (e.g. `__VA_OPT__` and `__has_include`) since it's C folk that depend on the preprocessor the most. But, that's alright, because a lot of these are also on the docket for C23, and one of them has made it in! Fantastically, `__has_include` is now part of C23, just like it's been a part of C++ for a good while now. It lets us check if a header file exists, which is not a perfect thing to do in C (and very discouraged with standard headers in C++ because the header can exist but the content can be excluded or wrong for the Standard Version you are using), but immensely helpful! A lot of those "checking sys/stat.h exists..." checks in `./configure` are about to become very, **very** irrelevant very quickly, and I am excited for it.
 
-It won't obsolete this stuff but it does mean we are getting closer and closer to writing robust, standalone libraries in C that don't require a mountain of pre work-up to get started on many completely normal systems.
+It won't obsolete this stuff but it does mean we are getting closer and closer to writing robust, standalone libraries in C that don't require a mountain of pre-work to get started on many completely normal systems.
 
 
 
@@ -177,9 +179,9 @@ It won't obsolete this stuff but it does mean we are getting closer and closer t
 
 There were a lot of other smaller fixes that were accepted to C23, and a few big ones I'm not exactly the most experienced in to talk about. For example, I think David Goldblatt will probably have some words (somewhere) about [N2801](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2801.htm), which is some exciting work on sized memory deallocation and other fun stuff we could use to increase performance AND safety in the standard with respect to allocation. I'll let him (if he chooses to!) handle that one, even if I think it's super important stuff! [Hans Boehm is also pushing changes to help synchronize `_Atomic(T)` between C and C++](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2741.htm), which should help close the gap between there and maybe push some implementations to have less of a schism between their C and C++ versions of these types.
 
-We are going to make C23 **the** definitive version of C to upgrade to. Work on `typeof`, forward-declaring parameters, [specifying the underlying type of an enumeration](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2575.pdf), better [escape sequences](http:/s/www.open-std.org/jtc1/sc22/wg14/www/docs/n2785.pdf), getting rid of [footguns like parameter-less/takes-any-argument functions](https://twitter.com/Cor3ntin/status/1432828206344716288), and other things are coming along. We are going to be producing a safer, better, and more programmer-friendly Standard that rewards your hard work with a language that can meet your needs without 100 compiler-specific extensions and subtle hacks that break. One proposal at a time, in the spirit of C. It won't be anything like C++ or Rust or Zig or any of that, but we hope it'll be good for you, dear reader.
+We are going to make C23 **the** definitive version of C to upgrade to. Work on `typeof`, forward-declaring parameters, [specifying the underlying type of an enumeration](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2575.pdf), better [escape sequences](http:/s/www.open-std.org/jtc1/sc22/wg14/www/docs/n2785.pdf), getting rid of [footguns like parameter-less/takes-any-argument functions](https://twitter.com/Cor3ntin/status/1432828206344716288), and other things are coming along. Producing a safer, better, and more programmer-friendly C Standard which rewards your hard work with a language that can meet your needs without 100 compiler-specific extensions and subtle hacks that break is my top priority. One proposal at a time, in the spirit of C. It won't be anything like C++ or Rust or Zig or any of that, but we hope it'll be good for you, dear reader.
 
-Finally, I got (very small, but still positive) approval to go start heckling implementations about one of my Big Bombs™ for shaking up the ABI problem space for C. It likely won't make it for C23, which means your `intmax_t` is gonna stay `long long` for a little bit longer. But that...
+Finally, I got (very small, but still positive) approval to go start heckling implementations about one of my Big Bombs™ for shaking up the ABI problem space for C. It likely won't make it for C23, which means your `intmax_t` is gonna stay `long long` for a little bit `long long`er. But that...
 
 is something I'll tell you about a little later.~
 
