@@ -40,13 +40,19 @@ Remember, keeping an open communication channel (Twitter, Slack, E-Mail, Literal
 
 ## N2626 - Digit Separators
 
-Have you ever written `8314056565186323712ull` as a numeric constant and felt your eyes cross when trying to read it over and over again? Have you ever wanted things to be a little easier to read when you make complex chunks of bits (separate it into bytes, separate it [into nybbles](https://en.wikipedia.org/wiki/Nibble))? Now you can! Introducing: digit separators! Because we didn't want any cultures getting the idea we loved them anymore than any other culture, we chose a digit separator everyone can ~~hate~~love equally, so it looks like this:
+Have you ever written `8314056565186323712ull` as a numeric constant and felt your eyes cross when trying to read it over and over again? Have you ever wanted things to be a little easier to read when you make complex chunks of bits (separate it into bytes, separate it [into nybbles](https://en.wikipedia.org/wiki/Nibble))? Now you can! Introducing: digit separators! Because we didn't want any cultures getting the idea we loved them anymore than any other culture, we chose a digit separator everyone can ~~hate~~love equally! ... Unless, wait a second:
+
+> Guess who uses apostrophes for digit separators! The SWISS! And who is in Switzerland? ISO! I see WG14 is no less corrupt than WG21.
+>
+> - [Miro Knejp](https://twitter.com/mknejp)
+
+... Oh. Well, the digit separators we use, are...
 
 ```cpp
 const unsigned magical_number = 1'633'902'946;
 ```
 
-I should also note that C23 will also have [Binary Integer Literals](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2549.pdf), so the same number can be written out in a more precise grouping of binary as well:
+... Oh. Hm. Guess we ARE kind of corrupt and his tinfoil hats are warranted...! Whoops? I should also note that C23 will also have [Binary Integer Literals](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2549.pdf), so the same number can be written out in a more precise grouping of binary as well:
 
 ```cpp
 const unsigned magical_number = 0b0110'0001'0110'0011'0110'0001'0110'0010;
