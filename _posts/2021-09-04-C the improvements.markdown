@@ -44,7 +44,7 @@ Have you ever written `8314056565186323712ull` as a numeric constant and felt yo
 
 > Guess who uses apostrophes for digit separators! The SWISS! And who is in Switzerland? ISO! I see WG14 is no less corrupt than WG21.
 >
-> - [Miro Knejp](https://twitter.com/mknejp)
+> — [Miro Knejp](https://twitter.com/mknejp)
 
 ... Oh. Well, the digit separators we use, are...
 
