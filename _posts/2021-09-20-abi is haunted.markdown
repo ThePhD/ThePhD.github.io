@@ -117,7 +117,7 @@ call    _Z5f_two18deque_iterator_two ; f_two(deque_iterator_two)
 call    _Z5f_one18deque_iterator_one ; f_one(deque_iterator_one)
 ```
 
-This means that, even if we named both functions just `f` in our code, at the symbol-level in our binaries it could tell apart a function meant for `deque_iterator_one` and `deque_iterator_two`. Again, this is because it's grafted to the name of the type into the final symbol that shows up in our binary:
+This means that, even if we named both functions just `f` in our code, at the symbol-level in our binaries it could tell apart a function meant for `deque_iterator_one` and `deque_iterator_two`. Again, this is because it's grafted the name of the type into the final symbol that shows up in our binary:
 
 ```s
 …
