@@ -27,4 +27,3 @@ In my free time I try to write and draw, which has naturally led me to creating 
 # Credit
 
 The adorable favicon is the Twitter Sheep Emoji from [Twemoji 2.7](https://github.com/twitter/twemoji). The avatar is something I drew by hand! 
-This file is an example of a page in Jekyll, that automatically shows up in the header navigation, you can delete or modify this file freely.
