@@ -100,7 +100,7 @@ movaps  XMMWORD PTR [rsp], xmm15
 call    _Z5f_two18deque_iterator_two ; f_two(deque_iterator_two)
 ```
 
-That's... definitely not the same assembly. Despite having identical structure and content, changing the copy constructor changes how it's called. And not even changing the copy constructor in a way that truly matters: the behavior is identical in both forms: it does a bit-blasting copy operation! Right now, we have the functions — `f_one` and `f_two` — with two distinct names, and two distinct symbols in the final executable. But, you can imagine that if we had a single `deque_iterator` type, and added that copy constructor, GCC would violate the previously-established `edi` + `esi` register contract expected by the internals of some call `f` and instead start messing around with `rdi` and `xmm15`. This means that while the code compiles, links, and even runtime loads properly, the actual running of the code has a separate by-the-bits expectation. And when every single bit matters, it turns out everything else needs to be extremely well-defined when it comes to how the world works out. Argument placement, data layout, even the amount of stack space used and where things are kept changes based on making a fundamentally idempotent change to the copy constructor.
+That's… definitely not the same assembly. Despite having identical structure and content, changing the copy constructor changes how it's called. And not even changing the copy constructor in a way that truly matters: the behavior is identical in both forms: it does a bit-blasting copy operation! Right now, we have the functions — `f_one` and `f_two` — with two distinct names, and two distinct symbols in the final executable. But, you can imagine that if we had a single `deque_iterator` type, and added that copy constructor, GCC would violate the previously-established `edi` + `esi` register contract expected by the internals of some call `f` and instead start messing around with `rdi` and `xmm15`. This means that while the code compiles, links, and even runtime loads properly, the actual running of the code has a separate by-the-bits expectation. And when every single bit matters, it turns out everything else needs to be extremely well-defined when it comes to how the world works out. Argument placement, data layout, even the amount of stack space used and where things are kept changes based on making a fundamentally idempotent change to the copy constructor.
 
 
 
@@ -111,18 +111,18 @@ Like the tweet above, some people think that ABI is explicitly a C++ problem. C 
 If you remember the example from above, we get these really filthy mangled symbols:
 
 ```s
-...
+…
 call    _Z5f_two18deque_iterator_two ; f_two(deque_iterator_two)
-...
+…
 call    _Z5f_one18deque_iterator_one ; f_one(deque_iterator_one)
 ```
 
 This means that, even if we named both functions just `f` in our code, at the symbol-level in our binaries it could tell apart a function meant for `deque_iterator_one` and `deque_iterator_two`. Again, this is because it's grafted to the name of the type into the final symbol that shows up in our binary:
 
 ```s
-...
+…
 call    _Z5f18deque_iterator_two ; f(deque_iterator_two)
-...
+…
 call    _Z5f18deque_iterator_one ; f(deque_iterator_one)
 ```
 
@@ -169,7 +169,7 @@ There is no "`long long`" or "`__int128_t`" baked into the names like there woul
 
 
 
-# Okay... But Why Does It Matter?
+# Okay… But Why Does It Matter?
 
 ![With a quiet "thump", the book is closed as Luna's eyebrow perks up, watching the figure walk right past her deeper into the house.](/assets/img/cryptiidcruxx/cruxx-comic-3.png)
 
@@ -185,11 +185,11 @@ For C++, they can change types that go into functions, add overloads, etc. becau
 
 > [isocpp-lib] N2994 was an ABI-breaking change to istream_iterator
 
-... Huh? It's been 10 years: July 19th is when this e-mail dropped into my inbox. N2994 been approved a long time ago! How do you have an ABI break from a pre-C++11 paper? This was before even my time, before I was even that into computers! And yet, this was exactly this case. It was similar to the `deque_iterator` case, just like outlined above: hand-crafted constructors prevented it from being a trivial type.
+… Huh? It's been 10 years: July 19th is when this e-mail dropped into my inbox. N2994 been approved a long time ago! How do you have an ABI break from a pre-C++11 paper? This was before even my time, before I was even that into computers! And yet, this was exactly this case. It was similar to the `deque_iterator` case, just like outlined above: hand-crafted constructors prevented it from being a trivial type.
 
 Some debate ensued. Thank God, we legitimately just had better things to do at the time: this was ~2 meetings before the final C++20 Prague Meeting, which was the last in-person meeting the C++ Standards Committee has had since (* gestures vaguely towards Outside *) happened. The thread ultimately fizzled out as other things were focused on, a [Library Working Group (LWG) issue](https://wg21.link/lwg) was never filed, and `std::istream_iterator<some-trivial-type>` as far as Standard C++ is concerned remains `std::is_trivially_copy_constructible_v`. Of course, this tiny detail has made it so some implementations - like GCC - [just don't conform](https://godbolt.org/z/Y1jh1Wer4) out of fear of the same bug that `deque_iterator` suffered from above.
 
-The worrying part about this is how, retroactively, long-accepted work done on the C++ Standard can be threatened if an implementation forgets to make a change before they flip their ABI switch. In this case, we very much just haven't done anything. Whether that was an intentional choice to just not bother, or an accident that I may unfortunately be roundabout-informing the original submitter that they can, in fact, grind this ABI axe with the C++ Committee if they remember to pick it up, is up to speculation. In my heart, I feel like this current situation is the right choice: the Standard makes a guarantee and libstdc++ just can't meet it for legacy reasons. I do not want what happened to `deque_iterator` happening to `istream_iterator`, no thank you: I prefer my calling conventions cheap and my code lean, thank you very much! Of course, this is a situation where the ship has already sailed. But...
+The worrying part about this is how, retroactively, long-accepted work done on the C++ Standard can be threatened if an implementation forgets to make a change before they flip their ABI switch. In this case, we very much just haven't done anything. Whether that was an intentional choice to just not bother, or an accident that I may unfortunately be roundabout-informing the original submitter that they can, in fact, grind this ABI axe with the C++ Committee if they remember to pick it up, is up to speculation. In my heart, I feel like this current situation is the right choice: the Standard makes a guarantee and libstdc++ just can't meet it for legacy reasons. I do not want what happened to `deque_iterator` happening to `istream_iterator`, no thank you: I prefer my calling conventions cheap and my code lean, thank you very much! Of course, this is a situation where the ship has already sailed. But…
 
 what would happen if you weren't 10 years late to the party?
 
@@ -294,7 +294,7 @@ This becomes the everlasting problem in most Committee discussions when a propos
 
 and it can block a lot of progress.
 
-Remember that at no point was Nozomu Katō-san in the wrong here. They did everything we normally ask of a person engaging with the C++ Committee: [write a proposal](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1844r1.html), submit it to be presented with a champion, have an [existing implementation with usage and deployment experience](https://www.akenotsuki.com/misc/srell/en/), and have [technical wording](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1844r1.html#sec6) that can be improved by wording experts to go into the C++ standard if it is not already good specification. There was no reason Katō-san failed other than the inability of the existing implementations to cope with ABI instability or wanting to nitpick `std::regex`'s existing design. For example, some people complained that `std::regex` can work with any bidirectional iterator, and "honestly, who would do that or need that in this day and age? Who is going to iterator over a `list<char>`?". Unluckily for this person, that criticism rings hollow in the [face of existing practice in even modern C++ implementations of regular expressions](https://godbolt.org/z/GnW695voz). It's also utterly reductive: linked lists and growable arrays exist on two opposite ends of the data structure spectrum. There is **plenty** of room for other traversable data structures in-between, including ropes, [gap buffers](https://github.com/soasis/text/blob/main/examples/basic/source/gap_buffer_decode_view.cpp#L39), and more.
+Remember that at no point was Nozomu Katō-san in the wrong here. They did everything we normally ask of a person engaging with the C++ Committee: [write a proposal](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1844r1.html), submit it to be presented with a champion, have an [existing implementation with usage and deployment experience](https://www.akenotsuki.com/misc/srell/en/), and have [technical wording](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1844r1.html#sec6) that can be improved by wording experts to go into the C++ standard if it is not already good specification. There was no reason Katō-san failed other than the inability of the existing implementations to cope with ABI instability or wanting to nitpick `std::regex`'s existing design. For example, some people complained that `std::regex` can work with any bidirectional iterator, and "honestly, who would do that or need that in this day and age? Who is going to iterate over a `list<char>`?". Unluckily for this person, that criticism rings hollow in the [face of existing practice in even modern C++ implementations of regular expressions](https://godbolt.org/z/GnW695voz). It's also utterly reductive: linked lists and growable arrays exist on two opposite ends of the data structure spectrum. There is **plenty** of room for other traversable data structures in-between, including ropes, [gap buffers](https://github.com/soasis/text/blob/main/examples/basic/source/gap_buffer_decode_view.cpp#L39), and more.
 
 Nevertheless, we, as the Committee:
 
@@ -360,7 +360,7 @@ This is, of course, a huge problem if you want to initialize a container or othe
 
 #### Hey, That's an ABI Break!
 
-...
+…
 
 ![A woman with a face scrunched up in anger, making a gesture with her hands like she's strangling a person who isn't there while practically snarling to herself.](/assets/img/2021/09/woman-deep-frustration.gif)
 
@@ -389,7 +389,7 @@ Yep! Despite getting a handful of papers before C++11 shipped to fix the problem
 >
 > …
 
-Little did I know, that that was exactly what David Krauss and Rodrigo Castro Campos had already been trying to do in the first place, just they were doing it over 10 years ago. I was just walking back that idea, all over again, in the exact same Committee, with almost all the same people who were there when Krauss's and Campos's ideas got shot down. Except now, it was about ABI! Even if I could make a convincing design argument (and [I DID](/san-diego-2018-c++-committee-trip-report#ewgi-battle-standings), which is why it almost went to the next stage until the ABI concerns were brought up!), it would always die because of ABI, plus whatever reasons prevented us from making `movable_initializer_list<T>` in the first place. Every time I talked about these things in the Committee, every time I spoke with C++ experts inside of the Committee, it was always "ah, well, we just did not know any better and did not know how to combine the ideas at the time, a shame!". Nobody ever admitted "oh, we knew, we just were not going to accept it in that form. :)". One of these explanations makes it seem like the Committee is just a bumbling oaf who needs a little help, of which I was happy to supply. The other is far more deliberate and means I should've not carefree-offer to champion someone else's (small) paper who is about to run headlong into a 16 year old intentionally-manufactured problem.
+Little did I know, that that was exactly what David Krauss and Rodrigo Castro Campos had already been trying to do in the first place, just they were doing it over 10 years ago. I was just walking back that idea, all over again, in the exact same Committee, with almost all the same people who were there when Krauss's and Campos's ideas got shot down. Except now, it was about ABI! Even if I could make a convincing design argument (and [I DID](/san-diego-2018-c++-committee-trip-report#ewgi-battle-standings), which is why it almost went to the next stage until the ABI concerns were brought up!), it would always die because of ABI, plus whatever reasons prevented us from making `movable_initializer_list<T>` in the first place. Every time I talked about these things in the Committee, every time I spoke with C++ experts inside of the Committee, it was always "ah, well, we just did not know any better and did not know how to combine the ideas at the time, a shame!". Nobody ever admitted "oh, we knew, we just were not going to accept it in that form. :)". One of these explanations makes it seem like the Committee is just a bumbling oaf who needs a little help, of which I was happy to supply. The other is far more deliberate and means I should not carefree-offer to champion someone else's (small) paper who is about to run headlong into a 16 year old intentionally-manufactured problem.
 
 But then again, [it's not the first time I've run headfirst into WG21's ability to memory hole an explicit design decision](/to-bind-and-loose-a-reference-optional).
 
@@ -431,19 +431,19 @@ And when I say in-perpetuity, I mean that in a very visceral and immediate sense
 
 # Haunting the Present
 
-![Luna speaks from the couch with a confused expression on her face, saying "... Wha–" like she's about to be interrupted by something.](/assets/img/cryptiidcruxx/cruxx-comic-5.png)
+![Luna speaks from the couch with a confused expression on her face, saying "… Wha–" like she's about to be interrupted by something.](/assets/img/cryptiidcruxx/cruxx-comic-5.png)
 
-One of the core problem with ABI is that it very much affects how the committee works and designs things. It also means that improvements often get sidelined or ignored because it can't be feasibly done without an ABI break. Sometimes, there are fixes that can be done. So, for example, while the standard adds `allocate_at_least(size_type n)` to the current `std::allocator`, nothing can be done for `std::polymorphic_allocator` because of the reasons mentioned. From a proposal that actually has a chance of making it into C++:
+One of the core problem with ABI is that it very much affects how the Committee works and designs things. It also means that improvements often get sidelined or ignored because it can't be feasibly done without an ABI break. Sometimes, there are fixes that can be done, but only partially. So, for example, while the standard adds `allocate_at_least(size_type n)` to the current `std::allocator`, nothing can be done for `std::polymorphic_allocator` because of the reasons mentioned. From a proposal that actually has a chance of making it into C++:
 
 > `std::pmr::memory_resource` is implemented using virtual functions. Adding new methods, such as the proposed allocate API would require taking an ABI break.
 >
 > — "Providing size feedback in the Allocator interface", [P0401r6](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2021/p0401r6.html#pmr)
 
-And so... well, that's that. Even if `std::polymorphic_allocator` is giving people huge gains in code — not because of the virtual interface, but because it comes with a few `std::` available [implementations for pre-created memory regions](https://www.youtube.com/watch?v=q6A7cKFXjY0) — it will never be able to realize any of the gains as we — finally — begin to add functionality called out by Howard Hinnant 17 years ago in proposals to C and C++. Even as `allocate_at_least` percolates through the Committee, we also miss both in-place `expand` and `shrink` functions for containers which can dynamically grow/shrink memory in-place, without reallocation, which is an incredibly useful property for single-memory-blob allocators which tend to pull objects from a singular region of memory. And if we ever properly propose `expand`,`shrink`, and potentially a `reallocate` function for our allocator model, `std::pmr::memory_resource` will continue to miss out on fixes, changes and optimizations. Which is likely what's so depressing about me working up the courage to release my own `ztd::vector` and `ztd::allocator` that realizes some of Howard Hinnant's vision, and what makes it doubly depressing to try and write a paper about it:
+And so… well, that's that. Even if `std::polymorphic_allocator` is giving people huge gains in code — not because of the virtual interface, but because it comes with a few `std::` available [implementations for pre-created memory regions](https://www.youtube.com/watch?v=q6A7cKFXjY0) — it will never be able to realize any of the gains as we — finally — begin to add functionality called out by Howard Hinnant 17 years ago in proposals to C and C++. Even as `allocate_at_least` percolates through the Committee, we also miss both in-place `expand` and `shrink` functions for containers which can dynamically grow/shrink memory in-place, without reallocation, which is an incredibly useful property for single-memory-blob allocators which tend to pull objects from a singular region of memory. And if we ever properly propose `expand`,`shrink`, and potentially a `reallocate` function for our allocator model, `std::pmr::memory_resource` will continue to miss out on fixes, changes and optimizations. Which is likely what's so depressing about me working up the courage to release my own `ztd::vector` and `ztd::allocator` that realizes some of Howard Hinnant's vision, and what makes it doubly depressing to try and write a paper about it:
 
 [![A picture of the paper submission system, showing a red-lined D2265R0 draft paper that was never submitted. It's name is "A More Useful and Complete Allocators API".](/assets/img/2021/09/d2256-submission-status.png)](https://github.com/ThePhD/future_cxx/issues/34)
 
-"Yes, we can realize these gains. No, they can't work with `polymoprhic_allocator`. No, I can't do anything about it unless every implementation decides to break ABI at the same time. What do you mean my eyes are glassy and I have a far-off, broken look in them?"
+"Yes, we can realize these gains. No, they can't work with `polymorphic_allocator`. No, I can't do anything about it unless every implementation decides to break ABI at the same time. What do you mean my eyes are glassy and I have a far-off, broken look in them?"
 
 It's a demoralizing process, from start to finish, and almost makes a person feel like it's better to abandon almost everything than stand there and fight with implementers. Of course, it's not just allocators that get in the way of proposals. Even something as low-level as `std::thread::attributes` ends up getting ABI flack!
 
@@ -504,7 +504,7 @@ Corentin Jabot may introduce `std::thread::name_attribute` as an `inline constex
 
 You might say that. Unfortunately, we have a lot of experience with Microsoft, in fact, doing exactly that! You would think that someone who came late to the ABI game would be a little bit more prepared for what it means to take their time to lock things in so they don't end up in the same situations as libstdc++ or libc++. But Microsoft did not only fail with ABI, they did it in a space where they had all of the right tools to make the right decisions.
 
-And somehow we still had a bit of a... kerfuffle, anyways.
+And somehow we still had a bit of a… kerfuffle, anyways.
 
 
 
@@ -526,7 +526,7 @@ One of the things we noticed while preparing `std::format` for release is that m
 
 We, as a Committee, very staunchly pushed back on them:
 
-> `std::format` does *not* use locale by default... It uses it only if you explicitly provide one.
+> `std::format` does *not* use locale by default… It uses it only if you explicitly provide one.
 >
 > — Fabio Fracassi, [February 15th, 2020](https://www.reddit.com/r/cpp/comments/f47x4o/comment/fhp6lls/?context=3)
 
@@ -544,7 +544,7 @@ Oops! Now, we didn't know we were lying, it was very much a surprise when Corent
 >
 > — Corentin Jabot, [LWG Issue 3547, April 27th, 2021](https://cplusplus.github.io/LWG/issue3547)
 
-[P2372 was written](https://wg21.link/p2372) to fix it, since it was further revealed that the normal `fmt` library was in fact locale-independent, and that it was a breaking change to swap between the way `fmt` was doing it and the way `std::format` was going to handle chrono specifiers. But, well, we had standardized the inconsistent behavior in C++20, and...
+[P2372 was written](https://wg21.link/p2372) to fix it, since it was further revealed that the normal `fmt` library was in fact locale-independent, and that it was a breaking change to swap between the way `fmt` was doing it and the way `std::format` was going to handle chrono specifiers. But, well, we had standardized the inconsistent behavior in C++20, and…
 
 
 ## "This is Going to be an ABI Break"
