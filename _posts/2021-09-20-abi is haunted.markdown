@@ -655,7 +655,7 @@ You cannot make me pay my blood for a contract with this insidious, ever-pervasi
 
 I shouldn't even be held back by my **own** mistakes from yesterday, what kind of world do we live in where we settle on a process so fundamentally against the human condition of learning and growing as an individual? Why would we prioritize a working process that at its deepest roots is so fundamentally against the living human being, and happier to dwell with the dead?
 
-The binary banshees and digital demons of ABI will not overtake us. It will not trample over me, over **my** implementation. I will not be bound by the mistakes of men and women who know not even my name, or the names of the people whose life I aim to make better. The standard is for **me** too, not just Microsoft. Not just IBM. Not just Apple. I will not let ABI hold us perpetually at implementation gunpoint. One way.
+The binary banshees and digital demons of ABI will not overtake us. It will not trample over me, over **my** implementation. I will not be bound by the mistakes of people who know not my name, nor the names of the people whose life I aim to make better. The standard is for **me** too, not just Microsoft. Not just IBM. Not just Apple. I will not let ABI hold us perpetually at implementation gunpoint. One way.
 
 ![The person in the purple robe turns around. In there hands, is an assembled and prepared shotgun.](/assets/img/cryptiidcruxx/cruxx-comic-9.png)
 
