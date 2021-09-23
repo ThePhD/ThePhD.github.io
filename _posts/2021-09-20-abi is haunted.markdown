@@ -4,7 +4,7 @@ title: "Binary Banshees and Digital Demons"
 permalink: /binary-banshees-digital-demons-abi-c-c++-help-me-god-please
 feature-img: "/assets/img/cryptiidcruxx/cruxx-comic-header.png"
 thumbnail: "/assets/img/cryptiidcruxx/cruxx-comic-header.png"
-tags: [C, C++, Standard, Help, Me]
+tags: [ABI, C, C++, Standard, Help, Me]
 excerpt_separator: <!--more-->
 ---
 
@@ -12,14 +12,14 @@ The Committee says these things do not exist. The Committee says these things ar
 
 They lie.
 
-The standard is haunted. I know it is. Especially by that Three Letter Demon, never really talking about how it has plagued me — plagued us all — with its insidious presence. Always the looming and lurking danger that The Demon of it rearing its ugly head, and while lamenting its existence I could never face it head on to challenge it. It is only at the height of my isolation that I could no longer bear witness to the violence the Three Letter Demon did to our beloved programming community and, thusly, began to scheme to take it down. But before we challenge it, dear reader, it stands to reason: what exactly is the Three Letter Demon? And why does The Demon matter to C and C++? Let's finally get through this, in full, with a little [illustrative help from our favorite local cryptid, Crux](https://cryptiidcruxx.carrd.co/) and the lovely visage of [Luna Sorcery](https://twitter.com/lunasorcery).
+The standard is haunted. I know it is. Especially by that Three Letter Demon, never really talking about how it has plagued me — plagued us all — with its insidious presence. Always the looming and lurking danger that The Demon of it rearing its ugly head, and while lamenting its existence I could never face it head on to challenge it. It is only at the height of my isolation that I could no longer bear witness to the violence the Three Letter Demon did to our beloved programming community and, thusly, began to scheme to take it down. But before we challenge it, dear reader, it stands to reason: what exactly is the Three Letter Demon? And why does The Demon matter to C and C++? Let's finally get through this, in full, with a little [illustrative help from our favorite local cryptid, Crux](https://cryptiidcruxx.carrd.co/) and [Luna Sorcery](https://twitter.com/lunasorcery).
 
 
 
 
 # Application Binary Interface
 
-![](/assets/img/cryptiidcruxx/cruxx-comic-1.png)
+![A catgirl named Luna is sitting on a sofa. She has long brunette hair, a tail, and ears the same color as her hair sitting on the couch. A moon pendant dangles from her necklace as she reads a book, while what appears to be a door "SLAM" comes from the image's right, Luna's left.](/assets/img/cryptiidcruxx/cruxx-comic-1.png)
 
 Or, as it's more commonly known as, ABI. Before many of you reading this were even born, before many of you reading this even knew what a computer was, a contract was forged in blood. It is not one you get to make for yourself; in fact, your consent or knowledge of its existence is not required, nor is it, frankly, at all requested. Everyone relies on it, and yet even people who build their own C++(-alike) compilers from scratch are unsure that such a contract exists, or that they're even playing by such rules:
 
@@ -36,7 +36,7 @@ How a function calls another function, how the stack is set up, where variables 
 
 Let's take a look.
 
-![](/assets/img/cryptiidcruxx/cruxx-comic-2.png)
+![Luna stares at the person who just entered, who is wearing a blue scarf and a purple robe. They seem not to be looking directly at Luna or saying anything as they walk in. The book is still open on their lap.](/assets/img/cryptiidcruxx/cruxx-comic-2.png)
 
 ## ABI: An Illustration
 
@@ -117,7 +117,7 @@ call    _Z5f_two18deque_iterator_two ; f_two(deque_iterator_two)
 call    _Z5f_one18deque_iterator_one ; f_one(deque_iterator_one)
 ```
 
-This means that, even if we named both functions just `f` in our code, at the symbol-level in our binaries it could tell apart a function meant for `deque_iterator_one` and `deque_iterator_two`. Again, this is because it's grafted the name of the type into the final symbol that shows up in our binary:
+This means that, even if we named both functions just `f` in our code, at the symbol-level in our binaries it could tell apart a function meant for `deque_iterator_one` and `deque_iterator_two`. Again, this is because it's grafted to the name of the type into the final symbol that shows up in our binary:
 
 ```s
 ...
@@ -171,7 +171,7 @@ There is no "`long long`" or "`__int128_t`" baked into the names like there woul
 
 # Okay... But Why Does It Matter?
 
-![](/assets/img/cryptiidcruxx/cruxx-comic-3.png)
+![With a quiet "thump", the book is closed as Luna's eyebrow perks up, watching the figure walk right past her deeper into the house.](/assets/img/cryptiidcruxx/cruxx-comic-3.png)
 
 Well, for C, it means that changing anything - literally anything - is an ABI break. Change your typedef to be a bigger integer? ABI break. Fix your `time_t` structure to handle time with 64-bit numbers because Jesus Christ I Thought We Already Have Been Through This Please Stop Using 32-bit Integers For Your Time Structures? ABI Break (and probably a security issue):
 
@@ -181,7 +181,7 @@ Well, for C, it means that changing anything - literally anything - is an ABI br
 
 And so on, and so forth.
 
-For C++, they can change types that go into functions, add overloads, etc. because the type names are mangled with the function. But for solving that problem, they introduce a whole lot of new bits of fun that are just oh-so-delightful to have to deal with. For example, back in 2009, a paper — [N2994](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2009/n2994.htm), when we still used "N" paper numbers! — was accepted into the C++ standard. It basically went through and not only `constexpr`-ified many random bits in the C++ standard, but added the property that some iterators were trivially copiable, copy constructible, and destructible in typical cases. This meant that, effectively, these types would always be extraordinarily cheap to copy/move (often just bit operations) or destroy for their respective platforms. It went in. And then a strange e-mail popped up nearly 10 years later:
+For C++, they can change types that go into functions, add overloads, etc. because the type names are mangled with the function. But for solving that problem, they introduce a whole lot of new bits of fun that are just oh-so-delightful to have to deal with. For example, back in 2009, a paper — [N2994](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2009/n2994.htm), when we still used "N" paper numbers! — was accepted into the C++ standard. It basically went through and not only `constexpr`-ified many random bits in the C++ standard, but added the property that some iterators were trivially copyable, copy constructible, and destructible in typical cases. This meant that, effectively, these types would always be extraordinarily cheap to copy/move (often just bit operations) or destroy for their respective platforms. It went in. And then a strange e-mail popped up nearly 10 years later:
 
 > [isocpp-lib] N2994 was an ABI-breaking change to istream_iterator
 
@@ -198,7 +198,7 @@ what would happen if you weren't 10 years late to the party?
 
 # Building a Graveyard
 
-![](/assets/img/cryptiidcruxx/cruxx-comic-4.png)
+![Luna speaking from the couch, her textbox overlaid by the interruption of the person who walked by. "You're back already? How--" "ABI's haunted."](/assets/img/cryptiidcruxx/cruxx-comic-4.png)
 
 Most of the time I've talked about ABI, it has usually been a casual mention, in the context of some other fight or some other larger problem. But here, we're going to talk about strictly ABI. Specifically, what happens when the ABI not only comes from the past, but also invades the present and future to stop us from doing things in C and C++.
 
@@ -224,11 +224,11 @@ Yeah.
 
 Dear reader, you can likely see why this becomes a problem when you have a system that becomes older than a few years, or you have a package manager running for said systems running for any length of time. Everybody has to agree in perpetuity, all the time, from the time someone settles that implementation's global table onward. And that really means whoever gets there first wins, not whoever has the best idea or works the hardest to improve their runtime. This is why Victor Zverovich found it easy to kick the C and C++ standard libraries's butts:
 
-> Even formatting such simple things as hour:minute with format string compilation in {fmt} can be almost 10x faster than ostringstream and ~2.5x faster than printf =)
+> Even formatting such simple things as hour:minute with format string compilation in {fmt} can be almost 10x faster than `ostringstream` and ~2.5x faster than `printf` =)
 >
 > Victor Zverovich, [September 3rd, 2021](https://twitter.com/vzverovich/status/1433864884190527489)
 
-If we can never improve what we have without fear of binary break - on top of actual source-breaking changes - it doesn't matter how carefully people craft design, because someone can and will always be able to completely outstrip that body of work, even if theoretically you could do better under the old design constraints. As the system becomes larger, bug-compatibility becomes more important than performance or correctness, and serving your life up on the alter of 50 year old design decisions becomes harder to resist with each progressively larger system rolled on top of another.
+If we can never improve what we have without fear of binary break - on top of actual source-breaking changes - it doesn't matter how carefully people craft design, because someone can and will always be able to completely outstrip that body of work, even if theoretically you could do better under the old design constraints. As the system becomes larger, bug-compatibility becomes more important than performance or correctness, and serving your life up on the altar of 50 year old design decisions becomes harder to resist with each progressively larger system rolled on top of another.
 
 The same thing happened with Nested Functions in C, too.
 
@@ -256,12 +256,12 @@ except it does.
 
 [Martin Uecker tried his best](https://gcc.gnu.org/legacy-ml/gcc-patches/2018-12/msg01532.html) to create a solution that allowed for general-purpose usage by following Ada's implementation technique:
 
-> … You pass -fno-trampolines and it would use the lowest bit to differentiate between a regular pointer and a descriptor (based on what Ada does). It still has run-time overhead and ABI issues.
+> … You pass `-fno-trampolines` and it would use the lowest bit to differentiate between a regular pointer and a descriptor (based on what Ada does). It still has run-time overhead and ABI issues.
 >
 > Martin Uecker, [July 17th, 2021](https://twitter.com/martin_uecker/status/1416453955798851584)
 
 
-Unfortunately, that's not how function pointers are expected to be called in C. Even if the bit was "always zero" before, there is an implicit, binary expectation in every single C-derived program that you can just blindly reinterpret the function address bits as a function call, set up the stack with the arguments, and jump right on over. Altering that bit means you may attempt to call a function at an improper alignment, resulting in All Hell Breaking Lose. So, you need to mask off the bottom bit - something no binary is currently doing in the wild - check if that bottom bit means you're doing Special Function Descriptor Things™, and then proceed with the function call.
+Unfortunately, that's not how function pointers are expected to be called in C. Even if the bit was "always zero" before, there is an implicit, binary expectation in every single C-derived program that you can just blindly reinterpret the function address bits as a function call, set up the stack with the arguments, and jump right on over. Altering that bit means you may attempt to call a function at an improper alignment, resulting in All Hell Breaking Loose. So, you need to mask off the bottom bit - something no binary is currently doing in the wild - check if that bottom bit means you're doing Special Function Descriptor Things™, and then proceed with the function call.
 
 So, it's a binary break to do it the function descriptor way! 🥳
 
@@ -294,7 +294,7 @@ This becomes the everlasting problem in most Committee discussions when a propos
 
 and it can block a lot of progress.
 
-Remember that at no point was Nozomu Katō-san in the wrong here. They did everything we normally ask of a person engaging with the C++ Committee: [write a proposal](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1844r1.html), submit it to be presented with a champion, have an [existing implementation with usage and deployment experience](https://www.akenotsuki.com/misc/srell/en/), and have [technical wording](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1844r1.html#sec6) that can be improved by wording experts to go into the C++ standard if it is not already good specification. There was no reason Katō-san failed other than the inability of the existing implementations to cope with ABI instability or wanting to nitpick `std::regex`'s existing design. For example, some people complained that `std::regex` can work with any bidirectional iterator, and "honestly, who would do that or need that in this day and age? Who is going to iterator over a `list<char>`?". Unluckily for this person, that criticism rings hollow in the [face of existing practice in even modern C++ implementations of regular expressions](https://godbolt.org/z/GnW695voz). It's also utterly reductive: linked lists and growable arrays exist on two opposite ends of the data structure spectrum. There is **plenty** of room for other traversable data structures inbetween, including ropes, [gap buffers](https://github.com/soasis/text/blob/main/examples/basic/source/gap_buffer_decode_view.cpp#L39), and more.
+Remember that at no point was Nozomu Katō-san in the wrong here. They did everything we normally ask of a person engaging with the C++ Committee: [write a proposal](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1844r1.html), submit it to be presented with a champion, have an [existing implementation with usage and deployment experience](https://www.akenotsuki.com/misc/srell/en/), and have [technical wording](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p1844r1.html#sec6) that can be improved by wording experts to go into the C++ standard if it is not already good specification. There was no reason Katō-san failed other than the inability of the existing implementations to cope with ABI instability or wanting to nitpick `std::regex`'s existing design. For example, some people complained that `std::regex` can work with any bidirectional iterator, and "honestly, who would do that or need that in this day and age? Who is going to iterator over a `list<char>`?". Unluckily for this person, that criticism rings hollow in the [face of existing practice in even modern C++ implementations of regular expressions](https://godbolt.org/z/GnW695voz). It's also utterly reductive: linked lists and growable arrays exist on two opposite ends of the data structure spectrum. There is **plenty** of room for other traversable data structures in-between, including ropes, [gap buffers](https://github.com/soasis/text/blob/main/examples/basic/source/gap_buffer_decode_view.cpp#L39), and more.
 
 Nevertheless, we, as the Committee:
 
@@ -356,7 +356,7 @@ int main () {
 }
 ```
 
-This is, of course, a huge problem if you want to initialize a container or other cool type with an `initializer_list` that would contain, for example, `std::unique_ptr`s or similar. There were several papers that attempted to fix the problem, from [introducing specializations rules](https://wg21.link/n2719), [trying to introduce special rules instead](https://wg21.link/n2801), to trying [to find new types to use](https://wg21.link/p0065), to ultimately - and most recently - just trying to [fix `std::initializer_list` itself, directly](https://wg21.link/p1249). After all the early decisions to try and find a new type and make it clear that it was not going to be accepted, and new rules weren't going to be allowed. Why not fix `std::initializer_list` itsel-
+This is, of course, a huge problem if you want to initialize a container or other cool type with an `initializer_list` that would contain, for example, `std::unique_ptr`s or similar. There were several papers that attempted to fix the problem, from [introducing specializations rules](https://wg21.link/n2719), [trying to introduce special rules instead](https://wg21.link/n2801), to trying [to find new types to use](https://wg21.link/p0065), to ultimately - and most recently - just trying to [fix `std::initializer_list` itself, directly](https://wg21.link/p1249). After all the early decisions to try and find a new type and make it clear that it was not going to be accepted, and new rules weren't going to be allowed. Why not fix `std::initializer_list` itself-
 
 #### Hey, That's an ABI Break!
 
@@ -420,9 +420,9 @@ You see it, right? Where this is going. If we, as a Standards Committee, add new
 
 ![A man with his hands at his waist and elbows out, staring disappointedly at a sportsball game's field as his team is utterly destroyed.](/assets/img/2021/09/disappointed-man-meme.jpg)
 
-Yeah, that was my face too. This is just how it is, because we cannot for the life of us handle ABI breaks. We knew this to be a bad idea at the point it was proposed, too, because by this time we had fully uncovered how inextensible and untouchable `iostream`s existing locale settings as a whole were, especially `std::moneypunct`. But, more importantly, we also knew that our allocator API was incomplete. As far back as 2004, Howard Hinnant wrote proposal for both [C (N1085)](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1085.htm) and [C++ N1953()](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2006/n1953.html). This was followed-on by Ion Gaztañaga [with another C++ proposal (N2045)](https://wg21.link/n2045), then [Jonathan Wakely](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0401r0.html), and a few others in-between these proposals that all indicated that the allocator model we had adopted into the standard library was woefully incomplete for real world work.
+Yeah, that was my face too. This is just how it is, because we cannot for the life of us handle ABI breaks. We knew this to be a bad idea at the point it was proposed, too, because by this time we had fully uncovered how inextensible and untouchable `iostream`s existing locale settings as a whole were, especially `std::moneypunct`. But, more importantly, we also knew that our allocator API was incomplete. As far back as 2004, Howard Hinnant wrote proposal for both [C (N1085)](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1085.htm) and [C++ (N1953)](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2006/n1953.html). This was followed-on by Ion Gaztañaga [with another C++ proposal (N2045)](https://wg21.link/n2045), then [Jonathan Wakely](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0401r0.html), and a few others in-between these proposals that all indicated that the allocator model we had adopted into the standard library was woefully incomplete for real world work.
 
-By standardizing virtual functions in `std::polymorphic_allocator` and `std::memory_resource`, we effectively cut off those avenues of improvement from the standard. Changing virtual functions is a hard ABI break, and no one has successfully added more virtual functions to existing virtual functions once we understood that there were consequential ABI breaks involved. To standardize a known-based interface and thereby lock out all improvements to polymorphic allocators was an avoidable, fundamental, and unfortunately recent (C++17!) mistake that we now have to just live with in perpetuity.
+By standardizing virtual functions in `std::polymorphic_allocator` and `std::memory_resource`, we effectively cut off those avenues of improvement from the standard. Changing virtual functions is a hard ABI break, and no one has successfully added more virtual functions to existing virtual functions once we understood that there were consequential ABI breaks involved. To standardize a known-bad interface and thereby lock out all improvements to polymorphic allocators was an avoidable, fundamental, and unfortunately recent (C++17!) mistake that we now have to just live with in perpetuity.
 
 And when I saw in-perpetuity, I mean that in a very visceral and immediate sense.
 
@@ -431,9 +431,9 @@ And when I saw in-perpetuity, I mean that in a very visceral and immediate sense
 
 # Haunting the Present
 
-![](/assets/img/cryptiidcruxx/cruxx-comic-5.png)
+![Luna speaks from the couch with a confused expression on her face, saying "... Wha–" like she's about to be interrupted by something.](/assets/img/cryptiidcruxx/cruxx-comic-5.png)
 
-One of the core problem with ABI is that it very much affects how the committee works and designs things. It also means that improvements often get sidelined or or ignored because it can't be feasibly done without an ABI break. Sometimes, there's fixes that can be done. So, for example, while the standard adds `allocate_at_least(size_type n)` to the current `std::allocator`, nothing can be done for `std::polymorphic_allocator` because of the reasons mentioned mentioned. From a proposal that actually has a chance of making it into C++:
+One of the core problem with ABI is that it very much affects how the committee works and designs things. It also means that improvements often get sidelined or ignored because it can't be feasibly done without an ABI break. Sometimes, there are fixes that can be done. So, for example, while the standard adds `allocate_at_least(size_type n)` to the current `std::allocator`, nothing can be done for `std::polymorphic_allocator` because of the reasons mentioned mentioned. From a proposal that actually has a chance of making it into C++:
 
 > `std::pmr::memory_resource` is implemented using virtual functions. Adding new methods, such as the proposed allocate API would require taking an ABI break.
 >
@@ -441,16 +441,16 @@ One of the core problem with ABI is that it very much affects how the committee 
 
 And so... well, that's that. Even if `std::polymorphic_allocator` is giving people huge gains in code — not because of the virtual interface, but because it comes with a few `std::` available [implementations for pre-created memory regions](https://www.youtube.com/watch?v=q6A7cKFXjY0) — it will never be able to realize any of the gains as we — finally — begin to add functionality called out by Howard Hinnant 17 years ago in proposals to C and C++. Even as `allocate_at_least` percolates through the Committee, we also miss both in-place `expand` and `shrink` functions for containers which can dynamically grow/shrink memory in-place, without reallocation, which is an incredibly useful property for single-memory-blob allocators which tend to pull objects from a singular region of memory. And if we ever properly propose `expand`,`shrink`, and potentially a `reallocate` function for our allocator model, `std::pmr::memory_resource` will continue to miss out on fixes, changes and optimizations. Which is likely what's so depressing about me working up the courage to release my own `ztd::vector` and `ztd::allocator` that realizes some of Howard Hinnant's vision, and what makes it doubly depressing to try and write a paper about it:
 
-[![A picture of the paper submission system, showing an red-lined D2265R0 draft paper that was never submitted. It's name is "A More Useful and Complete Allocators API".](/assets/img/2021/09/d2256-submission-status.png)](https://github.com/ThePhD/future_cxx/issues/34)
+[![A picture of the paper submission system, showing a red-lined D2265R0 draft paper that was never submitted. It's name is "A More Useful and Complete Allocators API".](/assets/img/2021/09/d2256-submission-status.png)](https://github.com/ThePhD/future_cxx/issues/34)
 
-"Yes, we can realize these gains. No, they can't work with `polymoprhic_allocator`. No, I can't do anything about it unless every implementation decides to break ABI at the same time. What do you mean my eyes are glassy and I have a far-off, broken look in my eyes?"
+"Yes, we can realize these gains. No, they can't work with `polymoprhic_allocator`. No, I can't do anything about it unless every implementation decides to break ABI at the same time. What do you mean my eyes are glassy and I have a far-off, broken look in them?"
 
 It's a demoralizing process, from start to finish, and almost makes a person feel like it's better to abandon almost everything than stand there and fight with implementers. Of course, it's not just allocators that get in the way of proposals. Even something as low-level as `std::thread::attributes` ends up getting ABI flack!
 
 
 ## … Seriously? Attributes for Threads is an ABI Break??
 
-In a very literal sense, no, no it's not. You can't break the ABI of something that does not (yet) exist. For those wondering, a proposal got circulated around to fix a common problem spoken about by Bruce Dawson: he wanted to name his threads so they he could keep track of them better, and `std::thread` didn't let him do this. Corentin Jabot picked up the idea, and put it in a [new paper called "Usability improvements for `std::thread`" (P2019)"](https://wg21.link/p2019). In it, it contains a simple structure:
+In a very literal sense, no, no it's not. You can't break the ABI of something that does not (yet) exist. For those wondering, a proposal got circulated around to fix a common problem spoken about [by Bruce Dawson](https://twitter.com/BruceDawson0xB/status/1223100713737146370): he wanted to name his threads so that he could keep track of them better, and `std::thread` didn't let him do this. Corentin Jabot picked up the idea, and put it in a [new paper called "Usability improvements for `std::thread`" (P2019)"](https://wg21.link/p2019). In it, it contains a simple structure:
 
 ```cpp
 class thread::attributes {
@@ -468,7 +468,7 @@ public:
 };
 ```
 
-Wouldn't you know, the first complains are about ABI. "If I implement this structure to contain exactly a name and exactly a size, what happens if I need to add more things to it later?". Which is baffling to me, sincerely. YOU are the implementer. You're the one that sets the tone here. If you expect `pthread` to add some new functionality, or `WinThread` gets a boost in features, or you want to add implementer-specific functionality to this with a special macro to `#ifdef` on it's existence, you could easily make room for that. The actual member variables are not even present from the paper's wording: they're explicitly "exposition only". That means you can layout the class however you like, set whatever defaults you like, go nuts. Thread/core affinities and other attributes could easily be supported. At no point do you have to sit down and take any guff from anyone, because you — the implementer — are in control of the implementation!
+Wouldn't you know, the first complaints are about ABI. "If I implement this structure to contain exactly a name and exactly a size, what happens if I need to add more things to it later?". Which is baffling to me, sincerely. YOU are the implementer. You're the one that sets the tone here. If you expect `pthread` to add some new functionality, or `WinThread` gets a boost in features, or you want to add implementer-specific functionality to this with a special macro to `#ifdef` on it's existence, you could easily make room for that. The actual member variables are not even present from the paper's wording: they're explicitly "exposition only". That means you can layout the class however you like, set whatever defaults you like, go nuts. Thread/core affinities and other attributes could easily be supported. At no point do you have to sit down and take any guff from anyone, because you — the implementer — are in control of the implementation!
 
 But proposal authors are now responsible for maintaining the ABI of every single implementation out there when they decide to implement things in the most future-incompatible way possible.
 
@@ -518,19 +518,29 @@ If you've been living under a rock, `std::format` is the biggest thing since sli
 
 ## Chrono, and Locale
 
-One of the things we noticed while preparing `std::format` for release is that many time spans from `std::chrono` did not have formatters for them. A last-minute paper from [Victor, Howard, and Daniela](https://wg21.link/p1361) added chrono specifiers to `std::format`. Victor implemented them, shipped them, and it was a good deal. The only problem is it violated one of `fmt`'s biggest tenets: no format specifier would be locale-sensitive by default. You had to opt into it, and the chrono formatters were NOT that. Which made for an interesting pie-on-the-face moment, because one of the National Body members complained about `locale` being used in `fmt` and we, as a Committee, very staunchly pushed back on them:
+One of the things we noticed while preparing `std::format` for release is that many time spans from `std::chrono` did not have formatters for them. A last-minute paper from [Victor, Howard, and Daniela](https://wg21.link/p1361) added chrono specifiers to `std::format`. Victor implemented them, shipped them, and it was a good deal. The only problem is it violated one of `fmt`'s biggest tenets: no format specifier would be locale-sensitive by default. You had to opt into it, and the chrono formatters were NOT that. Which made for an interesting pie-on-the-face moment, because one of the National Body members complained about `locale` being used in `fmt`:
 
-> 
+> It's sad that the C++ SC decided to taint std::format with locale. 10 years ago, I noticed the necessity of char8_t and they didn't listen, and now they not only think the locale is not considered harmful, but they also think locale helps localization. In reality, it's quite opposite, the locale actively hinder the localization effort.
 >
-> 
+> — Ezoe Ryou-san, [February 15th, 2020](https://www.reddit.com/r/cpp/comments/f47x4o/comment/fhoy1sq/?context=3)
 
-Turns out, we were lying. Oops! Now, we didn't know we were lying, it was very much a surprise when Corentin Jabot and several others figured out that the chrono specifiers were locale-sensitive by default:
+We, as a Committee, very staunchly pushed back on them:
+
+> `std::format` does *not* use locale by default... It uses it only if you explicitly provide one.
+>
+> — Fabio Fracassi, [February 15th, 2020](https://www.reddit.com/r/cpp/comments/f47x4o/comment/fhp6lls/?context=3)
+
+This was one of some 4 or 5 comments saying that. And, well, it turns out…
+
+We were lying. 😅
+
+Oops! Now, we didn't know we were lying, it was very much a surprise when Corentin Jabot and several others figured out that the chrono specifiers were locale-sensitive by default:
 
 >  In 27.12 [time.format] it is specified:
 >
 > > Some of the conversion specifiers depend on the locale that is passed to the formatting function if the latter takes one, or the global locale otherwise. 
 >
-> This is not consistent with the format design after the adoption of P1892
+> This is not consistent with the format design after the adoption of P1892…
 >
 > — Corentin Jabot, [LWG Issue 3547, April 27th, 2021](https://cplusplus.github.io/LWG/issue3547)
 
@@ -539,7 +549,7 @@ Turns out, we were lying. Oops! Now, we didn't know we were lying, it was very m
 
 ## "This is Going to be an ABI Break"
 
-![](/assets/img/cryptiidcruxx/cruxx-comic-6.png)
+![The catgirl on the sofa hunches her shoulders up and a blue tint overtakes her nose and cheeks as she gets scared by a big "GROOOOOOOHHhhHh" noise.](/assets/img/cryptiidcruxx/cruxx-comic-6.png)
 
 Welcome to Hell, population us. You might wonder how a paper being worked on barely a year after the release of C++20 can end up being an ABI break. This is where Microsoft and VC++ comes into play. See, Microsoft had very recently been guaranteeing ABI stability in their platform deployments. In years gone by, Microsoft would break ABI with every release and ship a new DLL. It was your responsibility to sync things if it truly mattered: this let them fix a LOT of bugs in their implementation, at the risk of needing people to either recompile or at least check things worked with an updated runtime. (Or to just keep shipping the old VC++ DLLs. Remember all those VC Redistributable Downloaders for v2011 and v2012 and v2013 and v2015, anyone?). These days, however, they started locking things down in their ABIs pretty much immediately. This is why a lot of bugs suddenly became no-fix, or were pushed back to a mythical and magical "when we break ABI" timeline. See, one of the things Microsoft wanted to do was have `std::format`. And not only did they want to ship a version 0 of their own `std::format`,
 
@@ -550,7 +560,7 @@ they wanted to mark it ABI stable right off the bat.
 
 Dear reader, let me tell you that even if you are a multibillion dollar corporation, being so brave as to tell the world you're going to ship a brand new API and on **Day 0** mark it as "stable, forever" is the kind of stuff you'd hear amongst developers after they all ate the specially-baked cookies & brownies, and the hookahs came out.
 
-Of COURSE we don't lock in our version 0 implementations, especially not for a sits-beneath-all-libraries library whose sole constraint is "stability, for the rest of your f[CENSOR]ing existence"! But Microsoft tried it. Oh, they tried it. When P2372 came out, everyone was freaked out because Microsoft started posturing that they were going to ship `std::format`, their first iteration of its implementation, to the whole world and mark it ABI stable while following the C++20 wording to the letter. That meant they were going to actively enshrine the design mistake from the `std::chrono` formatters: locale would be used by default, Ezoe would be completely within his rights to deride `std::format`, and we would be permanently made liars in the face of the entire C++ community while breaking Victor's own `fmt` library in behavior.
+Of COURSE we don't lock in our version 0 implementations, especially not for a sits-beneath-all-libraries library whose sole constraint is "stability, for the rest of your f[CENSOR]ing existence"! But Microsoft tried it. Oh, they tried it. When P2372 came out, everyone was freaked out because Microsoft started posturing that they were going to ship `std::format`, their first iteration of its implementation, to the whole world and mark it ABI stable while following the C++20 wording to the letter. That meant they were going to actively enshrine the design mistake from the `std::chrono` formatters: locale would be used by default, Ezoe-san would be completely within his rights to deride `std::format`, and we would be permanently made liars in the face of the entire C++ community while breaking Victor's own `fmt` library in behavior.
 
 The amount of effort that went to save Microsoft from this decision was staggering. We:
 
@@ -574,12 +584,12 @@ Thank God; crisis averted! … But yet, this left is a horrible taste in my mout
 
 # The Spooky Terror Behind the Actions
 
-![](/assets/img/cryptiidcruxx/cruxx-comic-7.png)
+![A picture of the door with the "menacing" Japanese hiragana emanating from around the door, similar to JoJo's Bizarre Adventure.](/assets/img/cryptiidcruxx/cruxx-comic-7.png)
 
 The ugly truth here is that we had to effectively convince a vendor not to do the worst possible implementation and shoot themselves in their own foot. Which is really quite remarkable! It's one thing when, say, IBM or Intel shows up and says "we have a private implementation of X, we'd like to put it in the standard library". It's understandable if people mess that up, because they only hand us the interface and not the implementation. But this was a case where:
 
 - Victor had published his library and had the correct behaviors in for years;
-- Victor changed the license so you could not only look, but blindly copy-paste if you wanted to; and,
+- Victor changed the license so vendors could not only look, but blindly copy-paste if they wanted to; and,
 - Victor published several blog posts describing the implementation details and tradeoffs to be made.
 
 At no point should anyone be stabilizing their implementation until they could prove it was at or better than Victor Zverovich's `fmt` lib. And yet, that's not what happened. Which begs the question: why did Victor spend all that time working so hard on the proposal, its fixes, and its percolation through the C++ Committee? If you work that hard and make it across the finish line and get it into the C++ Standard, only to have implementations both ignore your publicly available implementation **and** threaten to ABI stabilize the worst possible one so that the rest of the ecosystem suffers indefinitely, what is the point of standardizing a library feature in C++? Victor did everything right and completed the bonus material with flying colors. If Victor one of the greats, up there with Eric Niebler and Stepanov in their capacity to save C++ with their work,
@@ -593,7 +603,7 @@ The absurdity is only eclipsed by how profoundly harmful this behavior is to the
 
 # Implementation Override
 
-![](/assets/img/cryptiidcruxx/cruxx-comic-8.png)
+![The sheep is huddling up, with some kind of object in their arms, while their back is facing the viewer.](/assets/img/cryptiidcruxx/cruxx-comic-8.png)
 
 I am terrified, dear reader.
 
@@ -628,20 +638,23 @@ This code errors with "MSVC does not have no_unique_address", which means, which
 
 Is this sustainable? Is this tractable, when every Implementer can fuse themselves together to beat the crap out of a proposal even if it fits the design criteria and preserves the API space? Are we just supposed to live in perpetual fear that one day someone made an Oopsie Kapoopsie in their `std::lock_guard` implementation, and that there's no way to fix it from now until the end of days? That even if we can do better on our own platforms, because the Big Three don't want to be declared non-conforming, they can just continue to throw their weight around and complicate every proposal's lifespan and make every proposal author have to tremble in fear of those three letters? That we have to shake in our boots because our implementers can't handle **versioning a `struct`** that they have reason to suspect might change for their implementation??
 
-I am about to author [one gigantic proposal](https://thephd.github.io/_vendor/future_cxx/papers/d1629.html) for putting text in the Standard Library. I have authored no less than [five videos]() describing the design, performance, tradeoff, and motivation. I have a [boatload of documentation](https://ztdtext.readthedocs.io/en/latest/).
+I am about to author [one gigantic proposal](https://thephd.github.io/_vendor/future_cxx/papers/d1629.html) for putting text in the Standard Library. I have authored no less than [five videos](https://thephd.dev/portfolio/text#technical-details) describing the design, performance, tradeoff, and motivation. I have a [boatload of documentation](https://ztdtext.readthedocs.io/en/latest/).
 
-What happens when Microsoft decides that the worst possible implementation is what they should rush into their binaries and then declare it ABI-stable? What happens if there's additional improvements that come beyond the initial proposal (of which there is a big chance, because this is for a fundamentally human aspect of programming, text!)? What happens if libc++ decides today is a good day to phone it in with respect to performance and then vendors standardize on their v0 implementation…? Is what Victor went through what I'm supposed to look forward to, as someone who wants to contribute a large body of important work to C++?
+What happens when Microsoft decides that the worst possible implementation is what they should rush into their binaries and then declare it ABI-stable? What happens if there's additional improvements that come beyond the initial proposal (of which there is a big chance, because this is for a fundamentally human aspect of programming, text!)? What happens if libc++ decides today is a good day to phone it in with respect to performance and then vendors standardize on their v0 implementation…? What if they decide to not read any of my documentation, as they had no read Victor's documentation? What if they decide to ignore my videos, my lengthy design and performance explanations? Is what Victor went through what I'm supposed to look forward to, as someone who wants to contribute a large body of important work to C++?
 
 
 
 
 # No.
 
-I refuse. I will not sit in every meeting and be endlessly bullied by implementations that do not know how to handle a problem they are the sole controller and proprietor for. It's absolutely inane that even the most mundane of proposals can suddenly be ran through like a trainwreck because the pinnacle of C++ and C experts cannot answer the question "how do I version something". I will have a good standard library. It will meet my performance requirements. It will be correct. I do not care how many ghosts of the past there are. I do not care how many implementations exist where a person programming for longer than I have been alive made a suboptiomal choice one day and now we just have to live with that, for the rest of eternity. I will not be made to suffer someone else's mistakes in perpetuity, while they also continue to make the same mistakes in egregiously flagrant fashions.
+I refuse. I will not sit in every meeting and be endlessly bullied by implementations that do not know how to handle a problem they are the sole controller and proprietor for. It's absolutely inane that even the most mundane of proposals can suddenly be ran through like a train wreck because the pinnacle of C++ and C experts cannot answer the question "how do I version something". I will have a good standard library. It will meet my performance requirements. It will be correct. I do not care how many ghosts of the past there are. I do not care how many implementations exist where a person programming for longer than I have been alive made a sub-optimal choice one day and now we just have to live with that, for the rest of eternity. I will not be made to suffer someone else's mistakes in perpetuity, while they also continue to make the same mistakes in egregiously flagrant fashions now and into the future.
 
-I will have my rightful and deserved implementation. One way.
+I shouldn't even be held back by my **own** mistakes from yesterday, what kind of world do we live in where we settle on a process so fundamentally against the human condition of learning and growing as an individual? Why would we prioritize a working process that at its deepest roots is so fundamentally against the living human being, and happier to dwell with the dead?
 
-![](/assets/img/cryptiidcruxx/cruxx-comic-9.png)
+The binary banshees and digital demons of ABI will not overtake us. It will not trample over me, over **my** implementation. I will not be bound by the mistakes of men and women who know not even my name, or the names of the people whose life I aim to make better. The standard is for **me** too, not just Microsoft. Not just IBM. Not just Apple. I will not let ABI hold us perpetually at implementation gunpoint. One way.
+
+![The person in the purple robe turns around. In there hands, is an assembled and prepared shotgun.](/assets/img/cryptiidcruxx/cruxx-comic-9.png)
 
 Or another. 💚
 
+P.S.: This ENTIRE article was because [Luna Sorcery made a fun joke](https://twitter.com/lunasorcery/status/1390060842230685700). [Crux](https://twitter.com/CRYPTIIDCRUXX) brought the whole thing to life with their amazing artist skills: you should g[o commission art from them](https://cryptiidcruxx.carrd.co/), by the bucket load if you can!
