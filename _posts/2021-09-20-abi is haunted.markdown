@@ -424,7 +424,7 @@ Yeah, that was my face too. This is just how it is, because we cannot for the li
 
 By standardizing virtual functions in `std::polymorphic_allocator` and `std::memory_resource`, we effectively cut off those avenues of improvement from the standard. Changing virtual functions is a hard ABI break, and no one has successfully added more virtual functions to existing virtual functions once we understood that there were consequential ABI breaks involved. To standardize a known-bad interface and thereby lock out all improvements to polymorphic allocators was an avoidable, fundamental, and unfortunately recent (C++17!) mistake that we now have to just live with in perpetuity.
 
-And when I saw in-perpetuity, I mean that in a very visceral and immediate sense.
+And when I say in-perpetuity, I mean that in a very visceral and immediate sense.
 
 
 
