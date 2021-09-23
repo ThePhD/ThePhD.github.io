@@ -396,7 +396,7 @@ But then again, [it's not the first time I've run headfirst into WG21's ability 
 Something something history, something something repetition!
 
 
-### `std::polymoprhic_allocator`
+### `std::polymorphic_allocator`
 
 By now, you've got the gist of how this is going to go. It's another ABI break, but this time it's actually a little worse than the usual ABI break. The worst part about this is not that somebody proposed something new: oh, no. We just standardized something using the same design that, at the time of standardization, we *knew to be a terrible idea for extensibility*. Here's `std::memory_resource`'s interface, private virtual and public functions:
 
