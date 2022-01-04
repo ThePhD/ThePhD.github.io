@@ -1,0 +1,16 @@
+# Icons on the footer
+rss: true
+feed:
+  path: feed.xml
+
+# Share button options
+share:
+  facebook: true
+  twitter: true
+  reddit: true
+  linkedin: true
+  email: true
+  tumblr:
+  pinterest:
+  pocket:
+  wordpress:

@@ -1,0 +1,164 @@
+# How It Works ⚙
+
+
+### ADL-Based Customization Point Object
+
+```cpp
+// (0)
+auto result_w = std::ranges::reconstruct(std::in_place_type<RangeType>, range);
+// (1)
+auto result_x = std::ranges::reconstruct(std::in_place_type<RangeType>, range,
+                                         iter, sent);
+// (2)
+auto result_y = std::ranges::reconstruct(std::in_place_type<RangeType>,
+                                         iter, sent);
+// (3)
+auto result_z = std::ranges::reconstruct(iter, sent);
+```
+
+
+### Desired Order of Operations - 0️⃣
+
+```cpp
+std::ranges::reconstruct(std::in_place_type<RangeType>, range);
+```
+
+- Call `reconstruct(std::in_place_type<RangeType>, range)`, if well-formed.
+- Otherwise, call `std::ranges::reconstruct(std::in_place_type<RangeType>, range, ranges::begin(range), ranges::end(range));`
+
+
+### Desired Order of Operations - 1️⃣
+
+```cpp
+std::ranges::reconstruct(std::in_place_type<RangeType>, range,
+                         iter, sent);
+```
+
+- Call `reconstruct(std::in_place_type<RangeType>, range, iter, sent)` if well-formed.
+- Otherwise, call `std::ranges::reconstruct(std::in_place_type<RangeType>, iter, sent);`
+
+
+### Desired Order of Operations - 2️⃣
+
+```cpp
+std::ranges::reconstruct(std::in_place_type<RangeType>,
+                         iter, sent);
+```
+
+- Call `reconstruct(std::in_place_type<RangeType>, iter, sent)` if well-formed.
+- Otherwise, call `std::ranges::reconstruct(iter, sent);`
+
+
+### Desired Order of Operations - 3️⃣
+
+```cpp
+std::ranges::reconstruct(iter, sent);
+```
+
+Let `I` be `std::remove_cvref_t<decltype(iter)>`,  
+    `S` be `std::remove_cvref_t<decltype(sent)>`
+
+- If one of `std::is_class_v<I>`, `std::is_enum_v<I>` `std::is_class_v<S>`, or `std::is_enum_v<S>` is true:
+  - Call `reconstruct(iter, sent)` if well-formed.
+- Otherwise, return `std::ranges::subrange(iter, sent)`
+
+
+### Properties 📜
+
+What does this buy us?
+
+- Code never fails! Fallback to `std::ranges::subrange<I, S, K>`
+- Preserves type semantics
+- Preserves size semantics  
+  `llfio::io_span` for Windows Buffers [`T*`, `int32_t`)
+- iterator-only are not subject to catch-all ADL customization  
+  (`is_enum_v`/`is_class_v` guard)
+
+
+### Properties - No ADL on wild, global types ❌
+
+```cpp
+namespace mylib {
+
+  // ... Catches TOO MANY THINGS!!!!
+  auto reconstruct(const char* ptr_first, const char* ptr_last)
+  {
+    return std::string_view(ptr_first, ptr_last);
+  }
+
+}
+```
+
+
+### Properties - Catch-All Protection ✅
+
+```cpp
+namespace mylib {
+
+  // 👍
+  auto reconstruct(const char* ptr_first, c_string_sentinel)
+  {
+    return basic_c_string_view<char>(ptr_first);
+  }
+
+}
+```
+
+
+### Properties - Decay 🔻
+
+```cpp
+namespace mylib {
+
+  template <typename CharT, typename Traits>
+  auto reconstruct(
+    std::in_place_type_t<basic_c_string_view<CharT, Traits>>,
+    const CharT* ptr_first,
+    const CharT* ptr_last)
+  {
+    return std::basic_string_view<CharT, Traits>(ptr_first, ptr_last);
+  }
+
+}
+```
+
+
+
+### Properties - No Decay 🆗
+
+```cpp
+namespace mylib {
+
+  template <typename CharT, typename Traits>
+  auto reconstruct(
+    std::in_place_type_t<basic_c_string_view<CharT, Traits>>,
+    const CharT* ptr_first,
+    const c_string_sentinel sentinel) // (❗❕)
+  {
+    return basic_c_string_view<CharT, Traits>(ptr_first, sentinel);
+  }
+
+}
+```
+
+
+
+### Properties - "Stored Size" Sized Subranges
+
+```cpp
+namespace mylib {
+
+  auto reconstruct(std::in_place_type_t<cool_view>,
+    const cool_iterator iter, const cool_sentinel sentinel)
+  {
+    return std::ranges::subrange(iter, sentinel, sentinel.parent_->size());
+  }
+
+}
+```
+
+
+
+### Properties - Move vs. Copy
+
+[For example, for the wording in `transform_view`](https://thephd.dev/_vendor/future_cxx/papers/d1664.html##wording-specification-transform_view)

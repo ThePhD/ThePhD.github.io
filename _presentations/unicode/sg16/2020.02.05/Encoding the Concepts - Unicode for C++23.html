@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Encoding the Concepts - Unicode for C++23</title>
+
+	<link rel="stylesheet" href="../../../../_vendor/reveal.js/css/reset.css">
+	<link rel="stylesheet" href="../../../../_vendor/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="../../../../_vendor/reveal.js/css/theme/sky.css">
+
+	<style>	
+		.reveal pre code {
+			box-shadow: 7px 7px #888;
+			border-radius: 7px;
+			padding: 7px;
+			max-height: 600px !important;
+		}
+
+		div.footer {
+			z-index: 1;
+			font-size: small;
+			font-style: italic;
+			position: absolute;
+			bottom: 1em;
+			text-align: center;
+			box-shadow: 3px 3px 3px #888;
+			border-radius: 5px;
+			padding: 10px !important;
+		}
+	</style>
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="../../../../_vendor/reveal.js/lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '../../../../_vendor/reveal.js/css/print/pdf.css' : '../../../../_vendor/reveal.js/css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-markdown="source/00 - 00 Title.mdsl" 
+				data-background-image="../../../../assets/img/2020/04/person-holding-string-lights.jpg" data-background-opacity="0.25" 
+				data-separator="^\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-markdown="source/01 - 00 Introduction.mdsl" 
+				data-background-image="../../../../assets/img/2020/04/arid-barren-blue-sky-daylight.jpg" data-background-opacity="0.25" 
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-autoplay data-background-video="../../../../assets/img/2020/04/Shia Just Do It.mp4">
+			</section>
+			<section data-markdown="source/01 - 02 Just Don't.mdsl" 
+				data-background-image="resources/Committee.png" data-background-opacity="0.25" 
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-markdown="source/02 - 00 C.mdsl" 
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-markdown="source/03 - 00 Encoding Objects.mdsl"
+				data-background-image="../../../../assets/img/2020/04/gray-concrete-post-tunnel.jpg" data-background-opacity="0.15"
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-markdown="source/03 - 01 Error Handling.mdsl" 
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-markdown="source/03 - 02 Basis.mdsl" 
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-markdown="source/04 - 00 Speed.mdsl" 
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-markdown="source/05 - 00 Final.mdsl" 
+				data-background-image="../../../../assets/img/2020/04/numeric-7-wall-decor.jpg" data-background-opacity="0.15"
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+			<section data-markdown="source/05 - 01 Conclusion.mdsl" 
+				data-separator="^\r?\n\r?\n\r?\n\r?\n\r?\n" data-separator-vertical="^\r?\n\r?\n\r?\n"
+				data-separator-notes="^Note:" data-charset="utf8">
+			</section>
+		</div>
+	</div>
+
+	<div class="footer">
+		&copy; <a href="https://soasis.org">Shepherd's Oasis, LLC</a> and <a href="https://thephd.dev/">JeanHeyd "ThePhD" Meneide</a> 2019-2020, All Rights Reserved.<br>
+	</div>
+
+	<script src="../../../../_vendor/reveal.js/dist/reveal.js"></script>
+	<script src="../../../../_vendor/reveal.js/plugin/notes/notes.js"></script>
+	<script src="../../../../_vendor/reveal.js/plugin/markdown/markdown.js"></script>
+	<script src="../../../../_vendor/reveal.js/plugin/highlight/highlight.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			history: true,
+			slideNumber: true,
+			width: 1280,
+			height: 720,
+			autoPlayMedia: true,
+			markdown: {
+				smartypants: true,
+			},
+			dependencies: [
+				{src: '../../../../_vendor/reveal.js/plugin/markdown/marked.js'},
+				{src: '../../../../_vendor/reveal.js/plugin/markdown/markdown.js'},
+				{src: '../../../../_vendor/reveal.js/plugin/notes/notes.js', async: true},
+				{
+					src: '../../../../_vendor/reveal.js/plugin/highlight/highlight.js',
+					async: true,
+					callback: () => hljs.initHighlightingOnLoad()
+				}
+			]
+		});
+	</script>
+</body>
+
+</html>

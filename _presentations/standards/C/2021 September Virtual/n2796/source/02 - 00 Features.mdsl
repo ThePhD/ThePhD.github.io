@@ -1,0 +1,114 @@
+# Feature Set
+
+"What are we looking for?"
+
+
+### Prior Art
+
+There is a strong presence of prior tools:
+
+- `int old_name (void) asm("new_name");` declarations (GCC, Clang, etc.)
+- `#pragma redefine_extname "{old name}" "{new name}"` (Oracle)
+- `__attribute__ ((alias ("foo")))` (GCC, Keil ARM, etc.)
+- `#pragma comment(linker, "/export:OldName=_NewName")` (Microsoft)
+- hot-patching DLLs / symbols after-the-fact (weak symbols and friends, various)
+
+
+### The Basic Idea
+
+```cpp
+extern long long __glibc_imaxabs228(long long);
+extern __int128_t __glibc_imaxabs229(__int128_t);
+
+/* ... */
+
+#if __GNU_LIBC <= 228
+	typedef long long intmax_t;
+	_Alias imaxabs = __glibc_imaxabs228; // !!
+#else
+	typedef __int128_t intmax_t;
+	_Alias imaxabs = __glibc_imaxabs229; // !!
+#endif
+
+/* ... */
+
+int main () {
+	intmax_t x = imaxabs(-50);
+	return (int)x;
+}
+```
+
+
+## Solves §7.1.4 "Use of Library Functions", p1
+
+- Standard library must provide concrete symbol
+- Standard library allows a user to use macro-suppression to call function
+
+```cpp
+// stdfoo.h
+_Alias stdc_foo = __internal_foo;
+```
+
+```cpp
+// main.c
+int main () {
+	int x = (stdc_foo)(1, 2); // legal, suppsoed to work
+	#undef stdc_foo // legal
+	int x = stdc_foo(1, 2); // legal
+	return 0;
+}
+```
+
+
+## No Linkage
+
+These are not redeclarations / things with linkage
+
+- "Typedefs, but for Functions"
+
+
+## Front-end only
+
+- We do not want an attribute (they can be ignored)
+- We do not want a special linker / binary directive (not all implementations are binary)
+- We are trying for a front-end, standard feature that can have the desired effect
+
+
+## Best of Existing Features
+
+Combining best of `int bar () asm("foo");` and `int bar () __attribute__((alias("foo")))`:
+
+```cpp
+#if 0
+extern inline int foo (void) { return 1; }
+#endif
+
+int bar (void) __attribute__((alias("foo")));
+// <source>:5:27: error: alias must point to a defined variable or function
+// int bar () __attribute__((alias("foo")));
+//                           ^
+
+int main () {
+	return bar();
+}
+```
+
+
+## With `_Alias`
+
+```cpp
+#if 0
+extern int foo (void);
+#endif
+
+_Alias bar = foo;
+// <source>:5:27: error: alias must point to an existing declaration
+// _Alias bar = foo;
+//              ^
+
+int main (void) {
+	return bar();
+}
+
+int foo (void) { return 1; }
+```

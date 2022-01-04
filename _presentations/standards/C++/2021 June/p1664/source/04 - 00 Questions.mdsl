@@ -1,0 +1,24 @@
+# Convenience?
+
+
+### A Mouthful
+
+```cpp
+auto my_range = ...;
+auto result = std::ranges::reconstruct(
+	std::in_place_type<std::remove_cvref_t<decltype(my_range)>>,
+	std::ranges::begin(my_range),
+	std::ranges::end(my_range)
+);
+```
+
+
+### Less of a Mouthful - Does the same thing
+
+```cpp
+auto my_range = ...;
+auto result = std::ranges::reconstruct(my_range);
+```
+
+
+# Questions ?

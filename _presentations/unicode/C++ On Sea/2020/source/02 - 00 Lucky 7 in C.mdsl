@@ -1,0 +1,208 @@
+# Let's Do Better
+
+
+### 🗝 Problems
+
+`mbrtowc` & friends are _broken by design_:
+
+- does not acknowledge multi-unit encodings properly (1:N not M:N)
+- does not give input and output size information properly
+- clobbers return values with ambiguity
+- different return values for functions doing similar things
+
+
+### Solution
+
+```cpp
+enum conv_error {
+	CONV_ERR_OKAY = 0,
+	CONV_ERR_INVALID_SEQUENCE = -1,
+	CONV_ERR_INCOMPLETE_SEQUENCE = -2,
+	CONV_ERR_INSUFFICIENT_OUTPUT = -3,
+};
+
+conv_error mcrtomwc(
+	size_t* p_output_size, wchar_t** p_output,
+	size_t* p_input_size, const char** p_input,
+	mcstate_t* state
+);
+```
+
+
+### Properties
+
+- Most parameters are now out-parameters
+- Implementation updates each for the amount read/used
+- Return value is a clear enumeration
+
+```cpp
+conv_error mcrtomwc(
+	size_t* p_output_size, wchar_t** p_output,
+	size_t* p_input_size, const char** p_input,
+	mcstate_t* state
+);
+```
+
+
+### Properties
+
+- Doing the reverse direction is easy
+- Return codes / API does not change
+- Safely takes into account output size / input size
+
+```cpp
+conv_error mwcrtomc(
+	size_t* p_output_size, char** p_output,
+	size_t* p_input_size, const wchar_t** p_input,
+	mcstate_t* state
+);
+```
+
+
+### Broke: Asymmetric
+
+Different return values / codes
+
+```cpp
+size_t mbrtowc(
+	wchar_t* pwc, // output char
+	const char* s, size_t n, // sized read
+	mbstate_t* state
+);
+```
+
+```cpp
+size_t wcrtomb(
+	const char* s, // output string
+	wchar_t wc, // single read
+	mbstate_t* state
+);
+```
+
+
+### Woke: Symmetric
+
+```cpp
+conv_error mcrtomwc(
+	size_t* p_output_size, wchar_t** p_output,
+	size_t* p_input_size, const char** p_input,
+	mcstate_t* state
+);
+
+conv_error mwcrtomc(
+	size_t* p_output_size, char** p_output,
+	size_t* p_input_size, const wchar_t** p_input,
+	mcstate_t* state
+);
+```
+
+
+### Bespoke: Generic
+
+`X` or `Y`: `mc`/`mwc`/`c8`/`c16`/`c32`
+
+`XC` or `YC`: `char`/`wchar_t`/`char8_t`/`char16_t`/`char32_t`
+
+```cpp
+conv_error XrtoY(
+	size_t* p_output_size, YC** p_output,
+	size_t* p_input_size, const XC** p_input,
+	mcstate_t* state
+);
+```
+
+
+### Same interface for string output
+
+(It just processes more than 1 character and has `s` suffixes!)
+
+```cpp
+conv_error XsrtoYs(
+	size_t* p_output_size, YC** p_output,
+	size_t* p_input_size, const XC** p_input,
+	mcstate_t* state
+);
+```
+
+
+### Multi-purpose!
+
+```cpp
+conv_error XsrtoYs(
+	size_t* p_output_size, YC** p_output,
+	size_t* p_input_size, const XC** p_input,
+	mcstate_t* state
+);
+```
+
+Transcoding:
+
+```cpp
+XsrtoYs(&out_size, &out, &in_size, &in, &state);
+```
+
+
+### Multi-purpose!
+
+```cpp
+conv_error XsrtoYs(
+	size_t* p_output_size, YC** p_output,
+	size_t* p_input_size, const XC** p_input,
+	mcstate_t* state
+);
+```
+
+Validation:
+
+```cpp
+XsrtoYs(NULL, NULL, &in_size, &in, &state);
+```
+
+
+### Multi-purpose!
+
+```cpp
+conv_error XsrtoYs(
+	size_t* p_output_size, YC** p_output,
+	size_t* p_input_size, const XC** p_input,
+	mcstate_t* state
+);
+```
+
+Counting:
+
+```cpp
+XsrtoYs(&out_size, NULL, &in_size, &in, &state);
+```
+
+
+### UB 😰!
+
+```cpp
+conv_error XsrtoYs(
+	size_t* p_output_size, YC** p_output,
+	size_t* p_input_size, const XC** p_input,
+	mcstate_t* state
+);
+```
+
+"Transcoding, but don't bother size checking":
+
+```cpp
+XsrtoYs(NULL, &out, &in_size, &in, &state);
+```
+
+
+### Teach Once
+
+♾ Use forever ♾
+
+
+### ... Still; one small issue
+
+![From N2440 - Current Function Definitions for transcoding between types shown as a matrix with proposed functions there.](../../../../assets/img/2020/04/C%20-%20proposed%20functions.png)
+
+
+### Where's Big5-HKSCS ...?
+
+Where's EBCDIC? Where's ...?

@@ -1,0 +1,35 @@
+There once was some data in a file
+A new dev wanted in a literal to compile.
+They did try to include,
+Put their compiler in a mood,
+And got lost in errors for a while.
+
+A lesson they learned in those days;
+You can’t compile literals those ways!
+So they spun up a stream,
+And it worked like a dream,
+Even if the file at runtime stays.
+
+But ‘lo, their soul was chilled,
+This data didn’t change post-build!
+So they tried some linker tricks,
+Even xxd for kicks,
+And fresh fear from build scripts, instilled
+
+See, cross-platform was a terrible pain,
+Self-bundling with build steps insane.
+But after days of muck,
+Build assets permanently stuck,
+And runtime files disappeared down the drain.
+
+It clearly was not ideal,
+To have to go through all that spiel.
+So they penned a few letters,
+To their peers and betters,
+And came up with a bold new deal.
+
+A few bikesheds, to avoid design pits,
+And a few nights summoning their greatest wits!
+But it was finally shipped,
+A utility well equipped!
+std::embed, compile-time resource bits.

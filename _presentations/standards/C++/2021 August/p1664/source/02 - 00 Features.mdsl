@@ -1,0 +1,62 @@
+# Feature Set 📐
+
+"What are we looking for?"
+
+
+### Prior Art ✔
+
+Some ranges assign/construct with iterators or iterator-like things
+
+- `span`
+- `string_view`
+- Container requirements `Container(iterator, iterator)`/`container::assign(iterator, iterator)`S
+
+
+### Some Don't ❌
+
+- std:: `filter_view`
+- std:: `drop_view`
+- std:: `join_view`
+- std:: `keys_view`
+- std:: `elements_view`
+- std:: `values_view`
+- range v3's `unbounded_view`
+
+
+### The Basic Idea 💡
+
+```cpp
+std::u8string name = "𐌀𐌖𐌋𐌄𐌑𐌉·𐌌𐌄𐌕𐌄𐌋𐌉𐌑 𐑡𐑹𐑡 ·𐑚𐑻𐑯𐑸𐑛 ·𐑖𐑷";
+char16_t conversion_buffer[432];
+
+std::u8string_view name_view(name);
+std::span<char16_t> output_view(conversion_buffer, 432);
+
+auto encoding_result = ztd::text::transcode(name_view, output_view);
+std::u8string_view unprocessed_code_units
+	= encoding_result.input; // this works, no problems
+std::span<char16_t> unconsumed_output 
+	= encoding_result.output; // this works, no problems
+```
+
+Powers similar code, [like this `string_view` type](https://github.com/soasis/text/blob/194c24c9881fffba64e122b8b6474c18aa3a1552/examples/shift_jis/source/main.cpp#L62)!
+
+
+### Practicality - for Range-Based, Higher-Level Code
+
+- [ztd/ranges/reconstruct.hpp](https://github.com/soasis/text/blob/194c24c9881fffba64e122b8b6474c18aa3a1552/include/ztd/ranges/reconstruct.hpp#L55)
+- [ztd/text/decode_view.hpp](https://github.com/soasis/text/blob/194c24c9881fffba64e122b8b6474c18aa3a1552/include/ztd/text/decode_view.hpp#L248)
+- [std::span - shift_jis decoder](https://github.com/soasis/text/blob/194c24c9881fffba64e122b8b6474c18aa3a1552/examples/shift_jis/source/shift_jis.cpp#L101)
+- [std::ranges::drop_view](http://eel.is/c++draft/range.drop.overview)
+
+
+### ADL vs. Tag Invoke?
+
+Attempted to use `tag_invoke` for implementation
+
+- unsuitable when overriding types "from the outside"  
+  (e.g. Unreal Engine `TArrayView`- liketypes)
+- trouble getting it to work with poison pill  
+  (e.g. "`void tag_invoke() = delete`" within internal ADL namespace)
+
+No tag invoke this time!

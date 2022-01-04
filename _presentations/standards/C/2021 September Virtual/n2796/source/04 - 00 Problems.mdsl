@@ -1,0 +1,70 @@
+# 😱
+
+```cpp
+char* strcpy(char* restrict s1, const char* restrict s2);
+
+int main () {
+	return 0;
+}
+```
+
+
+## Feature Destroyer 💣
+
+> Provided that a library function can be declared without reference to any type defined in a header, it is also permissible to declare the function and use it without including its associated header.
+>
+> — N2596, C Working Draft, §7.1.4, p2
+
+
+## Oh No...
+
+- `<stdsleep.h>`
+
+```cpp
+int __zzz(int requested_sleep_time);
+
+_Alias stdc_sleep = __zzz;
+```
+
+- `main.c`
+
+```cpp
+#include <stdsleep.h>
+
+int stdc_sleep(int requested_sleep_time); // 😱
+// the above is a constraint violation of the feature as-is
+```
+
+
+## Oh No...!!
+
+- `<inttypes.h>`
+
+```cpp
+__int128_t __imaxabs_229(__int128_t value);
+
+_Alias imaxabs = __imaxabs_229;
+```
+
+- `main.c`
+
+```cpp
+#include <inttypes.h>
+
+intmax_t imaxabs(intmax_t value); // 😱
+// ... Aw shucks.
+```
+
+
+## Put Bluntly
+
+- This solves my personal ABI problems 🥳!
+
+- But it doesn't solve the Standard Library's problems?! 😭
+
+In short...
+
+
+# Pain.
+
+![Will Smith with his June 10th, 2020 tweet of "pain." overlaid on his bust of him leaning back close to tears but resolutely holding it in.](/assets/img/2021/09/pain.png)

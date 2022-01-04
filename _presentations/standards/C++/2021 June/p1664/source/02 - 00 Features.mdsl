@@ -1,0 +1,47 @@
+# Feature Set
+
+"What are we looking for?"
+
+
+### Prior Art
+
+Some ranges assign/construct with iterators or iterator-like things,
+
+- `span`
+- `string_view`
+- Container requirements `Container(iterator, iterator)`/`container::assign(iterator, iterator)`S
+
+
+### Some Don't
+
+- std:: `filter_view`
+- std:: `drop_view`
+- std:: `join_view`
+- std:: `keys_view`
+- std:: `elements_view`
+- std:: `values_view`
+- range v3's `unbounded_view`
+
+
+### The Basic Idea
+
+```cpp
+std::u8string name = "𐌀𐌖𐌋𐌄𐌑𐌉·𐌌𐌄𐌕𐌄𐌋𐌉𐌑 𐑡𐑹𐑡 ·𐑚𐑻𐑯𐑸𐑛 ·𐑖𐑷";
+char16_t conversion_buffer[432];
+
+std::u8string_view name_view(name);
+std::span<char16_t> output(conversion_buffer, 432);
+
+auto encoding_result = ztd::text::transcode(input, output);
+std::u8string_view unprocessed_code_units 
+	= encoding_result.input;
+std::span<char16_t> unconsumed_output 
+	= encoding_result.output;
+```
+
+
+### In Practice
+
+- [ztd/text/detail/reconstruct.hpp](https://github.com/soasis/text/blob/main/include/ztd/text/detail/reconstruct.hpp#L59)
+- [ztd/text/detail/decode_view.hpp](https://github.com/soasis/text/blob/main/include/ztd/text/decode_view.hpp#L248)
+- [std::ranges::drop_view](http://eel.is/c++draft/range.drop.overview)

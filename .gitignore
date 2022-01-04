@@ -1,0 +1,11 @@
+*.DS_Store
+*.gem
+.bundle
+.sass-cache
+_site
+Gemfile.lock
+.vscode/*
+!.vscode/spellright.dict
+.jekyll-cache
+.jekyll-metadata
+.vscode/spellright.dict

@@ -1,0 +1,95 @@
+# SITE CONFIGURATION
+baseurl: ""
+url: "https://thephd.dev"
+
+# THEME-SPECIFIC CONFIGURATION
+title: The Pasture
+description: "The musings, ideas, discussions, and sometimes silly words from a programming sheep & shepherd"
+avatar: assets/img/thephd.png
+favicon: assets/favicon.png
+
+# Header and footer text
+header_text: ♡
+header_feature_image: assets/img/pexels/triangular.jpeg
+footer_text: >
+  Copyright © 2018-2021 ThePhD -- Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap!</a>
+
+# Blog
+excerpt: true                                           # Or "truncate" (first 250 characters), "false" to disable
+post_navigation: true
+color_image: /assets/img/lineart.png                    # A bit transparent for color posts.
+
+# Features
+# More in the _data folder for social icons, share buttons, author and language
+# For layout customization, go to the "_sass > base" folder, and check "_variables.scss"
+katex: true                                             # Enable if using math markup
+mermaid: true                                           # Enable mermaid-js for sequence and diagrams
+google_analytics:                                       # Tracking ID, e.g. "UA-000000-01"
+cookie_consent: false                                   # To respect the usage of cookies
+disqus_shortname:                                       # Your discus shortname for comments
+
+# PAGINATION
+paginate: 5
+paginate_path: "/posts/page:num"
+
+# COLLECTIONS (e.g. PORTFOLIO)
+collections:
+  portfolio:
+    output: true
+    permalink: /:collection/:name
+  presentations:
+    output: false
+
+# DEFAULTS
+defaults:
+  -
+    scope:
+      path: "_presentations/*"
+      type: ""
+    values:
+      hide: true
+
+# BUILD SETTINGS
+plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed, jekyll-redirect-from]
+redirect_from:
+  json: false
+whitelist:
+  - jekyll-redirect-from
+exclude:
+  - ".jekyll-cache"
+  - ".idea"
+  - "assets/node_modules"
+  - "*.gem"
+  - "LICENSE"
+  - "README.md"
+  - "screenshot.png"
+  - "package.json"
+  - "node_modules"
+  - "gulpfile.js"
+  - ".idea/*"
+  - ".github/*"
+  - ".git/*"
+  - "_vendor/future_cxx/vendor/*"
+  - "_vendor/reveal.js/node_modules/*"
+  - "_vendor/reveal.js/examples/*"
+  - "_vendor/reveal.js/test/*"
+  - "_vendor/reveal.js/.github/*"
+  - "_vendor/reveal.js/*.json"
+  - "_vendor/reveal.js/*.md"
+  - "_vendor/reveal.js/gulpfile.js"
+  - "_vendor/reveal.js/.npmignore"
+  - "_vendor/reveal.js/.gitignore"
+  - "_vendor/reveal.js/index.html"
+  - "_vendor/reveal.js/demo.html"
+  - "_vendor/reveal.js/LICENSE"
+include:
+  - "_presentations"
+  - "_vendor"
+  - "_vendor/future_cxx/papers"
+  - "_vendor/reveal.js/dist"
+  - "_vendor/reveal.js/plugin"
+  - "_vendor/reveal.js/js"
+
+
+# THEME
+remote_theme: sylhare/type-on-strap@master
