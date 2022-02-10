@@ -16,9 +16,8 @@ C++       | p1040: std::embed | [Published](https://wg21.link/p1040) | [Latest D
 C++       | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/_vendor/future_cxx/papers/d1629.html)
 C++       | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/_vendor/future_cxx/papers/d1664.html)
 C++ and C | p1967 + n2898: Preprocessor embed - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed.html)
-C++       | p2513: `char8_t` Compatibility and Portability Fixes | [Not Yet Published](https://wg21.link/p2513) | [Latest Draft](/_vendor/future_cxx/papers/d2513.html)
+C++       | p2513: `char8_t` Compatibility and Portability Fixes | [Published](https://wg21.link/p2513) | [Latest Draft](/_vendor/future_cxx/papers/d2513.html)
 C         | n2828: Unicode Sequences More Than 21 Bits Are A Constraint Violation | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2828.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Unicode%20Sequences%20More%20Than%2021%20Bits%20are%20a%20Constraint%20Violation.html)
-C         | n2899: Not-So-Magic: `typeof()` for C | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2899.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20typeof.html)
 C         | n2900: Consistent, Warningless, and Intuitive Initialization with `{}` | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2900.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Consistent,%20Warningless,%20and%20Intuitive%20Initialization%20with%20%7B%7D.html)
 C         | n2901: Transparent Function Aliases | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2901.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Function%20Aliases.html)
 C         | n2902: Restartable and Non-Restartable Functions for Efficient Character Conversions | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2902.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
@@ -36,15 +35,15 @@ Most have been completed / merged at this point! The rest of the work is up abov
 ### Completed / Merged Proposals:
 
 C++ | p1025: Update References to the Unicode Standard | [Published](https://wg21.link/p1025) | [Accepted, C++20!](https://wg21.link/p1025)
-C++ | p1301: [[nodiscard("should have a reason")]] | [Published](https://wg21.link/p1301) | [Accepted, C++20!](/_vendor/future_cxx/papers/d1301.html)
-C   | n2448: [[nodiscard("should have a reason")]] | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2448.pdf) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20nodiscard.html)
-C++ | p0330: Literal Suffixes for `ptrdiff_t` and `size_t` | [Published](https://wg21.link/p0330) | [Accepted, C++23!](/_vendor/future_cxx/papers/d0330.html)
-C   | n2594: Mixed Wide String Literal Concatenation | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2594.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Mixed%20Wide%20String%20Literal%20Concatenation.html)
 C++ | p1682: `std::to_underlying(T enum_value)` | [Published](https://wg21.link/p1682) | [Accepted, C++23!](/_vendor/future_cxx/papers/d1682.html)
 C++ | p1132: out_ptr - a scalable output pointer abstraction | [Published](https://wg21.link/p1132) | [Accepted, C++23!](/_vendor/future_cxx/papers/d1132.html)
+C++ | p0330: Literal Suffixes for `ptrdiff_t` and `size_t` | [Published](https://wg21.link/p0330) | [Accepted, C++23!](/_vendor/future_cxx/papers/d0330.html)
+C++ | p1301: [[nodiscard("should have a reason")]] | [Published](https://wg21.link/p1301) | [Accepted, C++20!](/_vendor/future_cxx/papers/d1301.html)
+C   | n2448: [[nodiscard("should have a reason")]] | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2448.pdf) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20nodiscard.html)
+C   | n2594: Mixed Wide String Literal Concatenation | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2594.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Mixed%20Wide%20String%20Literal%20Concatenation.html)
 C   | n2726: `_Imaginary_I` and `_Complex_I` Qualifiers | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2726.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Imaginary_I%20and%20_Complex_I%20Qualifiers.html)
 C   | n2728: `char16_t` & `char32_t` string literals shall be UTF-16 and UTF-32 | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2728.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20char16_t%20&%20char32_t%20string%20literals%20shall%20be%20UTF-16%20&%20UTF-32.html)
-
+C   | n2927: Not-So-Magic: `typeof()` for C | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2927.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20typeof.html)
 
 ### Being Reworked from Feedback:
 
