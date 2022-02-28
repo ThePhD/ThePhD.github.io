@@ -2,8 +2,8 @@
 layout: post
 title: "Ever Closer - C23 Draws Nearer"
 permalink: /ever-closer-c23-improvements
-feature-img: "/assets/img/pexels/roman-odintsov-diver-close-to-fish.jpg"
-thumbnail: "/assets/img/pexels/roman-odintsov-diver-close-to-fish.jpg"
+feature-img: "/assets/img/2022/02/roman-odintsov-diver-close-to-fish.jpg"
+thumbnail: "/assets/img/2022/02/roman-odintsov-diver-close-to-fish.jpg"
 hide: true
 tags: [C, Standard, 📜]
 excerpt_separator: <!--more-->
