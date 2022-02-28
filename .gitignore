@@ -8,4 +8,5 @@ Gemfile.lock
 !.vscode/spellright.dict
 .jekyll-cache
 .jekyll-metadata
+.tweet-cache
 .vscode/spellright.dict

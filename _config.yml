@@ -50,7 +50,7 @@ defaults:
       hide: true
 
 # BUILD SETTINGS
-plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed, jekyll-redirect-from]
+plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-feed, jekyll-redirect-from, jekyll-twitter-plugin]
 redirect_from:
   json: false
 whitelist:

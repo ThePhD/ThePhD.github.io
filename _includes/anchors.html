@@ -1,0 +1,17 @@
+<script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
+<script>
+	var paragraph_anchors = new AnchorJS({
+		placement: 'left',
+		icon: '¶'
+	});
+	paragraph_anchors.add('.post-content>p');
+	var code_anchors = new AnchorJS({
+		placement: 'left',
+		icon: '📍'
+	});
+	code_anchors.add('.post-content>div.highlighter-rouge');
+	anchors.options = {
+		placement: 'left',
+	};
+	anchors.add('.post-content h1, h2, h3, h4');
+</script>
