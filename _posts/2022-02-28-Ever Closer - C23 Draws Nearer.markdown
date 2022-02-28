@@ -644,7 +644,7 @@ void do_something(invoker *proc, int x) { (*proc)(proc, x); }
 invoker my_invoker[1] = {&do_something};
 ```
 
-This code is relying on the fact that `int (**)()` is effectively an incomplete function pointer. It can be used to call any kind of function in the language, since it will complete with its given argument types and then call the function. Unfortunately, this code isn't completely unaffected. If N2919 passes, then the plan is that these function pointers will be swapped with `int(**)(...)` function pointers instead. You will have to dereference the double-indirected function pointer, and then perform a cast to get to the right function type before calling. It is a little more effort than before, but ultimately covers the use case for that particular style of programming. Of course, the most notable thing about K&R declarations of all is...
+This code is relying on the fact that `void (**)()` is effectively an incomplete function pointer. It can be used to call any kind of function in the language, since it will complete with its given argument types and then call the function. Unfortunately, this code isn't completely unaffected. If N2919 passes, then the plan is that these function pointers will be swapped with `void(**)(...)` function pointers instead. You will have to dereference the double-indirected function pointer, and then perform a cast to get to the right function type before calling. It is a little more effort than before, but ultimately covers the use case for that particular style of programming. Of course, the most notable thing about K&R declarations of all is...
 
 
 
