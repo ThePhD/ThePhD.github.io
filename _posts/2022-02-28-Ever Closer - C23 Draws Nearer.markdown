@@ -294,7 +294,7 @@ Here's a basic limiter, that hard-clamps the value of a single sample (a single 
 #include <stddef.h>
 
 static float clamp(float v, float lo, float hi) {
-	return (v > lo) ? lo : (hi < v) ? hi : v;
+	return (v < lo) ? lo : ((hi < v) ? hi : v);
 }
 
 extern void limiter(float* data, size_t size) {
@@ -304,73 +304,109 @@ extern void limiter(float* data, size_t size) {
 }
 ```
 
-Let's take a look at the assembly that comes out on the other side:
+Let's take a look at the assembly that comes out on the other side (`gcc -std=c2x -O3`):
 
 ```s
-clamp:
-	push    rbp
-	mov     rbp, rsp
-	movss   DWORD PTR [rbp-4], xmm0
-	movss   DWORD PTR [rbp-8], xmm1
-	movss   DWORD PTR [rbp-12], xmm2
-	movss   xmm0, DWORD PTR [rbp-4]
-	comiss  xmm0, DWORD PTR [rbp-8]
-	jbe     .L11
-	movss   xmm0, DWORD PTR [rbp-8]
-	jmp     .L8
-.L11:
-	movss   xmm0, DWORD PTR [rbp-4]
-	comiss  xmm0, DWORD PTR [rbp-12]
-	jbe     .L12
-	movss   xmm0, DWORD PTR [rbp-12]
-	jmp     .L8
-.L12:
-	movss   xmm0, DWORD PTR [rbp-4]
-.L8:
-	pop     rbp
-	ret
 limiter:
-	push    rbp
-	mov     rbp, rsp
-	push    rbx
-	sub     rsp, 32
-	mov     QWORD PTR [rbp-32], rdi
-	mov     QWORD PTR [rbp-40], rsi
-	mov     QWORD PTR [rbp-16], 0
-	jmp     .L14
-.L15:
-	mov     rax, QWORD PTR [rbp-16]
-	lea     rdx, [0+rax*4]
-	mov     rax, QWORD PTR [rbp-32]
-	add     rax, rdx
-	mov     eax, DWORD PTR [rax]
-	mov     rdx, QWORD PTR [rbp-16]
-	lea     rcx, [0+rdx*4]
-	mov     rdx, QWORD PTR [rbp-32]
-	lea     rbx, [rcx+rdx]
-	movss   xmm2, DWORD PTR .LC0[rip]
-	movss   xmm1, DWORD PTR .LC1[rip]
-	movd    xmm0, eax
-	call    clamp
-	movd    eax, xmm0
-	mov     DWORD PTR [rbx], eax
-	add     QWORD PTR [rbp-16], 1
-.L14:
-	mov     rax, QWORD PTR [rbp-16]
-	cmp     rax, QWORD PTR [rbp-40]
-	jb      .L15
-	nop
-	nop
-	mov     rbx, QWORD PTR [rbp-8]
-	leave
+	mov     rcx, rdi
+	test    rsi, rsi
+	je      .L1
+	lea     rax, [rsi-1]
+	cmp     rax, 2
+	jbe     .L11
+	mov     rdx, rsi
+	movss   xmm5, DWORD PTR .LC0[rip]
+	mov     rax, rdi
+	pcmpeqd xmm6, xmm6
+	shr     rdx, 2
+	movss   xmm4, DWORD PTR .LC1[rip]
+	sal     rdx, 4
+	shufps  xmm5, xmm5, 0
+	add     rdx, rdi
+	shufps  xmm4, xmm4, 0
+.L4:
+	movups  xmm1, XMMWORD PTR [rax]
+	movaps  xmm0, xmm5
+	add     rax, 16
+	movaps  xmm3, xmm1
+	cmpltps xmm3, xmm5
+	movaps  xmm2, xmm3
+	andps   xmm0, xmm3
+	andnps  xmm2, xmm4
+	orps    xmm2, xmm0
+	movaps  xmm0, xmm4
+	cmpltps xmm0, xmm1
+	por     xmm0, xmm3
+	pxor    xmm0, xmm6
+	andps   xmm1, xmm0
+	andnps  xmm0, xmm2
+	orps    xmm0, xmm1
+	movups  XMMWORD PTR [rax-16], xmm0
+	cmp     rdx, rax
+	jne     .L4
+	test    sil, 3
+	je      .L1
+	mov     rax, rsi
+	and     rax, -4
+.L3:
+	sub     rsi, rax
+	cmp     rsi, 1
+	je      .L6
+	movq    xmm0, QWORD PTR .LC4[rip]
+	lea     rdx, [rcx+rax*4]
+	movq    xmm1, QWORD PTR .LC5[rip]
+	movq    xmm2, QWORD PTR [rdx]
+	movaps  xmm4, xmm2
+	cmpltps xmm4, xmm0
+	movaps  xmm3, xmm4
+	andps   xmm0, xmm4
+	andnps  xmm3, xmm1
+	cmpltps xmm1, xmm2
+	orps    xmm3, xmm0
+	movaps  xmm0, xmm1
+	movq    xmm1, QWORD PTR .LC6[rip]
+	por     xmm0, xmm4
+	pxor    xmm0, xmm1
+	andps   xmm2, xmm0
+	andnps  xmm0, xmm3
+	orps    xmm0, xmm2
+	movlps  QWORD PTR [rdx], xmm0
+	test    sil, 1
+	je      .L1
+	and     rsi, -2
+	add     rax, rsi
+.L6:
+	lea     rax, [rcx+rax*4]
+	movss   xmm1, DWORD PTR .LC0[rip]
+	movss   xmm0, DWORD PTR [rax]
+	comiss  xmm1, xmm0
+	jbe     .L27
+	movaps  xmm0, xmm1
+	movss   DWORD PTR [rax], xmm0
 	ret
-.LC0:
-	.long   1065353216
-.LC1:
+.L27:
+	movss   xmm1, DWORD PTR .LC1[rip]
+	minss   xmm1, xmm0
+	movaps  xmm0, xmm1
+	movss   DWORD PTR [rax], xmm0
+	ret
+.L1:
+	ret
+.L11:
+	xor     eax, eax
+	jmp     .L3
+.LC4:
 	.long   -1082130432
+	.long   -1082130432
+.LC5:
+	.long   1065353216
+	.long   1065353216
+.LC6:
+	.long   -1
+	.long   -1
 ```
 
-This will be our baseline. It's about 61 lines of cleaned-up, prettified assembly. The assembly spends a lot of time carefully picking at the pointers and pulling out values to be checked and used. We also see that, despite the `clamp` function being marked `static` so that the compiler **knows** for a fact that the definition is specific to this translation unit and no `LD_PRELOAD`/weak-symbol/symbol-swapping shenanigans can occur, it **still** calls the `clamp` function. This is because it is observable when a floating point value that **maybe** be a `NaN` (a signaling `NaN`, for example) gets loaded into a register. The machine just might s c r e a m at you, so the registers have to be loaded and we need to eat the function call crap.
+This will be our baseline. It's about 97 lines of cleaned-up, prettified assembly. The assembly spends a lot of time carefully picking at the pointers and pulling out values to be checked and used. (NOTE: in a previous version of the article, I messed up the `clamp(...)` definition. That changed the listing to be 97 lines long as shown here, rather than the original 61, but the second remains largely unchanged.)
 
 What assumptions can we make that might improve our situation?
 
@@ -384,56 +420,56 @@ Well, we generally know that we're not processing `NaN`s in our audio flow. All 
 #define unreachable() __builtin_unreachable()
 
 static float clamp(float v, float lo, float hi) {
-    return (v > lo) ? lo : (hi < v) ? hi : v;
+	return (v < lo) ? lo : ((hi < v) ? hi : v);
 }
 
 extern void spicy_limiter(float* data, size_t size) {
 	if (size < 1 || (size % 32) != 0) {
 		unreachable();
 	}
-    for (size_t i = 0; i < size; ++i) {
-        if (!isfinite(data[i])) {
-            unreachable();
-        }
-        data[i] = clamp(data[i], -1.0f, 1.0f);
-    }
+	for (size_t i = 0; i < size; ++i) {
+		if (!isfinite(data[i])) {
+			unreachable();
+		}
+		data[i] = clamp(data[i], -1.0f, 1.0f);
+	}
 }
 ```
 
-"EWWW, gross, that's SO MUCH more code! AND it has branches, it MUST be terrible!" I had that thought too, looking at this code. And yet...
+"EWWW, gross, that's SO MUCH more code! AND it has branches, it MUST be terrible!" I had that thought too, looking at this code. And yet, with the same compiler and same flags...
 
 ```s
 spicy_limiter:
-        movss   xmm1, DWORD PTR .LC0[rip]
-        movss   xmm2, DWORD PTR .LC1[rip]
-        xor     eax, eax
-        jmp     .L3
+	movss   xmm1, DWORD PTR .LC0[rip]
+	movss   xmm2, DWORD PTR .LC1[rip]
+	xor     eax, eax
+	jmp     .L3
 .L9:
-        movaps  xmm3, xmm2
-        minss   xmm3, xmm0
-        movaps  xmm0, xmm3
-        movss   DWORD PTR [rdi+rax*4], xmm0
-        add     rax, 1
-        cmp     rsi, rax
-        je      .L8
+	movaps  xmm3, xmm2
+	minss   xmm3, xmm0
+	movaps  xmm0, xmm3
+	movss   DWORD PTR [rdi+rax*4], xmm0
+	add     rax, 1
+	cmp     rsi, rax
+	je      .L8
 .L3:
-        movss   xmm0, DWORD PTR [rdi+rax*4]
-        comiss  xmm0, xmm1
-        jbe     .L9
-        movaps  xmm0, xmm1
-        movss   DWORD PTR [rdi+rax*4], xmm0
-        add     rax, 1
-        cmp     rsi, rax
-        jne     .L3
+	movss   xmm0, DWORD PTR [rdi+rax*4]
+	comiss  xmm1, xmm0
+	jbe     .L9
+	movaps  xmm0, xmm1
+	movss   DWORD PTR [rdi+rax*4], xmm0
+	add     rax, 1
+	cmp     rsi, rax
+	jne     .L3
 .L8:
-        ret
+	ret
 .LC0:
-        .long   -1082130432
+	.long   -1082130432
 .LC1:
-        .long   1065353216
+	.long   1065353216
 ```
 
-.... Daaaamn, that's way better. From 61 lines for the full assembly to 28! And we are getting all the good scalar intrstructions we want, too (`movaps`, `comiss`, `movss`, and `minss`)! It even manages to cut the `clamp` call out, since it can assume the values are safe to pass through the registers and there won't be any signaling `NaN`s. [That is a S P I C Y limiter, indeed!](https://godbolt.org/z/q6rxx8EW5)
+.... Daaaamn, that's way better. From 61 lines for the full assembly to 28! And we are getting all the good scalar intrstructions we want, too (`movaps`, `comiss`, `movss`, and `minss`)! It even manages to cut the `clamp` call out, since it can assume the values are safe to pass through the registers and there won't be any signaling `NaN`s. [That is a S P I C Y limiter, indeed!](https://godbolt.org/z/Eh9z497jK) We could probably get even better, but this is just illustrative of how much better we can get from the code.
 
 A lot of people get scared when they see "Undefined Behavior", but this is one of the first times we're putting Undefined Behavior - and its subsequent optimization potential - in your hands as the end-user. This means rather than praying that you don't run afoul or something, or doing `1/0` in a branch to deliberately trigger UB in that branch and hope the compiler takes a bushwhacker to the code to clean it up, you can **clearly expression your semantic desire and let the compiler do what it does best**. Working together, rather than against!
 
