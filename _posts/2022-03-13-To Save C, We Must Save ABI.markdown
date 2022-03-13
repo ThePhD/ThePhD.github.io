@@ -216,7 +216,7 @@ __int128_t do_stuff(__int128_t value) {
 }
 ```
 
-Now, let's build it, with Clang on MSVC using some default debug flags:
+Now, let's build it, with Clang + MSVC using some default debug flags:
 
 ```s
 [build] [1/2   0% :: 0.009] Re-checking globbed directories...
