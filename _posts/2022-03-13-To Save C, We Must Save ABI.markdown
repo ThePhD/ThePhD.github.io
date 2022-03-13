@@ -22,7 +22,7 @@ Should it not be utterly destroyed and routed from this earth? Is it not the ant
 
 [![A tweet from Ólafur Waage, stating "How to break ABI and get away with it.", with a screenshot of the Add and Remove Programs Settings screen showing every Microsoft Redistributable and Update from 2008 to 2022.](/assets/img/2022/03/Ólafur%20Waage%20-%20Break%20ABI%20Tweet.png)](https://twitter.com/olafurw/status/1487092942191878149)
 
-Silliness aside, it's important to make sure everyone is up to speed on what an "ABI" really is. Let's look at ABI - this time, from the C side - and what it prevents us from fixing.
+Silliness aside, it is important to make sure everyone is up to speed on what an "ABI" really is. Let's look at ABI - this time, from the C side - and what it prevents us from fixing.
 
 
 
@@ -42,7 +42,7 @@ Because this article focuses on C, we won't be worrying too much about the C++ p
 - the position, order, and layout of members in a `struct`; and,
 - the argument types and return type of a function.
 
-Of course, because C++ [consumes the entire C standard library into itself nearly wholesale with very little modifications](http://eel.is/c++draft/library.c), C's ABI problems become C++'s ABI problems. In fact, because C undergirds **way** too much software, it's effectively everyone's problem what C decides to do with itself. How exactly can ABI manifest in C? Well, let's give a quick example:
+Of course, because C++ [consumes the entire C standard library into itself nearly wholesale with very little modifications](http://eel.is/c++draft/library.c), C's ABI problems become C++'s ABI problems. In fact, because C undergirds **way** too much software, it is effectively everyone's problem what C decides to do with itself. How exactly can ABI manifest in C? Well, let's give a quick example:
 
 
 
@@ -118,7 +118,7 @@ main:
 	ret
 ```
 
-This `_Z8do_stuffn` is a way of describing that there's a `do_stuff` function that takes an `__int128_t` argument. Because the argument type gets beaten up into some weird letters and injected into the final function name, the C++ linker can't be confused about which symbol it likes, compared to the C one. This is called **name mangling**. This post won't be calling for C to embrace name mangling - no implementation will do that (except for Clang and it's `[[overloadable]]` [attribute](https://clang.llvm.org/docs/AttributeReference.html#overloadable)) - which does make what we're describing substantially easier to go over.
+This `_Z8do_stuffn` is a way of describing that there's a `do_stuff` function that takes an `__int128_t` argument. Because the argument type gets beaten up into some weird letters and injected into the final function name, the C++ linker can't be confused about which symbol it likes, compared to the C one. This is called **name mangling**. This post won't be calling for C to embrace name mangling - no implementation will do that (except for Clang and its `[[overloadable]]` [attribute](https://clang.llvm.org/docs/AttributeReference.html#overloadable)) - which does make what we're describing substantially easier to go over.
 
 Still, how precarious can C's direct/non-mangled symbols be, really? Right now, we see that the `call` in the assembly for the C-compiled code only has one piece of information: the name of the function. It just calls `do_stuff`. As long as it can find a symbol in the code named `do_stuff`, it's gonna call `do_stuff`. So, well, let's implement `do_stuff`!
 
@@ -226,7 +226,7 @@ Now, let's build it, with Clang on MSVC using some default debug flags:
 [build] Build finished with exit code 0
 ```
 
-We'll note that, despite the definition having different types from the declaration, not hiding it behind a DLL, and not doing any other shenanigans to hide the object file that creates the definition from it's place of declaration, the linker's attitude to us having completely incompatible declarations and definitions is pretty clear:
+We'll note that, despite the definition having different types from the declaration, not hiding it behind a DLL, and not doing any other shenanigans to hide the object file that creates the definition from its place of declaration, the linker's attitude to us having completely incompatible declarations and definitions is pretty clear:
 
 ![The embroidery of the text "Behold! The field on which I grow my fucks / Lay thine eyes upon/and see that it is barren." on a pillow, which rests on a grey-blanketed bed.](/assets/img/2022/03/field-of-fucks.jpg)
 
@@ -251,7 +251,7 @@ What if I told you this exact problem could happen, even if the header's code re
 
 See, the whole point of ABI breaks is they can happen without the frontend or the linker complaining. It's not just about headers and source files. We have an new entirely source of problems, and they're called Libraries. As shown, C does not mangle its identifiers. What you call it in the source code is more or less what you get in the assembly, modulo any implementation-specific shenanigans you get into. This means that when it comes to sharing libraries, everybody has to agree and shake hands on exactly the symbols that are in said library.
 
-This is never more clear than on \*nix distributions. Only a handful of people stand between each distribution and it's horrible collapse. The only reason many of these systems continue to work is because we take these tiny handful of people and put them under computational constraints that'd make Digital Atlas not only shrug, but yeet the sky and heavens into the void. See, these people - the Packagers, Release Managers, and Maintainers for anyone's given choice of system configuration — have the enviable job of making sure your dynamic libraries match up with the expectations the entire system has for them. Upgraded dynamic libraries pushed to your favorite places — like the `apt` repositories, the `yum` repositories, or the Pacman locations — need to maintain backwards compatibility. Every single package on the system has to use the agreed upon libc, not at the source level,
+This is never more clear than on \*nix distributions. Only a handful of people stand between each distribution and its horrible collapse. The only reason many of these systems continue to work is because we take these tiny handful of people and put them under computational constraints that'd make Digital Atlas not only shrug, but yeet the sky and heavens into the void. See, these people - the Packagers, Release Managers, and Maintainers for anyone's given choice of system configuration — have the enviable job of making sure your dynamic libraries match up with the expectations the entire system has for them. Upgraded dynamic libraries pushed to your favorite places — like the `apt` repositories, the `yum` repositories, or the Pacman locations — need to maintain backwards compatibility. Every single package on the system has to use the agreed upon libc, not at the source level,
 
 but at the *binary* level.
 
@@ -329,7 +329,7 @@ Notice that the symbol name `f` appears nowhere, despite being the name of the f
 - Oracle C: `#pragma redefine_extname NormalName _BinarySymbolName`
 - GCC, Arm Keil, and similar C implementations: `Ret NormalName (Arg, Args...) __attribute__((alias("_BinarySymbolName")))`
 
-All of them have slightly different requirements and semantics, but boil down to the same goal. It replaces the `NormalName` at compilation (translation) time with `_BinarySymbolName`, optionally performing some amount of type/entity checking during compilation to prevent connecting to things that do not exist to the compiler's view (`alias` works this way in particular, while the others will happily do not checking and link to oblivion). These annotations make it possible to "redirect" a given declaration from it's original name to another name. It's used in many standard libray distributions, including musl libc. For example, using using this `weak_alias` macro and the `__typeof` functionality, musl redeclares several different kinds of names and [links them to specifically-versioned symbols within its own binary](https://git.musl-libc.org/cgit/musl/tree/src/stdio/fscanf.c) to satisfy glibc compatibility:
+All of them have slightly different requirements and semantics, but boil down to the same goal. It replaces the `NormalName` at compilation (translation) time with `_BinarySymbolName`, optionally performing some amount of type/entity checking during compilation to prevent connecting to things that do not exist to the compiler's view (`alias` works this way in particular, while the others will happily do not checking and link to oblivion). These annotations make it possible to "redirect" a given declaration from its original name to another name. It's used in many standard libray distributions, including musl libc. For example, using using this `weak_alias` macro and the `__typeof` functionality, musl redeclares several different kinds of names and [links them to specifically-versioned symbols within its own binary](https://git.musl-libc.org/cgit/musl/tree/src/stdio/fscanf.c) to satisfy glibc compatibility:
 
 
 ```cpp
@@ -520,7 +520,7 @@ Since we have the working feature and a compiler on [Godbolt.org](https://godbol
 
 # The ABI Test: `maxabs`
 
-We talked about how `intmax_t` can't be changed because some binary, somewhere, would lose it's mind and use the wrong calling convention / return convention if we changed from e.g. `long long` (64-bit integer) to `__int128_t` (128-bit integer). But is there a way that - if the code opted into it or something - we could upgrade the function calls for newer applications while leaving the older applications intact? Let's craft some code that test the idea that Transparent Aliases can help with ABI.
+We talked about how `intmax_t` can't be changed because some binary, somewhere, would lose its mind and use the wrong calling convention / return convention if we changed from e.g. `long long` (64-bit integer) to `__int128_t` (128-bit integer). But is there a way that - if the code opted into it or something - we could upgrade the function calls for newer applications while leaving the older applications intact? Let's craft some code that test the idea that Transparent Aliases can help with ABI.
 
 
 
@@ -595,7 +595,7 @@ Here is the `maxabs.c` file:
 #include <my_libc/defs.h>
 
 extern DLL_FUNC int my_libc_magic_number (void) {
-#if (MY_LIBC_NEW_CODE == 0))
+#if (MY_LIBC_NEW_CODE == 0)
 	return 0;
 #else
 	return 1;
@@ -680,7 +680,7 @@ Section contains the following exports for my_libc.dll
 	      3    2 00001000 my_libc_magic_number = my_libc_magic_number
 ```
 
-Note, very specifically, that the old `maxabs` function is still there. This is because we marked it's definition in the `maxabs.c` source file as both `extern` and `DLL_FUNC` (to be exported). But, critically, it is not the same as the alias. Remember, when the compiler sees `_Alias maxabs = __libc_maxabs_v1;`, it simply produces a "`typedef`" of the function `__libc_maxabs_v1`. All code that then uses `maxabs`, as it did before, will just have the function call transparently redirected to use the new symbol. This is the most important part of this feature: it is not that it *should* be a transparent alias to the desired symbol. It is that it **must** be, so that we have a way to transition old code like the one above to the new code. But, speaking of that transition... now we need to check if this can work in the wild. If you do a drop-in replacement of the old `libc`, do old applications - that cannot/will not be recompiled - still use the old symbols despite having the new DLL and its shiny new symbols present? Let's make our applications, and find out.
+Note, very specifically, that the old `maxabs` function is still there. This is because we marked its definition in the `maxabs.c` source file as both `extern` and `DLL_FUNC` (to be exported). But, critically, it is not the same as the alias. Remember, when the compiler sees `_Alias maxabs = __libc_maxabs_v1;`, it simply produces a "`typedef`" of the function `__libc_maxabs_v1`. All code that then uses `maxabs`, as it did before, will just have the function call transparently redirected to use the new symbol. This is the most important part of this feature: it is not that it *should* be a transparent alias to the desired symbol. It is that it **must** be, so that we have a way to transition old code like the one above to the new code. But, speaking of that transition... now we need to check if this can work in the wild. If you do a drop-in replacement of the old `libc`, do old applications - that cannot/will not be recompiled - still use the old symbols despite having the new DLL and its shiny new symbols present? Let's make our applications, and find out.
 
 
 
@@ -777,7 +777,7 @@ What I've proposed here does not fix all scenarios. Some of them are just the no
 
 at least we'll finally have the chance to have that discussion with our communities, rather than just being outright denied the opportunity before Day 0.
 
-There's also one other scenario it can't help. Though, I don't think **anyone** can help fix this one, since it's an explicit choice Microsoft has made. Microsoft's ABI requirements are so painfully restrictive that they not only require backwards compatibility (old symbols need to be present and retain the same behavior), but forward compatibility (you can downgrade the library and "strip" new symbols, and **newly built** code must still work with the downgraded shared library). The solution that the Microsoft STL has adopted is on top of having files like `msvcp140.dll`, whenever they need to break something they ship an entirely new DLL instead, even if it contains literally only a single object such as `msvc140p_atomic_wait.dll`, `msvc140p_1.dll`, and `msvc140p_2.dll`. Some of them contain almost no symbols at all, and now that they are shipped nothing can be added or removed to that list of symbols lest you break a new application that has it's DLL swapped out with an older version somewhere. Poor `msvcp140_codecvt_ids.dll` is 20,344 bytes, and for all that 20 kB of space, it's sole job is this:
+There's also one other scenario it can't help. Though, I don't think **anyone** can help fix this one, since it's an explicit choice Microsoft has made. Microsoft's ABI requirements are so painfully restrictive that they not only require backwards compatibility (old symbols need to be present and retain the same behavior), but forward compatibility (you can downgrade the library and "strip" new symbols, and **newly built** code must still work with the downgraded shared library). The solution that the Microsoft STL has adopted is on top of having files like `msvcp140.dll`, whenever they need to break something they ship an entirely new DLL instead, even if it contains literally only a single object such as `msvc140p_atomic_wait.dll`, `msvc140p_1.dll`, and `msvc140p_2.dll`. Some of them contain almost no symbols at all, and now that they are shipped nothing can be added or removed to that list of symbols lest you break a new application that has it's DLL swapped out with an older version somewhere. Poor `msvcp140_codecvt_ids.dll` is 20,344 bytes, and for all that 20 kB of space, its sole job is this:
 
 ```s
 Microsoft (R) COFF/PE Dumper Version 14.31.31104.0
