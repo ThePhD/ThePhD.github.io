@@ -174,7 +174,7 @@ do_stuff:
 	ret
 ```
 
-... Oof. That's a LOT of changes. We see **both** `rsi` and `rdi` being used, we're using a `cmp` (compare) on `rsi` and `rdi`, and we're using a Subtract with Borrow (`sbb`) to get the right computation into the `rcx` register. Not only that, but instead of just using the `rax` register for the return (from `cmovl`), we're **also** appying that do the `rdx` register too (with a similar `cmovl`). So there's an expectation of 2 registers containing the return value, not just one! So we've clearly got two different expectations for each set of functions. But... well, I mean, come on.
+... Oof. That's a LOT of changes. We see **both** `rsi` and `rdi` being used, we're using a `cmp` (compare) on `rsi` and `rdi`, and we're using a Subtract with Borrow (`sbb`) to get the right computation into the `rcx` register. Not only that, but instead of just using the `rax` register for the return (from `cmovl`), we're **also** applying that to the `rdx` register too (with a similar `cmovl`). So there's an expectation of 2 registers containing the return value, not just one! So we've clearly got two different expectations for each set of functions. But... well, I mean, come on.
 
 Can it **really** break?
 
