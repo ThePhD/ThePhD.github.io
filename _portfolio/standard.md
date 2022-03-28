@@ -20,9 +20,10 @@ C++       | p2513: `char8_t` Compatibility and Portability Fixes | [Published](h
 C         | n2901: Transparent Function Aliases | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2901.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Function%20Aliases.html)
 C         | n2902: Restartable and Non-Restartable Functions for Efficient Character Conversions | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2902.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
 C         | n2903: Modern Bit Utilities | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2903.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Modern%20Bit%20Utilities.html)
-C         | n2904: Enhanced Enumerations | [Not Yet Published]((http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2904.htm)) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Enhanced%20Enumerations.html)
-C         | n2908: Improved Normal Enumerations | [Not Yet Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2908.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20Normal%20Enumerations.html)
+C         | n2904: Enhanced Enumerations | [Published]((http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2904.htm)) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Enhanced%20Enumerations.html)
+C         | n2908: Improved Normal Enumerations | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2908.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20Normal%20Enumerations.html)
 C         | n29XX: Literal Suffixes for `size_t` | [Not Yet Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n29XX.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
+C         | n29XX: `__supports_literal` | [Not Yet Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n29XX.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__supports_literal.html)
 
 
 ### Approved Proposals:

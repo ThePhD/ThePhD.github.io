@@ -151,7 +151,7 @@ As a minor side fix, a smaller change that came along for the ride was that prov
 
 # Consistent, Warningless, and Intuitive Initialization with `= {}`
 
-*Document Number: [N2900](www.open-std.org/jtc1/sc22/wg14/www/docs/n2900.htm)*
+*Document Number: [N2900](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2900.htm)*
 
 Initialization, even in C, is harder than it should be. Many people have been burned by simply putting a semicolon after their struct and forgetting to properly initialize it (or a part of it) before use. And worse, as more security-focused individuals discovered and continue to battle with, `= {0}` and similar braced or designated initialization for automatic storage duration variable does not require that padding bits / bytes be initialized to 0. This has been a constant source of accidental data leakage in security-critical contexts, including the kernel.
 
