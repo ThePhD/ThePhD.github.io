@@ -191,3 +191,5 @@ Nevertheless, I cannot exactly go screaming ahead with `std::embed`. There are s
 is a story for another time!
 
 Catch you on the flip side. 💚
+
+{% include anchors.html %}

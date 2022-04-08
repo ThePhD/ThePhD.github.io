@@ -194,3 +194,5 @@ is something I'll tell you about a little later.~
 Take care, out there! 💚
 
 <sub>— [Title Photo](https://www.pexels.com/photo/brown-cat-with-green-eyes-617278/) by [Kelvin Valerio](https://www.pexels.com/@kelvin809), from Pexels.</sub>
+
+{% include anchors.html %}

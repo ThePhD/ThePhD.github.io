@@ -76,3 +76,5 @@ To those who messaged me. And, specifically, to the Y.G. Senior Embedded Develop
 And You're Great.
 
 Even when you're just in tiny cute e-mail 📧 form. 💚
+
+{% include anchors.html %}

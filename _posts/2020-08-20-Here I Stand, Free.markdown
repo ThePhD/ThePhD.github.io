@@ -273,3 +273,5 @@ I am freestanding.
 And I hope you are too, dear reader.
 
 Until next time. 💚
+
+{% include anchors.html %}

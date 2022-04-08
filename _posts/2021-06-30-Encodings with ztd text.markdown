@@ -536,3 +536,5 @@ then because I did it with my own two hands. 💚
 [![A picture of the ztd.text documentation containing the anarchist flag.](/assets/img/2021/06/ztd.text.png)](https://ztdtext.readthedocs.io/en/latest/design/lucky%207.html#first-principles-lucky-7-and-a-liberation-first-design)
 
 <sub><sub>P.S. There will be more posts about ztd.text and all the cool things that can be done with it!! I just had to get all this off my chest, FINALLY.</sub></sub>
+
+{% include anchors.html %}

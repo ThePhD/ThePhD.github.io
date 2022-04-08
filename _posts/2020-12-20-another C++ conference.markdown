@@ -231,3 +231,5 @@ We will be excluding knee pancakes like _you_ and Anon Anon, though!
 We'll build something, for the good folk. There will be a place where we focus on the technology, and worry only about the content of our characters. We're going to get there. I'm going to make a comfortable conference, surrounded by a strong policy for equitable and fair treatment that Boost and its peers have failed to live up to.
 
 See you at the CoSy-est conference of 2021. 💚
+
+{% include anchors.html %}

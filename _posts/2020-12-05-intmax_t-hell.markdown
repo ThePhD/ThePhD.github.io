@@ -276,3 +276,4 @@ Obviously. 💚
 
 <sub>Modified Title Photo by [Joy Marino](https://www.pexels.com/@joymarino?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) from [Pexels](https://www.pexels.com/photo/woman-wears-black-sleeveless-top-3052651/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)</sub>
 
+{% include anchors.html %}

@@ -103,3 +103,5 @@ If you have any questions, feel free to reach out to myself + other helpful folk
 I'll see you in the next post!
 
 Ta-ta for now. 💚
+
+{% include anchors.html %}

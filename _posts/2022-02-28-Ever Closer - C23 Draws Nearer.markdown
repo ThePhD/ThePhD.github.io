@@ -203,7 +203,7 @@ This is best illustrated by Kate's maliciously conforming TenDRA compiler, which
 >
 > — [Kate (@thingskatedid), August 13th, 2020](https://twitter.com/thingskatedid/status/1293780146663518208)
 
-Now, I say "malicious", but as evidenced by the tweet from Scott earlier we know that there exist implementations where writing to all-bits-zero doesn't necessarily produce a failure or fault. This is because there are many tiny devices and embedded scenarios where literal all-bits-zero points to a **real** address used for things. For example, all-bits-zero tends to be a semi-popular location to put the bootloader, and it's where a lot of devices will write to while the actual bit-for-bit representation of `NULL` will instead besomething like `0xFFFFFFFF`.
+Now, I say "malicious", but as evidenced by the tweet from Scott earlier we know that there exist implementations where writing to all-bits-zero doesn't necessarily produce a failure or fault. This is because there are many tiny devices and embedded scenarios where literal all-bits-zero points to a **real** address used for things. For example, all-bits-zero tends to be a semi-popular location to put the bootloader, and it's where a lot of devices will write to while the actual bit-for-bit representation of `NULL` will instead be something like `0xFFFFFFFF`.
 
 All this to say, given a structure that looks like this:
 
