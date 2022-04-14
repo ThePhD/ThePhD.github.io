@@ -12,19 +12,20 @@ I have quite a few C++ proposals I am working on and percolating through the C++
 
 ### Actively Pursued Evolution Proposals:
 
-C++       | p1040: std::embed | [Published](https://wg21.link/p1040) | [Latest Draft](/_vendor/future_cxx/papers/d1040.html)
-C++       | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/_vendor/future_cxx/papers/d1629.html)
-C++       | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/_vendor/future_cxx/papers/d1664.html)
-C++ and C | p1967 + n2898: Preprocessor embed - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed.html)
-C++       | p2513: `char8_t` Compatibility and Portability Fixes | [Published](https://wg21.link/p2513) | [Latest Draft](/_vendor/future_cxx/papers/d2513.html)
-C         | n2901: Transparent Function Aliases | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2901.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Function%20Aliases.html)
-C         | n2902: Restartable and Non-Restartable Functions for Efficient Character Conversions | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2902.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
-C         | n2903: Modern Bit Utilities | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2903.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Modern%20Bit%20Utilities.html)
-C         | n2904: Enhanced Enumerations | [Published]((http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2904.htm)) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Enhanced%20Enumerations.html)
-C         | n2908: Improved Normal Enumerations | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2908.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20Normal%20Enumerations.html)
-C         | n29XX: Literal Suffixes for `size_t` | [Not Yet Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n29XX.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
-C         | n29XX: `__supports_literal` | [Not Yet Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n29XX.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__supports_literal.html)
-C         | n29XX: Prefixes for the Standard Library | [Not Yet Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n29XX.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Prefixes%20for%20the%20Standard%20Library.html)
+C++ | p1040: std::embed | [Published](https://wg21.link/p1040) | [Latest Draft](/_vendor/future_cxx/papers/d1040.html)
+C++ | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/_vendor/future_cxx/papers/d1629.html)
+C++ | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/_vendor/future_cxx/papers/d1664.html)
+C++ | p1967: Preprocessor embed - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/_vendor/future_cxx/papers/d1967.html)
+C++ | p2513: `char8_t` Compatibility and Portability Fixes | [Published](https://wg21.link/p2513) | [Latest Draft](/_vendor/future_cxx/papers/d2513.html)
+C   | n2961: Literal Suffixes for `size_t` | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2961.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
+C   | n2962: `__supports_literal` | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2962.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__supports_literal.html)
+C   | n2963: Enhanced Enumerations | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2963.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Enhanced%20Enumerations.html)
+C   | n2964: Improved Normal Enumerations | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2964.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20Normal%20Enumerations.html)
+C   | n2965: Modern Bit Utilities | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2965.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Modern%20Bit%20Utilities.html)
+C   | n2966: Restartable and Non-Restartable Functions for Efficient Character Conversions | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2966.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
+C   | n2967: Preprocessor embed - Binary Resource Inclusion | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2967.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed.html)
+C   | n2968: Prefixes for the Standard Library | [Published](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2968.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Prefixes%20for%20the%20Standard%20Library.html)
+C   | n29XX: Transparent Function Aliases | [Published (Old)](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2901.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Function%20Aliases.html)
 
 
 ### Approved Proposals:
