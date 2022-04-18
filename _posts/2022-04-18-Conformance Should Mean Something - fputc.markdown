@@ -105,7 +105,7 @@ What I discovered was a little more than worrying.
 
 Not only have implementations been playing with the values when serialized into streams, it was considered ubiquitous practice on embedded chips and for strange implementations of the chip's C Standard Library, including [TI's Run-time Support Library (PDF)](https://www.ti.com/lit/an/spra757/spra757.pdf) for 2 decades and running. I got a hold of some of the folk who worked on these chips and their C library and compilers, and they confirmed that the fears presented in the linked  PDF, like "`fwrite` truncates data to 8 bits", was the real deal. Both customers of various other embedded chipsets and DSPs also reached out to me, confirming this behavior was not just niche, but prevalent in embedded programming for **decades** now.
 
-`fwrite` was, in fact, taking this code snippet:
+Some implementations were, in fact, taking this code snippet:
 
 ```cpp
 #include <stdio.h>
