@@ -333,3 +333,5 @@ and may it bring comfort to your hearts. 💚
 
 
 P.S.: With my Greatest Thanks to the talented and wonderful artist Anett ([@WusdisWusdat](https://twitter.com/WusdisWusdat)), whose terrifying art brought a tangible form to this lingering, festering psychological plague inflicted upon me and let me face up to what had been done. [Buy her a coffee, y'all](https://www.buymeacoffee.com/WusdisWusdat), or just pay for a slice of her pretty amazing artwork.
+
+{% include anchors.html %}
