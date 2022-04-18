@@ -8,7 +8,7 @@ tags: [C, Standard]
 excerpt_separator: <!--more-->
 ---
 
-There is a slow-bubbling agony in my soul about this. Not because it's actually critically important or necessary but because it once again completely defies the logic of having a C Standard, a C Standard Library, or enganging in the concept of trying to "conform" to such any kind of specification. So, as per usual, I must write about it to get it out of my head:<!--more--> we need to talk about `fputc`. And, by consequence, all of the other core I/O functions in C implementations.
+There is a slow-bubbling agony in my soul about this. Not because it's actually critically important or necessary but because it once again completely defies the logic of having a C Standard, a C Standard Library, or engaging in the concept of trying to "conform" to such any kind of specification. So, as per usual, I must write about it to get it out of my head:<!--more--> we need to talk about `fputc`. And, by consequence, all of the other core I/O functions in C implementations.
 
 
 
@@ -31,7 +31,7 @@ int main () {
 	if (cwritten != cread) {
 		ret = 1;
 	}
-	else if (c != cread {
+	else if (c != cread) {
 		ret = 2;
 	}
 	fclose(f);
@@ -39,7 +39,7 @@ int main () {
 }
 ```
 
-On 90% of most end-user facing machines, where `CHAR_BIT` — the definition of how many bits are within a single `char`, `signed char`, or `unsigned char` type — is 8, this code is nothing special. But, as the example hints at with the comment, what happens when you go above the minimum-allotted size of 8 and have a `CHAR_BIT` that is either 16 or 32?
+On 90% of most end-user facing machines, where `CHAR_BIT` — the definition of how many bits are within a single `char`, `signed char`, or `unsigned char` object — is 8, this code is nothing special. But, as the example hints at with the comment, there's more to think about. What happens when you go above the minimum-allotted size of 8 and have a `CHAR_BIT` that is either 16 or 32?
 
 I believed that is should just write out the whole value of `c`. So with `CHAR_BIT == 16`, I would end up with 16 bits in my file and the value should be `UCHAR_MAX`, or the usual 65,535. No matter what happens, `cwritten` and `cread` should both be identical. That's covered by the fact that `fputc` always returns what it wrote to the file, and `fgetc` must always pull out the data that was written to a file. Both of these things are guaranteed by the C Standard, very explicitly and clearly, so `ret` will never be `1`. This leaves the second case: if `cread` == `cwritten`, then we only need to check if `c` is equal to one of them, not both. So, we ask the question: is `cread` the same as `c`, the value we stored in the file?
 
@@ -121,7 +121,7 @@ int main () {
 	if (cwritten != cread) {
 		ret = 1;
 	}
-	else if (c != cread {
+	else if (c != cread) {
 		ret = 2;
 	}
 	fclose(f);
@@ -131,7 +131,7 @@ int main () {
 
 and returning `2` like it was just the way things should be done.
 
-"This can't be standards-conforming!", I thought to myself. But these people — and these users — have been doing this for **over twenty years**. Assuredly, they spot-checked themselves and the standard before deciding they were just gonna do some particularly heinous things like "if you write data to a file on my chip, nothing in the standard stops me from performing a last-minute truncation of your data and writing out only 8 bits of your 16 bit or 32 bit `unsigned char`, and I will also do this to every `unsigned char` in your big fata data array too, sucker". I may be the C Project Editor, but I'm still a baby: assuredly, these industrial titans who came many, many years before me and, in some cases, programming before I was born had a better grasp of what was going on. When I publicly lamented, I was told that I shouldn't give these rabble-rousing implementations like TI a second thought, including by the developer of the popular musl-libc:
+"This can't be standards-conforming!", I thought to myself. But these people — and these users — have been doing this for **over twenty years**. Assuredly, they spot-checked themselves and the standard before deciding they were just gonna do some particularly heinous things like "if you write data to a file on my chip, nothing in the standard stops me from performing a last-minute truncation of your data and writing out only 8 bits of your 16 bit or 32 bit `unsigned char`, and I will also do this to every `unsigned char` in your big fata data array too, sucker". I may be the C Project Editor, but I'm still a baby: assuredly, these industrial titans who came many, many years before me and, in some cases, programming before I was born had a better grasp of what was going on. When I publicly lamented, I was told that I shouldn't give these rabble-rousing implementations like TI a second thought, including by the developer of the popular and well-maintained musl-libc:
 
 > If that's the case then you should be asking if it's legal, and if not why, rather than insisting it is and making up allowances to redefine things to make it so. As a starting point you need to understand that the C specification is not written in a rigorous language. It relies on making sense of natural language to draw any conclusions from it. If you insist that means you can just interpret it however you want, ...
 >
@@ -141,16 +141,16 @@ and returning `2` like it was just the way things should be done.
 
 I calmed myself down a little bit, after that. I mean, the guy ships **musl libc**, the preeminent reimplementation of the C Standard Library outside of glibc. Clearly, he's got a handle on it, and I shouldn't be worried about it, right?
 
-That happened in October. But... I still couldn't quite sleep. After all, something didn't sit right with me from the DMs and e-mails I received from other implementers who believed they **were** correct in their behavior. And what struck me most was the **way** they explained themselves.
+That happened in October. But... I still couldn't quite sleep right. After all, something didn't sit right with me from the DMs and e-mails I received from other implementers and end-users who believed this **was** the correct behavior. And what struck me most was the **way** they explained themselves.
 
 
 
 
 # Weasel Words
 
-Before we get into this, there are going to be real commercial and non-commercial implementations spoken about here. Almost all of them will be what are called "freestanding" implementations of the C Standard. A freestanding implementation is, informally, considered an implementation without a "host" (usually, an Operating System). It's fairly akin to what you get with `--bare-metal` flags or `-ffreestanding`, and _somewhat_ related to what comes out on the other side with Microsoft's Kernel-development flags. You know you're in "freestanding" mode by checking the `__STDC_HOSTED__` macro. It's 1 when you're on a "normal" implementation, and 0 when you're in ~~Hell~~ bare-metal mode or whatever the implementations are calling it these days.
+Before we get into this, there are going to be real commercial and non-commercial implementations spoken about here. Almost all of are special kinds of C implementations called "freestanding" implementations. A freestanding implementation is, informally, considered an implementation without a "host" (usually, an Operating System). It's fairly akin to what you get with `--bare-metal` flags or `-ffreestanding`, and _somewhat_ related to what comes out on the other side with Microsoft's Kernel-development flags. You know you're in "freestanding" mode by checking the `__STDC_HOSTED__` macro. It's 1 when you're on a "normal" implementation, and 0 when you're in ~~Hell~~ bare-metal mode or whatever the implementations are calling it these days.
 
-When I first reached out to a handful of implementations, almost ALL of them had the same disclaimer placed at the top of their e-mail (so much so that I actually wondered if they were coordinating together; they weren't, but it was still eerie to get the same "waiver" of responsibility). This is a paraphrasing, put in a block quote so you can read it in a voice that's not mine:
+When I first reached out to a handful of implementations, almost ALL of them had the same disclaimer placed at the top of their e-mail (so much so that I actually wondered if they were coordinating together; they weren't, but it was still eerie to get the same "waiver" of responsibility). This is a paraphrasing, but it is put in a block quote so you can read it in a voice that's not mine:
 
 > `fread` is not part of freestanding C, and we ship a freestanding implementation, so we can do whatever we want to the I/O functions. Sorry!
 
@@ -182,7 +182,7 @@ Some of the implementers and end-users were remorseful: they wouldn't mind the b
 
 Which — and excuse my French here, I do apologize for this one, but sometimes these words are just plain necessary — blew my **fucking** mind.
 
-No way this kind of narrow, clinching definition of `character` was allowed to be used in this way. And I was furious that it could be implied so, especially for a binary stream. §7.21.2 Streams, one parapgrah reads:
+No way this kind of narrow, clinching definition of `character` was allowed to be used in this way. And I was furious that it could be implied so, especially for a binary stream. §7.21.2 Streams, one paragraph reads:
 
 > A binary stream is an ordered sequence of characters that can transparently record internal data. Data read in from a binary stream shall compare equal to the data that were earlier written out to that stream, under the same implementation. Such a stream may, however, have an implementation- defined number of null characters appended to the end of the stream.
 >
@@ -201,7 +201,7 @@ int main () {
 }
 ```
 
-to demand that `c` is the same as `cwritten` (what is written is identical to what shall be returned, if there are no errors), implementations are free to do whatever they want. I was not the only one to notice this weasel-y reasoning in the standard, of course: someone else involved with MISRA and involved in the WG14 — Working Group 14, the C Standards Committee — pointed this out to me in both an e-mail long before this popped up, and many years later it popped up again. It turns out this person had already climbed the ladder, asking that the Commmittee make a more formal definition of character so there's less room to play these kinds of games in the standard wording. And, uh, unfortunately...
+to demand that `c` is the same as `cwritten` (what is written is identical to what shall be returned, if there are no errors), implementations are free to do whatever they want. I was not the only one to notice this weasel-y reasoning in the standard, of course: someone else involved the WG14 — Working Group 14, the C Standards Committee — pointed this out to me in both an e-mail long before this popped up while I was working on [Unicode Functions for C](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2966.htm), and many years later it popped up again. It turns out this person had already climbed the ladder, asking that the Committee make a more formal definition of character so there's less room to play these kinds of games in the standard wording. And, uh, unfortunately...
 
 
 
@@ -225,7 +225,7 @@ The plot got thicker here for me, because I didn't know someone else was concern
 >
 > — [§3.7 and 3.7.1, N2731 Working Draft ISO/IEC 9899:202x, October 2021](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2731.pdf)
 
-So a good fix would be to carefully annotate whether someone meant "abstract character", a "single byte", a "code unit", and so on and so forth. This would make it better to handle cases like this and others in the standard, and to at the very least make "character" a distinct Word of Power with a more precise definition (like matching it more directly to mean "*character type*" or something more formal). But in a little twist that I was not fully prepared for in this story, they were told it was left *intentionally non-italicized and not strictly defined so people could wiggle within the definition*. … Ah.
+So a good fix would be to carefully annotate whether someone meant "abstract character", a "single byte", a "code unit", and so on and so forth. This would make it better to handle cases like this and others in the standard, and to at the very least make "character" a distinct Word of Power with a more precise definition (like matching it more directly to mean "*character type*" or something more formal). It would also help in this case: if we meant "abstract character", then it didn't matter what "transparently" meant in the previous wording because an implementation could do whatever they want (the input represents an "abstract character"). But, if they meant the bit representation that fits in a single byte — a single `unsigned char`, even! — then this would help us close the loop. But in a little twist that I was not fully prepared for in this story, they were told it was left *intentionally not strictly defined so people could wiggle within the definition*. … Ah.
 
 …
 
@@ -236,7 +236,7 @@ So a good fix would be to carefully annotate whether someone meant "abstract cha
 
 # Hm.
 
-That's not really all that comforting. So, still troubled by this, even after my brief interaction with the musl-libc maintainer, I decided to do what I do best: keep digging so I can get a definitive answer:
+That's not really all that comforting. It means that the people using the not-explicitly-specified transitive property of what is passed in after conversion to `unsigned char` to what ends being read from the file later, by the "same implementation", may be entitled to do that transformation during a binary stream. So long as they return the "character that is written", they consider themselves to be doing what they think is correct. This still brings up what the hell "transparently" means to the people operating under such an assumption, but that's English prose and not a strict definition. We would once again at the mercy of interpretation even if we *do* whip out the Merriam-Webster's Dictionary. So, still troubled by this, even after my brief interaction with the musl-libc maintainer, I decided to do what I do best: keep digging so I can get a definitive answer:
 
 ![A screenshot of an e-mail whose subject line reads: "[ Conformance ] fwrite/fputc, "character", and binary streams"](/assets/img/2022/04/fputc-e-mail.png)
 
@@ -258,28 +258,46 @@ Well, that's okay, because I'm not one to just sit on my hands no matter how muc
 
 there was not consensus.
 
-It wasn't even like there was a tiny, itty bitty holdout against the general consensus. It was an **alarmingly** split room, nearly half-and-half, which I suspect only wasn't half-and-half because there apparently was an uneven number and **someone** had to break the tie. And this is where I begin to take issue with Rich Felker's designated approach to reading and understanding the C Standard.
+It wasn't even like there was a tiny, itty bitty holdout against the general consensus. It was an **alarmingly** split room, supposedly near half-and-half, which I suspect only wasn't half-and-half because there apparently was an uneven number and **someone** had to break the tie. This is deeply concerning that the body responsible for figuring out the dusty corners of the C standard and guaranteeing portable behavior are not sure if (a) they like what the code snippet implies and (b) whether or not they should reach in and do something about it. They're sort of on top of moving the needle to make sure we are writing high-quality code that can stand the test of time, and "`fwrite` may not portably do what you want and you need to write a wrapper function before using it every time" needs to be something they should be keen on agreeing on before we can move forward with using basic file abstractions for C. Of course, this is the human-based, common, and shared understanding I was being told about before that would lead us to Nirvana, and what I'm unfortunately finding is that it's not actually all that bound together in harmony.
+
+Which, unfortunately, is where I begin to take issue with Rich Felker's designated approach to reading and understanding the C Standard.
 
 
 
 
 # I Do Not Program on ✨ Vibes ✨
 
-"Human consensus" is, exactly that, human. I was agitated and pushing to place more normative wording and additional examples in the C Standard because it was extremely obvious at this point that people **are** leaning on this behavior and snowballing existing practice to make this kind of behavior for `fwrite`/`fputc` be considered standards-conforming behavior. We can call it "TI's jank non-conforming verison of C" all we like, at the end of the day what matters is that there's consistent and clear rules. It would be one thing if someone was just inventing Death Station 9000, but the fact that multiple developers have reported "yeah, I had to program around that, I just assumed it was allowed there" should be enough of an indicator that this is something that needs to be addressed by the humans in the room. You cannot simply toke on your pipe and casually observe and conclude that it is reasonable that no implementation should behave this way when there are, in fact, implementations behaving that way, calling themselves conforming, and have a significant chunk of embedded developers taking them up on that proposition.
+"Human consensus" is, exactly that, human. I was agitated and pushing to place more normative wording and additional examples in the C Standard because it was extremely obvious at this point that people **are** leaning on this behavior and snowballing existing practice to make this kind of behavior for `fwrite`/`fputc` be considered standards-conforming behavior. We can call it "TI's non-conforming version of not-C" or "Some DSP's not-libc" all we like, at the end of the day what matters is that there are implementations out there taking the name of POSIX and C functions and still advertising this as conforming behavior. It has leaked onto users, and those users are the ones who have to write backwards code to work on these devices, meaning that no matter the agreement I or Rich or MISRA comes to, implementations are doing what implementations have been known to do best since the EEE days of Microsoft: hold users hostage to non-portable behavior.
 
-There is no resolution to this. I have not written a paper, by the time this blog post goes out I still will not have been given a response (and at this point I don't want one, because this needs a formal paper trail now), and I do not expect MISRA to suddenly resolve the tension either with a supposed 50/50 split on the matter. I'm also not going to stop having a quiet, slow, internal scream about these matters.
+It would be one thing if someone was just inventing Death Station 9000, but the fact that multiple developers have reported "yeah, I had to program around that, I just assumed it was allowed there" should be enough of an indicator that this is something that needs to be addressed by the people in the driver's seat. You cannot simply toke on your pipe and casually observe and conclude that it is reasonable that no implementation should behave this way when there are, in fact, implementations behaving that way, calling themselves conforming, and have a significant chunk of embedded developers taking them up on that proposition.
+
+Unfortunately, I have (not yet) reached a resolution to this. I have not written a paper. By the time this blog post goes out, I still will not have been given a response (and at this point I don't want one, because this needs a formal paper trail now), and I do not expect MISRA to suddenly resolve the tension either with their supposed 50/50 split on the matter. I'm also not going to stop having a quiet, slow, internal scream about these matters either, and it might take me so long to write the next paper that C23 will ship with this as the status quo and it will have to be something to take care of for C2Y/C3a, whenever it comes out...
 
 <center>
-<img alt="An anthropomorphic, smol sheep in a robe and a scarf, with beady little eyes and down-turned ears going &quot;a&quot; with their mouth open in disbelieving, mostly quiet, shocked agony.." src="/assets/img/2022/04/a.png"/>
+<img alt="An anthropomorphic, smol sheep in a robe and a scarf, with beady little eyes and down-turned ears going &quot;a&quot; with their mouth open in disbelieving, mostly quiet, shocked agony." src="/assets/img/2022/04/a.png"/>
 </center>
 
-But, internal screaming aisde, these are moments the C Standards Committee were made for. When we need to resolve implementation tensions and make sure we give protable behavior to implementations which claim to implement our standard. Whether you believe all of those Digital Signal Processors, System-on-a-Chips, Microcontrollers and more are right to exercise their right to this interpretation or not, we should be clear that this interpretation is intended and give the end-users ways to know that much of the code they're written on "normal" implementations is compromised for these embedded environments and will do things like fundamentally shave off the high 8 / 24 bits of the 16 or 32-bit data arrays if they are not careful.
+a.
 
-Every single program which writes a whole data array to file or whatever else should not suddenly need to add special `#ifdef`'s around their code to work with what is fancied to be a conforming C implementation, freestanding or not. The human consensus is clearly not coming, and it's time for the Committee to step in so we can stop writing critical infrastructure and code on a pile of vibes.
+But, internal screaming aside, these are moments the C Standards Committee were made for. When we need to resolve implementation tensions and make sure we give portable behavior to end-users which claim to implement our standard. Whether you believe all of those Digital Signal Processors, System-on-a-Chips, Microcontrollers and more are right to exercise their right to this interpretation or not, we should be clear that this interpretation is intended and give the end-users ways to know that much of the code they're written on "normal" implementations is compromised for these embedded environments and will do things like fundamentally shave off the high 8 / 24 bits of the 16 or 32-bit data arrays if they are not careful. At the **very** least, our users deserve a `#define __STDC_LIB_IO_WRITE_WIDTH__ (some-number)` so they can do:
 
-I promise you, reader, I am going to get to the bottom of this. Either we get clear guidance and it is made clear in the Standard this was intended (even for `__STDC_HOSTED__ == 1` implementations), or we get clear guidance that this was never intended and that implementations have made a grave error. No matter which way we go,
+```cpp
+#include <limits.h>
+#include <stdio.h>
 
-Conformance to the C Standard should mean something: you've written a portable program whose semantics are respected by all implementations, and you deserve to have a program that won't start pattern-shaving off bits. 💚
+#if !defined(I_ACKNOWLEDGE_MY_PLATFORM_WILL_DO_INTERESTING_THINGS) \
+    || (I_ACKNOWLEDGE_MY_PLATFORM_WILL_DO_INTERESTING_THINGS == 0)
+
+static_assert(__STDC_LIB_IO_WRITE_WIDTH__ == CHAR_BIT, "this is one hell of a spicy implementation, tread with caution");
+
+#endif
+```
+
+But, my preferred solution would be to specify that data truncation is not a conforming trait, and force implementations - as TI has done - to document their choices and make that choice clear to end-users. Every single program which writes a whole data array to file or whatever else should not suddenly need to add special `#ifdef`'s around their code to work with what is fancied to be a conforming C implementation, freestanding or not. The human consensus is clearly not coming, and it's time for the Committee to step in so we can stop writing critical infrastructure and code on a pile of vibes.
+
+I promise you, Dear Reader, I am going to get to the bottom of this. Either we get clear guidance and it is made clear in the Standard this was intended (even for `__STDC_HOSTED__ == 1` implementations), or we get clear guidance that this was never intended and that implementations have made a grave error. No matter which way we go, if you've written a portable program whose semantics are respected by all implementations you deserve to have a program that won't start pattern-shaving off bits.
+
+Conformance to the C Standard should mean something. 💚
 
 <sub>Concerned face by <a href="https://tannibeanie.wordpress.com/about-2/">Tanni H.</a>, check them out, and e-mail them to commission them for stuff too!</sub> <sub>Smol, delicate 'a' drawn by <a href="https://twitter.com/framebuffer">Framebuffer</a>, go throw them some love too!</sub>
 
