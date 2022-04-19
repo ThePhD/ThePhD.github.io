@@ -8,7 +8,7 @@ tags: [C, Standard, Conformance]
 excerpt_separator: <!--more-->
 ---
 
-There is a slow-bubbling agony in my soul about this. Not because it's actually critically important or necessary but because it once again completely defies the logic of having a C Standard, a C Standard Library, or engaging in the concept of trying to "conform" to such any kind of specification. So, as per usual, I must write about it to get it out of my head:<!--more--> we need to talk about `fputc`. And, by consequence, all of the other core I/O functions in C implementations.
+There is a slow-bubbling agony in my soul about this. Not because it's actually critically important or necessary, but because it once again completely defies the logic of having a C Standard, a C Standard Library, or engaging in the concept of trying to "conform" to such. So, as per usual, I must write about it to get it out of my head:<!--more--> we need to talk about `fputc`. And, by consequence, all of the other core I/O functions in C implementations.
 
 
 
@@ -242,7 +242,7 @@ That's not really all that comforting. It means that the people using the not-ex
 
 As per usual, the rules are clear that I can't share what was said on the C Standard mailing list (it's okay to share the title and stuff because it's **my** e-mail, and I consent to myself sharing my own stuff, obviously). But in this case, it doesn't even matter if I can or can't share what was or was not said on the reflector: similar to when I sent my first ever e-mail to the C++ Committee E-mail List [about `std::optional`](/to-bind-and-loose-a-reference-optional#a-deafening-silence), I was met with one thing and one thing only.
 
-[🔇 Silence! (Sound warning.)](https://static.wikia.nocookie.net/dota2_gamepedia/images/7/73/Weapons_silence.mp3/revision/latest).
+[🔇 Silence! (Sound warning.)](/assets/snd/Silence.mp3).
 
 But, hey, maybe I'm being unreasonable! I asked a few people to see if the e-mail was sent out, and — just like the C++ optional shenanigans — it was confirmed I had sent the e-mail out, and that people got it, and that it hadn't just been lost to The Software Stack Vortex™. And so I just sort of left the problem alone. Assuredly, someone would get back to me, soon, like within, say, maybe...
 
