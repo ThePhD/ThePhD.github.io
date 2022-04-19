@@ -52,7 +52,7 @@ Before we get into the standard, you should know upfront that there are a lot of
 
 It's a little bit weird, but yes: existing implementations of the C Standard Library — multiple, in fact — believe the answer is "no", that this program CAN return `2`, and that it's legal and right to be able to do so. This was part of my foray into many of the C and POSIX APIs, their specifications, and what they do and don't guarantee to the end-user. This one came as the biggest blow, because this throws into question much of what is and is not guaranteed by the C Standard, and whether or not we end up with **truly** portable code, or we're all just flying by the seat of our pants like Fabian makes so clear in this extremely and painfully correct pet peeve explainer:
 
-> Pet peeve: code chock full of #ifdefs is \_not\_ "portable code". It is, at best, code that's been ported a lot. There's a big difference.
+> Pet peeve: code chock full of `#ifdefs` is \_not\_ "portable code". It is, at best, code that's been ported a lot. There's a big difference.
 >
 > the parts of your code that have platform `#ifdefs` are, by definition, exactly the parts that are \_not\_ portable
 >
@@ -188,7 +188,7 @@ No way this kind of narrow, clinching definition of `character` was allowed to b
 >
 > — [§7.21.2 Streams ¶3, N2731 Working Draft ISO/IEC 9899:202x, October 2021](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2731.pdf)
 
-It has "transparently" right in the wording, assuredly that's enough. But, the only hard requirement is that data read from a binary stream must compare equal to the data written earlier to the stream, under the same implementation. Remember that `fputc` returns the "character that was written", so if a change happens *just before the write* (after the conversion to `unsigned char`), well. As long as you define "character" to mean whatever you want to here, that's just the way you can get the behavior in. Which, honestly, is deeply concern. Because there is no explicit mandate for this code snippet:
+It has "transparently" right in the wording, assuredly that's enough. But, the only hard requirement is that data read from a binary stream must compare equal to the data written earlier to the stream, under the same implementation. Remember that `fputc` returns the "character that was written", so if a change happens *just before the write* (after the conversion to `unsigned char`), well. As long as you define "character" to mean whatever you want to here, that's just the way you can get the behavior in. Which, honestly, is deeply concerning. There is no explicit mandate for this code snippet:
 
 ```cpp
 #include <stdio.h>
@@ -201,7 +201,7 @@ int main () {
 }
 ```
 
-to demand that `c` is the same as `cwritten` (what is written is identical to what shall be returned, if there are no errors), implementations are free to do whatever they want. I was not the only one to notice this weasel-y reasoning in the standard, of course: someone else involved the WG14 — Working Group 14, the C Standards Committee — pointed this out to me in both an e-mail long before this popped up while I was working on [Unicode Functions for C](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2966.htm), and many years later it popped up again. It turns out this person had already climbed the ladder, asking that the Committee make a more formal definition of character so there's less room to play these kinds of games in the standard wording. And, uh, unfortunately...
+to demand that `c` is the same as `cwritten` (what is written is identical to what shall be returned, if there are no errors). Apparently, implementations are free to do whatever they want. I was not the only one to notice this weasel-y reasoning in the standard, of course: someone else involved the WG14 — Working Group 14, the C Standards Committee — pointed this out to me in both an e-mail long before this popped up while I was working on [Unicode Functions for C](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2966.htm), and many years later it popped up again. It turns out this person had already climbed the ladder, asking that the Committee make a more formal definition of character so there's less room to play these kinds of games in the standard wording. And, uh, unfortunately...
 
 
 
@@ -236,7 +236,7 @@ So a good fix would be to carefully annotate whether someone meant "abstract cha
 
 # Hm.
 
-That's not really all that comforting. It means that the people using the not-explicitly-specified transitive property of what is passed in after conversion to `unsigned char` to what ends being read from the file later, by the "same implementation", may be entitled to do that transformation during a binary stream. So long as they return the "character that is written", they consider themselves to be doing what they think is correct. This still brings up what the hell "transparently" means to the people operating under such an assumption, but that's English prose and not a strict definition. We would once again at the mercy of interpretation even if we *do* whip out the Merriam-Webster's Dictionary. So, still troubled by this, even after my brief interaction with the musl-libc maintainer, I decided to do what I do best: keep digging so I can get a definitive answer:
+That's not really all that comforting. It means that the people using the not-explicitly-specified transitive property of what is passed in after conversion to `unsigned char` to what ends being read from the file later, by the "same implementation", may be entitled to do that transformation during a binary stream. So long as they return the "character that is written", they consider themselves to be doing what they think is correct. This still brings up what the hell "transparently" means to the people operating under such an assumption, but that's English prose and not a strict definition. We are once again at the mercy of this weird interpretation, even if we *do* whip out the Merriam-Webster's Dictionary. So, still troubled by this, even after my brief interaction with the musl-libc maintainer, I decided to do what I do best! That is, I kept digging so I could get a definitive answer:
 
 ![A screenshot of an e-mail whose subject line reads: "[ Conformance ] fwrite/fputc, "character", and binary streams"](/assets/img/2022/04/fputc-e-mail.png)
 
@@ -286,9 +286,10 @@ But, internal screaming aside, these are moments the C Standards Committee were 
 #include <stdio.h>
 
 #if !defined(I_ACKNOWLEDGE_MY_PLATFORM_WILL_DO_INTERESTING_THINGS) \
-    || (I_ACKNOWLEDGE_MY_PLATFORM_WILL_DO_INTERESTING_THINGS == 0)
+	|| (I_ACKNOWLEDGE_MY_PLATFORM_WILL_DO_INTERESTING_THINGS == 0)
 
-static_assert(__STDC_LIB_IO_WRITE_WIDTH__ == CHAR_BIT, "this is one hell of a spicy implementation, tread with caution");
+static_assert(__STDC_LIB_IO_WRITE_WIDTH__ == CHAR_BIT,
+	"this is one hell of a spicy implementation, tread with caution");
 
 #endif
 ```
