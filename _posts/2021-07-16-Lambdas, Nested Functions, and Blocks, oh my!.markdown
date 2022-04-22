@@ -4,7 +4,7 @@ title: Lambdas, Nested Functions, and Blocks, oh my!
 permalink: /lambdas-nested-functions-block-expressions-oh-my
 feature-img: "/assets/img/2021/07/nest.jpg"
 thumbnail: "/assets/img/2021/07/nest.jpg"
-tags: [C, C++, Functions, Lambdas, Motivation, 📜]
+tags: [ABI, C, C++, Functions, Lambdas, Motivation, 📜]
 excerpt_separator: <!--more-->
 ---
 
