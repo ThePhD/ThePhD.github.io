@@ -12,7 +12,7 @@ The C Meeting has ended officially as of like less than 2 hours ago. I will writ
 
 N2654 is Melanie Blower's paper for `#elifdef` and `#elifndef`, a long-standing hole in the preprocessor and a constant consistency footgun. Even I experienced this pain, and I was grateful to see Melanie put it forward. We don't often get to do simple things, so Melanie is doing the Lord's Work, here.
 
-I took to Twitter on Monday and wanted to [shout OUT to the very FIRMAMENT of HEAVEN](https://twitter.com/__phantomderp/status/1368972508817395728) about what happened, but ISO and its various sub/working-groups have rules. So I specifically can't reveal anything until the actual adjournment of the meeting. But the meeting is over now so, let's get right to it:
+I took to Twitter on Monday and wanted to shout OUT to the very FIRMAMENT of HEAVEN about what happened, but ISO and its various sub/working-groups have rules. So I specifically can't reveal anything until the actual adjournment of the meeting. But the meeting is over now so, let's get right to it:
 
 
 
