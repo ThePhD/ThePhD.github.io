@@ -34,7 +34,7 @@ The problem begins when you're dealing with ranges and generic code. With a meth
 > 
 > For splitting a string, this means we get a range of `subrange<string::iterator>` where we might wish we got a `span<char const>` or a `string_view` …
 >
-> — [P2210, §3.1 "What should the reference type be?"](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2021/p2210r2.html#what-should-the-reference-type-of-this-be)
+> — [P2210, §3.1 "What should the reference type be?"](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2021/p2210r2.html#what-should-the-reference-type-of-this-be)
 
 But, he provides no solution and opts out of trying to make a special reference type, or special-casing `char` specifically in the backing `split_view<…>::iterator` code. This is a good API design choice, but that still leaves the user holding the bag here. If someone uses a `std::string_view`, they should get out a `std::string_view` from their split algorithm. Similarly, if someone puts a `std::span<char>` in, they should get a `std::span<char>` out. And so-on, and so forth. If you've been reading my blog for a long time now (or just clicked on the very first link in this blog post), you'll know that I already have a functional solution to this problem! That's right, it's:
 

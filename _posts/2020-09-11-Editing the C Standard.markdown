@@ -65,7 +65,7 @@ There's also the use of `latexdiff` and other things to produce nice diffmarks. 
 
 # Applying Your Paper to the Standard
 
-Sweet, You Wrote a [Sick-Nasty Rad Paper](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2335.pdf) And Now It Needs To Be Put In The C Standard! So, how does it get there? Well, you don't actually write a diff to the standard. At least, not a _real_ diff: the sources to the C standard are hidden from the world to keep them safe, even when the time of Darkness descends upon us. What you write are _instructions to the project editor_ (Hi, That's Me!), and then I take your instructions and do my Best Effort™ to reflect them in the C Standard. Most of the wording gets approved by the Committee before-hand, and the edits are usually straightforward and simple. [For example](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2517.pdf):
+Sweet, You Wrote a [Sick-Nasty Rad Paper](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2335.pdf) And Now It Needs To Be Put In The C Standard! So, how does it get there? Well, you don't actually write a diff to the standard. At least, not a _real_ diff: the sources to the C standard are hidden from the world to keep them safe, even when the time of Darkness descends upon us. What you write are _instructions to the project editor_ (Hi, That's Me!), and then I take your instructions and do my Best Effort™ to reflect them in the C Standard. Most of the wording gets approved by the Committee before-hand, and the edits are usually straightforward and simple. [For example](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2517.pdf):
 
 > RECOMMENDATION: 3.4.3p4 should use a different example of undefined behavior, such as:
 > > EXAMPLE An example of undefined behavior is the behavior on dereferencing a null pointer.
@@ -98,7 +98,7 @@ I had some inspiration thanks to the [work done by LynnKirby](https://github.com
 
 Still, this is a lot of rambling and anymore stuff will start to get way off topic to what it means to actually edit the C Standard. Hopefully this gave you a nice little look into the world of paper/proposal wrangling!
 
-If you have any questions, feel free to reach out to myself + other helpful folks helping me keep Project Editing straight at [wg14@soasis.org](mailto:wg14@soasis.org), or others at the newly minted [WG14 Contacts](http://www.open-std.org/jtc1/sc22/wg14/www/contacts) page. (Yes it doesn't look very modern but at least the information is up to date now; baby steps. This is a very, very old Committee...)
+If you have any questions, feel free to reach out to myself + other helpful folks helping me keep Project Editing straight at [wg14@soasis.org](mailto:wg14@soasis.org), or others at the newly minted [WG14 Contacts](https://www.open-std.org/jtc1/sc22/wg14/www/contacts) page. (Yes it doesn't look very modern but at least the information is up to date now; baby steps. This is a very, very old Committee...)
 
 I'll see you in the next post!
 

@@ -65,7 +65,7 @@ Honestly, there isn't even more to write here. This is literally the whole post.
 
 > “... if STL switched to making bugs [logic errors, domain errors] be contracts... and we could make `bad_alloc` fail fast, we could use the standard STL unmodified throughout Windows.” – _Pavel Curtis, private communication_
 > 
-> – [Herb Sutter's P0709r3](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p0709r3.pdf)
+> – [Herb Sutter's P0709r3](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p0709r3.pdf)
 
 A million game developer projects, all of LLVM's codebase, embedded projects throughout the globe... the possibilities are endless, which is why such a banal solution just floors me. I meme about apex library design but honestly there's no way it can be this easy. It's not like I could port the entirety of libstdc++'s test suite and several libc++ tests to use my `std0::dynamic_array<T, Allocator>` class and pass them all like it was no big deal--
 
@@ -76,7 +76,7 @@ A million game developer projects, all of LLVM's codebase, embedded projects thr
 
 # Narrator: it is exactly that easy
 
-I'm not even going to be pretend to be surprised: this is a (that is, this is one of the) logical conclusion of how to handle memory allocation errors. Most applications are simply not interested in dealing with the problem. Others yet still try to handle it (the exception version), but do it poorly. More disciplined and focused application writers (not library authors) attempt the second and third rows in this [13 year old table inside paper C++ paper from Paul Pedriana](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2271.html#Appendix_18). Still, when it comes to "I can handle this on my own and I do not need to make every downstream user pay for it", `noexcept` allocators are the best way to handle it.
+I'm not even going to be pretend to be surprised: this is a (that is, this is one of the) logical conclusion of how to handle memory allocation errors. Most applications are simply not interested in dealing with the problem. Others yet still try to handle it (the exception version), but do it poorly. More disciplined and focused application writers (not library authors) attempt the second and third rows in this [13 year old table inside paper C++ paper from Paul Pedriana](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2271.html#Appendix_18). Still, when it comes to "I can handle this on my own and I do not need to make every downstream user pay for it", `noexcept` allocators are the best way to handle it.
 
 So let's make it so the user does not pay for it.
 
@@ -204,7 +204,7 @@ And the implementation does not like your use case.
 
 # At the Precipice
 
-Exceptions -- alongside RTTI -- continue to be the feature that you pay for, even if you don't want it and can do better for your domain space. We strongly tied exceptions to one of the most fundamental operations in our programming language -- retrieving memory -- and made it nearly impossible to separate the two in regular code. This cuts out many industries from Standard C++. As Ben Craig so thoroughly explains in [his paper P1105 with Ben Saks called "Leaving no room for a lower-level language"](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p1105r1.html#exception_why):
+Exceptions -- alongside RTTI -- continue to be the feature that you pay for, even if you don't want it and can do better for your domain space. We strongly tied exceptions to one of the most fundamental operations in our programming language -- retrieving memory -- and made it nearly impossible to separate the two in regular code. This cuts out many industries from Standard C++. As Ben Craig so thoroughly explains in [his paper P1105 with Ben Saks called "Leaving no room for a lower-level language"](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p1105r1.html#exception_why):
 
 > Kernel and embedded environments can’t universally afford exceptions. Throwing an exception requires a heap allocation on the Itanium ABI, and a large stack allocation on the Microsoft ABI, neither of which are suitable in kernel and embedded environments.
 > 
@@ -216,7 +216,7 @@ We exist in a world where we have cut our ecosystem in half, and there is no C c
 
 C++98 exceptions came before `noexcept`. Even if we had a `throw()` specifier, we barely did anything meaningful with it. C++11 gave us move semantics and the `noexcept` that allowed us to think further and farther beyond, dear reader! But, the weight of C++98's inheritance-based exceptions are already here to stay, and they are bound to our allocation model.
 
-Changing the way the default allocator behaves breaks everything; this is why Herb Sutter's suggestions in [P0709, Revision 3](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p0709r3.pdf) failed in the 2019 Köln (Cologne), Germany meeting, and will _consistently_ fail:
+Changing the way the default allocator behaves breaks everything; this is why Herb Sutter's suggestions in [P0709, Revision 3](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p0709r3.pdf) failed in the 2019 Köln (Cologne), Germany meeting, and will _consistently_ fail:
 
 > The default `std::allocator` and non-placement global `operator new` should terminate on failure. No effect on `new(nothrow)` which will continue to report null on failure: 0-17-6-10-5 (SF-F-N-WA-SA).
 

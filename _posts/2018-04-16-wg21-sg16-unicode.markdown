@@ -18,7 +18,7 @@ Working Group 21 (The C++ Committee of the ISO) has approved and armored Study G
 Please lend your voice and ideas for improving C++ support for Unicode and text processing by joining me and others in:
 
 
-- [The Mailing List](http://www.open-std.org/mailman/listinfo/unicode)
+- [The Mailing List](https://www.open-std.org/mailman/listinfo/unicode)
 - [The C++ Slack](https://cpplang.slack.com/messages/sg16-unicode)
 - [The GitHub](https://github.com/sg16-unicode)
 

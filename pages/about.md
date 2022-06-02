@@ -11,7 +11,7 @@ tags: [about, hello, 👋]
 
 # Hey there! 🎉
 
-My name is JeanHeyd Meneide. I am a Software Engineer and the [Project Editor for ISO/IEC JTC1 SC22 WG14 - Programming Languages, C](http://www.open-std.org/jtc1/sc22/wg14/www/contacts). I specialize in ergonomic library design, performance tuning, foreign function/language interfaces, and a little bit of graphics programming. My favorite work includes programming that enables even the newest programmers to produce high-quality code that pushes them and others towards the pit of success! Occasionally, I get stuck in a Network Programming loop 💫.
+My name is JeanHeyd Meneide. I am a Software Engineer and the [Project Editor for ISO/IEC JTC1 SC22 WG14 - Programming Languages, C](https://www.open-std.org/jtc1/sc22/wg14/www/contacts). I specialize in ergonomic library design, performance tuning, foreign function/language interfaces, and a little bit of graphics programming. My favorite work includes programming that enables even the newest programmers to produce high-quality code that pushes them and others towards the pit of success! Occasionally, I get stuck in a Network Programming loop 💫.
 
 You can find me on [LinkedIn](https://www.linkedin.com/in/thephd/), follow me on [Twitter](https://twitter.com/__phantomderp/), and keep track of what I'm doing on [GitHub](https://github.com/ThePhD)!
 

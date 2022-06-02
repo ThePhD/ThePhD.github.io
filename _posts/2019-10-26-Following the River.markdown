@@ -14,7 +14,7 @@ Or, so I thought.<!--more-->
 
 I never thought I'd be a part of the C Standard Committee. but if I am going to fix some of these problems once and for all, I have to go back to the Beginning. It all started from a chat with Aaron Ballman. ~~The Dwarves~~Core Working Group of the C++ Standards Committee finished some papers off during a session in Köln, Germany. Aaron caught me: "Thanks for bringing in the paper on `[[nodiscard]]`! You know, C2x has attributes, and it would probably be good to get it into C too, for parity with C++..."
 
-It was a simple conversation, and it made sense once I realized that the C Committee was _not_ dead, fixing bugs, and putting new features into the language. I was surprised that attribute syntax -- double colons and all -- made it into C too. Since this was the case, it'd create an undue burden on implementations strictly conforming to the C Standard to miss out on having a reason string. So, I packed my bags and took the original [p1301 - `[[nodiscard("should have a reason")]]`](https://wg21.link/p1301) paper from Isabella Muerte and me to the C Standards Meeting in Ithaca, New York as [ISO document N2430](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2430.pdf).
+It was a simple conversation, and it made sense once I realized that the C Committee was _not_ dead, fixing bugs, and putting new features into the language. I was surprised that attribute syntax -- double colons and all -- made it into C too. Since this was the case, it'd create an undue burden on implementations strictly conforming to the C Standard to miss out on having a reason string. So, I packed my bags and took the original [p1301 - `[[nodiscard("should have a reason")]]`](https://wg21.link/p1301) paper from Isabella Muerte and me to the C Standards Meeting in Ithaca, New York as [ISO document N2430](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2430.pdf).
 
 
 
@@ -144,7 +144,7 @@ It also means that as a student, I cannot attend anymore WG14 meetings until I r
 
 # Spicing Things Up
 
-Of course, as chill and quaint as the meeting was, it was not without a little bit of fire thrown into the mix. Aaron was not just all about attributes, after all: he brought up another paper talking about the various identifier reservations WG14 makes for itself. The paper was called [What We Think We Reserve](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2409.pdf), and was a look into the pretty maddening landscape of reservations made by C. As an example from Aaron's paper:
+Of course, as chill and quaint as the meeting was, it was not without a little bit of fire thrown into the mix. Aaron was not just all about attributes, after all: he brought up another paper talking about the various identifier reservations WG14 makes for itself. The paper was called [What We Think We Reserve](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2409.pdf), and was a look into the pretty maddening landscape of reservations made by C. As an example from Aaron's paper:
 
 
 ```cpp

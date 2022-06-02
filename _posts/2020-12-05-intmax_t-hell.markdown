@@ -78,7 +78,7 @@ This is one of the manifestations of what is called an "Application Binary Inter
 
 ## "But C Is ABI-Stable?!"
 
-Not necessarily. C is a simple language, and it both sells itself on and prides itself as such. So much so, that it's even part of the [language's rolling charter](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2021.htm). There's barely any name mangling because there's no overloading. If you want "virtual functions" you need to hand-craft your virtual table structure and initialize it yourself. There's barely any lookup or entity negotiation: what you write -- [however scary or cursed](https://twitter.com/thingskatedid/status/1328918322507706368) -- is what you get, in a general sense. (No, it's not "portable assembly". Compilers tear C code apart and make it far more efficient than the code people stuff into it. It's not even a direct model of the machine anymore: just an abstract one.)
+Not necessarily. C is a simple language, and it both sells itself on and prides itself as such. So much so, that it's even part of the [language's rolling charter](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2021.htm). There's barely any name mangling because there's no overloading. If you want "virtual functions" you need to hand-craft your virtual table structure and initialize it yourself. There's barely any lookup or entity negotiation: what you write -- [however scary or cursed](https://twitter.com/thingskatedid/status/1328918322507706368) -- is what you get, in a general sense. (No, it's not "portable assembly". Compilers tear C code apart and make it far more efficient than the code people stuff into it. It's not even a direct model of the machine anymore: just an abstract one.)
 
 Still, sometimes even C can't get away from it. The function `imaxabs` relates to exactly one entity that, for historical reasons, was pinned to a function taking and returning a `long long`. Upgrading it means dealing with this schism between what the user expects (`intmax_t` that got upgraded and can print `__int128_t`/`__int256_t`) with old, non-recompiled code that maintains the old invariant (`long long`, a 64-bit number).
 
@@ -190,7 +190,7 @@ The [bug reports roll in](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=96710) to
 
 ## The Fix
 
-For C? None. I am not even kidding: no less than [5 papers](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2465.pdf) discussed over [3-4 Standards meetings](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2498.pdf) have been [burned on this topic](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2425.pdf). There's no combination of ISO Standard C features that can fix this problem without breaking somebody. Not even the upcoming idea for [lambdas and auto (see §6.5.2.6 Lambda expressions)](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2522.pdf) in C can fix this problem:
+For C? None. I am not even kidding: no less than [5 papers](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2465.pdf) discussed over [3-4 Standards meetings](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2498.pdf) have been [burned on this topic](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2425.pdf). There's no combination of ISO Standard C features that can fix this problem without breaking somebody. Not even the upcoming idea for [lambdas and auto (see §6.5.2.6 Lambda expressions)](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2522.pdf) in C can fix this problem:
 
 ```c
 extern inline

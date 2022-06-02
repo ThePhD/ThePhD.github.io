@@ -186,7 +186,7 @@ No way this kind of narrow, clinching definition of `character` was allowed to b
 
 > A binary stream is an ordered sequence of characters that can transparently record internal data. Data read in from a binary stream shall compare equal to the data that were earlier written out to that stream, under the same implementation. Such a stream may, however, have an implementation- defined number of null characters appended to the end of the stream.
 >
-> — [§7.21.2 Streams ¶3, N2731 Working Draft ISO/IEC 9899:202x, October 2021](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2731.pdf)
+> — [§7.21.2 Streams ¶3, N2731 Working Draft ISO/IEC 9899:202x, October 2021](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2731.pdf)
 
 It has "transparently" right in the wording, assuredly that's enough. But, the only hard requirement is that data read from a binary stream must compare equal to the data written earlier to the stream, under the same implementation. Remember that `fputc` returns the "character that was written", so if a change happens *just before the write* (after the conversion to `unsigned char`), well. As long as you define "character" to mean whatever you want to here, that's just the way you can get the behavior in. Which, honestly, is deeply concerning. There is no explicit mandate for this code snippet:
 
@@ -201,7 +201,7 @@ int main () {
 }
 ```
 
-to demand that `c` is the same as `cwritten` (what is written is identical to what shall be returned, if there are no errors). Apparently, implementations are free to do whatever they want. I was not the only one to notice this weasel-y reasoning in the standard, of course: someone else involved the WG14 — Working Group 14, the C Standards Committee — pointed this out to me in both an e-mail long before this popped up while I was working on [Unicode Functions for C](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2966.htm), and many years later it popped up again. It turns out this person had already climbed the ladder, asking that the Committee make a more formal definition of character so there's less room to play these kinds of games in the standard wording. And, uh, unfortunately...
+to demand that `c` is the same as `cwritten` (what is written is identical to what shall be returned, if there are no errors). Apparently, implementations are free to do whatever they want. I was not the only one to notice this weasel-y reasoning in the standard, of course: someone else involved the WG14 — Working Group 14, the C Standards Committee — pointed this out to me in both an e-mail long before this popped up while I was working on [Unicode Functions for C](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2966.htm), and many years later it popped up again. It turns out this person had already climbed the ladder, asking that the Committee make a more formal definition of character so there's less room to play these kinds of games in the standard wording. And, uh, unfortunately...
 
 
 
@@ -223,7 +223,7 @@ The plot got thicker here for me, because I didn't know someone else was concern
 > 
 > ⟨C⟩ bit representation that fits in a byte
 >
-> — [§3.7 and 3.7.1, N2731 Working Draft ISO/IEC 9899:202x, October 2021](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2731.pdf)
+> — [§3.7 and 3.7.1, N2731 Working Draft ISO/IEC 9899:202x, October 2021](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2731.pdf)
 
 So a good fix would be to carefully annotate whether someone meant "abstract character", a "single byte", a "code unit", and so on and so forth. This would make it better to handle cases like this and others in the standard, and to at the very least make "character" a distinct Word of Power with a more precise definition (like matching it more directly to mean "*character type*" or something more formal). It would also help in this case: if we meant "abstract character", then it didn't matter what "transparently" meant in the previous wording because an implementation could do whatever they want (the input represents an "abstract character"). But, if they meant the bit representation that fits in a single byte — a single `unsigned char`, even! — then this would help us close the loop. But in a little twist that I was not fully prepared for in this story, they were told it was left *intentionally not strictly defined so people could wiggle within the definition* during the 2019 November Ithaca, New York meeting, and that it was meant to be wiggle-y like the "physical source file character" definition. … Ah.
 
@@ -271,7 +271,7 @@ Which, unfortunately, is where I begin to take issue with Rich Felker's designat
 
 It would be one thing if someone was just inventing Death Station 9000, but the fact that multiple developers have reported "yeah, I had to program around that, I just assumed it was allowed there" should be enough of an indicator that this is something that needs to be addressed by the people in the driver's seat. You cannot simply toke on your pipe and casually observe and conclude that it is reasonable that no implementation should behave this way when there are, in fact, implementations behaving that way, calling themselves conforming, and have a significant chunk of embedded developers taking them up on that proposition.
 
-Unfortunately, I have (not yet) reached a resolution to this. I have not written a paper. By the time this blog post goes out, I still will not have been given a response (and at this point I don't want one, because this needs a formal paper trail now), and I do not expect MISRA to suddenly resolve the tension either with their supposed 50/50 split on the matter. I'm also not going to stop having a quiet, slow, internal scream about these matters either, and it might take me so long to write the next paper that C23 will ship with this as the status quo and it will have to be something to take care of for C2Y/C3a, whenever it comes out...
+Unfortunately, I have (not yet) reached a resolution to this. I have not written a paper. By the time this blog post goes out, I still will not have been given a response (and at this point I don't want one, because this needs a formal paper trail now), and I do not expect MISRA to suddenly resolve the tension either with their supposed 50/50 split on the matter. I'm also not going to stop having a quiet, slow, internal scream about these matters either, and it might take me so long to write the next paper that C23 will ship with this as the status quo and it will have to be something to take care of for C2y/C3a, whenever it comes out...
 
 <center>
 <img alt="An anthropomorphic, smol sheep in a robe and a scarf, with beady little eyes and down-turned ears going &quot;a&quot; with their mouth open in disbelieving, mostly quiet, shocked agony." src="/assets/img/2022/04/a.png"/>

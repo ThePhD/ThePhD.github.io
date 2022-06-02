@@ -18,7 +18,7 @@ As a primer, you can get a semi-complete list (modulo the latest stuff) from [cp
 
 # Revise Spelling of Keywords" \| Make false and true First-Class Language Features
 
-*Document Numbers: [N2934](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2934.pdf) \| [N2935](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2935.pdf)*
+*Document Numbers: [N2934](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2934.pdf) \| [N2935](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2935.pdf)*
 
 To quote a hardworking C professional of a few decades:
 
@@ -76,7 +76,7 @@ Hopefully, this helps put most of the concerns about backwards compatibility and
 
 # `typeof(...)`
 
-*Document Number: [N2927](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2927.htm)*
+*Document Number: [N2927](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2927.htm)*
 
 This has been a long time coming. Some of the first mentions of `typeof` came in the C99 rationale, where they deemed that `typeof` was nice but they would like a little more time to settle out the semantics of it. (There were probably earlier ones, I just could not be bothered to go even further back in time.)
 
@@ -113,18 +113,18 @@ Macros are commonly used in C, and the general consensus is to always wrap the e
 
 So, the idea is that `typeof(...)` and `remove_quals(...)` - if they ever make it into C++ - will both not feature references. As a side note for C++ junkies, this means you can define a `MOVE(...)` macro to replace `std::move` that does not need to use the standard library's type trait facilities. Because `typeof` deduces the non-reference type of what is put in, you can define it by using `static_cast<typeof(__VA_ARGS__)&&>(__VA_ARGS__)`. Just something to think about if `typeof` ever gets proposed to C++ for the people who are doing truly absurd things to stop things like `std::move` from showing up in even their debug builds and massively increasing debug throughput with this.
 
-There's also some [grumbling over in C++ land](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2930.pdf) that it's called `remove_quals`, so the final name might end up being `typeof_unqual`. I support that rename fully, and it was one of the alternative names to `remove_quals`, but a _different_ group of C++ people were semi-grumbly over the name `typeof_unqual` (a longer time ago when I was first trying to name `typeof` and its no-qualifiers version). All in all, I don't care _how_ it's spelled, just that I can spell it in some fashion. Pick something before C23 ships so I can put it in the next revision of the Working Draft, that's all I ask!
+There's also some [grumbling over in C++ land](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2930.pdf) that it's called `remove_quals`, so the final name might end up being `typeof_unqual`. I support that rename fully, and it was one of the alternative names to `remove_quals`, but a _different_ group of C++ people were semi-grumbly over the name `typeof_unqual` (a longer time ago when I was first trying to name `typeof` and its no-qualifiers version). All in all, I don't care _how_ it's spelled, just that I can spell it in some fashion. Pick something before C23 ships so I can put it in the next revision of the Working Draft, that's all I ask!
 
 
 
 
 # `char8_t` (as a typedef) and Unicode Improvements!
 
-*Document Numbers: [N2653](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2653.htm) \| [N2828](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2828.htm)*
+*Document Numbers: [N2653](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2653.htm) \| [N2828](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2828.htm)*
 
 This is something that will make quite a few Unicode folks happy, since it's been a problem that's been bothering them for quite some time now.
 
-For those of you just shaking off the Standard Sleep from your eyes, C11 added a few new forms of string literal to make sure the type was encoded as one of an implementation-defined "UTF-8", `char16_t`, or `char32_t` literal: `u8"💣"`, `u"💣"`, and `U"💣"`, respectively. [A paper I talk about](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2728.htm) in my earlier blog post mandated that the `char16_t` and `char32_t` literals actually produced UTF-16 and UTF-32 encoded strings (they didn't have to, they could produce some inscrutable, implementation-defined encoding whose name you were not required to know when compiling your code). This updated all 3 string literals to be UTF-8, UTF-16, and UTF-32 respectively. Unfortunately, there was still one problem: while `char16_t` (a `typedef` for `uint_least16_t`) and `char32_t` (a `typedef` for `uint_least32_t`) were both mandated to be unsigned types, `u8"🤡"` had a type of `const char[N]`. What this meant is that calling a `<ctypes.h>` function like so:
+For those of you just shaking off the Standard Sleep from your eyes, C11 added a few new forms of string literal to make sure the type was encoded as one of an implementation-defined "UTF-8", `char16_t`, or `char32_t` literal: `u8"💣"`, `u"💣"`, and `U"💣"`, respectively. [A paper I talk about](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2728.htm) in my earlier blog post mandated that the `char16_t` and `char32_t` literals actually produced UTF-16 and UTF-32 encoded strings (they didn't have to, they could produce some inscrutable, implementation-defined encoding whose name you were not required to know when compiling your code). This updated all 3 string literals to be UTF-8, UTF-16, and UTF-32 respectively. Unfortunately, there was still one problem: while `char16_t` (a `typedef` for `uint_least16_t`) and `char32_t` (a `typedef` for `uint_least32_t`) were both mandated to be unsigned types, `u8"🤡"` had a type of `const char[N]`. What this meant is that calling a `<ctypes.h>` function like so:
 
 ```cpp
 isspace(u8"💣"[0])
@@ -132,7 +132,7 @@ isspace(u8"💣"[0])
 
 is undefined behavior on specific implementations. In this case, this is a `char` value for a multi-unit UTF-8 string literal, which is larger than 127. It shows up as a negative value after promoted to `int` on implementations where `char` is a signed type, and that negative value is passed straight to the internals of the `isspace` function. What happens from there depends on your implementation, but on a few this is memory corruption and others it just grabs completely illegal data. Suffice to say, it has been a persistent problem that the thing that is meant to model UTF-8 characters produces an implementation-defined quantity of `signed` or `unsigned` for `char`.
 
-This proposal fixed this situation by making the above code produce an `unsigned char`, so it will be the proper value when passed to the given functions. This only applies to the `u8"💣"` string literals: these are converted to arrays of `const char8_t[N]`. The `char8_t` typedef will live in the `uchar.h` header with the others, and it comes with 2 other functions to convert from the multibyte character locale encoding to UTF-8: `mbrtoc8` and `c8rtomb`. I don't recommend using these functions as a general rule because their design is fundamentally broken, but that's a rant for another day ([with a paper that also proposes the fix](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2902.htm) on the way for, hopefully, C23, but it hasn't been accepted yet).
+This proposal fixed this situation by making the above code produce an `unsigned char`, so it will be the proper value when passed to the given functions. This only applies to the `u8"💣"` string literals: these are converted to arrays of `const char8_t[N]`. The `char8_t` typedef will live in the `uchar.h` header with the others, and it comes with 2 other functions to convert from the multibyte character locale encoding to UTF-8: `mbrtoc8` and `c8rtomb`. I don't recommend using these functions as a general rule because their design is fundamentally broken, but that's a rant for another day ([with a paper that also proposes the fix](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2902.htm) on the way for, hopefully, C23, but it hasn't been accepted yet).
 
 Of course, at this point I usually get asked this question by a lot of folk:
 
@@ -151,7 +151,7 @@ As a minor side fix, a smaller change that came along for the ride was that prov
 
 # Consistent, Warningless, and Intuitive Initialization with `= {}`
 
-*Document Number: [N2900](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2900.htm)*
+*Document Number: [N2900](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2900.htm)*
 
 Initialization, even in C, is harder than it should be. Many people have been burned by simply putting a semicolon after their struct and forgetting to properly initialize it (or a part of it) before use. And worse, as more security-focused individuals discovered and continue to battle with, `= {0}` and similar braced or designated initialization for automatic storage duration variable does not require that padding bits / bytes be initialized to 0. This has been a constant source of accidental data leakage in security-critical contexts, including the kernel.
 
@@ -251,7 +251,7 @@ Simple thing: big improvements, all coming to C23.
 
 # `unreachable()` Macro for Optimization and Code Improvement
 
-*Document Number: [N2826](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2826.pdf)*
+*Document Number: [N2826](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2826.pdf)*
 
 This paper was accepted in its *macro* form for C23. It provides standard access to a common optimization pattern that exists as a builtin in GCC and Clang-alike compilers (`__builtin_unreachable()`) and MSVC-like compilers (`__assume(false)`). The way it works is that it deliberately triggers undefined behavior when used. Used in conjunction with ternaries or other conditional structures, it can be used to weed out specific branches and inform the optimizer of case that either cannot happen or should not happen, providing performance gains for suitable optimizers. Here's an example lifted from some cppreference, C-ified to show it off:
 
@@ -480,7 +480,7 @@ Plus, in debug/tracing modes, you can rig up `unreachable()` to instead do actua
 
 # Make the `assert()` Macro User-Friendly for C
 
-*Document Number: [N2829](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2829.htm)*
+*Document Number: [N2829](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2829.htm)*
 
 It's a simple fix, and frankly one that's extremely overdue. `assert(cond)` has long been a gigantic pain in most people's backsides because of how macros parse their arguments. Whenever someone had a stray comma in a struct definition without an enclosing pair of parentheses, `assert(cond)` would lose its shit entirely. The paper makes `assert` use a variadic definition of `assert(...)`, which allows passing multiple arguments to the function and sticthing them together.
 
@@ -495,7 +495,7 @@ This gets us to one of the last changes I'll talk about in this blog post.
 
 # K&R Function Declaration AND Definitions are 🪦🪦!
 
-*Document Number: [N2432](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2432.pdf) \| [N2841](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2841.htm)*
+*Document Number: [N2432](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2432.pdf) \| [N2841](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2841.htm)*
 
 [It's Happening, Baby!](https://youtu.be/j9V78UbdzWI?t=16)
 
@@ -552,7 +552,7 @@ namespace C_Interop {
 
 This alone is not enough of a justification, of course. After all, you can perfectly replicate the signature of `compute_with_see_sharpe` in C. What's more interesting is that this was used to communciate with more complicated languages like assembly or to Javascript, where even the # of arguments and other things could change dynamically. This meant that there **was** no matching prototype to use, and the function name was just a stand-in for a symbol that could be called with whatever # and types of arguments.
 
-The fix for declarations (and definitions in C that would like to utilize a similar power) is the paper [N2919](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2919.pdf), by Alex Gilding. She proposes removing the restriction on `...` variable-argument declarations and definitions, allowing them to have no required preceding argument. This can then be used to capture the same conceptual and semantic details that the K&R declaration of `int compute_with_see_sharpe();` did, by just doing a mechanical change:
+The fix for declarations (and definitions in C that would like to utilize a similar power) is the paper [N2919](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2919.pdf), by Alex Gilding. She proposes removing the restriction on `...` variable-argument declarations and definitions, allowing them to have no required preceding argument. This can then be used to capture the same conceptual and semantic details that the K&R declaration of `int compute_with_see_sharpe();` did, by just doing a mechanical change:
 
 ```cpp
 #include <time.h>
@@ -624,7 +624,7 @@ Ultimately, the cost-benefit of keeping this is minimal. K&R declarations cannot
 unsigned char* sized_memcpy();
 ```
 
-This means that any code trying to call this function would not get the benefit of a VLA parameter, Variably-Modified Type parameter, or static-extent array parameter declarations in the first place (no information on how to check at the call site). There was a proposal to fix this - [N2780 by Martin Uecker](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2780.pdf) - that allowed you to "forward declare" parameters. This would solve the small hole left by K&R definitions, allowing you to "forward declare" parameters in the argument list and then use them "for real" later:
+This means that any code trying to call this function would not get the benefit of a VLA parameter, Variably-Modified Type parameter, or static-extent array parameter declarations in the first place (no information on how to check at the call site). There was a proposal to fix this - [N2780 by Martin Uecker](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2780.pdf) - that allowed you to "forward declare" parameters. This would solve the small hole left by K&R definitions, allowing you to "forward declare" parameters in the argument list and then use them "for real" later:
 
 ```cpp
 unsigned char* sized_memcpy(
@@ -700,7 +700,7 @@ Compiler implementations may never move on thanks to needing to support `-std=c1
 
 # 16-bit `ptrdiff_t`. Again!
 
-*Document Number: [N2808](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2808.htm)*
+*Document Number: [N2808](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2808.htm)*
 
 This is more of a pedantic change than anything. Most embedded devices that had 16-bit pointers were just running around with 16-bit `ptrdiff_t` values anyways, meaning you could not get the FULL difference between an object larger than half the size of main memory without overflowing into the negatives. The C standard originally required that `ptrdiff_t` be 17 bits as a minimum (to allow for a sign plus representing the full required 16 bit-minimum mandated for `size_t`). But people just shrugged their shoulders and deliberately broke away from the Standard to work on their machines. In short, folks never really cared that we had a theoretically correct and beautiful 16-bit `size_t` and 17-bit `ptrdiff_t` value: they just went with both being 16 bits and said to hell with any kind of object/array larger than half the size of main memory.
 
@@ -711,7 +711,7 @@ It's good to reflect reality rather than try to insist on a theoretical purity. 
 
 # Separating Variably-Modified Types from Variable Length Arrays
 
-*Document Number: [N2778](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2778.pdf)*
+*Document Number: [N2778](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2778.pdf)*
 
 This was an interesting paper. I did not know much about Variably-Modified Types (VMTs) versus Variable Length Arrays (VLAs), or what the differences between the two were. It turns out that Variably-Modified Types are actually really cool, and can go a long way to making handling arrays and allocations a lot better in C. They still fail in very specific ways that make me think we still need more in the C Language to fix our true issues with pointers and sizes, but until then in C23 Variably-Modified Types will have to do!
 
@@ -811,19 +811,19 @@ VMTs are still useful when used locally within a function, but as a means of act
 
 But this article has gone on long enough. Other things not mentioned here are:
 
-- ([N2775](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2775.pdf)) Literal Suffixes for `_BitInt(N)` types are in: `0x10wb` returns in a signed `_BitInt(5)` (the smallest possible integer type that can represent the integer literal).
-- ([N2701](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2701.htm)) `@`, `$`, and <code>`</code> (backtick) are added to the source character set: Doxygen docs and Markdown snippets in comments are far more portable than ever before (not that it necessarily matters in a material, real sense).
-- ([N2764](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2764.pdf)) `[[_Noreturn]]` is a real attribute now, giving everyone access to a way to say their function will never return.
-- ([N2840](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2840.htm)) `call_once` is now mandatory across implementations. This is good and it was annoying it could be thrown out on specific implementations.
+- ([N2775](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2775.pdf)) Literal Suffixes for `_BitInt(N)` types are in: `0x10wb` returns in a signed `_BitInt(5)` (the smallest possible integer type that can represent the integer literal).
+- ([N2701](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2701.htm)) `@`, `$`, and <code>`</code> (backtick) are added to the source character set: Doxygen docs and Markdown snippets in comments are far more portable than ever before (not that it necessarily matters in a material, real sense).
+- ([N2764](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2764.pdf)) `[[_Noreturn]]` is a real attribute now, giving everyone access to a way to say their function will never return.
+- ([N2840](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2840.htm)) `call_once` is now mandatory across implementations. This is good and it was annoying it could be thrown out on specific implementations.
 
 Some things I do not have enough experience with (like the tons of Decimal Floating Point changes we make every meeting, many of them small and just trying to clean it up so that it's ready to ship in C23), or things that I am not sure would be considered blockbuster features. That does not mean we are not continuing to work on it. There is a large swath of things which may still make C23, such as Endianess Macros, Modern Bit Utilities, Unicode `printf` modifiers for printing things, Comma Omission and Deletion for Variadic Macros (e.g. the `__VA_OPT__` fix from C++), `memset_explicit` for safety and security purposes, Unicode functions to convert inbetween all of the Unicode and wide/narrow locale encodings, Enumeration fixes (underlying type and larger-than-`int`-enumerations), and much more.
 
 Some things were also defeated this past meeting, meaning we won't see them for C23. Some have a chance beyond C23, others are probably close to dead.
 
-- ([N2896](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2896.htm)) `#once` and `#once YOUR_GUARD_ID_HERE`, to reduce include guard spam, was narrowly voted down and thus likely won't  come back without some serious modifications, adjustments, or a massive wave of user outcry to force their implementers to implement it. This one is a bitter pill for me to swallow. I would have absolutely loved even the second form, but... alas.
-- ([N2895](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2895.htm), [N2892](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2892.pdf)) `defer`, Lambdas, and similar were voted down, but still have consensus to proceed for a timeline beyond/after C23. I've personally volunteered to direct and maybe even steer the effort for Lambdas. `defer` might come along for the ride since it's basically in the same vein when it comes to what variables are available for `defer`. Spoiler: we're going to be pursuing barebones, simple `defer` that is block-scoped (to the nearest braces, or conditional/etc. if the braces are omitted). This is mostly to save us from making the same design mistake Go did, where they have a `defer` that may dynamically allocate (?! Jesus Christ!) [or other complete nonsense](https://twitter.com/horenmar_ctu/status/1491423390170693632).
-- ([N2859](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2859.pdf)) `break break;`, `break continue;`, `break break continue;`, and similar iterations of a way to get out of multiple switch/loop statements was carefully put on ice. The proposal author probably got the same sense I did: if a vote was taken, it likely might not have passed, especially for C23. So, they elected not to and will come back with a paper in the far future. Even if I'd prefer a labeled loop, that was the most politically savvy decisions I've seen out of someone in a Committee. By not having a vote, the paper is not officially rejected: they can come back with a proposal later on with no recorded elbow drop slaying the feature forever. Very smart!
-- ([N2917](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2917.pdf)) `constexpr` - an extremely watered down version compared to C++ that is super simple and deliberately intended not to be much more than updated ways of handling constants in C - did not die. There is strong support to work on it, albeit it might not make C23. Which is perfectly okay, as long as it stays alive!
+- ([N2896](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2896.htm)) `#once` and `#once YOUR_GUARD_ID_HERE`, to reduce include guard spam, was narrowly voted down and thus likely won't  come back without some serious modifications, adjustments, or a massive wave of user outcry to force their implementers to implement it. This one is a bitter pill for me to swallow. I would have absolutely loved even the second form, but... alas.
+- ([N2895](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2895.htm), [N2892](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2892.pdf)) `defer`, Lambdas, and similar were voted down, but still have consensus to proceed for a timeline beyond/after C23. I've personally volunteered to direct and maybe even steer the effort for Lambdas. `defer` might come along for the ride since it's basically in the same vein when it comes to what variables are available for `defer`. Spoiler: we're going to be pursuing barebones, simple `defer` that is block-scoped (to the nearest braces, or conditional/etc. if the braces are omitted). This is mostly to save us from making the same design mistake Go did, where they have a `defer` that may dynamically allocate (?! Jesus Christ!) [or other complete nonsense](https://twitter.com/horenmar_ctu/status/1491423390170693632).
+- ([N2859](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2859.pdf)) `break break;`, `break continue;`, `break break continue;`, and similar iterations of a way to get out of multiple switch/loop statements was carefully put on ice. The proposal author probably got the same sense I did: if a vote was taken, it likely might not have passed, especially for C23. So, they elected not to and will come back with a paper in the far future. Even if I'd prefer a labeled loop, that was the most politically savvy decisions I've seen out of someone in a Committee. By not having a vote, the paper is not officially rejected: they can come back with a proposal later on with no recorded elbow drop slaying the feature forever. Very smart!
+- ([N2917](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2917.pdf)) `constexpr` - an extremely watered down version compared to C++ that is super simple and deliberately intended not to be much more than updated ways of handling constants in C - did not die. There is strong support to work on it, albeit it might not make C23. Which is perfectly okay, as long as it stays alive!
 
 That's the full status update. Hopefully things will keep going well in the C Meetings and we'll get some of the last juicy library and language bits in for C23 for you all!
 

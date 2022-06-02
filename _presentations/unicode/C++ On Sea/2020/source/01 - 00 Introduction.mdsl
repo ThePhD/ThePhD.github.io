@@ -66,7 +66,7 @@ Part 4 (No Video (yet), just slides [here](https://thephd.dev/_presentations/uni
 ### 😶
 
 > The design of the Bounds checking interfaces, though well-intentioned, suffers from far too many problems to correct. Using the APIs has been seen to lead to worse quality, less secure software than relying on established approaches or modern technologies. More effective and less intrusive approaches have become commonplace and are often preferred by users and security experts alike.  
->  — [Martin Sebor and Carlos O'Donnel, N1969](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1969.htm#about)
+>  — [Martin Sebor and Carlos O'Donnel, N1969](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1969.htm#about)
 
 
 # Womp Womp 🤦‍♀️

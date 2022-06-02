@@ -8,7 +8,7 @@ tags: [C, Standard, 🎉]
 excerpt_separator: <!--more-->
 ---
 
-The C Meeting has ended officially as of like less than 2 hours ago. I will write all about what happened in a later post, but I wanted to talk specifically<!--more--> about something that happened on Monday, during the meeting, with [proposal n2645](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2645.pdf).
+The C Meeting has ended officially as of like less than 2 hours ago. I will write all about what happened in a later post, but I wanted to talk specifically<!--more--> about something that happened on Monday, during the meeting, with [proposal n2645](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2645.pdf).
 
 N2654 is Melanie Blower's paper for `#elifdef` and `#elifndef`, a long-standing hole in the preprocessor and a constant consistency footgun. Even I experienced this pain, and I was grateful to see Melanie put it forward. We don't often get to do simple things, so Melanie is doing the Lord's Work, here.
 
@@ -34,7 +34,7 @@ See, we were discussing the paper. All the usual arguments were brought up for a
 
 and so on, so forth. A slew of folk made the exact same arguments through various other communication mediums when they saw the paper; there's not that much that's new under the sun, after all! But, the longer the discussion went on, the more it turned into this not being compelling enough to add, and that `#if defined(...)` covered the functionality well enough. It felt like it was going to be a pretty narrowly close vote on the No side. I spoke up, talking about how out of all the features I've done work on, this one actually got the most messages for a C feature (not C++ ones). (It even beat out `typeof`, don't ask me how this is more popular than that!)
 
-In mentioning that some folk had indeed messaged me directly about [n2645](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2645.pdf), someone also got to share one of the e-mails of support they received from a random Senior Embedded Engineer directly with the whole Committee. And, once they shared it...
+In mentioning that some folk had indeed messaged me directly about [n2645](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2645.pdf), someone also got to share one of the e-mails of support they received from a random Senior Embedded Engineer directly with the whole Committee. And, once they shared it...
 
 
 

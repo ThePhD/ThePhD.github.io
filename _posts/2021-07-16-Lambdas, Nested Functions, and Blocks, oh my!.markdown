@@ -8,7 +8,7 @@ tags: [ABI, C, C++, Functions, Lambdas, Motivation, 📜]
 excerpt_separator: <!--more-->
 ---
 
-I have the fortunate privilege to be part of the ISO C Standard mailing list, and recently a thread kicked off<!--more--> about Lambdas and what their need is in the C Community. That thread was in response to an ongoing push by Jens Gustedt's proposal [N2736](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2736.pdf), where Gustedt is building steam to put a proper function + data type into the C Standard at some point. What kicked off in that thread was a lot of talking about nested functions, blocks, statement expressions, whether we even need the ability to have data + code in C, and more. Several times I wrote a feature-length film of a response to that mailing list, but since the misconception seems to spread far beyond just the C Committee I decided I would publish my analysis of Lambdas, Nested Functions, and Blocks.
+I have the fortunate privilege to be part of the ISO C Standard mailing list, and recently a thread kicked off<!--more--> about Lambdas and what their need is in the C Community. That thread was in response to an ongoing push by Jens Gustedt's proposal [N2736](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2736.pdf), where Gustedt is building steam to put a proper function + data type into the C Standard at some point. What kicked off in that thread was a lot of talking about nested functions, blocks, statement expressions, whether we even need the ability to have data + code in C, and more. Several times I wrote a feature-length film of a response to that mailing list, but since the misconception seems to spread far beyond just the C Committee I decided I would publish my analysis of Lambdas, Nested Functions, and Blocks.
 
 I will do my best to cover each of the solutions in pretty good detail. First, let's start with where we are today, with how we have to do function calls and callbacks with plain, vanilla, Standard C code.
 
@@ -503,7 +503,7 @@ int main () {
 }
 ```
 
-Okay, we can give a name to these lambdas now! But, without this extension, this probably chalks up to being a significant disadvantage to Gustedt Lambdas. They cannot be given names since they are not split into the normal declaration / definition that C has for most entities. If we're going to take such a significant hit to potential usability [without introducing something like `auto`](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2735.pdf), then what are the potential gains? Well, while generating a completely unique type when evaluated and making a complete object might produce this problem, it also gives us some incredibly interesting (and very familiar!) levels of control!
+Okay, we can give a name to these lambdas now! But, without this extension, this probably chalks up to being a significant disadvantage to Gustedt Lambdas. They cannot be given names since they are not split into the normal declaration / definition that C has for most entities. If we're going to take such a significant hit to potential usability [without introducing something like `auto`](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2735.pdf), then what are the potential gains? Well, while generating a completely unique type when evaluated and making a complete object might produce this problem, it also gives us some incredibly interesting (and very familiar!) levels of control!
 
 
 
@@ -562,7 +562,7 @@ We've made a function pointer `f_dispatch` now. While `f` itself cannot be conve
 - it remains local: there's no need to write a function definition outside the function or forward-declare anything; and,
 - it requires no special handling; we don't need to define a "these are my variables" `struct`.
 
-It's still not as compact as the Nested Functions version, but nobody is willing to wade into ABI wars with every implementer on the planet just so they can call an API `qsort`-style. More points should be taken off if we were being strict about `__typeof`, but [there's a paper that's finally going to put it in C properly](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2724.htm). So, we'll overlook the use of `typeof` and `auto` since there are ongoing and active (leaning successful) efforts to make these things happen.
+It's still not as compact as the Nested Functions version, but nobody is willing to wade into ABI wars with every implementer on the planet just so they can call an API `qsort`-style. More points should be taken off if we were being strict about `__typeof`, but [there's a paper that's finally going to put it in C properly](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2724.htm). So, we'll overlook the use of `typeof` and `auto` since there are ongoing and active (leaning successful) efforts to make these things happen.
 
 
 

@@ -269,9 +269,9 @@ When there are Shared Libraries on the system, there are two sources of truth. T
 
 ## And That's the Good Ending
 
-Remember, that's C++. You know, the language with the "ambitious" Committee that C and Game Developers like to routinely talk smack about (sometimes for really good reasons, and sometimes for pretty bad reasons). The bad ending you can get if you can't work out a compatibility story is that conservative groups - say, the C Committee - will just blow everything up. For example, when the C Committee first learned that `realloc` on many implementations had diverging behavior, they tried to fix it by releasing Defect Report (DR) 400. Unfortunately, DR 400 still didn't close the implementation-defined behavior loop for `realloc` of size `0`. After quite a few more years implementing it, then arguing about it, then trying to talk to implementations, [this paper](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2464.pdf) showed up:
+Remember, that's C++. You know, the language with the "ambitious" Committee that C and Game Developers like to routinely talk smack about (sometimes for really good reasons, and sometimes for pretty bad reasons). The bad ending you can get if you can't work out a compatibility story is that conservative groups - say, the C Committee - will just blow everything up. For example, when the C Committee first learned that `realloc` on many implementations had diverging behavior, they tried to fix it by releasing Defect Report (DR) 400. Unfortunately, DR 400 still didn't close the implementation-defined behavior loop for `realloc` of size `0`. After quite a few more years implementing it, then arguing about it, then trying to talk to implementations, [this paper](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2464.pdf) showed up:
 
-[![Document N2464: "Zero-size Reallocations are Undefined Behavior"](/assets/img/2022/03/realloc-size-0-paper.png)](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2464.pdf)
+[![Document N2464: "Zero-size Reallocations are Undefined Behavior"](/assets/img/2022/03/realloc-size-0-paper.png)](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2464.pdf)
 
 You would think adding more undefined behavior to the C Standard would be a bad thing, especially when it was defined before. Unfortunately, implementations diverged and they wanted to stay diverged. Nobody was willing to change their behavior after DR 400. So, of course,
 
@@ -362,7 +362,7 @@ I developed and tested a solution that works on all 3 major operating system dis
 
 # Transparent Aliases
 
-The paper document that describes the work done here is [N2901](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2901.htm). It contains much of the same statement of the problem that is found in this post, but talks about the development of a solution. In short, what we develop here is a way to provide a symbol that does officially exist as far as the final binary is concerned, much like how the `asm("new_name")` and `__attribute__((alias("old_name")))` are. Notably, the design has these goals:
+The paper document that describes the work done here is [N2901](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2901.htm). It contains much of the same statement of the problem that is found in this post, but talks about the development of a solution. In short, what we develop here is a way to provide a symbol that does officially exist as far as the final binary is concerned, much like how the `asm("new_name")` and `__attribute__((alias("old_name")))` are. Notably, the design has these goals:
 
 - it must cost nothing to use;
 - it must cost nothing if there is no use of the feature;

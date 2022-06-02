@@ -34,7 +34,7 @@ Severe ecosystem problems (take e.g `intmax_t`)
 
 ## One part solved
 
-Robert Seacord's [N2680 - Specific Width Length Modifier](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2680.pdf)
+Robert Seacord's [N2680 - Specific Width Length Modifier](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2680.pdf)
 
 Can print out numbers better without an ABI break: great! 🎉
 
