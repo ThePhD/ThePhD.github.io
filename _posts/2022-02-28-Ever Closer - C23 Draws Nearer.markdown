@@ -161,7 +161,7 @@ The conventional wisdom to battle this has to always initialize your structures 
 
 ## `memset` is Easy to Make Mistakes With
 
-This is a human argument, so obviously more people than it acceptable will discard it by just banging the drum of C's creators: "just be more careful". But, whether we like it or not, [we are not Gods but human beings](https://twitter.com/ekuber/status/1406620697531666440). We seriously make mistakes, and many of us do not recognize it:
+This is a human argument, so obviously more people than is acceptable will discard it by just banging the drum of C's creators: "just be more careful". But, whether we like it or not, [we are not Gods but human beings](https://twitter.com/ekuber/status/1406620697531666440). We seriously make mistakes, and many of us do not recognize it:
 
 
 > I lost the last week of February due to a bug I introduced in firmware attempting to zero out a structure:
@@ -170,7 +170,7 @@ This is a human argument, so obviously more people than it acceptable will disca
 > memcpy(&spibuf, 0, sizeof(spibuf));
 > ```
 > 
-> Yeah, that's copying from a NULL pointer. Should've been:
+> Yeah, that's copying from a `NULL` pointer. Should've been:
 >
 > ```cpp
 > memset(&spibuf, 0, sizeof spibuf);
@@ -179,7 +179,7 @@ This is a human argument, so obviously more people than it acceptable will disca
 >
 > — [Scott Stanfield (@seesharp), March 5th, 2021](https://twitter.com/seesharp/status/1367819804116013058)
 
-When I quoted this as part of explaining why this change to the language was a necessary one, people still didn't see the error that was made, despite them explicitly knowing they were looking for a bug:
+When I quoted this as part of explaining why this change to the language was a necessary one, people still didn't see the error that was made! This was with the fact that they explicitly knew they were looking for a bug:
 
 > Wait .. is there a difference if you use parentheses for sizeof...?
 > 
@@ -511,7 +511,7 @@ Indeed, reading The C Programming Language, 2nd Edition, reaffirms how important
 
 At the time, they felt they could not remove the K&R "old-style" definitions. It had not been deprecated long enough, and the new syntax had not been around for long enough (it hadn't been around at all, in fact). So, they rolled it into C89 deprecated, and explicitly discouraged its use for some 33+ years. It's been deprecated longer than I've been alive (sorry to those of you reading this and feeling old)! But, well, since it's been deprecated for so damn long, the Committee finally felt that it was time to retire the unsafe K&R declarations and definitions.
 
-It's no secret that I think [K&R declarations are unsafe, error-prone, and dangerous](https://twitter.com/__phantomderp/status/1406468399782322177). So I was happy that in the first revision of the C Standard that I joined the Committee, we were going to get rid of it and make `void foo();` mean that it was an argument taking 0 functions, adjusting the syntax back to what Kernighan and Ritchie had yearned for in their language originally with prototypes. Unfortunately, it's not all Happy-Happy Sing-Along Songs. We removed some functionality when we did this, particularly ~3 different use cases. One was related to the declaration, and the other was related to definitions.
+It's no secret that I think [K&R declarations are unsafe, error-prone, and dangerous](https://twitter.com/__phantomderp/status/1406468399782322177). So I was happy that in the first revision of the C Standard that I joined the Committee, we were going to get rid of it and make `void foo();` mean that it was an argument taking 0 parameters, adjusting the syntax back to what Kernighan and Ritchie had yearned for in their language originally with prototypes. Unfortunately, it's not all Happy-Happy Sing-Along Songs. We removed some functionality when we did this, particularly ~3 different use cases. One was related to the declaration, and the other was related to definitions.
 
 
 
