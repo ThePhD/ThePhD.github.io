@@ -12,27 +12,28 @@ I have quite a few C++ proposals I am working on and percolating through the C++
 
 ### Actively Pursued Evolution Proposals:
 
-C++ | p1040: std::embed | [Published](https://wg21.link/p1040) | [Latest Draft](/_vendor/future_cxx/papers/d1040.html)
-C++ | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/_vendor/future_cxx/papers/d1629.html)
-C++ | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/_vendor/future_cxx/papers/d1664.html)
-C++ | p1967: Preprocessor embed - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/_vendor/future_cxx/papers/d1967.html)
-C++ | p2513: `char8_t` Compatibility and Portability Fixes | [Published](https://wg21.link/p2513) | [Latest Draft](/_vendor/future_cxx/papers/d2513.html)
-C   | n2965: Modern Bit Utilities | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2965.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Modern%20Bit%20Utilities.html)
-C   | n2968: Prefixes for the Standard Library | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2968.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Prefixes%20for%20the%20Standard%20Library.html)
-C   | n2970: Transparent Aliases | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2970.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Function%20Aliases.html)
-C   | n2995: `__supports_literal` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2995.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__supports_literal.html)
-C   | n2996: Enhanced Enumerations | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2996.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Enhanced%20Enumerations.html)
-C   | n2997: Improved Normal Enumerations | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2997.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20Normal%20Enumerations.html)
-C   | n2998: Literal Suffixes for `size_t` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2998.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
-C   | n2999: Restartable Functions for Efficient Character Conversions | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2999.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
-C   | n3000: Preprocessor embed - Binary Resource Inclusion | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3000.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed.html)
-C   | n3001: Modern Bit Utilities | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3001.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed.html)
-C   | n3011: Oops, Compound Literals and Empty Initializers | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3011.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Oops,%20Compound%20Literals%20with%20Empty%20Initializers.html)
+C++??   | p1040: std::embed | [Published](https://wg21.link/p1040) | [Latest Draft](/_vendor/future_cxx/papers/d1040.html)
+C++26   | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/_vendor/future_cxx/papers/d1629.html)
+C++26   | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/_vendor/future_cxx/papers/d1664.html)
+C++26   | p1967: Preprocessor embed - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/_vendor/future_cxx/papers/d1967.html)
+C2y/C3a | n2968: Prefixes for the Standard Library | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2968.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Prefixes%20for%20the%20Standard%20Library.html)
+C2y/C3a | n2970: Transparent Aliases | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2970.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Function%20Aliases.html)
+C2y/C3a | n2995: `__supports_literal` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2995.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__supports_literal.html)
+C23     | n2997: Improved Normal Enumerations | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2997.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20Normal%20Enumerations.html)
+C2y/C3a | n2998: Literal Suffixes for `size_t` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2998.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
+C23     | n2999: Restartable Functions for Efficient Character Conversions | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2999.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
+C23     | n3011: Oops, Compound Literals and Empty Initializers | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3011.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Oops,%20Compound%20Literals%20with%20Empty%20Initializers.html)
+C23     | n3017: Preprocessor embed - Binary Resource Inclusion | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3017.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed.html)
+C23     | n3021: Enhanced Enumerations | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3021.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Enhanced%20Enumerations.html)
+C23     | n3022: Modern Bit Utilities | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3022.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Modern%20Bit%20Utilities.html)
 
 
 ### Approved Proposals:
 
 Most have been completed / merged at this point! The rest of the work is up above!
+
+C++23 | p2513: `char8_t` Compatibility and Portability Fixes | [Published](https://wg21.link/p2513) | [Latest Draft](/_vendor/future_cxx/papers/d2513.html)
+
 
 
 ### Completed / Merged Proposals:
