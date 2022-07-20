@@ -20,13 +20,13 @@ C++??   | p2537: Relax `va_start` Requirements to Match C | [Published](https://
 C2y/C3a | n2968: Prefixes for the Standard Library | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2968.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Prefixes%20for%20the%20Standard%20Library.html)
 C2y/C3a | n2970: Transparent Aliases | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2970.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Function%20Aliases.html)
 C2y/C3a | n2995: `__supports_literal` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2995.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__supports_literal.html)
-C23     | n2997: Improved Normal Enumerations | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2997.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20Normal%20Enumerations.html)
 C2y/C3a | n2998: Literal Suffixes for `size_t` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2998.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
-C23     | n2999: Restartable Functions for Efficient Character Conversions | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2999.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
 C23     | n3011: Oops, Compound Literals and Empty Initializers | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3011.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Oops,%20Compound%20Literals%20with%20Empty%20Initializers.html)
 C23     | n3017: Preprocessor embed - Binary Resource Inclusion | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3017.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed.html)
-C23     | n3021: Enhanced Enumerations | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3021.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Enhanced%20Enumerations.html)
 C23     | n3022: Modern Bit Utilities | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3022.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Modern%20Bit%20Utilities.html)
+C23     | n3029: Improved Normal Enumerations | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3029.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20Normal%20Enumerations.html)
+C23     | n3030: Enhanced Enumerations | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3030.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Enhanced%20Enumerations.html)
+C23     | n3031 Restartable Functions for Efficient Character Conversions | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3031.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
 
 
 ### Approved Proposals:
