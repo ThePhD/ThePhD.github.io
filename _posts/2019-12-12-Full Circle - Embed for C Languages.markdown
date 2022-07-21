@@ -148,3 +148,5 @@ So, I froze P1040. Even if I walked down the Circle Language path, I would end u
 Maybe SG7 might change their minds on this soon. I don't know. But until that happens, I won't be running in any circles over it.
 
 Later-taters. 💚
+
+{% include anchors.html %}

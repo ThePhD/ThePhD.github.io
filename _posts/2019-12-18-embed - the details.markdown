@@ -361,3 +361,5 @@ Instead of standing on the shoulders of giants, I have to instead struggle not t
 And I won't mess it up, for me or the ones who come after me.
 
 See you in 2020. 💚
+
+{% include anchors.html %}
