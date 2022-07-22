@@ -8,7 +8,7 @@ tags: [C, Standard, 🎉]
 excerpt_separator: <!--more-->
 ---
 
-It happened. Nearly 5 years of paper writing, being snuck Committee Meeting notes on the DL until I could access them myself and absolve my co-conspirators of their sins, 5 different implementations/patches later, I can finally say it.<!--more-->
+It happened. Nearly 5 years of paper writing, being snuck Committee Meeting notes on the DL until I could access them myself and absolve my co-conspirators of their sins, 5 different implementations/patches later, I can<!--more--> finally say it.
 
  
 
@@ -92,7 +92,7 @@ int main (int, char*[]) {
 }
 ```
 
-It's that simple. Of course, you may ask "of what benefit is this to me?". If you've been keeping up with this blog for a while, you'll have noticed that `#embed` can actually come with some [pretty slick performance improvements](/embed-the-details#results). This relies on the implementation taking advantage of C and C++'s "as-if" rule, knowing specifically that the data comes from `#embed` to effectively gobble that data up and cram it into a contiguous data sequence (e.g., a C array, a `std::array`, or `std::initializer_list` (which is backed by a C array)). My implementation and one other implementation - from the QAC Compiler at Perforce - also proved this to be true by obtai.ning a (reportedly) 2+ orders of magnitude (150x, to be exact) speed up in the inclusion of binary data in their real-world customer data.
+It's that simple. Of course, you may ask "of what benefit is this to me?". If you've been keeping up with this blog for a while, you'll have noticed that `#embed` can actually come with some [pretty slick performance improvements](/embed-the-details#results). This relies on the implementation taking advantage of C and C++'s "as-if" rule, knowing specifically that the data comes from `#embed` to effectively gobble that data up and cram it into a contiguous data sequence (e.g., a C array, a `std::array`, or `std::initializer_list` (which is backed by a C array)). My implementation and one other implementation - from the QAC Compiler at Perforce - also proved this to be true by obtaining a reportedly 2+ orders of magnitude (150x, to be exact) speed up in the inclusion of binary data with real-world customer application data.
 
 Suffice to say, there's tons of potential here to really crunch down build times and make things far more optimal for the typical end-user.
 
@@ -102,7 +102,7 @@ With this, putting data into C and C++ executables will be a dream. Obviously, i
 - the actual standards flag (`-std=c23` or `/std:clatest` or whatever MSVC comes up with); and,
 - only to C and not C++ despite the same paper existing for C++ and progressing towards Evolution Working Group acceptance for maybe C++26
 
-is just your vendor being as pedantic and hostile as possible to an extension that should've existed 40-50 years ago. And, boy howdy, does fighting for a please-God-let-me-put-my-binary-data-in-my-program-in-a-way-that-does-not-suck-please-bro-pls-bro-plssssss feature is an exercise in self torture and deeply personal self-hatred.
+is just your vendor being as pedantic and hostile as possible to an extension that should've existed 40-50 years ago. And, boy howdy, does fighting for a please-God-let-me-put-my-binary-data-in-my-program-in-a-way-that-does-not-suck-please-bro-pls-bro-plssssss feature make for a terrific exercise in self torture and deeply personal self-hatred.
 
 
 
@@ -123,14 +123,14 @@ So much energy went into convincing people that *yes*, we should have this, *no*
 
 This is, really, the crux of it. Many of the folks who claimed that compilers could "just parse it better" seemed to live in a world where these two competing sides:
 
-- an ASCII-based, human-readable text-based format (numeric literals) in a sequence;
-- a binary, bit-blasting loading and storage apparatus that has been maintained, improved, and honed for 60+ years that has its own OS-side and hardware-side caches (your **file system**)
+- an ASCII-based, human-readable text-based format (numeric literals) in a sequence; versus,
+- a binary, bit-blasting loading and storage apparatus that has been maintained, improved, and honed for 60+ years that has its own OS-side and hardware-side caches (your **file system**),
 
-were going to have a fair fight. I'm just going to be blunt: there is no parsing algorithm, no hand-optimized assembly-pilled LL(1) parser, no recursive-descent madness you could pull off in any compiler implementation that will beat "I called `fopen()` and then `fread()` the data directly where it needed to be". But, just in case the theoretical tension between "dump data" versus "complex speed-parsing algorithm" does not prove it to you, maybe Corentin Jabot should have. He, quite literally, tried to ["just parse better, bro"](https://cor3ntin.github.io/posts/arrays/) and the speed gains were **pathetic** compared to `#embed` and its counterparts. That we had to very slowly, over the course of 4 years of convincing people of the utility of `#embed` and `std::embed`, explain that No, You Cannot Just "implement your compiler better" (a real argument we had to deal with **multiple** times over). GCC had to sacrifice diagnostic information to get better speed (good luck if you've got a big array, 256 elements is enough for everybody, right?); Clang had its own issue open for large array initializers (and has subsequently shrugged its shoulders); MSVC is quite literally so bad at parsing a series of integer literals on its compilers that it not only ran out of memory faster than every other compiler, but it lost in both compile-time and memory usage to MinGW on the same computer! And yet,
+were going to have a fair fight. I'm just going to be blunt: there is no parsing algorithm, no hand-optimized assembly-pilled LL(1) parser, no recursive-descent madness you could pull off in any compiler implementation that will beat "I called `fopen()` and then `fread()` the data directly where it needed to be". But, just in case the theoretical tension between "dump data" versus "complex speed-parsing algorithm" does not prove it to you, maybe Corentin Jabot already did the work. He, quite literally, tried to ["just parse better, bro"](https://cor3ntin.github.io/posts/arrays/) and the speed gains were **pathetic** compared to `#embed` and its counterparts. That we had to very slowly, over the course of 4 years of convincing people of the utility of `#embed` and `std::embed`, explain that No, You Cannot Just "implement your compiler better" (a real argument we had to deal with **multiple** times over). GCC had to sacrifice diagnostic information to get better speed (good luck if you've got a big array, 256 elements is enough for everybody, right?); Clang had its own issue open for large array initializers (and has subsequently shrugged its shoulders); MSVC is quite literally so bad at parsing a series of integer literals on its compilers that it not only ran out of memory faster than every other compiler, but it lost in both compile-time and memory usage to MinGW on the same computer! And yet,
 
 we can parse our way out of this one?
 
-This is one of those things where you just have to sit back and let people steadily bang their head against the problem, quite literally generate the motivation for your proposal for you, so you can just quietly insert links to public discourse and user complaints and compiler engineers *this decade* throwing their hands up and giving up. You don't have to say "I Told You So", because they'll get it when they read back their own frustrated commit messages and mailing list struggles. Excuse my French here, but there's no cure for people believing they could beat out the file system - one of the most versatile and fastest data storage systems ever created - using the syntax of a programming language as fundamentally broken as C or C++. Still?
+This is one of those things where you just have to sit back and let people steadily bang their head against the problem. It turned out to be an effective method of generating the motivation on the proposal for me. Inserting links to public discourse and user complaints and compiler engineers *this decade* throwing their hands up and giving up served as a powerful motivator. You don't have to say "I Told You So", because they'll get it when they read back their own frustrated commit messages, review discussion, and mailing list struggles. Sometimes, there's no cure for people believing they could beat out the file system - one of the most versatile and fastest data storage systems ever created - using the syntax of a programming language as fundamentally broken as C or C++. Still?
 
 It's draining to watch it play out, though.
 
@@ -140,13 +140,13 @@ It's draining to watch it play out, though.
 
 <br/>
 
-It's this kind of Maidenless and Lost behavior that has come to tire me out the most in C and C++. Even among people who control all the cards, they are in many respects fundamentally incapable of imagining a better world or seizing on that opportunity to try and create one, let alone doing so in a timely fashion. Meanwhile, compilers like Circle will [literally implement your directive in a few days, tops](/full-circle-embed#during-this-time-embed-and-std-embed-took-almost-no-memory-overh) and then go give talks about [how much better they are at your own job than you](https://www.youtube.com/watch?v=15j4bkipuAg). And a some point you just begin to wonder. Questions start forming in your head.
+It's this kind of Maidenless and Lost behavior that has come to tire me out the most in C and C++. Even among people who control all the cards, they are in many respects fundamentally incapable of imagining a better world or seizing on that opportunity to try and create one, let alone doing so in a timely fashion. Meanwhile, compilers like Circle will [literally implement your directive in a few days, tops](/full-circle-embed#during-this-time-embed-and-std-embed-took-almost-no-memory-overh) and then go give talks about [how much better they are at your own job than you](https://www.youtube.com/watch?v=15j4bkipuAg). And at some point you just begin to wonder. Questions start forming in your head.
 
 _Is this really the best place for me to put my effort into?_  
 _Am I wasting my time by believing in these other folk to make changes?_  
-_Is there truly a free from the constant rent seeking of the ruling class and live a more free life?_  
+_Is there truly a way to escape from the constant rent seeking of the ruling class and live a more free life?_  
 _Should I have a Peanut Butter & Jelly Sandwich for lunch, today?_  
-_Should I not join with others or go do my own thing?_  
+_Should I not join with others and go do my own thing?_  
 
 Truly, a struggle.
 
