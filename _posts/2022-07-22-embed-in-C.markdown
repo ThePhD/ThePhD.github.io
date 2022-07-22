@@ -1,0 +1,268 @@
+---
+layout: post
+title: "finally. <code>#embed</code>"
+permalink: /finally-embed-in-c23
+feature-img: "/assets/img/2022/07/exhausted.png"
+thumbnail: "/assets/img/2022/07/exhausted.png"
+tags: [C, Standard, 🎉]
+excerpt_separator: <!--more-->
+---
+
+It happened. Nearly 5 years of paper writing, being snuck Committee Meeting notes on the DL until I could access them myself and absolve my co-conspirators of their sins, 5 different implementations/patches later, I can finally say it.
+
+ 
+
+
+# `#embed` is in C23
+
+Surprisingly, despite this journey starting with C++ and WG21, the C Committee is the one that managed to get there first despite having less time with these forms. This means that, in one of those rare occurrences that doesn't generally happen, a standard C implementation will outstrip a conforming standard C++ implementation for old--yet-groundbreaking features.
+
+But what is `#embed`, exactly, and what it does it offer us? Let's review the feature and some of the facts at hand.
+
+
+
+## Please Put My Data In My Gotdang Executable And Stop Doing Crazy Nonsense, The Feature
+
+You would think that we would have figured out a decent, cross-platform way to put data in executables after 60 years of filesystem research and advances and 40 years of C and C++ implementations.
+
+You would unfortunately be thinking wrong.
+
+Every compiler, every linker, every **platform** had its own little bespoke way of sticking data into your executable. Worse, all of them required different levels of weird invocations from not just your compiler, but your linker or, in even worse cases, nonportable inline assembly. This was, of course, orchestrated in further bespoke ways by whatever build system was being used at the time, resulting in Bespoke<sup>2</sup> behavior. Then, I note that some people stacked `${lang}` scripts to handle some of this, and then paired it up with CMake, so you're no longer dealing with just Quadratic Bespoke behavior, but literal Exponentially Bespoke behavior! Nevertheless, I won't beleaguer you more on all the ways you can go about this: many are included in the [appendix of the actual preprocessor embed paper](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3017.htm#appendix).
+
+The good news is, with this you should now be able to simply write:
+
+```cpp
+#include <assert.h>
+
+int main (int, char*[]) {
+	static const char sound_signature[] = {
+#embed <sdk/jump.wav>
+	};
+	static_assert((sizeof(sound_signature) / sizeof(*sound_signature)) >= 4,
+		"There should be at least 4 elements in this array.");
+
+	// verify PCM WAV resource signature (at run-time)
+	assert(sound_signature[0] == 'R');
+	assert(sound_signature[1] == 'I');
+	assert(sound_signature[2] == 'F');
+	assert(sound_signature[3] == 'F');
+
+	return 0;
+}
+```
+
+and in C++, you can make it `constexpr`, which means you can check/manipulate the data at compile-time:
+
+```cpp
+int main (int, char*[]) {
+	constexpr const char sound_signature[] = {
+#embed <sdk/jump.wav>
+	};
+	static_assert((sizeof(sound_signature) / sizeof(*sound_signature)) >= 4,
+		"There should be at least 4 elements in this array.");
+	// verify PCM WAV resource signature: AT COMPILE TIME!!!
+	static_assert(sound_signature[0] == 'R');
+	static_assert(sound_signature[1] == 'I');
+	static_assert(sound_signature[2] == 'F');
+	static_assert(sound_signature[3] == 'F');
+
+	return 0;
+}
+```
+
+The directive is well-specified, currently, in all cases to generate a comma-delimited list of integers. So, the code above - assuming only 4 elements in the file and no failures - would look something like this after preprocessor expansion:
+
+```cpp
+/* God-awful explosion of code just so I can get the assert() macro */
+
+int main (int, char*[]) {
+	static const char sound_signature[] = {
+0x52, 0x49, 0x46, 0x46
+	};
+	static_assert((sizeof(sound_signature) / sizeof(*sound_signature)) >= 4,
+		"There should be at least 4 elements in this array.");
+
+	// verify PCM WAV resource signature (at run-time)
+	assert(sound_signature[0] == 'R');
+	assert(sound_signature[1] == 'I');
+	assert(sound_signature[2] == 'F');
+	assert(sound_signature[3] == 'F');
+
+	return 0;
+}
+```
+
+It's that simple. Of course, you may ask "of what benefit is this to me?". If you've been keeping up with this blog for a while, you'll have noticed that `#embed` can actually come with some [pretty slick performance improvements](/embed-the-details#results). This relies on the implementation taking advantage of C and C++'s "as-if" rule, knowing specifically that the data comes from `#embed` to effectively gobble that data up and cram it into a contiguous data sequence (e.g., a C array, a `std::array`, or `std::initializer_list` (which is backed by a C array)). My implementation and one other implementation - from the QAC Compiler at Perforce - also proved this to be true by obtai.ning a (reportedly) 2+ orders of magnitude (150x, to be exact) speed up in the inclusion of binary data in their real-world customer data.
+
+Suffice to say, there's tons of potential here to really crunch down build times and make things far more optimal for the typical end-user.
+
+With this, putting data into C and C++ executables will be a dream. Obviously, it is only available for C23 - so far as the standard is concerned - and I will need to put up the usual (hopefully not dragging) fight to get it into C++26. Nevertheless, I would expect (or perhaps, 🙏 pray 🤲 is the right word to use here) any compiler vendor not high on the Strictly Conforming Standardese supply to simply enable it in all standard modes, and if they're being pedantic warn on it being used in older standard's modes, because gating it behind:
+
+- new compiler builds (you already need a new version of a compiler to have a new feature anyways);
+- the actual standards flag (`-std=c23` or `/std:clatest` or whatever MSVC comes up with); and,
+- only to C and not C++ despite the same paper existing for C++ and progressing towards Evolution Working Group acceptance for maybe C++26
+
+is just your vendor being as pedantic and hostile as possible to an extension that should've existed 40-50 years ago. And, boy howdy, does fighting for a please-God-let-me-put-my-binary-data-in-my-program-in-a-way-that-does-not-suck-please-bro-pls-bro-plssssss feature is an exercise in self torture and deeply personal self-hatred.
+
+
+
+
+# The Fight
+
+The rest of this article is going to be about squishy, icky, blech-y humanity. You can bail now and you'd not miss much (other than some possibly dank memes and a deeply heartfelt show of support from the folks who helped make `#embed` possible). If you're one of those stick-in-the-mud, humans-are-disgusting, personality-is-way-too-much-in-my-pure-clean-technology kind of people, well. See you next article (which will be very fun and technical, I promise!) 👋.
+
+And with the disclaimer out of the way…
+
+I cannot begin to explain to you how many people asked me for this, e-mailed me about this, encouraged (and discouraged) me from doing this, told me I wouldn't need an implementation of it (and then my multiple implementations, and basically being a for-free vendor of GCC/Clang patches to some development houses, coming in the clutch to protect me from the "two implementations or it doesn't count" criticism in the C Committee), told me this form was a bad idea (but then refused to elaborate on why, even when I followed up to ask as requested), told me this form was non-ideal and it was worth voting against (and that they'd want the [pure, beautiful C++ version only](https://wg21.link/p1040)), jokingly threatened to file ISO National Body-level objections to the existence of the C++ version and that only the C version would survive, **actually** threatened to file ISO National Body-level objections to the existence of the C++ version, held me to a standard of finding/tracking dependencies that they won't (and still don't) hold their own Modules implementations to ("where are the source files that make up this module? who knows; ask your vendor, not dealing with that noise in the standard 😂!"), having to deal with an endless wave of things I had to disprove ("`#embed` is an attack vector (but `#include` is fine)", that was the most fun one!) and on and on and on.
+
+So much energy went into convincing people that *yes*, we should have this, *no*, we can't "just parse better" our way out of it, *no*, the smartest people in the last 30 years across all major compilers were literally not capable of doing a better job at this! I actually wondered for a brief moment if I was not a proper user of C and C++ but an alien who existed in a planet that got the cursed or dark version of C and C++ and my interactions with other human beings were actually a brief window into an alternative universe where Everything Is Just Fine, Actually. At one point, I had to even convince vendors using **their own bug trackers**, linking to [mail from the LLVM Mailing List where folks speed-ran](https://lists.llvm.org/pipermail/llvm-dev/2020-January/138225.html) the entire motivation for the proposals in a single e-mail chain. Or, to the bug report in GCC where someone is embedded a big `xxd`-generated array (one big list of numbers), and ultimately their [response to the bug report was](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=14179#c81) "*We Will Simply Stop Keeping Error Information For All Arrays Past The 256th Element, Good Luck!!*". Or having to reaffirm that no, you can't [just "Use a String Literal", because MSVC](https://twitter.com/oe1cxw/status/1014330034142654464) has an arbitrarily **tiny** limit of string literals in its compiler (64 kB, no they can't raise it because ABI, I know, I checked with multiple bug reports and with the implementers themselves as have [many other frustrated developers](https://github.com/libnonius/nonius/blob/devel/include/nonius/reporters/html_reporter.h%2B%2B#L42)). Finally, after every implementer ran themselves into the ground and finally realized "gosh, we actually can't parse our way or string literal our way out of our distinct problems", they finally begin to come around. Which, and if I can just take a brief moment to state,
+
+
+
+## How In The World Are You Going To Out-Do The File System?
+
+This is, really, the crux of it. Many of the folks who claimed that compilers could "just parse it better" seemed to live in a world where these two competing sides:
+
+- an ASCII-based, human-readable text-based format (numeric literals) in a sequence;
+- a binary, bit-blasting loading and storage apparatus that has been maintained, improved, and honed for 60+ years that has its own OS-side and hardware-side caches (your **file system**)
+
+were going to have a fair fight. I'm just going to be blunt: there is no parsing algorithm, no hand-optimized assembly-pilled LL(1) parser, no recursive-descent madness you could pull off in any compiler implementation that will beat "I called `fopen()` and then `fread()` the data directly where it needed to be". But, just in case the theoretical tension between "dump data" versus "complex speed-parsing algorithm" does not prove it to you, maybe Corentin Jabot should have. He, quite literally, tried to ["just parse better, bro"](https://cor3ntin.github.io/posts/arrays/) and the speed gains were **pathetic** compared to `#embed` and its counterparts. That we had to very slowly, over the course of 4 years of convincing people of the utility of `#embed` and `std::embed`, explain that No, You Cannot Just "implement your compiler better" (a real argument we had to deal with **multiple** times over). GCC had to sacrifice diagnostic information to get better speed (good luck if you've got a big array, 256 elements is enough for everybody, right?); Clang had its own issue open for large array initializers (and has subsequently shrugged its shoulders); MSVC is quite literally so bad at parsing a series of integer literals on its compilers that it not only ran out of memory faster than every other compiler, but it lost in both compile-time and memory usage to MinGW on the same computer! And yet,
+
+we can parse our way out of this one?
+
+This is one of those things where you just have to sit back and let people steadily bang their head against the problem, quite literally generate the motivation for your proposal for you, so you can just quietly insert links to public discourse and user complaints and compiler engineers *this decade* throwing their hands up and giving up. You don't have to say "I Told You So", because they'll get it when they read back their own frustrated commit messages and mailing list struggles. Excuse my French here, but there's no cure for people believing they could beat out the file system - one of the most versatile and fastest data storage systems ever created - using the syntax of a programming language as fundamentally broken as C or C++. Still?
+
+It's draining to watch it play out, though.
+
+![A picture of an anthropomorphic sheep in the style of the Maiden of Elden Ring, one eye closed and tattooed over while the other is half-open. Their brows are pushed up together near the forehead and slope off downward as it goes out, sheep ears downturned fully with a grimace on their face and bags under their one good, open eye. ](/assets/img/2022/07/no_maidens.png)
+
+<center><sub><sub><sub>"No Maidens?"</sub></sub></sub></center>
+
+<br/>
+
+It's this kind of Maidenless and Lost behavior that has come to tire me out the most in C and C++. Even among people who control all the cards, they are in many respects fundamentally incapable of imagining a better world or seizing on that opportunity to try and create one, let alone doing so in a timely fashion. Meanwhile, compilers like Circle will [literally implement your directive in a few days, tops](/full-circle-embed#during-this-time-embed-and-std-embed-took-almost-no-memory-overh) and then go give talks about [how much better they are at your own job than you](https://www.youtube.com/watch?v=15j4bkipuAg). And a some point you just begin to wonder. Questions start forming in your head.
+
+_Is this really the best place for me to put my effort into?_  
+_Am I wasting my time by believing in these other folk to make changes?_  
+_Is there truly a free from the constant rent seeking of the ruling class and live a more free life?_  
+_Should I have a Peanut Butter & Jelly Sandwich for lunch, today?_  
+_Should I not join with others or go do my own thing?_  
+
+Truly, a struggle.
+
+It's deeply depressing and ultimately a great source of burnout being at the grindstone for 4 years for things people were casually discussing [about in September of 1995](https://groups.google.com/g/comp.std.c/c/zWFEXDvyTwM) (and earlier). It's almost as depressing as putting `typeof` in the C Standard and then realizing this was something they'd been discussing doing since after C89 (1989). Am I destined to just keep closing the loop on old, unrealized dreams because a bunch of people were too tired/scared/busy/combative to standardize what has literally been decades of existing practice?
+
+It was hard to realize how tired I was of this kind of grind until the day the feature was put into the C Standard, this past Tuesday. I quite literally could not even muster a "yes!" after the vote finished. I just felt empty and numb, because quite literally dragging an entire community of implementers through several hurdles, to finally get them to acknowledge the existence of a problem and its solution, is just... soul-crushing. It is a level of effort that I recommend to nobody in any sphere of life, for any task. At least when you are on the ground and organizing and helping people, you're providing some kind of material value. Water. Food. Improving something. Here? I'm talking about things that are quite literally older than I am. Just trying to bring ideas from the last 3 decades - things you would think were Table Stakes for foundational languages like C and C++ languages - would not be seen as a radical new paradigm or shift in the language. Nevertheless, I spent (burned?) that energy, and finally.
+
+It's in. By all the god's, it's in the C Standard now. And, truly, it all came down to your help.
+
+
+
+
+# Actual, Real, Touchable, Non-Electronic Mail
+
+This is the first proposal that someone actually not only e-mailed but **physically sent** a letter of support to not only the company help backing the proposal, but also to the literal doorstep of the C Standards Committee. Believe it or not, the company forwarded it to me and was like "you **actually** got something", and lo' and behold both the Convener of the C Committee and I got to actually put our hands on a real letter sent by a multinational company (given here, with permission):
+
+[!["A letter from a company by the name of 'DMG Mori', sent to the C Standards Committee (with the address of the company, the Committee, and name/e-mail of the signee blacked out). The full text is included just below, for reading."](/assets/img/2022/07/Embed%20Support%20Letter%20-%20DMG.png)](/assets/img/2022/07/Embed%20Support%20Letter%20-%20DMG.png)
+
+The full text reads:
+
+> From Address:
+> DMG MORI
+> (REDACTED) Wernau, Germany
+>
+> To Address:
+> C Standards Committee
+> ISO/IEC JTC 1/SC 22/WG 14
+> (REDACTED) NV, USA
+>
+> **Speaking in favor of N2592 and `#embed` for C23**
+>
+> Dear C Standards Committee,
+>
+> I'm (REDACTED), a senior engineer at DMG MORI Japan. I write to you to speak in favor of the proposal N2592 and its possible inclusion in the C23 standard.
+> 
+> My relationship with the C programming language comes from graphics programming. Commanding the GPU and processing images via GLSL shaders is a jot to me in itself. Often, I embed resources in the final binary — Fonts, Icons, Shaders, etc. My Makefiles provide me a folder to drag&drop resources into, which automatically get included. Having just a single executable without the need to unpack anything and not dealing with file streams to load resources make this workflow a real joy.
+> 
+> Getting this workflow smoothed out across many operating systems and toolchains, however, is a never-ending task and the Makefiles that make this possible have long since left the realm of readability. When multiple compilers and different platforms are involved, messy details start to surface.
+> 
+> For instance, with the GNU toolchain this can be done via `ld -r -b binary -o icon_svg.o icon.svg` and linking the resulting object file to the final executable. The resource's size in the object file, however, is provided by means of an absolutely address. Modern compiler features like position independent executables (PIE) make the size inaccessible during run-time. A common workaround is to compute the size at run-time via 'end-pointer minus start-pointer'. A separate run-time calculation for a specific toolchain to get information already known at compile-time - this makes the code less portable. My Makefiles get the size via `nm` and auto-generate a header file with the size information to avoid this run-time calculation. Tiny detail in the grand scheme of things, but across many platforms, lots of work.
+> 
+> I look towards #embed as proposed by JeanHeyd Meneide with great anticipation. Unifying all these platform dependent details with a single #embed would make C code more portable, more comfortable, and more elegant. Thus, I symbolically vote in favor of N2592 for inclusion in C23 with this letter.
+> 
+> Yours Sincerely,  
+> (REDACTED)
+> 
+> (A signature is part of the image from the author.)
+
+"Touch grass", some people liked to tell me. "Go outside", they said (like I would in the middle of Yet Another Gotdang COVID-19 Spike). My dude, I've literally gotten company snail mail, and it wasn't a legal notice or some shenanigans like that! Holy cow, **real** paper in a **real** envelope, shipped through German Speed Mail!! This letter alone probably increases my Boomer Cred™ by at least 50; who needs Outside anymore after something like this? And, more importantly, it also injected me with the energy to keep going when I quite literally just wanted to toss a grenade under most of the work I was doing. As I stated in a [previous article](/no-us-without-you-elifdef-elifndef-c-n2645), never underestimate what your participation can do for the individuals involved in fighting for things that you like. Even if it's just a boost to their spirit, it can make all the difference. It **absolutely** made me sit back down when I was just going to toss all my volunteer effort out the window and say "screw this, I can get along fine with makefiles and `ld` and resource-files and non-constant-expressions and crap!".
+
+That energy kick was extremely helpful, too, because it was around this time that vendors started to be convinced they couldn't parse their way out of this problem. And it was then, cooperation started happening. The feature got so much time to stew with users, that we were able to incorporate one other game-changing idea into the `#embed` directive. And, that was the idea of directives that take Preprocessor Parameters.
+
+
+
+
+# `#embed`, Now with Parameters and Vendor Extensions™
+
+This suggestion actually came from a vendor, last year! If you were tracking the proposal earlier, you'd know that `#embed` supported opening, on Linux for example, "infinity files". That is, similar to `#include </dev/urandom>`, you could write:
+
+```cpp
+#embed </dev/urandom>
+```
+
+and simply watch the compiler run out of memory. That file name is a special Character Device on *nix (not to be confused with Nix) distributions that will provide, effectively, random numbers. An infinity of random numbers. So, we needed a way of providing a "limit", that told us how many elements maximum we could expect out of our directive. The way we solved this problem before was not at all great: it was just a number (or parenthesized expressino) stuck before the `"name"`/`<name>`:
+
+```cpp
+// limit to producing 4 elements, do not internally overflow the compiler
+#embed (2+2) </dev/urandom>
+```
+
+This was, of course, terrible. At the time, I wanted to do more: "what if we had named parameters we could pass to the directive". Unfortunately, by this time in the process I was consumed with the survival of the paper. "If I introduce something new, they'll hate it, and kill it." I mulled over options with a few friends: "maybe it could be spelled this way? But then embed looks like a function call, with named function parameters, that's a really bad conversation to have given how poorly named ANYTHING related to named parameters has gone in the Committee...". And so on, and so forth; I had become part of what I disliked most about the C and C++ proceedings. Concerned about the survival of things rather than boldly stepping forward and letting things work. Which is really a testament to how badly my psyche in approaching the `#embed` paper degraded over the years of maintaining patches and defending it again and again from each new imminent threat.
+
+The first time I presented `#embed` to the C++ Committee - Belfast 2019, when we still had in-person meetings and the world didn't collapse - I remember showing the EWG Chair at the time a preview of the feature and it's implementation. I explicitly used the `#embed </dev/urandom>`, putting the data in an array, and returning that random data.
+
+"You're going to scare people with that, and it might not help your paper survive." But I did it anyways, because at the time I was bold and ready to fight for my features back in 2019. I walked right in and showed loading bytes at compile-time during a build with `</dev/urandom>`. Like I said at the time, "if I can show them this and the paper will still survive, then it's worth it". It did survive, but that didn't stop the tumultuous ride from continuing. By 2021, I was just trying not to circle the drain and stay afloat, and I had become afflicted with that same poisoned mentality. "Do the minimum possible" is an absolutely terrible approach to language and library design, especially for the end-user. I was stuck in that rut for a while, until one implementer finally vouched in favor of something better. That e-mail came like a ray of light:
+
+> … it would be better if these came after the header name, and it was better **named**…
+
+(Emphasis mine.) I had my excuse for named preprocessor parameters, now. Quickly, I agreed to do such a thing, took WG21 feedback from the early 2021 meeting, and went right back to it. Finally, some bloody support to get things done the right way rather than have to always bring the "novel" and "new" ideas myself! Quickly, what used to be a number now came as a named parameter, similar to how OpenMP directives worked:
+
+```cpp
+// limit to producing 4 elements, do not internally overflow the compiler
+#embed </dev/urandom> limit(2+2)
+```
+
+My god, it was beautiful. I danced in place: no more magic, position-dependent stuff. I quickly reimplemented it and shipped the paper and prototype back to that implementer, and received their approval. The relief that coursed through my body: finally! I no longer had to live in survival mode and beg for table scraps with some unnamed bullshit. And, what's more important, is that this opened the door to **vendor extensions** with a well-defined form. Notably, special things like so:
+
+```cpp
+#include <stdint.h>
+
+// limit to producing 4 elements, do not internally overflow the compiler
+// 4 elements * 4 bytes = 16 total bytes pulled from /dev/urandom
+#embed </dev/urandom> limit(2+2) sdcc::element_type(int32_t)
+```
+
+were now a legal part of the syntax. If your implementation does not support a thing, [it can issue a diagnostic for the parameters it does not understand](https://godbolt.org/z/7ocPPv7dv). This was **great** stuff. We knew for a fact that this was going to be needed, because users (and implementers) were already asking how they could do extensions on `#embed` to support different file modes, potentially reading from the network (with a timeout), and other shenanigans. I can't put all of that in the standard, but so long as they implement their extension VIA a `vendor_name::parameter_name(any, args, they, need, ...)`, it is fully understandable and processable.
+
+It was the last break through necessary to push it all the way through.
+
+There was a ton of other stuff that had to be done, too. Coordinating with other implementers so they could provide their implementations and numbers, constantly communicating with users so they could be kept in the loop whenever someone sent feedback, the C Standards Committee requested a change, or the C++ Standards Committee had a new opinion on something. But it finally paid off. We have a readable preprocessor directive with a good model for preprocessor parameters going forward formally included in the C Standard.
+
+
+
+## It was all worth it.
+
+...
+
+Or. That's what I keep telling myself. Because it doesn't feel like it was worth it. It feels like I wasted a lot of my life achieving something so ridiculously basic that it's almost laughable. How utterly worthless I must consider myself, that hearing someone complain about putting data in C++ 5 years ago put me on the track to decide to try to put something in a programming language standard. That I had to fight this hard for table scraps off the Great C Standard's table.
+
+What a life, huh?
+
+
+
+
+# Anyways.
+
+Enjoy your directive. Even if all I am is increasingly miserable, I'm sure you'll enjoy it. 💚
+
+{% include anchors.html %}
