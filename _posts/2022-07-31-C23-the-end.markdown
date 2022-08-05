@@ -15,7 +15,7 @@ It's That Blog Post. The release one, where we round up all the last of the feat
 
 The last meeting was pretty jam-packed, and a lot of things made it through at the 11th hour. We also lost quite a few good papers and features too, so they'll have to be reintroduced next cycle, which might take us a whole extra 10 years to do. Some of us are agitating for a faster release cycle, mainly because we have 20+ years of existing practice we've effectively ignored and there's a lot of work we should be doing to reduce that backlog significantly. It's also just no fun waiting for `__attribute__((cleanup(…)))` (defer), statement expressions, better bitfields, wide pointers (a native pointer + size construct), a language-based generic function pointer type (GCC's `void(*)(void)`) and like 20 other things for another 10 years when they've been around for decades.
 
-But, I've digressed long enough: let's not talk about the future, but the present. What's in C23? Well, it's everything (sans the typo-fixes the Project Editors - me 'n' another guy - have to do) present in [N3047](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3047.pdf) What's on the table? There's a lot that got in with this last meeting, some of them pretty big blockbuster features for C (C++ will mostly quietly laugh, but that's fine because C is not C++ and we take pride in what we can get done here, with our community.) The first huge thing that will drastically improve code is a combination-punch of papers written by Jens Gustedt and Alex Gilding.
+But, I've digressed long enough: let's not talk about the future, but the present. What's in C23? Well, it's everything (sans the typo-fixes the Project Editors - me 'n' another guy - have to do) present in [N3047](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3047.pdf). Some of them pretty big blockbuster features for C (C++ will mostly quietly laugh, but that's fine because C is not C++ and we take pride in what we can get done here, with our community.) The first huge thing that will drastically improve code is a combination-punch of papers written by Jens Gustedt and Alex Gilding.
 
 
 
@@ -24,9 +24,9 @@ But, I've digressed long enough: let's not talk about the future, but the presen
 
 [Link](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3018.htm).
 
-I suppose most people did not see this one coming down the pipe for C, but with how wildly successful this was in C++ and how many C implementations were cranking out larger and larger constant expression parsers not just for serious speed gains, but also to do more type checking and semantic analysis at compile-time. What was most unfortunate is that despite many compilers getting powerful constant expression processors, standard C just continued to give everyone who ended up silently relying on those increasingly beefy and handsome compiler tricks a gigantic middle finger.
+I suppose most people did not see this one coming down the pipe for C. (Un?)Fortunately, C++ was extremely successful with `constexpr` and C implementations were cranking out larger and larger constant expression parsers for serious speed gains and to do more type checking and semantic analysis at compile-time. Sadly, despite many compilers getting powerful constant expression processors, standard C just continued to give everyone who ended up silently relying on those increasingly beefy and handsome compiler's tricks a gigantic middle finger.
 
-For example, if you've been reading my [last posts about C](/c-the-improvements-june-september-virtual-c-meeting#n2713---integer-constant-expressions-and-their-use-for-arrays) (or just watching [me post on Twitter](https://twitter.com/__phantomderp/status/1552424424758022147)), you'd know that this:
+For example, in my [last post about C](/c-the-improvements-june-september-virtual-c-meeting#n2713---integer-constant-expressions-and-their-use-for-arrays) (or just watching [me post on Twitter](https://twitter.com/__phantomderp/status/1552424424758022147)), I explained how this:
 
 ```cpp
 const int n = 5 + 4;
@@ -34,9 +34,9 @@ int purrs[n];
 // …
 ```
 
-was some highly illegal contraband. This created a Variable-Length Array (VLA), not a constant-sized array of size "5". What's worse is that the Usual Compilers™ (GCC, Clang, ICC, MSVC, and most other optimizing compilers actually worth compiling with) were typically powerful enough to basically turn the code generation of this object -- so long as you didn't pass it to something expecting an actual [Variably-Modified Types (also talked about in another post)](/ever-closer-c23-improvements#separating-variably-modified-types-from-variable-length-arrays) -- into working like a normal C array.
+is some highly illegal contraband. This creates a Variable-Length Array (VLA), not a constant-sized array with size `5`. What's worse is that the Usual Compilers™ (GCC, Clang, ICC, MSVC, and most other optimizing compilers actually worth compiling with) were typically powerful enough to basically turn the code generation of this object -- so long as you didn't pass it to something expecting an actual [Variably-Modified Types (also talked about in another post)](/ever-closer-c23-improvements#separating-variably-modified-types-from-variable-length-arrays) -- into working like a normal C array.
 
-This left people relying on the fact that this was a C array, even though it never was. And it created enough confusion that we had to accept N2713 to add clarification to the Standard Library to tell people that No, Even If You Can Turn That Into A Constant Expression, You Cannot Treat It Like One For The Sake Of the Language. One way you could force an error up-front if your compiler might turn this to a VLA behind-your-back is to do:
+This left people relying on the fact that this was a C array, even though it never was. And it created enough confusion that we had to accept N2713 to add clarification to the Standard Library to tell people that No, Even If You Can Turn That Into A Constant Expression, You Cannot Treat It Like One For The Sake Of the Language. One way to force an error up-front if the compiler would potentially turn something into not-a-VLA behind-your-back is to do:
 
 ```cpp
 const int n = 5 + 4;
@@ -44,7 +44,7 @@ int purrs[n] = { 0 }; // 💥
 // …
 ```
 
-VLAs are not allowed to have initializers[^note-vla-init], so adding one makes a compiler scream at you for daring to write one for an array. Of course, if you're one of those S P E E D junkies, this could waste precious cycles in potentially initializing your data to its `0` bit representation. So, there really was no way to win when dealing with `const` here, despite everyone's mental model -- thanks to the word's origin in "constant" -- latching onto `n` being a constant expression. Compilers "accidentally" supporting it by either not treating it as a VLA (and requiring the paper I linked to earlier to be added to C23 as a clarification), or treating it as a VLA but extension-ing and efficient-code-generating the problem away just resulted in one too many portability issues. So, in true C fashion, we added a 3rd way that was DEFINITELY unmistakable:
+VLAs are not allowed to have initializers[^note-vla-init], so adding one makes a compiler scream at you for daring to write one. Of course, if you're one of those S P E E D junkies, this could waste precious cycles in potentially initializing your data to its `0` bit representation. So, there really was no way to win when dealing with `const` here, despite everyone's mental model -- thanks to the word's origin in "constant" -- latching onto `n` being a constant expression. Compilers "accidentally" supporting it by either not treating it as a VLA (and requiring the paper I linked to earlier to be added to C23 as a clarification), or treating it as a VLA but extension-ing and efficient-code-generating the problem away just resulted in one too many portability issues. So, in true C fashion, we added a 3rd way that was DEFINITELY unmistakable:
 
 ```cpp
 constexpr int n = 5 + 4;
@@ -70,11 +70,11 @@ Note that there are no function calls included in this, so nobody has to flip ou
 
 This is to keep it easy to implement evaluation in smaller compilers and prevent feature-creep like the C++ feature. C is also protected from additional feature creep because, unlike C++, there's no template system. What justified half of the improvements to `constexpr` functions in C++ was "well, if I just rewrite this function in my favorite Functional Language -- C++ Templates! -- and tax the compiler even harder, I can do exactly what I want with worse compile-time and far more object file bloat". This was a scary consideration for many on the Committee, but we will not actually go that direction precisely because we are in the C language and not C++.
 
-You cannot look sideways and squint and say "well, if I just write this in the most messed up way possible, I can compute a constant expression in this backdoor Turing complete functional language"; it just doesn't exist. Therefore, there is no prior art or justification for an ever-growing selection of constant expression library functions or marked-up headers. Even if we get `constexpr` functions, it will be literally so bad that the best you can do with it is write a non-garbage `max` function to use as the behind-the-scenes for a `max` macro with `_Generic`.
+You cannot look sideways and squint and say "well, if I just write this in the most messed up way possible, I can compute a constant expression in this backdoor Turing complete functional language"; it just doesn't exist in C. Therefore, there is no prior art or justification for an ever-growing selection of constant expression library functions or marked-up headers. Even if we get `constexpr` functions, it will be literally and intentionally be underpowered and weak. It will be so bad that the best you can do with it is write a non-garbage `max` function to use as the behind-the-scenes for a `max` macro with `_Generic`. Or, maybe replace a few macros with something small and tiny.
 
-Some people will look at this and go: "Well. That's crap. The reason I use `constexpr` in my C++-like-C is so I can write crazy compile-time functions to do lots of heavy computation once at a compile-time, and have it up-to-date with the build at the same time. I can really crunch a perfect hash or create a perfect table that is hardware-specific and tailored without needing to drop down to platform-specific tricks. If I can't do that, then what good is this?" And it's a good series of questions, dear reader. But, my response to this for most C programmers yearning for better is this:
+Some people will look at this and go: "Well. That's crap. The reason I use `constexpr` in my C++-like-C is so I can write beefy compile-time functions to do lots of heavy computation once at a compile-time, and have it up-to-date with the build at the same time. I can really crunch a perfect hash or create a perfect table that is hardware-specific and tailored without needing to drop down to platform-specific tricks. If I can't do that, then what good is this?" And it's a good series of questions, dear reader. But, my response to this for most C programmers yearning for better is this:
 
-you get what you shill for.
+we get what we shill for.
 
 With C we do not ultimately have the collective will or implementers brave enough to take-to-task making a large constant expression parser, even if the C language is a lot simpler to write one for compared to C++. Every day we keep proclaiming C is a simple and beautiful language that doesn't need features, even features that are compile-time only with no runtime overhead. That means, in the future, the only kind of constant functions on the table are ones with no recursion, only one single statement allowed in a function body, plus additional restrictions to get in your way. But that's part of the appeal, right? The compilers may be weak, the code generation may be awful, most of the time you have to abandon actually working in C and instead just use it as a macro assembler and drop down to bespoke, hand-written platform-specific assembly nested in a god-awful compiler-version-specific `#ifdef`, but That's The Close-To-The-Metal C I'm Talkin' About, Babyyyyy!!
 
@@ -87,7 +87,7 @@ With C we do not ultimately have the collective will or implementers brave enoug
 
 [Link](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3038.htm).
 
-You may have notice me glaze over the fact that Compound Literals are now part of things that can be constant expressions. Well, this is the paper that enables such a thing! This is a feature that actually solves a problem C++ was having, and fixes a lot of annoyances with C too. For those of you in the dark and who haven't caught up with C99, C has a feature called Compound Literals. It's a way to create any type - usually, structures - that have a longer lifetime than normal and can act as a temporary going into a function. They're used pretty frequently in code examples and stuff done by [Andre Weissflog of `sokol_gfx.h` fame](https://github.com/floooh/sokol#sokol_gfxh), who writes some pretty beautiful C code (excerpted from the link):
+Earlier, I sort of glazed over the fact that Compound Literals are now part of things that can be constant expressions. Well, this is the paper that enables such a thing! This is a feature that actually solves a problem C++ was having as well, while also fixing a lot of annoyances with C. For those of you in the dark and who haven't caught up with C99, C has a feature called Compound Literals. It's a way to create any type - usually, structures - that have a longer lifetime than normal and can act as a temporary going into a function. They're used pretty frequently in code examples and stuff done by [Andre Weissflog of `sokol_gfx.h` fame](https://github.com/floooh/sokol#sokol_gfxh), who writes some pretty beautiful C code (excerpted from the link):
 
 ```cpp
 #define SOKOL_IMPL
@@ -141,11 +141,13 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-and C++ doesn't have them (though GCC, Clang, and a few other compilers support them out of necessity). There was [a paper by Zhihao Yuan](https://wg21.link/p2174) to support Compound Literal syntax in C++, but there was a hang up: with destructors, unnamed/invisible C++ objects being l-values (objects whose address you can take) and having "Block Scope" lifetime (lifetime until where the next `}` was) resulted in the usual intuitive behavior of C++'s temporaries-passed-to-functions turning into a nightmare. For C, this didn't matter and - in many cases - the behavior was even relied on to have longer-lived "temporaries" that survived beyond the duration of a function call to, say, chain with other function calls in a macro expression. For C++, this meant that some types of RAII resource holders -- like mutexen/locks, or just data holders like dynamic arrays -- would hold onto the memory for way too long.
+C++ doesn't have them (though GCC, Clang, and a few other compilers support them out of necessity). There is [a paper by Zhihao Yuan](https://wg21.link/p2174) to support Compound Literal syntax in C++, but there was a hang up. Compound Literals have a special lifetime in C called "block scope" lifetime. That is, compound literals in functions behave as-if they are objects created in the enclosing scope, and therefore retain that lifetime. In C++, where we have destructors, unnamed/invisible C++ objects being l-values (objects whose address you can take) and having "Block Scope" lifetime (lifetime until where the next `}` was) resulted in the usual intuitive behavior of C++'s temporaries-passed-to-functions turning into a nightmare.
 
-The conclusion from the latest conversation was "we can't have compound literals, as they are, in C and C++ both, since C++ won't take the semantics of how they work from the C standard in their implementation-defined extensions and none of the implementations want to change behavior". Which is pretty crappy: taking an extension from C's syntax and then kind of just… smearing over its semantics is a bit of a rotten thing to do, even if the new semantics are better for C++.
+For C, this didn't matter and - in many cases - the behavior was even relied on to have longer-lived "temporaries" that survived beyond the duration of a function call to, say, chain with other function calls in a macro expression. For C++, this meant that some types of RAII resource holders -- like mutexen/locks, or just data holders like dynamic arrays -- would hold onto the memory for way too long.
 
-Nevertheless, Jens Gustedt's paper saves us a lot of the trouble. While default, plain compound literals have "block scope" (C) or "full-expression scope" (C++), with the new storage-class specification feature, you can control that. Borrowing the `sg_setup` function above that takes the `sg_desc` structure type:
+The conclusion from the latest conversation was "we can't have compound literals, as they are, in C++, since C++ won't take the semantics of how they work from the C standard in their implementation-defined extensions and none of the implementations want to change behavior". Which is pretty crappy: taking an extension from C's syntax and then kind of just… smearing over its semantics is a bit of a rotten thing to do, even if the new semantics are better for C++.
+
+Nevertheless, Jens Gustedt's paper saves us a lot of the trouble. While default, plain compound literals have "block scope" (C) or "temporary r-value scope" (C++), with the new storage-class specification feature, you can control that. Borrowing the `sg_setup` function above that takes the `sg_desc` structure type:
 
 ```cpp
 #include <sokol_gfx.h>
@@ -153,7 +155,7 @@ Nevertheless, Jens Gustedt's paper saves us a lot of the trouble. While default,
 SOKOL_GFX_API_DECL void sg_setup(const sg_desc *desc);
 ```
 
-Below, we are going to add the `static` modifier, which means that the compound literal we create has static storage duration:
+ we are going to add the `static` modifier, which means that the compound literal we create has static storage duration:
 
 ```cpp
 int main (int argc, const char* argv[]) {
@@ -164,7 +166,7 @@ int main (int argc, const char* argv[]) {
 }
 ```
 
-Similarly, `auto`, `thread_local`, and even `constexpr` can go there. `constexpr` is perhaps the most pertinent to people today, because right now using compound literals in initializers for `const` data is SUPER illegal:
+Similarly, `auto`, `thread_local`, and even `constexpr` can go there. `constexpr` is perhaps the most pertinent to people today, because right now using compound literals in initializers for `const` data is technically SUPER illegal:
 
 ```cpp
 typedef struct crime {
@@ -209,19 +211,19 @@ Go read [this](/finally-embed-in-c23) to find out all about the feature and how 
 
 [Link](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3033.htm).
 
-This paper was a long time coming. C++ got it first, making it slightly hilarious that C harps on standardizing existing practice so much but C++ tends to beat it to the punch for features which solve long-standing Preprocessor shenanigans. If you've ever had to use `__VA_ARGS__` in C, and you needed to pass 0 arguments to that `…`, or try to use a comma before the `__VA_ARGS__`, you know that things got genuinely messed up when that code had to be ported to other platforms. This is because `__VA_ARGS__` was never allowed to be legally empty, and rather than devise a solution the use of `__VA_ARGS__` with a `#define f(…)` macros that was empty and happened to have a `,` in front of it simply resulted in a lot of undefined behavior. It got a [special entry in GCC's documentation](https://gcc.gnu.org/onlinedocs/gcc/Variadic-Macros.html) because of how blech the situation ended up being:
+This paper was a long time coming. C++ got it first, making it slightly hilarious that C harps on standardizing existing practice so much but C++ tends to beat it to the punch for features which solve long-standing Preprocessor shenanigans. If you've ever had to use `__VA_ARGS__` in C, and you needed to pass 0 arguments to that `…`, or try to use a comma before the `__VA_ARGS__`, you know that things got genuinely messed up when that code had to be ported to other platforms. It got a [special entry in GCC's documentation](https://gcc.gnu.org/onlinedocs/gcc/Variadic-Macros.html) because of how blech the situation ended up being:
 
 > … GNU CPP permits you to completely omit the variable arguments in this way. In the above examples, the compiler would complain, though since the expansion of the macro still has the extra comma after the format string.
 > 
-> To help solve this problem, CPP behaves specially for variable arguments used with the token paste operator, ‘##’. If instead you write
+> To help solve this problem, CPP behaves specially for variable arguments used with the token paste operator, ‘`##`’. If instead you write
 > 
 > ```cpp
 > #define debug(format, …) fprintf (stderr, format, ## __VA_ARGS__)
 > ```
 >
-> and if the variable arguments are omitted or empty, the ‘##’ operator causes the preprocessor to remove the comma before it. If you do provide some variable arguments in your macro invocation, GNU CPP does not complain about the paste operation and instead places the variable arguments after the comma. …
+> and if the variable arguments are omitted or empty, the ‘`##`’ operator causes the preprocessor to remove the comma before it. If you do provide some variable arguments in your macro invocation, GNU CPP does not complain about the paste operation and instead places the variable arguments after the comma. …
 
-This is solved by the use of the C++-developed `__VA_OPT__`, which expands out to a legal sequence if and only if the arguments passed to the variadic `…` are not empty. So, the above could be rewritten as:
+This is solved by the use of the C++-developed `__VA_OPT__`, which expands out to a legal token sequence if and only if the arguments passed to the variadic `…` are not empty. So, the above could be rewritten as:
 
 ```cpp
 #define debug(format, …) fprintf (stderr, format __VA_OPT__(,) __VA_ARGS__)
@@ -476,11 +478,15 @@ int main (int argc, char* argv[]) {
 }
 ```
 
+If you fall into the last branch, you have some weird endianness. We do not provide a macro for that name because there is too much confusion around what the exact proper byte order for "PDP Endian" or "Honeywell Endian" or "Bi Endian" would end up being.
+
 
 
 ## "What's that ugly `stdc_` prefix?"
 
-Unfortunately, `popcount` is a **really** popular function name. If the standard were to take it, we'd effectively be loading up a gun to shoot a ton of existing codebases right in the face. The only proper resolution I could get to the problem was adding `stdc_` in front. It's not ideal, but honestly it's the best I could do on short notice. We do not have namespaces in C, which means any time we add functionality we basically have to square off with users. It's most certainly not a fun part of proposal development, for sure: thus, we get a `stdc_` prefix. Perhaps it will be the first of many functions to use such prefixes so we do not have to step on user's toes, but I imagine for enhancements and fixes to existing functionality, we will keep writing function names by the old rules. This will be decided later by a policy paper, but that policy paper only applies to papers after C23 (and after we get to have that discussion).
+For the bit functions, a prefix was added to them in the form of `stdc_…`. Why?
+
+`popcount` is a **really** popular function name. If the standard were to take it, we'd effectively be loading up a gun to shoot a ton of existing codebases right in the face. The only proper resolution I could get to the problem was adding `stdc_` in front. It's not ideal, but honestly it's the best I could do on short notice. We do not have namespaces in C, which means any time we add functionality we basically have to square off with users. It's most certainly not a fun part of proposal development, for sure: thus, we get a `stdc_` prefix. Perhaps it will be the first of many functions to use such prefixes so we do not have to step on user's toes, but I imagine for enhancements and fixes to existing functionality, we will keep writing function names by the old rules. This will be decided later by a policy paper, but that policy paper only applies to papers after C23 (and after we get to have that discussion).
 
 
 
