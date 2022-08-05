@@ -34,7 +34,7 @@ int purrs[n];
 // …
 ```
 
-is some highly illegal contraband. This creates a Variable-Length Array (VLA), not a constant-sized array with size `5`. What's worse is that the Usual Compilers™ (GCC, Clang, ICC, MSVC, and most other optimizing compilers actually worth compiling with) were typically powerful enough to basically turn the code generation of this object -- so long as you didn't pass it to something expecting an actual [Variably-Modified Types (also talked about in another post)](/ever-closer-c23-improvements#separating-variably-modified-types-from-variable-length-arrays) -- into working like a normal C array.
+is some highly illegal contraband. This creates a Variable-Length Array (VLA), not a constant-sized array with size `9`. What's worse is that the Usual Compilers™ (GCC, Clang, ICC, MSVC, and most other optimizing compilers actually worth compiling with) were typically powerful enough to basically turn the code generation of this object -- so long as you didn't pass it to something expecting an actual [Variably-Modified Types (also talked about in another post)](/ever-closer-c23-improvements#separating-variably-modified-types-from-variable-length-arrays) -- into working like a normal C array.
 
 This left people relying on the fact that this was a C array, even though it never was. And it created enough confusion that we had to accept N2713 to add clarification to the Standard Library to tell people that No, Even If You Can Turn That Into A Constant Expression, You Cannot Treat It Like One For The Sake Of the Language. One way to force an error up-front if the compiler would potentially turn something into not-a-VLA behind-your-back is to do:
 
