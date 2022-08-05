@@ -335,7 +335,7 @@ It was time to roll up my sleeves and do what I always did: take these abominabl
 
 oh my god, [it's from 2016](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2008.pdf).
 
-I had no realized Clive had been working on it this long until, during one meeting, Clive -- when asked about the status of an updated version of this paper -- said (paraphrasing) "yeah, I'm not carrying this paper forward anymore, I'm tired, thanks".
+I had not realized Clive had been working on it this long until, during one meeting, Clive -- when asked about the status of an updated version of this paper -- said (paraphrasing) "yeah, I'm not carrying this paper forward anymore, I'm tired, thanks".
 
 …
 
@@ -343,7 +343,7 @@ That's not, uh, good. I quickly snapped up in my chair, slammed the Mute-Off but
 
 … a lot.
 
-I didn't realize Clive had this much push back. 2022 was around the corner, we were basically out of time to workshop stuff. I frequently went to twitter and ranted about enumerations, from October 2021 and onward. The worst part is, most people didn't know, so they just assumed I was cracked up about something until I pointed them to the words in the standard and then revealed all the non-standard behavior. Truly, the C specification for enumerations was something awful.
+I didn't realize Clive had this much push back. It was late 2021. 2022 was around the corner, we were basically out of time to workshop stuff. I frequently went to twitter and ranted about enumerations, from October 2021 and onward. The worst part is, most people didn't know, so they just assumed I was cracked up about something until I pointed them to the words in the standard and then revealed all the non-standard behavior. Truly, the C specification for enumerations was something awful.
 
 Of course, no matter how much I fumed, anger is useless without direction.
 
