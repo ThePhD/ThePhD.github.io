@@ -880,6 +880,6 @@ And when the archival is done? When the old programs are properly preserved and 
 
 Extinguish them. 💚
 
-<sub>Art by <a href="https://twitter.com/Bunurrii">Bunurrii</a>, check them out, follow them, and commission them too!</sub>
+<sub>Art by <a href="https://twitter.com/Bugurrii">Bugurrii</a>, check them out, follow them, and commission them too!</sub>
 
 {% include anchors.html %}

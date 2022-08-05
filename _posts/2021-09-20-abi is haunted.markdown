@@ -662,3 +662,5 @@ The binary banshees and digital demons of ABI will not overtake us. It will not 
 Or another. 💚
 
 P.S.: This ENTIRE article was because [Luna Sorcery made a fun joke](https://twitter.com/lunasorcery/status/1390060842230685700). [Crux](https://twitter.com/CRYPTIIDCRUXX) brought the whole thing to life with their amazing artist skills: you should g[o commission art from them](https://cryptiidcruxx.carrd.co/), by the bucket load if you can!
+
+{% include anchors.html %}
