@@ -236,7 +236,7 @@ Which, speaking of 0-argument `…` functions…
 
 
 
-# N975 - Relax requirements for variadic parameter lists
+# N2975 - Relax requirements for variadic parameter lists
 
 [Link](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2975.pdf).
 
@@ -421,7 +421,7 @@ int main (int argc, char* argv[]) {
 }
 ```
 
-Now, nobody's passing `NULL` directly to `printf(…)`, but in a roundabout way we had `NULL` - the macro itself - filtering down into function calls with variadic arguments. Or, more critically, we had people just passing straight up literal `0`. "It's the null pointer constant, that's perfectly fine to pass to something expecting a pointer, right?" This was, of course, wrong. It would be nice if this was true, but it wasn't, and on certain ABIs that had consequences. The same registers and stack locations for passing a pointer were not always the same as were used for literal `0` or - worse - they were the same, but the literal `0` didn't fill in all the expected space of the register (32-bit vs. 64-bit, for example). That meant people doing `prtinf("%p", 0);` in many ways were relying purely on the luck of their implementation that it wasn't producing actual undefined behavior! Whoops.
+Now, nobody's passing `NULL` directly to `printf(…)`, but in a roundabout way we had `NULL` - the macro itself - filtering down into function calls with variadic arguments. Or, more critically, we had people just passing straight up literal `0`. "It's the null pointer constant, that's perfectly fine to pass to something expecting a pointer, right?" This was, of course, wrong. It would be nice if this was true, but it wasn't, and on certain ABIs that had consequences. The same registers and stack locations for passing a pointer were not always the same as were used for literal `0` or - worse - they were the same, but the literal `0` didn't fill in all the expected space of the register (32-bit vs. 64-bit, for example). That meant people doing `printf("%p", 0);` in many ways were relying purely on the luck of their implementation that it wasn't producing actual undefined behavior! Whoops.
 
 `nullptr` and the associated `nullptr_t` type in `<stddef.h>` fixes that problem. You can specify `nullptr`, and it's required to have the same underlying representation as the null pointer constant in `char*` or `void*` form. This means it will always be passed correctly, for all ABIs, and you won't read garbage bits. It also aids in the case of `_Generic`: with `NULL` being implementation-defined, you could end up with `void*` or `0`. With `nullptr`, you get exactly `nullptr_t`: this means you don't need to lose the `_Generic` slot for both `int` or `void*`, especially if you're expecting actual `void*` pointers that point to stuff. Small addition, gets rid of some Undefined Behavior cases, nice change.
 
