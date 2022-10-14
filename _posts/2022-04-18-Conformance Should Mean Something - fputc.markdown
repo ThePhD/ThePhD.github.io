@@ -274,7 +274,7 @@ It would be one thing if someone was just inventing Death Station 9000, but the 
 Unfortunately, I have (not yet) reached a resolution to this. I have not written a paper. By the time this blog post goes out, I still will not have been given a response (and at this point I don't want one, because this needs a formal paper trail now), and I do not expect MISRA to suddenly resolve the tension either with their supposed 50/50 split on the matter. I'm also not going to stop having a quiet, slow, internal scream about these matters either, and it might take me so long to write the next paper that C23 will ship with this as the status quo and it will have to be something to take care of for C2y/C3a, whenever it comes out...
 
 <center>
-<img alt="An anthropomorphic, smol sheep in a robe and a scarf, with beady little eyes and down-turned ears going &quot;a&quot; with their mouth open in disbelieving, mostly quiet, shocked agony." src="/assets/img/2022/04/a.png"/>
+<img alt="An anthropomorphic, smol sheep in a robe and a scarf, with beady little eyes and down-turned ears going &quot;a&quot; with their mouth open in disbelieving, mostly quiet, shocked agony." src="/assets/img/framebuffer/a.png"/>
 </center>
 
 a.

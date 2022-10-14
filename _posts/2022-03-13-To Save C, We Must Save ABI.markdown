@@ -2,8 +2,8 @@
 layout: post
 title: "To Save C, We Must Save ABI"
 permalink: /to-save-c-we-must-save-abi-fixing-c-function-abi
-feature-img: "/assets/img/2022/03/bunurrii%20-%20eyes%20open.jpg"
-thumbnail: "/assets/img/2022/03/bunurrii%20-%20eyes%20open.jpg"
+feature-img: "/assets/img/2022/03/bugurrii%20-%20eyes%20open.jpg"
+thumbnail: "/assets/img/2022/03/bugurrii%20-%20eyes%20open.jpg"
 tags: [C, Standard, ABI, 📜, ⌨]
 excerpt_separator: <!--more-->
 ---
@@ -876,7 +876,7 @@ I will Extend their functionality and allow new implementations and new libraria
 
 And when the archival is done? When the old programs are properly preserved and the old guard closes their eyes, well taken care of into their last days? I will arm myself. I will make one more trip down into the depths of the Old and the Dark. I will find each and every one of the last symbols, the 32-bit and 64-bit shackles we have had to live with all these years. And to save us — to save our ABI and the to-be-imagined future — I will…
 
-![An anthropomorphic sheep clad in flowing purple robes of royalty, wielding a wooden staff who's tip is beset with a large green orb. Eyes pupil-less, they stare down from the would-be perspective of one of the last symbols, that lay low. And staring up along the barrel of a glinting revolver in the dark light, the sheep's fingers are poised to pull the trigger and end the cycle.](/assets/img/bunurrii/bunurri%20-%20wild%20wild%20west%20sheep.png)
+![An anthropomorphic sheep clad in flowing purple robes of royalty, wielding a wooden staff who's tip is beset with a large green orb. Eyes pupil-less, they stare down from the would-be perspective of one of the last symbols, that lay low. And staring up along the barrel of a glinting revolver in the dark light, the sheep's fingers are poised to pull the trigger and end the cycle.](/assets/img/bugurrii/bugurri%20-%20wild%20wild%20west%20sheep.png)
 
 Extinguish them. 💚
 

@@ -4,7 +4,7 @@ url: "https://thephd.dev"
 
 # THEME-SPECIFIC CONFIGURATION
 title: The Pasture
-description: "The musings, ideas, discussions, and sometimes silly words from a programming sheep & shepherd"
+description: "The musings, ideas, discussions, and sometimes silly words from a digital sheep magician"
 avatar: assets/img/thephd.png
 favicon: assets/favicon.png
 
@@ -12,7 +12,7 @@ favicon: assets/favicon.png
 header_text: ♡
 header_feature_image: assets/img/pexels/triangular.jpeg
 footer_text: >
-  Copyright © 2018-2021 ThePhD -- Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap!</a>
+  Copyright © 2018-2022 ThePhD -- Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap!</a>
 
 # Blog
 excerpt: true                                           # Or "truncate" (first 250 characters), "false" to disable
