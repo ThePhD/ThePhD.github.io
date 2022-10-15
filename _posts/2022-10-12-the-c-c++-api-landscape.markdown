@@ -8,7 +8,7 @@ tags: [C, Standard, String, Text, Unicode, API Design]
 excerpt_separator: <!--more-->
 ---
 
-Last time we talked about encodings, we went in with a C++-like design where we proved that<!--more-->so long as you [implement the required operations on a single encoding type](/any-encoding-ever-ztd-text-unicode-cpp#the-lucky-7), you can go between any two encodings on the planet. This meant you didn't need to specifically write an e.g. SHIFT-JIS-to-UTF-8 or UTF-EBCDIC-to-Big5-HKSCS pairwise function, it Just Worked™ as long as you had some common pivot between functions. But, it involved a fair amount of template shenanigans and a bunch of things that, quite frankly, do not exist in C.
+Last time we talked about encodings, we went in with a C++-like design where we proved that<!--more--> so long as you [implement the required operations on a single encoding type](/any-encoding-ever-ztd-text-unicode-cpp#the-lucky-7), you can go between any two encodings on the planet. This meant you didn't need to specifically write an e.g. SHIFT-JIS-to-UTF-8 or UTF-EBCDIC-to-Big5-HKSCS pairwise function, it Just Worked™ as long as you had some common pivot between functions. But, it involved a fair amount of template shenanigans and a bunch of things that, quite frankly, do not exist in C.
 
 Can we do the same in C, nicely?
 
@@ -25,7 +25,7 @@ In totality, we will be looking at the designs and performance of:
 - the Windows API, both [`MultiByteToWideChar`](https://docs.microsoft.com/en-us/windows/win32/api/stringapiset/nf-stringapiset-multibytetowidechar) and [`WideCharToMultiByte`](https://docs.microsoft.com/en-us/windows/win32/api/stringapiset/nf-stringapiset-widechartomultibyte)
 - [ztd.text](https://github.com/soasis/text/), the initial C++ version of this library leading [P1629](/_vendor/future_cxx/papers/d1629.html)
 
-We will not only be comparing API design / behavior, but also the speed with benchmarks to show whether or not the usage of the design we come up with will be workable. After all, performance **is** part of correctness measurements. No use running an algorithm that's perfect if it will only compute the answer by the Heat Death of the Universe, right? So, with all of that in mind, let's start by trying to craft a C API that can cover all of the concerns we need to cover. In order to do that without making a bunch of mistakes or repeated bad ideas from the last five decades, we'll be looking at all the above mentioned libraries and how they handle things.
+We will not only be comparing API design/behavior, but also the speed with benchmarks to show whether or not the usage of the design we come up with will be workable. After all, performance **is** part of correctness measurements. No use running an algorithm that's perfect if it will only compute the answer by the Heat Death of the Universe, right? So, with all of that in mind, let's start by trying to craft a C API that can cover all of the concerns we need to cover. In order to do that without making a bunch of mistakes or repeated bad ideas from the last five decades, we'll be looking at all the above mentioned libraries and how they handle things.
 
 
 
@@ -87,7 +87,7 @@ This is a pretty obvious feature: whether or not you can process at least *some*
 
 ### Handles UTF Encodings
 
-What it says on the tin: the library can convert UTF-8, UTF-16, and/or UTF-32, generally between one another but sometimes to outside encodings. Nominally, you would believe this is table-stakes to even be discussed here but believe it or not some people believe that not all Unicode conversions be fully supported, so it has to become a row in our feature table. We do not count specifically converting to UTF-16 Little Endian, or UTF-32 Big Endian, or what have you: this can be accomplished by doing a UTF-N conversion and then immediately doing byte swaps on the output code units of the conversion.
+What it says on the tin: the library can convert UTF-8, UTF-16, and/or UTF-32, generally between one another but sometimes to outside encodings. Nominally, you would believe this is table-stakes to even be discussed here but believe it or not some people believe that not all Unicode conversions be fully supported, so it has to become a row in our feature table. We do not count specifically converting to UTF-16 Little Endian, or UTF-32 Big Endian, or what have you: this can be accomplished by doing an UTF-N conversion and then immediately doing byte swaps on the output code units of the conversion.
 
 
 ### Safe Conversion API
@@ -109,7 +109,7 @@ Unbounded conversions are effectively conversions with bounds checking on the ou
 
 ### Counting API
 
-This is not too much of a big deal for APIs; nominally, it just allows someone to count how many bytes/code units/code points result from converting an input sequence from X to Y, without actually doing the conversion and/or without actually writing to an output buffer. There are ways to repurpose normal single/bulk conversions to achieve this API without requiring a library author to write it, but for this feature we will consider the explicit existence of such counting APIs directly because they can be optimized on their own with better performance characteristics if they are not simply wrappers around bulk/single conversion APIs.
+This is not too much of a big deal for APIs; nominally, it just allows someone to count how many bytes / code units / code points result from converting an input sequence from X to Y, without actually doing the conversion and/or without actually writing to an output buffer. There are ways to repurpose normal single/bulk conversions to achieve this API without requiring a library author to write it, but for this feature we will consider the explicit existence of such counting APIs directly because they can be optimized on their own with better performance characteristics if they are not simply wrappers around bulk/single conversion APIs.
 
 
 ### Validation API
@@ -138,7 +138,7 @@ In the opposite case, where only a bulk conversion API is available, you can sti
 
 ### Custom Error Handling
 
-This is just the ability for a user to change what happens on failure/error. Note that this is still possible if the algorithm just stops where the error is and hands you that information; you can decide to skip and/or insert your own kind of replacement characters. (Or panic/crash, write to log, trigger an event; whatever it is you like to do.) I did not think I needed this category, but after working with a bunch of different APIs it is surprising how many do not offer functions to handle this exact use case and instead force replacements or just throw this information into the sea of forgetfulness.
+This is just the ability for an user to change what happens on failure/error. Note that this is still possible if the algorithm just stops where the error is and hands you that information; you can decide to skip and/or insert your own kind of replacement characters. (Or panic/crash, write to log, trigger an event; whatever it is you like to do.) I did not think I needed this category, but after working with a bunch of different APIs it is surprising how many do not offer functions to handle this exact use case and instead force replacements or just throw this information into the sea of forgetfulness.
 
 
 ### Updates Input Range / Updates Output Range
@@ -187,7 +187,7 @@ U_CAPI void ucnv_convertEx(
 	UBool reset, UBool flush, UErrorCode *pErrorCode); // error code out-parameter
 ```
 
-Some things done really well are the `pErrorCode` value and the pointer-based source/limit arguments. The error code pointer means that a user cannot ever forget to pass in an error code object. And, what's more, is that if the value going into the function isn't set to the proper 0-value (`U_SUCCESS`), the function will return a "warning" error code that the value going in was an unexpected value. This forces you to initialize the error code with `UErrorCode error = U_SUCCESS;`, then pass it in properly to be changed to something. You can still ignore what it sets the value to and pretend nothing ever happened, but you have, at least, forced the user to reckon with its existence. If someone is a Space CadetⓇ like me and still forgets to check it, well. That is on them.
+Some things done really well are the `pErrorCode` value and the pointer-based source/limit arguments. The error code pointer means that an user cannot ever forget to pass in an error code object. And, what's more, is that if the value going into the function isn't set to the proper 0-value (`U_SUCCESS`), the function will return a "warning" error code that the value going in was an unexpected value. This forces you to initialize the error code with `UErrorCode error = U_SUCCESS;`, then pass it in properly to be changed to something. You can still ignore what it sets the value to and pretend nothing ever happened, but you have, at least, forced the user to reckon with its existence. If someone is a Space CadetⓇ like me and still forgets to check it, well. That is on them.
 
 Furthermore, the pointer arguments are also extraordinarily helpful. Taking a pointer-to-pointer of the first argument means that the algorithm can increment the pointer past what it has read, to successfully indicate how much data was read that produced an output. For example, UTF-8 may have anywhere from 1 to 4 code units of data (1 to 4 `unsigned char`s of data) in it. It is impossible to know how much data was read from a "successful" decoding operation, because it is a variable amount. Due to this, you cannot know how much was read/written without the function telling you, or you going backwards to re-do the work the function already did.
 
@@ -378,7 +378,7 @@ namespace unchecked {
 
 You can copy-and-paste all of my criticisms for simdutf onto this one, as well as all my praises. Short, simple, sweet API, has an explicit opt-in for unchecked behavior (using a `namespace` to do this is a nice flex), and makes it clear what is on offer. As a side benefit, it also includes an `utf8::iterator` and an `utf16::iterator` classes to do iterator and view-like stuff with, which can help cover a pretty vast set of functionality that the basic functions cannot provide.
 
-It goes without saying that extensibility is not built into this package, but it will be fun to test its speed. The way errors are handled are done by the user, which means that custom error handling / replacement / etc. can be done. Of course, just like simdutf, it thinks input iterator returns are for losers, so there's no telling where exactly the error might be in e.g. a UTF-16 sequence or something to that effect. However, for ease-of-use, utf8cpp also includes a `utf8::replace_invalid` function to replace bad UTF-8 sequences with a replacement character sequence. It also has `utf8::find_valid`, so you can scan for bad things in-advance and either remove/replace/eliminate them in a given object yourself.
+It goes without saying that extensibility is not built into this package, but it will be fun to test its speed. The way errors are handled are done by the user, which means that custom error handling / replacement / etc. can be done. Of course, just like simdutf, it thinks input iterator returns are for losers, so there's no telling where exactly the error might be in e.g. an UTF-16 sequence or something to that effect. However, for ease-of-use, utf8cpp also includes a `utf8::replace_invalid` function to replace bad UTF-8 sequences with a replacement character sequence. It also has `utf8::find_valid`, so you can scan for bad things in-advance and either remove/replace/eliminate them in a given object yourself.
 
 
 
@@ -453,7 +453,7 @@ Finally, the functions present here always go: to UTF-8 or UTF-16; or, from UTF-
 
 This makes it a little painful to add one's own encodings using the library, but it can *technically* be done. I will not vouch for such a path because when the author tells me ["I explicitly made it as hard as possible to make it extensible"](https://twitter.com/hsivonen/status/1576068684300156928), I don't take that as an invitation to go trying to force extensibility. Needless to say, the API was built for streaming and is notable because it is used in Mozilla Firefox and a handful of other places like Thunderbird. It is also frequently talked up as THE Rust Conversion API, but that wording has only come from, in my experience, Mozilla and Mozilla-adjacent folks who had to use the Gecko API (and thus influenced by them), so that might just be me getting the echo feedback from a specific silo of Rustaceans. But if it's powering things like Thunderbird, it's got to be good, especially on the performance front, right?
 
-I did counter a pretty annoying usability bug when trying to convert from UTF-8 to UTF-16 the "generic" way, and ended up with an unexplained spurious conversion failure that seemed to mangle the data. It was, apparently, derived from the fact that you cannot ask for an encoder (an "output encoding") of a UTF-16 type, which is itself apparently a restriction derived from the WHATWG encoding specification:
+I did counter a pretty annoying usability bug when trying to convert from UTF-8 to UTF-16 the "generic" way, and ended up with an unexplained spurious conversion failure that seemed to mangle the data. It was, apparently, derived from the fact that you cannot ask for an encoder (an "output encoding") of an UTF-16 type, which is itself apparently a restriction derived from the WHATWG encoding specification:
 
 > 4.3. Output encodings
 > 
@@ -465,7 +465,7 @@ I did counter a pretty annoying usability bug when trying to convert from UTF-8 
 > 
 > — §4.3 WHATWG Encoding Specification, [June 20, 2022](https://encoding.spec.whatwg.org/#output-encodings)
 
-Yes, you read that right. If the encoding is UTF-16, return the UTF-8 encoding instead. Don't raise an error, don't print that something's off to console, just slam a UTF-8 in there. I spent a good moment doing all sorts of checks/tests, trying to figure out why the Rust code was apparently giving me a UTF-8 encoder when I asked for a UTF-16 encoder:
+Yes, you read that right. If the encoding is UTF-16, return the UTF-8 encoding instead. Don't raise an error, don't print that something's off to console, just slam an UTF-8 in there. I spent a good moment doing all sorts of checks/tests, trying to figure out why the Rust code was apparently giving me an UTF-8 encoder when I asked for an UTF-16 encoder:
 
 ![A screenshot showing the Visual Studio Code debugger, highlighting a variable called "u16enc". The variable was initialized using "auto u16enc = UTF_16LE_ENCODING->new_encoder();" which produced a type of "std::unique_ptr<encoding_rs::Encoder>". Inspecting the variable in the left-hand-side panel and checking deep into its data members, it reveals that it has a name of "UTF-8" and not "UTF-16".](/assets/img/2022/10/utf8-in-my-utf16.jpg)
 
@@ -665,7 +665,7 @@ And here's how each of the libraries squares up.
 | Updates Input Range (How Much Read™) | ✅ | ❌ | ✅ | ✅ | ❌ |
 | Updates Output Range (How Much Written™) | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-This is the full spread. Every marker should be explained above; if something is missing, do let me know, because I am going to routinely reference this table as the Definitive™ Feature List for all of these libraries from now until I die. I spent way too much time investigating these APIs, suffering through their horrible builds, and knick-knack-patty-slapping these APIs and benchmarks and investigations together. I most certainly never want to touch libiconv again, and even though I'm tired as hell I've already put "remake ztd.text in Rust so I can have a UTF-32 conversion as part of a Rust text library, for God's Sake" on my list of things to do. (Or someone else will get to do it before I do, which would be grrreeat.)
+This is the full spread. Every marker should be explained above; if something is missing, do let me know, because I am going to routinely reference this table as the Definitive™ Feature List for all of these libraries from now until I die. I spent way too much time investigating these APIs, suffering through their horrible builds, and knick-knack-patty-slapping these APIs and benchmarks and investigations together. I most certainly never want to touch libiconv again, and even though I'm tired as hell I've already put "remake ztd.text in Rust so I can have an UTF-32 conversion as part of a Rust text library, For God's Sake" on my list of things to do. (Or someone else will get to do it before I do, which would be grrreeat.)
 
 
 
@@ -688,5 +688,10 @@ Sorry! It turns out this article has quite literally surpassed 10,000 words and 
 
 
 See you soon 💚.
+
+- Thumbnail / Title Feature art done by [Nemo (@Wusdiswusdat)](https://twitter.com/WusdisWusdat) (There's a whole comic, but it's being Saved™ for a whole new blog post!)
+- "a" Emote art done by [Framebuffer (@framebuffer)](https://twitter.com/framebuffer)
+- Exhausted Phone art done by [Cynthia (@PixieCatSupreme)](https://twitter.com/PixieCatSupreme)
+- Concerned Emote art done by Queenie B
 
 {% include anchors.html %}
