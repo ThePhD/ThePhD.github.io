@@ -20,7 +20,7 @@ In totality, we will be looking at the designs and performance of:
 - [iconv](https://www.gnu.org/software/libiconv/) ([patched vcpkg](https://vcpkg.io/en/packages.html) version, search "libiconv")
 - [boost.text](https://github.com/tzlaine/text) (proposed for Boost, in limbo...?)
 - [utf8cpp](https://github.com/nemtrif/utfcpp)
-- [ICU](https://unicode-org.github.io/icu/userguide/conversion/converters.html) (plain libicu & friends, and presumably not the newly released ICU4C)
+- [ICU](https://unicode-org.github.io/icu/userguide/conversion/converters.html) (plain libicu & friends, and presumably not the newly released ICU4X, or ICU4C/ICU4J)
 - [encoding_rs](https://github.com/hsivonen/encoding_rs) through it's [encoding_c](https://github.com/hsivonen/encoding_c) binding library
 - the Windows API, both [`MultiByteToWideChar`](https://docs.microsoft.com/en-us/windows/win32/api/stringapiset/nf-stringapiset-multibytetowidechar) and [`WideCharToMultiByte`](https://docs.microsoft.com/en-us/windows/win32/api/stringapiset/nf-stringapiset-widechartomultibyte)
 - [ztd.text](https://github.com/soasis/text/), the initial C++ version of this library leading [P1629](/_vendor/future_cxx/papers/d1629.html)
@@ -459,9 +459,8 @@ I did encounter a pretty annoying usability bug when trying to convert from UTF-
 > 
 > To get an output encoding from an encoding encoding, run these steps:
 > 
->     If encoding is replacement or UTF-16BE/LE, then return UTF-8.
-> 
->     Return encoding
+> - If encoding is replacement or UTF-16BE/LE, then return UTF-8.
+> - Return encoding
 > 
 > — §4.3 WHATWG Encoding Specification, [June 20, 2022](https://encoding.spec.whatwg.org/#output-encodings)
 
@@ -503,7 +502,7 @@ libiconv was, of course, happy to NOT provide any of that functionality, nor giv
 
 The only thing going for libiconv, instead, is its wide variety of encodings it supports. Other than that, it's a decent API surface whose potential is not at all taken advantage of, including the fact that despite having a type-erased encoding interface does not provide any way to add new encodings to its type-erased interface. (If you want to do that, you need to add it manually into the code and then recompile the entire library, giving no means of runtime addition that are not expressly added to it by some outside force.)
 
-Additionally, the names given to "create" `iconv_t` conversion descriptor objects" function is not stable. For example, asking for the "UTF-32" encoding does not necessarily mean you will be provided with the UTF-32 encoding that matches the endianness of the machine compiled for. (This actually became a problem for me because a DLL meant to be used for Postgres's libiconv got picked up in my application once. Suffice to say, deep shenanigans ensued as my little endian machine suddenly started chugging down big-endian UTF-32 data.) In fact, asking for "UTF-32" does not guarantee there is any relationship between the encoding name you asked for and what is the actual byte representation; despite being a POSIX standard, there are no guarantees about the name <-> encoding mapping. There is also no way to control Byte Order Marks, which is hilarious when e.g. you are trying to compile the C Standard using LaTeX and a bad libiconv implementation (thanks Postgres) that inserts them [poisons your system installation](https://twitter.com/__phantomderp/status/1460695063193870339).
+Additionally, the names given to "create `iconv_t` conversion descriptor objects" function is not stable. For example, asking for the "UTF-32" encoding does not necessarily mean you will be provided with the UTF-32 encoding that matches the endianness of the machine compiled for. (This actually became a problem for me because a DLL meant to be used for Postgres's libiconv got picked up in my application once. Suffice to say, deep shenanigans ensued as my little endian machine suddenly started chugging down big-endian UTF-32 data.) In fact, asking for "UTF-32" does not guarantee there is any relationship between the encoding name you asked for and what is the actual byte representation; despite being a POSIX standard, there are no guarantees about the name <-> encoding mapping. There is also no way to control Byte Order Marks, which is hilarious when e.g. you are trying to compile the C Standard using LaTeX and a bad libiconv implementation (thanks Postgres) that inserts them [poisons your system installation](https://twitter.com/__phantomderp/status/1460695063193870339).
 
 It is further infuriating that the error handling modes for POSIX can range from "stop doing things and return here to the user can take care of it", "insert ASCII `?` everywhere an error occurs" (glibc does this, and sometimes uses the Unicode Replacement Character when it likes), or even "insert ASCII `*` everywhere an error occurs" (musl-libc; do not ask me why they chose `*` instead of the nearly-universally-applied `?`). How do you ask for a different behavior? Well, by building an entirely different libiconv module based on a completely different standard library and/or backing implementation of the functionality. Oh, the functionality comes from a library that is part of your core distribution? Well, just figure out the necessary linker and loader flags to get the right functions _first_. Duh!
 
@@ -533,7 +532,7 @@ transcode_result<I, O> transcode_to_utf16(
 
 It also offers range-based solutions, more fleshed out that utf8cpp's. These are created from a `boost::text::as_utfN(...)` function call, (where `N` is {8, 16, 32}) and produce iterator/range types for going from the input type (deduced from the pointer (treated as a null-terminated C-string) or from the range's value type) to the `N`-deduced output type.
 
-As usual, the criticism of "please do not assume unbounded writes are the only thing I am interested in or need" applies to boost.text's API here. Thankfully, it does something better than simdutf or utf8cpp: it gives back **both** the incremented `first` and the incremented `out` iterators. Meaning that if I passed 3 pointers in, I will get 2 updated pointers back, allowing me to know how much was written and how much was not written. There is an open question about whether or not one can safely subtract pointers that may have a difference larger than `PTRDIFF_MAX` without invoking undefined behavior, but I have resigned myself that it is more or less an impossible problem to solve in a C and C++ standards-compliant way for now (modulo relying on not-always-present `uintptr_t`).
+As usual, the criticism of "please do not assume unbounded writes are the only thing I am interested in or need" applies to boost.text's API here. Thankfully, it does something better than simdutf or utf8cpp: it gives back **both** the incremented `first` and the incremented `out` iterators. Meaning that if I passed 3 pointers in, I will get 2 updated pointers back, allowing me to know how much was read and how much was written. There is an open question about whether or not one can safely subtract pointers that may have a difference larger than `PTRDIFF_MAX` without invoking undefined behavior, but I have resigned myself that it is more or less an impossible problem to solve in a C and C++ standards-compliant way for now (modulo relying on not-always-present `uintptr_t`).
 
 boost.text's unfortunate drawback is in its error handling scheme. You are only allowed to insert one (1) character — maybe — through its error handler abstraction, and **only** when using its iterator-based replacement facilities. During it's `transcode_to_utfN` functions, it actively refuses to do anything other than insert the canonical Unicode replacement character, which means you cannot get the fast iteration functions to stop on bad data. It will just plow right on through, stick the replacement character, and then smile a big smile at you while pretending everything is okay. This can have some pretty gnarly performance implications for folks who want to do things like, say, stop on an error or perform some other kind of error handling, forcing you to use the (less well-performing) iterator APIs.
 
@@ -558,11 +557,11 @@ I am not even going to deign to consider C++ here. The APIs for doing conversion
 
 I'm also less than thrilled about the C Standard API for conversions. There are a number of problems, but I won't regale you all of the problems because I wrote a whole paper about it so I could fix it eventually in C. It did not make C23 because a last minute objection to the structure of the wording handling state ended up costing the paper it's ability to make the deadline. Sorry; despite being the project editor I am (A) new to this, (B) extremely exhausted, and (C) not good at this at all, unfortunately!
 
-Nevertheless, the C standard does not support UTF-16 as a wide encoding right now, which violates at least 6 different existing major C platforms today. Even if the wide (`wchar_t`) encoding is UTF-32, the C API is still _fundamentally incapable of representing many of the legacy text encodings it is supposed to handle in the first place_. This has made even steely open source contributes stared slack-jawed at embattled C libraries like glibc, which have no choice but to effectively jettison themselves into nonsense behavior because the C standard provides no proper handling of things. This case, in particular, arises when Big5-HKSCS needs to return **two** UTF-32 code points (e.g. `U"\U00CA\U+0304"`) for certain input sequences (e.g. `"Ê̄"`):
+Nevertheless, the C standard does not support UTF-16 as a wide encoding right now, which violates at least 6 different existing major C platforms today. Even if the wide (`wchar_t`) encoding is UTF-32, the C API is still _fundamentally incapable of representing many of the legacy text encodings it is supposed to handle in the first place_. This has made even steely open source contributors stared slack-jawed at embattled C libraries like glibc, which have no choice but to effectively jettison themselves into nonsense behavior because the C standard provides no proper handling of things. This case, in particular, arises when Big5-HKSCS needs to return **two** UTF-32 code points (e.g. `U"\U00CA\U+0304"`) for certain input sequences (e.g. `"Ê̄"`):
 
 > oh wow, even better: glibc goes absolutely fucking apeshit (returns 0 for each `mbrtowc()` after the initial one that eats 2 bytes; herein `wc` modified to write the resulting character)
 >
-> — наб, [July 9, 2009](https://twitter.com/nabijaczleweli/status/1545890979466592257)
+> — наб, [July 9, 2022](https://twitter.com/nabijaczleweli/status/1545890979466592257)
 
 In fact, implementations can do whatever they want in the face of Big5-HKSCS, since it's outside the Standard's auspices:
 
@@ -611,9 +610,9 @@ int MultiByteToWideChar(
 
 There is no "one by one" API here; just bulk. And, similar to the criticisms levied at simdutf, the standard library, and so many other APIs, they only have a single return `int` that is used as both the error code channel **and** the return value for the text. (We will ignore that they are using `int`, which definitely means you cannot be using larger than 4 GB buffers, even on a 64-bit machine, without getting a loop prepped to do the function call multiple times.) I am willing to understand Windows's poor design because this API is some literal early-2000s crap. I imagine with all the APIs Windows cranks out regularly, they might have an alternative to this one by now. But if they do, (A) I cannot find such an API, and (B) contacting people who literally work (and worked) on the VC++ runtime have started in no uncertain terms that the C and C++ code to use for these conversions is the `WideCharToMultiByte`/`MultiByteToWideChar` interfaces.
 
-So I did.
+So, well, that's what we're using.
 
-This API certainly suffers from its age as well. For example, it does things like assume you would only want to insert 1 replacement character (and that the replacement character can fit neatly in one UTF-16 code unit). This was fixed in more recent versions of windows with the introduction of the `MB_ERR_INVALID_CHARS` flag that can be passed to `dwFlags`, where the conversion simply fails if there are invalid characters. Of course, the same problem as simdutf manifests but in an even **worse** fashion. Because the error code channel is the same as the "# of written bytes" channel (the return value), returning an error code means you cannot even communicate to the user where you left off in the input, or how much output you have written. If the conversion fails and you want to, say, insert a replacement `u'\xFFFD'` or `u'?'` by yourself and skip over the single bit of problematic input, you simply cannot because you have no idea where in the output to put it. You also don't know where the error has occurred in the input. It's the [old string conversion issue detailed at the start of this article](#updates-input-range--updates-output-range), all over again, and it's **infuriating**.
+This API certainly suffers from its age as well. For example, it does things like assume you would only want to insert 1 replacement character (and that the replacement character can fit neatly in one UTF-16 code unit). This was fixed in more recent versions of windows with the introduction of the `MB_ERR_INVALID_CHARS` flag that can be passed to the `dwFlags` parameter, where the conversion simply fails if there are invalid characters. Of course, the same problem as simdutf manifests but in an even **worse** fashion. Because the error code channel is the same as the "# of written bytes" channel (the return value), returning an error code means you cannot even communicate to the user where you left off in the input, or how much output you have written. If the conversion fails and you want to, say, insert a replacement `u'\xFFFD'` or `u'?'` by yourself and skip over the single bit of problematic input, you simply cannot because you have no idea where in the output to put it. You also don't know where the error has occurred in the input. It's the [old string conversion issue detailed at the start of this article](#updates-input-range--updates-output-range), all over again, and it's **infuriating**.
 
 
 
@@ -622,7 +621,7 @@ This API certainly suffers from its age as well. For example, it does things lik
 
 Turns out I have an [entire slab of documentation](https://ztdtext.readthedocs.io/en/latest/design.html) you can read about the design, and an [entire article explaining part of that design](/any-encoding-ever-ztd-text-unicode-cpp) out, so I really won't bother explaining ztd.text. It's the API I developed, the API mentioned in the video linked above, and what I've poured way too much of my time into for the sole purpose of saving the C and C++ landscape from its terrible encoding woes. I have people reaching out from different companies already attempting re-implementations of the specification for their platforms, and progress continues to move forward.
 
-It checks every single box in the table's row from the feature set, obviously. If it didn't I would have went back and whipped my API into shape to make sure it did, but I didn't have to because unlike just about every other API in this list it actually paid attention to everything that came before it and absorbed their lessons. I didn't make obvious mistakes or skip over use cases because, as it turns out, listening and learning are really, really powerful tools to prevent rehashing 30 year old discussions.
+It checks every single box in the table's row for the desired feature sets, obviously. If it didn't I would have went back and whipped my API into shape to make sure it did, but I didn't have to because unlike just about every other API in this list it actually paid attention to everything that came before it and absorbed their lessons. I didn't make obvious mistakes or skip over use cases because, as it turns out, listening and learning are really, really powerful tools to prevent rehashing 30 year old discussions.
 
 Wild, isn't it?
 
@@ -634,8 +633,8 @@ Wild, isn't it?
 We listed a few criteria and talked about it, so let's try to make a clear table of what we want out of an API and what each library gives us in terms of conversions. As a reminder, here's the key:
 
 - ✅ Meets all the necessary criteria of the feature.
-— ❌ Does not meet all the necessary criteria of the feature.
-— 🤨 Partially meets the necessary criteria with caveats or addendums.
+- ❌ Does not meet all the necessary criteria of the feature.
+- 🤨 Partially meets the necessary criteria with caveats or addendums.
 
 And here's how each of the libraries squares up.
 
@@ -707,6 +706,8 @@ Sorry! It turns out this article has quite literally surpassed 10,000 words and 
 ![A benchmark teaser. Dear low-vision reader, I apologize for the crappy alt-text in this current release. I will go back and write a much more detailed one for these teaser graphs, but right now I am exhausted. Maybe I can beg Kate or ask someone else for help with this, because I am just energy-wasted.](/assets/img/2022/10/Conversion%20Tests%20-%20UTF-16%20to%20UTF-8%20%28Well-Formed%29.png)
 ![A benchmark teaser. Dear low-vision reader, I apologize for the crappy alt-text in this current release. I will go back and write a much more detailed one for these teaser graphs, but right now I am exhausted. Maybe I can beg Kate or ask someone else for help with this, because I am just energy-wasted.](/assets/img/2022/10/Conversion%20Tests%20-%20UTF-16%20to%20UTF-8%20%28Well-Formed%2C%20Assumed%20Valid%29.png)
 
+
+Nyeheheh, such beautiful graphs...!
 
 See you soon 💚.
 
