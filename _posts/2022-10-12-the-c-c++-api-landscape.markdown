@@ -653,8 +653,8 @@ And here's how each of the libraries squares up.
 | Feature Set 👇 vs. Library 👉 | boost.text | utf8cpp | Standard C | Standard C++ | Windows API |
 | Handles Legacy Encodings | ❌ | ❌ | 🤨 | 🤨 | ✅ |
 | Handles UTF Encodings | ✅ | ✅ | 🤨 | 🤨 | 🤨 |
-| Bounded and Safe Conversion API | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Assumed Valid Conversion API | ✅ | ✅ | ❌ | ❌ | ✅ |
+| Bounded and Safe Conversion API | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Assumed Valid Conversion API | ✅ | ✅ | ❌ | ❌ | ❌ |
 | Unbounded Conversion API | ✅ | ✅ | ❌ | ❌ | ✅ |
 | Counting API | ❌ | 🤨 | ❌ | ❌ | ✅ |
 | Validation API | ❌ | 🤨 | ❌ | ❌ | ❌ |
@@ -663,7 +663,7 @@ And here's how each of the libraries squares up.
 | Single Conversions | ✅ | ✅ | ✅ | ✅ | ❌ |
 | Custom Error Handling | ❌ | ✅ | ✅ | ✅ | ❌ |
 | Updates Input Range (How Much Read™) | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Updates Output Range (How Much Written™) | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Updates Output Range (How Much Written™) | ✅ | ✅ | ✅ | ✅ | ❌ |
 
 This is the full spread. Every marker should be explained above; if something is missing, do let me know, because I am going to routinely reference this table as the Definitive™ Feature List for all of these libraries from now until I die. I spent way too much time investigating these APIs, suffering through their horrible builds, and knick-knack-patty-slapping these APIs and benchmarks and investigations together. I most certainly never want to touch libiconv again, and even though I'm tired as hell I've already put "remake ztd.text in Rust so I can have an UTF-32 conversion as part of a Rust text library, For God's Sake" on my list of things to do. (Or someone else will get to do it before I do, which would be grrreeat.)
 
