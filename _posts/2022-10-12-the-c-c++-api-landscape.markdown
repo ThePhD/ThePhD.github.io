@@ -639,7 +639,7 @@ We listed a few criteria and talked about it, so let's try to make a clear table
 And here's how each of the libraries squares up.
 
 | Feature Set 👇 vs. Library 👉 | ICU | libiconv | simdutf | encoding_rs/encoding_c | ztd.text |
-| Handles Legacy Encodings | ✅ | ✅  | ❌ | ❌ | ✅ |
+| Handles Legacy Encodings | ✅ | ✅  | ❌ | ✅ | ✅ |
 | Handles UTF Encodings | ✅ | ✅  | ✅ | 🤨 | ✅ |
 | Bounded and Safe Conversion API | ✅ | ✅ | ❌ | ✅ | ✅ |
 | Assumed Valid Conversion API | ❌ | ❌ | ✅ | ❌ | ✅ |
