@@ -689,7 +689,7 @@ Sorry! It turns out this article has quite literally surpassed 10,000 words and 
 
 See you soon 💚.
 
-- Thumbnail / Title Feature art done by [Nemo (@Wusdiswusdat)](https://twitter.com/WusdisWusdat) (There's a whole comic, but it's being Saved™ for a whole new blog post!)
+- Thumbnail / Title Feature art done by [Nemo (@WusdisWusdat)](https://twitter.com/WusdisWusdat) (There's a whole comic, but it's being Saved™ for a whole new blog post!)
 - "a" Emote art done by [Framebuffer (@framebuffer)](https://twitter.com/framebuffer)
 - Exhausted Phone art done by [Cynthia (@PixieCatSupreme)](https://twitter.com/PixieCatSupreme)
 - Concerned Emote art done by Queenie B
