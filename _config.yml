@@ -1,7 +1,7 @@
 # SITE CONFIGURATION
 baseurl: ""
 url: "https://thephd.dev"
-show_drafts: true
+show_drafts: false
 
 # THEME-SPECIFIC CONFIGURATION
 title: The Pasture
