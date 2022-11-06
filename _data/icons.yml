@@ -3,6 +3,7 @@
 behance:
 bitbucket:
 calendly:
+cohost: cohost.org/ThePhD
 dribbble:
 facebook:
 flickr:
@@ -15,7 +16,7 @@ keybase:
 linkedin:
 mail: "phdofthehouse@gmail.com"
 map:              # e.g. "34.0886/-118.3191"
-mastodon: chaos.social/@__phantomderp
+mastodon: pony.social/@thephd
 matrix:           # e.g. "@sam:matrix.org"
 medium:
 patreon:

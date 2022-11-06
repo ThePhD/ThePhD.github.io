@@ -7,6 +7,9 @@ bitbucket:
 calendly:
   pre: "https://calendly.com/"
   icon: "far fa-calendar-plus"
+cohost:
+  pre: "https://"
+  icon: "fas fa-egg"
 dribbble:
   pre: "https://www.dribbble.com/"
 facebook:

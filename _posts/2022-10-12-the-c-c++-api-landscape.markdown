@@ -655,13 +655,13 @@ And here's how each of the libraries squares up.
 
 | Feature Set 👇 vs. Library 👉 | boost.text | utf8cpp | Standard C | Standard C++ | Windows API |
 | Handles Legacy Encodings | ❌ | ❌ | 🤨 | 🤨 | ✅ |
-| Handles UTF Encodings | ✅ | ✅ | 🤨 | 🤨 | 🤨 |
-| Bounded and Safe Conversion API | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Handles UTF Encodings | ✅ | ✅ | 🤨 | 🤨 | ✅ |
+| Bounded and Safe Conversion API | ❌ | ❌ | 🤨 | ✅ | ✅ |
 | Assumed Valid Conversion API | ✅ | ✅ | ❌ | ❌ | ❌ |
 | Unbounded Conversion API | ✅ | ✅ | ❌ | ❌ | ✅ |
 | Counting API | ❌ | 🤨 | ❌ | ❌ | ✅ |
 | Validation API | ❌ | 🤨 | ❌ | ❌ | ❌ |
-| Extensible to (Runtime) User Encodings | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Extensible to (Runtime) User Encodings | ❌ | ❌ | ❌ | ✅ | ❌ |
 | Bulk Conversions  | ✅ | ✅ | 🤨 | 🤨 | ✅ |
 | Single Conversions | ✅ | ✅ | ✅ | ✅ | ❌ |
 | Custom Error Handling | ❌ | ✅ | ✅ | ✅ | ❌ |
