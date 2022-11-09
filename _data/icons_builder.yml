@@ -8,7 +8,7 @@ calendly:
   pre: "https://calendly.com/"
   icon: "far fa-calendar-plus"
 cohost:
-  pre: "https://"
+  pre: "https://cohost.org/"
   icon: "fas fa-egg"
 dribbble:
   pre: "https://www.dribbble.com/"
@@ -82,4 +82,4 @@ wordpress:
   pre: "https://"
   pos: ".wordpress.com/"
 youtube:
-  pre: "https://www.youtube.com/channel/"
+  pre: "https://www.youtube.com/"

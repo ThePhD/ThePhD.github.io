@@ -3,7 +3,7 @@
 behance:
 bitbucket:
 calendly:
-cohost: cohost.org/ThePhD
+cohost: ThePhD
 dribbble:
 facebook:
 flickr:
@@ -16,23 +16,23 @@ keybase:
 linkedin:
 mail: "phdofthehouse@gmail.com"
 map:              # e.g. "34.0886/-118.3191"
-mastodon: pony.social/@thephd
+mastodon: "pony.social/@thephd"
 matrix:           # e.g. "@sam:matrix.org"
 medium:
 patreon:
 phone:            # e.g. "+11111111111"
 pinterest:
-reddit: __phantomderp
+reddit: "__phantomderp"
 soundcloud:
 sms:              # e.g. "+11111111111"
 stack-exchange:   # e.g. "123456789"
 stack-overflow:   # e.g. "123456789"
 steam:
-telegram: thephantomderp
+telegram: "thephantomderp"
 tumblr:
-twitch:
-twitter: __phantomderp
+twitch: "ShepherdsOasis"
+twitter: "__phantomderp"
 vimeo:
 vk:
 wordpress:
-youtube: UCbPn0sw5rIgfT0vlSBvCWlA # Youtube channel token like: UCqECaJ8Gagnn7YCbPEzWH6g
+youtube: "@shepherdsoasis" # Youtube channel token like: UCqECaJ8Gagnn7YCbPEzWH6g

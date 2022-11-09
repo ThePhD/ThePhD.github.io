@@ -193,7 +193,7 @@ Not UTF-8. Not Latin-1!
 
 Post-locale, "`const char*` is always UTF-8", "UTF-8 is the only encoding you'll need" world, eh? 🙄
 
-Windows fairs no better, pulling out the generic default locale associated with my typical location since the computer's install. This means that if I decide today is a good day to transcode between UTF-16 and UTF-8 the "standard" way, everything that is not either ASCII or Latin-1 will simply be mangled, errored on, or destroyed. I have long since had to teach not only myself, but others how to escape the non-UTF-8 hell on Windows machines. For example, someone sent me a screenshot of a bit of code whose comments looked very much like it was mojibake'd over Telegram:
+Windows fares no better, pulling out the generic default locale associated with my typical location since the computer's install. This means that if I decide today is a good day to transcode between UTF-16 and UTF-8 the "standard" way, everything that is not either ASCII or Latin-1 will simply be mangled, errored on, or destroyed. I have long since had to teach not only myself, but others how to escape the non-UTF-8 hell on Windows machines. For example, someone sent me a screenshot of a bit of code whose comments looked very much like it was mojibake'd over Telegram:
 
 ![](/assets/img/2022/11/telegram-bad-data.png)
 
@@ -301,7 +301,7 @@ protected:
 }
 ```
 
-Now, this template is not supposed to anything and everything, which is why it additionally has virtual functions on it. And, despite the poorness of the `std::wstring_convert<…>` APIs, we can immediately see the enormous benefits of the API here, even if it is a little verbose:
+Now, this template is not supposed to be anything and everything, which is why it additionally has virtual functions on it. And, despite the poorness of the `std::wstring_convert<…>` APIs, we can immediately see the enormous benefits of the API here, even if it is a little verbose:
 
 - it cares about having both a beginning and an end;
 - it contains a third pointer-by-reference (rather than using a double-pointer) to allow someone to know where it stopped in its conversion sequences; and,
@@ -387,9 +387,9 @@ There is also another significant problem with the usage of `std::codecvt` for i
 
 # But, That Done and Dusts That
 
-So C and C++ are now Officially Critiqued™ and hopefully I don't have to have anyone crawl out of the woodwork to talk about X or Y thing again and how I'm not being fair enough[^Imagine-Defense].
+C and C++ are now Officially Critiqued™ and hopefully I don't have to have anyone crawl out of the woodwork to talk about X or Y thing again and how I'm not being fair enough[^Imagine-Defense].
 
-If all of these APIs are garbage, how do we build our own good one? Clearly, if I have all of this evidence and all of these opinions, assuredly I've been able to make a better API? So, let's try to dig in on that. I already figured out the C++ API in ztd.text, so let's cook up ztd.cuneicode, from the ground up, with a good interface.
+Nevertheless, if these APIs are garbage, how do we build our own good one? Clearly, if I have all of this evidence and all of these opinions, assuredly I've been able to make a better API? So, let's try to dig in on that. I already figured out the C++ API in ztd.text, so let's cook up ztd.cuneicode, from the ground up, with a good interface.
 
 
 
@@ -399,7 +399,7 @@ For a C function, we need to have 4 capabilities, as outlined by the table above
 
 - Single conversions, to transcode one indivisible unit of information at a time. 
 - Bulk conversions, to transcode a large buffer as fast as possible (a speed optimization over single conversion with the same properties).
-- Validation, to check whether an input is valid (or where there an error would occur in the input if some part is invalid).
+- Validation, to check whether an input is valid and can be converted to the output encoding (or where there an error would occur in the input if some part is invalid).
 - Counting, to know how much output is needed (often with an indication of where an error would occur in the input, if the full input can't be counted successfully).
 
 We also know from the ztd.text blog post and design documentation, as well as the analysis from the previous blog post and the above table, that we need to provide specific information for the given capabilities:
@@ -414,7 +414,7 @@ It turns out that there is already on C API that does most of what we want desig
 
 
 
-## The Perfect Curves, The Worst Personality
+## Borrowing Perfection
 
 This library has the perfect interface design and principles with — as is standard with most C APIs — the worst execution. To review, let's take a look at the libiconv conversion interface:
 
@@ -472,7 +472,7 @@ As shown, the `s` indicates that we are processing as many elements as possible 
 | `c16` | `char16_t` | UTF-16 |
 | `c32` | `char32_t` | UTF-32 |
 
-The optional encoding suffix is for the left-hand-side (from, `X`) encoding first, before the right-hand side (to, `Y`) encoding. If the encoding is the default, then it can be left off. If it may be ambiguous which tag is referring to which optional encoding suffix, both encoding suffixes are provided. The reason we do not use `mb` or `wc` is because those prefixes are tainted forever by API and ABI constraints in the C standard to refer to "bullshit multibyte encoding limited by a maximum output of `MB_MAX_LEN`", and "can only ever output 1 value and is insufficient even if it is picked to be UTF-32", respectively. The new name "mc" stands for "multi character", and "mwc" stands for — you guessed it — "multi wide character", to make it explicitly clear there's multiple values that will be going into and coming out of these functions.
+The optional encoding suffix is for the left-hand-side (from, `X`) encoding first, before the right-hand side (to, `Y`) encoding. If the encoding is the default associated encoding, then it can be left off. If it may be ambiguous which tag is referring to which optional encoding suffix, both encoding suffixes are provided. The reason we do not use `mb` or `wc` (like pre-existing C functions) is because those prefixes are tainted forever by API and ABI constraints in the C standard to refer to "bullshit multibyte encoding limited by a maximum output of `MB_MAX_LEN`", and "can only ever output 1 value and is insufficient even if it is picked to be UTF-32", respectively. The new name "`mc`" stands for "multi character", and "`mwc`" stands for — you guessed it — "multi wide character", to make it explicitly clear there's multiple values that will be going into and coming out of these functions.
 
 This means that if we want to convert from UTF-8 to UTF-16, bulk, the function to call is `cnc_c8snrtoc16sn(…)`. Similarly, converting from the Wide Execution Encoding to UTF-32 (non-bulk) would be `cnc_mwcnrtoc32n(…)`. There is, however, a caveat: at times, you may not be able to differentiate solely based on the encodings present, rather than the character type. In those cases, particularly for legacy encodings, the naming scheme is extended by adding an additional suffix directly specifying the encoding of one or both of the ends of the conversion. For example, a function that deliberate encodings from [Punycode](https://en.wikipedia.org/wiki/Punycode) ([RFC](https://www.rfc-editor.org/rfc/rfc3492.txt)) to UTF-32 (non-bulk) would be spelled `cnc_mcnrtoc32n_punycode(…)` and use `char` for `CharX` and `char32_t` for `CharY`. A function to convert specifically from SHIFT-JIS to EUC-JP (in bulk) would be spelled `cnc_mcsnrtomcsn_shift_jis_euc_jp(…)` and use `char` for both `CharX` and `CharY`. Furthermore, since people like to use `char` for UTF-8 despite [associated troubles with `char`'s signedness](/ever-closer-c23-improvements#isspace-u8-%F0%9F%92%A3-0), a function converting from UTF-8 to UTF-16 in this style would be `cnc_mcsnrtoc16sn_utf8(…)`. The function that converts the execution encoding to `char`-based UTF-8 is `cnc_mcsnrtomcsn_exec_utf8(…)`.
 
@@ -489,6 +489,7 @@ Given all of this, we can demonstrate a small usage of the API here:
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 
 int main() {
 	const char32_t input_data[] = U"Bark Bark Bark 🐕‍🦺!";
@@ -510,7 +511,8 @@ int main() {
 	const char* const conversion_result_title_str
 	     = (const char*)(has_err ? u8"Conversion failed... 😭"
 	                             : u8"Conversion succeeded 🎉");
-	const size_t conversion_result_title_str_size = 25;
+	const size_t conversion_result_title_str_size
+	     = strlen(conversion_result_title_str);
 	// Use fwrite to prevent conversions / locale-sensitive-probing from
 	// fprintf family of functions
 	fwrite(conversion_result_title_str, sizeof(*conversion_result_title_str),
@@ -522,8 +524,8 @@ int main() {
 	     (size_t)(output_written), (size_t)(sizeof(*output) * CHAR_BIT));
 	fprintf(stdout, "%s Conversion Result:\n", has_err ? "Partial" : "Complete");
 	fwrite(output_data, sizeof(*output_data), output_written, stdout);
-	// the stream (may be) line-buffered, so make sure an extra "\n" is written
-	// out this is actually critical for some forms of stdout/stderr mirrors; they
+	// The stream is (possibly) line-buffered, so make sure an extra "\n" is written
+	// out; this is actually critical for some forms of stdout/stderr mirrors. They
 	// won't show the last line even if you manually call fflush(…) !
 	fwrite("\n", sizeof(char), 1, stdout);
 	return has_err ? 1 : 0;
@@ -540,7 +542,7 @@ Complete Conversion Result:
 Bark Bark Bark 🐕‍🦺! 
 ```
 
-Of course, as specific in this section's title, this only covers the **canonical** conversions:
+Of course, as specified in this section's title, this only covers the **canonical** conversions:
 
 |         | **mc** | **mwc**| **c8** | **c16** | **c32** |
 |---------|--------|--------|--------|---------|---------|
@@ -566,9 +568,9 @@ So let's build the C version of all of this.
 
 
 
-## Conversion needs: Genericity
+## General-Purpose Interconnected Conversions Require Genericity
 
-ICU gives us most of the things we need to understand how to do a generic API. Let's take a look at its most general-purpose conversion API, `ucnv_convertEx`:
+The collection of the cuneicode functions above are all all both strongly-typed and the encoding is known.In most cases (save for the internal execution and wide execution encodings, where things may be a bit ambiguous to an end-user (but not for the standard library vendor)), there is no need for any intermediate conversion steps. They do not need any potential intermediate storage because both ends of the transcoding operation are known. libiconv provides us with a good idea for what the input and output needs to look like, but having a generic pivot is a different matter. ICU and a few other libraries have an explicit pivot source; other libraries (like encoding_rs) want you to coordinate the conversion from the disparate encoding to UTF-8 or UTF-16 and then to the destination encoding yourself (and therefore provide your own UTF-8/16 pivot). Here's how ICU does it in its `ucnv_convertEx` API:
 
 ```cpp
 U_CAPI void ucnv_convertEx(
@@ -579,15 +581,7 @@ U_CAPI void ucnv_convertEx(
 	UBool reset, UBool flush, UErrorCode *pErrorCode); // error code out-parameter
 ```
 
-There's a lot going on here, but it's got 4 main components.
-
-- The objects describing conversion. Rather than using a bunch of compile-time "Lucky 7" information, all of that information disappears behind opaque structures and runtime description holders of type `UConverter`.
-- The destination data. It's effectively using `char` as a byte-based buffer. It uses a pointer-to-pointer for the "start" pointer because that pointer is going to be advanced up. The second pointer is the end of the byte buffer.
-- The source data. It's the same as the destination, but `const`-qualified.
-- The pivot. We'll discuss this more down below.
-- The error code out-parameter. It could be used as a return values, but C and C++ people are allergic to remembering to check return values for some reason. Out parameter error values are one way to force developers to care, because the function cannot be called without it (at the cost of maybe the tiniest, most insignificant performance impact for the potential single indirect write).
-
-The first 3 bullets describe what we generally need. The buffers have to be type-erased, which means either providing `void*` or using the aliasing-capable `char*` or `unsigned char*`. (Aliasing is when a pointer to one type is used to look at the data of a fundamentally different type; only `char` and `unsigned char` can do that, and `std::byte` if C++ is on the table.) After we type-erase the buffers so that we can work on a "byte" level, we then need to develop what ICU calls `UConverter`s. Converters effectively handle converting between their desired representation (e.g., SHIFT-JIS or EUC-KR) and transport to a given neutral middle-ground encoding (such as UTF-32, UTF-16, or UTF-8). In the case of ICU, they convert to `UChar` objects, which are at-least 16-bit sized objects which can hold UTF-16 code units for UTF-16 encoded data. This becomes the Unicode-based anchor through which all communication happens, and why it is named the "pivot".
+The buffers have to be type-erased, which means either providing `void*`, aliasing-capable[^aliasing] `char*`, or aliasing-capable `unsigned char*`. (Aliasing is when a pointer to one type is used to look at the data of a fundamentally different type; only `char` and `unsigned char` can do that, and `std::byte` if C++ is on the table.) After we type-erase the buffers so that we can work on a "byte" level, we then need to develop what ICU calls `UConverter`s. Converters effectively handle converting between their desired representation (e.g., SHIFT-JIS or EUC-KR) and transport to a given neutral middle-ground encoding (such as UTF-32, UTF-16, or UTF-8). In the case of ICU, they convert to `UChar` objects, which are at-least 16-bit sized objects which can hold UTF-16 code units for UTF-16 encoded data. This becomes the Unicode-based anchor through which all communication happens, and why it is named the "pivot".
 
 
 ### Pivoting: Getting from A to B, through C
@@ -603,9 +597,9 @@ U_CAPI void ucnv_convertEx (UConverter *targetCnv, UConverter *sourceCnv,
 	UBool reset, UBool flush, UErrorCode *pErrorCode);
 ```
 
-What we see here is that we have the typical destination and source buffers (fashioned as bytes through `char`), but an interesting addendum that drastically improves what we're working with: the addition of an explicit "pivot" buffer. The pivot is typed as various levels of `UChar` pointers, where `UChar` is a stand-in for a type wide enough to hold 16 bits (like `uint_least16_t`). More specifically, the `UChar`-based pivot buffer is meant to be the place where *UTF-16 intermediate data is stored when there is no direct conversion between two encodings*. The iconv library has the same idea, except it does not expose the pivot buffer to you. Emphasis mine:
+The pivot is typed as various levels of `UChar` pointers, where `UChar` is a stand-in for a type wide enough to hold 16 bits (like `uint_least16_t`). More specifically, the `UChar`-based pivot buffer is meant to be the place where *UTF-16 intermediate data is stored when there is no direct conversion between two encodings*. The iconv library has the same idea, except it does not expose the pivot buffer to you. Emphasis mine:
 
-> It provides support for the follow encodings…
+> It provides support for the encodings…
 >
 > … [huuuuge list] …
 >
@@ -811,7 +805,7 @@ Which is surprisingly simple, despite all the stuff we talked about. The various
 
 
 
-## Conversion and Allocation Control
+## Creating a cuneicode Conversion
 
 Dealing with allocations can be a pretty difficult task. As with the `cnc_new_registry` function, we are going to provide a number of entry points that simply shill out to the heap passed in during registry creation so that, once again, 99% of users do not have to care where their memory comes from for these smaller objects. But, it's still important to let users override such defaults and control the space: this is paramount to allow for a strictly-controlled embedded implementation that can compile and run the API we are presenting here. So, let's get into the (thorny) rules of both creating a conversion object, and providing routines to give our **own** conversion routines. First, let's start with creating a conversion object to use:
 
@@ -858,10 +852,10 @@ cnc_open_error cnc_conv_open_n_select(cnc_conversion_registry* registry,
 As shown with the registry APIs, there's 2 distinct variants: the `_open` and `_new`. `_new` pulls its memory from the heap passed in during registry creation. However, sometimes that's not local-enough for some folks. Therefore, the `_open` variant of the functions ask for a pointer to a `size_t*` for the amount of space is available, and a `void* space` that contains all the space. Each set of APIs takes a `from` name and a `to` name: these are encoding names that are compared in a specific manner. That is:
 
 - it is basic ASCII Latin Alphabet (A-Z, a-z) case-insensitive;
-- ASCII `_`, `-`, `.` (period), and ` ` (space) are ignored;
+- ASCII `_`, `-`, `.` (period), and space are ignored;
 - and the input must be UTF-8.
 
-The reason that the rules are like this is so `"UTF-8"` and `"utf-8"` and `"utf_8"` and `"Utf-8"` are all considered identical. This is different from Standard C and C++, where `setlocale` and `getlocale` are not required to do any sort of invariant-folding comparison and instead can consider  `"C.UTF-8"`, `"C.Utf-8"`, `"c.utf-8"` and similar name variations as completely different. That is, while one platform will affirm that `"C.UTF-8"` is a valid locale/encoding, another platform will reject this despite having the moral, spiritual, and semantic equivalent of `"C.UTF-8"` because you spelled it with lowercase letters or some completely infuriating bullcrap-of-the-day that POSIX and C implementations settled on as a good idea for some reason. Perhaps in the future I could provide Unicode-based title casing/case folding, but at the moment 99% of encoding names are in mostly-ASCII identifiers. (It could be possible in the future to provide a suite of translated names for the `to` and `from` codes, but that is a bridge we can cross at a later date thankfully.)
+The reason that the rules are like this is so `"UTF-8"` and `"utf-8"` and `"utf_8"` and `"Utf-8"` are all considered identical. This is different from Standard C and C++, where `setlocale` and `getlocale` are not required to do any sort of invariant-folding comparison and instead can consider  `"C.UTF-8"`, `"C.Utf-8"`, `"c.utf-8"` and similar name variations as completely different. That is, while one platform will affirm that `"C.UTF-8"` is a valid locale/encoding, another platform will reject this despite having the moral, spiritual, and semantic equivalent of `"C.UTF-8"` because you spelled it with lowercase letters rather than some POSIX-blessed "implementation-defined" nutjobbery. Perhaps in the future I could provide Unicode-based title casing/case folding, but at the moment 99% of encoding names are in mostly-ASCII identifiers. (It could be possible in the future to provide a suite of translated names for the `to` and `from` codes, but that is a bridge we can cross at a later date thankfully.)
 
 The `_n` and non-`_n` functions are just variations on providing a size for the `from` and `to` names; this makes it easy not to require allocation if you parse a name out of another format (e.g., passing in a validated sub-input that identifies the encoding from a buffer that contains an `<?xml … ?>` encoding tag in an XHTML file, or the `<meta>` tag). If you don't call the `_n` functions, we do the C thing and call `strlren` on the input `from` and `to` buffers. It's not great, but momentum is momentum: C programmers and the APIs they use/sit beneath them on their systems expect footgun-y null terminated strings, no matter how many times literally everyone gets it wrong.
 
@@ -879,14 +873,256 @@ typedef struct cnc_conversion_info {
 } cnc_conversion_info;
 ```
 
-The `(to|from)_code_(data/size)` fields should be self-explanatory: when the conversion from `from` to `to` is found, it hands the user a point of the found conversion. These names should compare equal under the function `ztdc_is_encoding_name_equal_n_c8(…)` to the `from`/`to` code passed in. Note it may not be identical (even if they are considered equivalent), and so the name provided in the `cnc_conversion_info` structure is what is stored inside of the registry, and not the name provided to the function call.
+The `(to|from)_code_(data/size)` fields should be self-explanatory: when the conversion from `from` to `to` is found, it hands the user the sized strings of the found conversions. These names should compare equal under the function `ztdc_is_encoding_name_equal_n_c8(…)` to the `from`/`to` code passed in to any of the `cnc_conv_new_*`/`cnc_conv_open_*` functions. Note it may not be identical (even if they are considered equivalent), and so the name provided in the `cnc_conversion_info` structure is what is stored inside of the registry, and not the name provided to the function call.
 
 The interesting bit is the `is_indirect` boolean value and the `indirect_code_(data/size)` fields. If `is_indirect` is true, then the `indirect_` fields will be populated with the name (and the size of the name) of the **indirect encoding that is used as a pivot** between the two encoding pairs!
 
 
 ### Indirect Encoding Connection
 
-If we are going to have a way to connect two entirely disparate encodings through a common medium, then we need to be able to direct an encoding through an intermediate. This is where indirect conversions come in. The core idea is, thankfully, not complex. If you have an encoding 
+If we are going to have a way to connect two entirely disparate encodings through a common medium, then we need to be able to direct an encoding through an intermediate. This is where indirect conversions come in. The core idea is, thankfully, not complex, and works as follows:
+
+- if there is an encoding conversion from "`from`" to "`{Something}`";
+- and, if there is an encoding from "`{Something}`" to "`to`";
+- then, a conversion entry will be created that internally connects `from` to `to` through `{Something}` as the general-purpose pivot.
+
+So, for a brief second, if we assumed we have an encoding conversion from an encoding called "`SHIFT-JIS`" to "`UTF-32`", and we had an encoding from "`UTF-32`" to "`UTF-8`", we could simply ask to go from "`Shift-JIS`" to "`UTF-8`" **without** explicitly writing that encoding conversion ourselves. Since cuneicode comes with an encoding conversion that does Shift-JIS ➡ UTF-32 and UTF-32 ➡ UTF-8, we can try out the following code ourselves and verify it works with the APIs we have been discussing up until now. This is the exact same example we had [back in the C++ article](/any-encoding-ever-ztd-text-unicode-cpp#whew-alright-does-it-work).
+
+Step one is to open a registry, and then open the conversion pair that we want:
+
+```cpp
+#include <ztd/cuneicode.h>
+
+#include <ztd/idk/size.h>
+
+#include <stdio.h>
+#include <stdbool.h>
+
+int main() {
+	cnc_conversion_registry* registry = NULL;
+	{
+		cnc_open_error err
+		     = cnc_registry_new(&registry, CNC_REGISTRY_OPTIONS_DEFAULT);
+		if (err != CNC_OPEN_ERROR_OK) {
+			fprintf(stderr, "[error] could not open a new registry.");
+			return 2;
+		}
+	}
+
+	cnc_conversion* conversion          = NULL;
+	cnc_conversion_info conversion_info = {};
+	{
+		cnc_open_error err = cnc_conv_new(
+		     registry, "shift-jis", "utf-8", &conversion, &conversion_info);
+		if (err != CNC_OPEN_ERROR_OK) {
+			fprintf(stderr, "[error] could not open a new registry.");
+			cnc_registry_delete(registry);
+			return 2;
+		}
+	}
+
+	// …
+```
+
+If we fail, we bail and return `2` out of `main`. But, if not, we can keep going. Note that, by this point, the `conversion_info` variable has been filled in, so now we can use it to get information about what we opened up into the `cnc_conversion*` handle:
+
+```cpp
+	// …
+
+	fprintf(stdout, "Opened a conversion from \"");
+	fwrite(conversion_info.from_code_data,
+	     sizeof(*conversion_info.from_code_data), conversion_info.from_code_size,
+	     stdout);
+	fprintf(stdout, "\" to \"");
+	fwrite(conversion_info.to_code_data, sizeof(*conversion_info.to_code_data),
+	     conversion_info.to_code_size, stdout);
+	if (conversion_info.is_indirect) {
+		fprintf(stdout, "\" (through \"");
+		fwrite(conversion_info.indirect_code_data,
+		     sizeof(*conversion_info.indirect_code_data),
+		     conversion_info.indirect_code_size, stdout);
+		fprintf(stdout, "\").");
+	}
+	else {
+		fprintf(stdout, "\".");
+	}
+	fprintf(stdout, "\n");
+
+	// …
+```
+
+Executing the code up until this point, we'll get something like:
+
+> ```sh
+> Opened a conversion from "shift-jis" to "utf8" (through "utf32").
+> ```
+
+which is what we were expecting. Right now, cuneicode only has a conversion routines between Shift-JIS ⬅➡ UTF-32, so it only has one "indirect" encoding to pick from. The rest of this code should look familiar to the example given above for the compile-time known encoding conversions, save for the fact that we are passing values through `unsigned char*` rather than any strongly-typed `const char*` or `char8_t*` types. That means we need to get the array sizes in bytes (not that it matters too much, since the input and output values are in `char` and `unsigned char` arrays):
+
+```cpp
+	// …
+
+	const char input_data[] = "all according to , ufufufu!-5r3z2fqepc";
+	unsigned char output_data[ztd_c_array_size(input_data)] = {};
+
+	const size_t starting_input_size  = ztd_c_string_array_size(input_data);
+	size_t input_size                 = starting_input_size;
+	const unsigned char* input        = (const unsigned char*)&input_data[0];
+	const size_t starting_output_size = ztd_c_array_size(output_data);
+	size_t output_size                = starting_output_size;
+	unsigned char* output             = (unsigned char*)&output_data[0];
+	cnc_mcerror err
+	     = cnc_conv(conversion, &output_size, &output, &input_size, &input);
+	const bool has_err          = err != CNC_MCERROR_OK;
+	const size_t input_read     = starting_input_size - input_size;
+	const size_t output_written = starting_output_size - output_size;
+	const char* const conversion_result_title_str
+	     = (const char*)(has_err ? u8"Conversion failed... 😭"
+	                             : u8"Conversion succeeded 🎉");
+	const size_t conversion_result_title_str_size
+	     = strlen(conversion_result_title_str);
+	// Use fwrite to prevent conversions / locale-sensitive-probing from
+	// fprintf family of functions
+	fwrite(conversion_result_title_str, sizeof(*conversion_result_title_str),
+	     conversion_result_title_str_size, has_err ? stderr : stdout);
+	fprintf(has_err ? stderr : stdout,
+	     "\n\tRead: %zu %zu-bit elements"
+	     "\n\tWrote: %zu %zu-bit elements\n",
+	     (size_t)(input_read), (size_t)(sizeof(*input) * CHAR_BIT),
+	     (size_t)(output_written), (size_t)(sizeof(*output) * CHAR_BIT));
+	fprintf(stdout, "%s Conversion Result:\n", has_err ? "Partial" : "Complete");
+	fwrite(output_data, sizeof(*output_data), output_written, stdout);
+	// the stream (may be) line-buffered, so make sure an extra "\n" is written
+	// out this is actually critical for some forms of stdout/stderr mirrors; they
+	// won't show the last line even if you manually call fflush(…) !
+	fprintf(stdout, "\n");
+
+	// clean up resources
+	cnc_conv_delete(conversion);
+	cnc_registry_delete(registry);
+	return has_err ? 1 : 0;
+}
+```
+
+Running the above portion of the code, we can see the following output:
+
+> ```sh
+> Conversion succeeded 🎉
+> 	Read: 35 8-bit elements
+> 	Wrote: 39 8-bit elements
+> Complete Conversion Result:
+> all according to けいかく, ufufufu!
+> ```
+
+So, there we have it. A general-purpose pivoting mechanism that can choose an intermediate and allow us to pivot through to it! That means we have covered most of what is inside of the table even when we use an encoding that is as obnoxious to write an implementation against such as Punycode. Of course, despite demonstrating it can go through an indirect/intermediate encoding, that does not necessarily prove that we can do that for **any** encoding we want. The algorithm inside of cuneicode preferences conversions to and from UTF-32, UTF-8, and UTF-16 before any other encoding, but after that it's a random grab bag of whichever matching encoding pair is discovered first.
+
+This can, of course, be a problem. You may want to bias the selection of the intermediate encoding one way or another; to solve this problem, we just have to add another function call that takes a filtering/"selecting" function.
+
+
+### Indirect Control: Choosing an Indirect Encoding
+
+Because this is C, we just add some more prefixes on to the existing collection of function names, so we end up with a variant of `cnc_conv_new` that is instead named `cnc_conv_new_select` and its friends:
+
+```cpp
+typedef bool(cnc_indirect_selection_function)(size_t from_size,
+     const char* from, size_t to_size,
+     const char* to, size_t indirect_size,
+     const char* indirect);
+
+cnc_open_error cnc_conv_new_n_select(cnc_conversion_registry* registry,
+	size_t from_size, const char* from,
+	size_t to_size, const char* to,
+	cnc_indirect_selection_function* selection, // ❗ this parameter
+	cnc_conversion** out_p_conversion, cnc_conversion_info* p_info);
+```
+
+A `cnc_indirect_selection_function` type effectively takes the from name, the to name, and the indirect name and passes them to a function that returns a `bool`. This allows a function to wait for e.g. a specific indirect name to select, or maybe will reject any conversion that features an indirect conversion at all (the indirect name will be a null pointer to signify that it's a direct conversion). For example, here's a function that will only allow Unicode-based go-betweens:
+
+```cpp
+#include <ztd/cuneicode.h>
+
+#include <stdbool.h>
+
+bool filter_non_unicode_indirect(size_t from_size, const char* from,
+	size_t to_size, const char* to,
+	size_t indirect_size, const char* indirect) {
+	// unused warnings removal
+	(void)from_size;
+	(void)from;
+	(void)to_size;
+	(void)to_size;
+	if (indirect == nullptr) {
+		// if there's no indirect, then it's a direct conversion
+		// which is fine.
+		return true;
+	}
+	return ztdc_is_unicode_encoding_name_n(indirect_size, indirect);
+}
+```
+
+This function might come in handy to guarantee, for example, that there's a maximum chance that 2 encodings could convert between each other. Typically, Unicode's entire purpose is to enable going from one encoded set of text to another without any loss, whether through publicly available and assigned code points or through usage of the private use area. A user can further shrink this surface area by demanding that the go-between is something like UTF-8, which can come particularly in handy for UTF-EBCDIC which has many bit-level similarities with UTF-8 that can be used for optimization purposes as a go-between.
+
+cuneicode itself, when a version of the `cnc_conv_(open|new)` is used, provides a function that simply just returns `true`. This is because cuneicode, internally, has special mechanisms that directly scans a subset of the list of [known Unicode encodings](https://ztdcuneicode.readthedocs.io/en/latest/known%20unicode%20encodings.html) and checks them first. If there's a conversion routine stored in the registry to or from for UTF-8, UTF-16, and UTF-32, it will select and prioritize those first before going on to let the function pick whatever happens to be the first one. The choice is unspecified and not stable between invocations of the `cnc_conv` creation functions, but that's because I'm reserving the right to improve the storage of the conversion routines in the registry and thus might need to change the data structures and their iteration paths / qualities in the future.
+
+Still, there's something more important than these minute details we've been discussing here. In particular, one of the things hinted at by [Part 1](/the-c-c++-rust-string-text-encoding-api-landscape) was this interface — despite it doing things like updating the input/output pointers as well as the input/output sizes — could be fast. Now that we have both the static conversion sections and the registry for this C library, is it possible to be fast? Can we compete with the Big Dogs™ like ICU and encoding_rs for their conversion routines?
+
+
+
+
+# Faster than Fast: Unicode Conversions at the Edge
+
+Let's cut right to the chase: can all of this messing around with a registry — or the static, known-encoding functions — allow us to reach maximum speed in C? Ideally, we created the registry to allow someone to sub in an implementation for transcoding between two encodings in a way that was the most advantageous for their platform. And it would be easy to see why, once we present the below graphs. But, before we do, let's make sure to contextualize all of the results in the upcoming graphs. All of these graphs have the following properties:
+
+- The latest of each library was used as of 21 October, 2022.
+- Windows 10 Pro machine, general user processes running in the background (but machine not being used).
+- AMD Ryzen 5 3600 6-Core @ 3600 MHz (12 Logical Processors), 32.0 GB Physical Memory
+- Clang 15.0.2, latest available Clang at the time of generation with MSVC ABI.
+- Entire software stack for every dependency build under default CMake flags (including ICU and libiconv from vcpkg).
+- Anywhere from 150 to 10million samples per iteration, with mean (average) of 100 iterations forming transparent dots on graph.
+- Each bar graph is mean of the 100 iterations, with provided standard deviation-based error bars.
+- In general, unless explicitly noted, the fastest possible API under the constraints was used to produce the data.
+	- "Unbounded" means that, where shown, the available space left for writing was not considered.
+	- "Unchecked" means that, where shown, the input was not validated before being converted.
+	- "Well-Formed", in the title, means that the input was well-formed (we do not do error benchmarks (yet)).
+	- "Assumed Valid", in the title, means that **every** benchmarked method shown in the graph does not perform input validation of any kind.
+
+There are many entries in the graph, most of them derived from the critiques done here nd in [Part 1](/the-c-c++-rust-string-text-encoding-api-landscape). They are:
+
+- [simdutf](https://github.com/simdutf/simdutf)
+- [iconv](https://www.gnu.org/software/libiconv/) ([patched vcpkg](https://vcpkg.io/en/packages.html) version, search "libiconv")
+- [boost.text](https://github.com/tzlaine/text) (proposed for Boost, in limbo...?)
+- [utf8cpp](https://github.com/nemtrif/utfcpp)
+- [ICU](https://unicode-org.github.io/icu/userguide/conversion/converters.html) (plain libicu & friends, and presumably not the newly released ICU4X, or ICU4C/ICU4J)
+- [encoding_rs](https://github.com/hsivonen/encoding_rs) through it's [encoding_c](https://github.com/hsivonen/encoding_c) binding library
+- the Windows API, both [`MultiByteToWideChar`](https://docs.microsoft.com/en-us/windows/win32/api/stringapiset/nf-stringapiset-multibytetowidechar) and [`WideCharToMultiByte`](https://docs.microsoft.com/en-us/windows/win32/api/stringapiset/nf-stringapiset-widechartomultibyte)
+- [ztd.text](https://github.com/soasis/text/), the initial C++ version of this library leading [P1629](/_vendor/future_cxx/papers/d1629.html)
+- [ztd.cuneicode](https://github.com/soasis/cuneicode), the initial C version of this library which is in-part described by [N3031 and its Revisions](/_vendor/future_cxx/papers/C%20-%20Restartable%20and%20Non-Restartable%20Character%20Functions%20for%20Efficient%20Conversions.html)
+- [CTRE](https://compile-time-regular-expressions.readthedocs.io/en/latest/), as requested by the library author for their UTF-8 to UTF-32 iterator-based conversion routine.
+
+There are tons of benchmarks that need to be run, and they do not even cover the full gamut of things that can and should be tested. A full listing of all the graphs can be found on the [ztd.text benchmarking page](https://ztdtext.readthedocs.io/en/latest/benchmarks.html), but some of the more interesting ones will be shown here to talk about performance and other metrics. First up, the teaser graphs from last time (with some updates since last time):
+
+
+
+![](/assets/img/2022/11/utf32-to-utf8-well_formed.png)
+
+![](/assets/img/2022/11/utf32-to-utf8-well_formed-assume_valid.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Finally, the `_select` functions off an intriguing intervention that is more relevant when selecting a conversion routine.
 
@@ -910,5 +1146,6 @@ Finally, the `_select` functions off an intriguing intervention that is more rel
 [^UCS-2]: See [[depr.locale.stdcvt](https://eel.is/c++draft/depr.locale.stdcvt)].
 [^Imagine-Defense]: Imagine having such a crap API with such shitty preconditions that it can't stand on its own merits and instead needs someone to painstakingly "defend" its honor. Amazing work from people who usually spend half of their time trying to convince me that Technology is Definitely A Meritocracy™ and not subject to any of the usual human forces that literally everything else deals with.
 [^lost-mind]: This includes Windows Terminal, a handful of Command Prompt shims, Powershell (most of the time), the Console on Mac OS, and (most) Linux Terminals not designed by people part of the weird anti-Unicode Fiefdoms that exist in the many Canon *nix Universes.
+[^aliasing]: Aliasing-capable means that the pointer can be used as the destination of a pointer cast and then be used in certain ways without violating the rules of C and C++ on what is commonly called "strict aliasing". Generally, this means that if data has one type, it cannot be used through a pointer as another type (e.g., getting the address of a `float` variable, then casting the `float*` to a `unsigned int*` and accessing it through the `unsigned int*`). Strict aliasing is meant to allow a greater degree of optimizations by being capable of knowing certain data types can always be handled in a specific way / with specific instructions.
 
 {% include anchors.html %}
