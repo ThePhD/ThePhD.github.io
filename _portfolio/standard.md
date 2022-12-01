@@ -22,6 +22,7 @@ C2y/C3a | n2970: Transparent Aliases | [Published](https://www.open-std.org/jtc1
 C2y/C3a | n2995: `__supports_literal` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2995.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__supports_literal.html)
 C2y/C3a | n2998: Literal Suffixes for `size_t` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2998.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
 C2y/C3a | n3031 Restartable Functions for Efficient Character Conversions | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3031.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
+C2y/C3a | n3XXX: More Modern Bit Utilities | Not Published | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20More%20Modern%20Bit%20Utilities.html)
 
 
 ### Approved Proposals:
@@ -46,7 +47,7 @@ C23   | n2828: Unicode Sequences More Than 21 Bits Are A Constraint Violation | 
 C23   | n2900: Consistent, Warningless, and Intuitive Initialization with `{}` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2900.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Consistent,%20Warningless,%20and%20Intuitive%20Initialization%20with%20%7B%7D.html)
 C23   | n3011: Oops, Compound Literals and Empty Initializers | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3011.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Oops,%20Compound%20Literals%20with%20Empty%20Initializers.html)
 C23   | n3017: Preprocessor embed - Binary Resource Inclusion | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3017.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20embed.html)
-C23   | n3022: Modern Bit Utilities | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3022.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Modern%20Bit%20Utilities.html)
+C23   | n3022: Modern Bit Utilities (Most Components) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3022.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Modern%20Bit%20Utilities.html)
 C23   | n3029: Improved Normal Enumerations | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3029.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Improved%20Normal%20Enumerations.html)
 C23   | n3030: Enhanced Enumerations | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3030.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Enhanced%20Enumerations.html)
 
