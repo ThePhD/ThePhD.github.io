@@ -238,14 +238,14 @@ It's a lot of work, and we have to keep actively working at it, but this is the 
 
 C and C++ are already broken.
 
-We can either leave it like this and keep letting the vendors take our space from us, or we can fight back. I threw money into a bus ticket and slept in a rickety room where I got to see some very large spiders and a few other many-legged bugs say good morning to me on my curtain every morning [just for the chance to get into this mess of a language](/follow-the-river-wg14-ithaca-2019), because it doesn't have to stay broken. We deserve signed integers that don't trigger undefined behavior on a flippin' left shift. We deserve multiplies and subtracts and adds that don't punch us in the face. We deserve code that **actually** respects what we write and what we say when we say it, so we can build the necessary safety guarantees into what we ship to what I know C programmers are shipping to millions of people all over the globe.
+We can either leave it like this and keep letting the vendors take our space from us. Or, we can fight back. I threw money into a bus ticket and slept in a rickety room where I got to see some very large spiders and a few other many-legged bugs say good morning to me on my curtain every morning [just for the chance to get into this mess of a language](/follow-the-river-wg14-ithaca-2019), because it doesn't have to stay broken. We deserve signed integers that don't trigger undefined behavior on a flippin' left shift. We deserve multiplies and subtracts and adds that don't punch us in the face. We deserve code that **actually** respects what we write and what we say when we say it, so we can build the necessary safety guarantees into what I know C programmers are shipping to millions of people all over the globe.
 
 We deserve better, and if our forefathers aren't going to settle the question and give it to us then we better damn well do it ourselves.
 
 
 
 
-# Of Course …
+# … Of Course.
 
 There is a secret option as opposed to all of this. You could not remember the Sledgehammer Principle. You can ignore the minutia of Undefined or Implementation-defined or Unspecified or whatever behavior. You could simply just use tools
 
