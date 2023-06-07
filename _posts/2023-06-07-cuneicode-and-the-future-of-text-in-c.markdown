@@ -454,7 +454,7 @@ We also know from the ztd.text blog post and design documentation, as well as th
 - that "output written" should only include how much was **successfully** converted (e.g., points to just after the last successful serialization, and not any partial writes); and,
 - that we may need additional state associated with a given encoding to handle it properly (any specific "shift sequences" or held-onto state; we'll talk about this more thoroughly when demonstrating the new API).
 
-It turns out that there is already on C API that does most of what we want design-wise, even if its potential was not realized by the people who worked on it and standardized its interface in POSIX!
+It turns out that there is already one C API that does most of what we want design-wise, even if its potential was not realized by the people who worked on it and standardized its interface in POSIX!
 
 
 
