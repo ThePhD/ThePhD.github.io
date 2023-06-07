@@ -218,3 +218,5 @@ Finished and documented here:
   - Containers operations are made conditionally `noexcept` if possible based on the allocator and movability of the inserted types.
 
 [ ⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀ ]
+
+{% include anchors.html %}

@@ -138,3 +138,5 @@ Someone asked about CMake during the January 2018 meetup, so I threw together a 
 [![Wrapping Lua C in C++ - Efficiently and with a Touch of Magic](/assets/img/thumbnails/wrapping-lua.png)](/_presentations/sol2/Boston C++ Meetup/2017.11.08 - ThePhD - Wrapping Lua C in C++.pdf)
 
 An early presentation of sol2 at my C++ Meetup. I did not think it would be so much fun, but it was! I went a tad overtime, but that was because I was so zealous about the topic, and quite a few people were very interested in the actual contents of the conversation! It was quite nice. It was about a 50 minute presentation or so.
+
+{% include anchors.html %}

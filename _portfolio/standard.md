@@ -82,3 +82,5 @@ C++ | p0051: `std::overload` | Not Published | [Latest Draft](/_vendor/future_cx
 C++ | p1803: packexpr(args, I) -- compile-time friendly pack inspection | [Published](https://wg21.link/p1803) | [Latest Draft](/_vendor/future_cxx/papers/d1803.html)
 C++ | p1193: Explicitly Specified Returns for (Implicit) Conversions | [Published](https://wg21.link/p1193) | [Latest Draft](/_vendor/future_cxx/papers/d1193.html)
 C++ | p1378: `consteval is_string_literal(T*)` | Not Published | [Latest Draft](/_vendor/future_cxx/papers/d1378.html)
+
+{% include anchors.html %}
