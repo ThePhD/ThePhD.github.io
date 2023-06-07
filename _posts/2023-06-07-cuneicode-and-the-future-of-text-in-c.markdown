@@ -236,7 +236,7 @@ There are other ways to transition your application to UTF-8 on Windows, even if
 
 Yep, the option to turn on UTF-8 by default is buried *underneath* the new Settings screen, under the "additional clocks" Legacy Settings window on the first tab, into the "Region" Legacy Settings window on the **second** tab ("Administrative"), and then you need to click the "Change system locale" button, check a box, and reset your computer.
 
-But sure, after you do all of that, you get to live in a post-locale world. 🙃
+But sure, after you do all of that, you get to live in a post-locale world[^locale-lying]. 🙃
 
 
 
@@ -586,7 +586,7 @@ Complete Conversion Result:
 Bark Bark Bark 🐕‍🦺! 
 ```
 
-Of course, some readers may have a question about how the example is written. In particular…
+Of course, some readers may have a question about how the example is written. Two things, in particular…
 
 
 
@@ -599,6 +599,68 @@ For example, even if I put UTF-8 data into `fprintf("%s", (const char*)u8"🐈 m
 The result is that you will get a bunch of weird symbols or a bunch of empty cells in your terminal, leading to confused users and no Unicode-capable output. So, the cross-platform solution is to use `fwrite` specifically for data that we expect implementations like Microsoft will mangle on various terminal displays (such as in VSCode, Microsoft Terminal, or just plain ol' `cmd.exe` that is updated enough and under the right settings). This bypasses any internal `%s` decoding that happens, and basically shoves the bytes as-is straight to the terminal. Given it is just a sequence of bytes going to the terminal, it will be decoded directly by the display functions of the terminal and the shown cells, at least for the new Windows Terminal, will show us UTF-8 output.
 
 It's not ideal and it makes the examples a lot less readable and tangible, but that is (unfortunately) how it is.
+
+
+
+## What is with the `"foo"` string literal but the e.g. `\xF0\x9F\x98\xAD` sequence??
+
+Let us take yet another look at this very frustrating initialization:
+
+```cpp
+	// …
+
+	const char* const conversion_result_title_str = (has_err
+		? "Conversion failed... \xF0\x9F\x98\xAD" // UTF-8 bytes for 😭
+		: "Conversion succeeded \xF0\x9F\x8E\x89"); // UTF-8 bytes for 🎉
+
+	// …
+```
+
+You might look at this and be confused. And, rightly, you should be: why not just use a `u8""` string literal? And, with that `u8""` literal, why not just use e.g. `u8"Blah blah\U0001F62D"` to get the crying face? Well, unfortunately, I regret to inform you that
+
+
+### MSVC is At It Again!
+
+Let's start with just using `u8""` and trying to put the crying face into the string literal, directly:
+
+```cpp
+	// …
+
+	const char very_normal[] = u8"😭";
+
+	// …
+```
+
+This seems like the normal way of doing things. Compile on GCC? Works fine. Compile on Clang? Also works fine enough. Compile on MSVC? Well, I hope you brought tissues. If you forget to use the `/utf-8` flag, this breaks in fantastic ways. First, it will translate your crying emoji into a sequence of code units that is mangled, at the _source level_. Then, as the compiler goes forward, a bunch of really fucked up bytes that no longer correspond to the sobbing face emoji (Unicode code point U+0001F62D) will then each individually be treated as its own Unicode code point. So you will get 4 code points, each one more messed up that the last, but it doesn't stop there, because MSVC — in particular — has a wild behavior. The size of the string literal here won't be 4 (number of mangled bytes) + 1 (null terminator) to have `sizeof(very_normal)` be 5. No, the [`sizeof(very_normal)` here is **NINE** (9)](https://godbolt.org/z/haGxfeddd)!
+
+See, Microsoft did this funny thing where, inside of the `u8""`, each byte is not considered as part of a sequence. Each byte is considered its *own Unicode code point*, all by itself. So the 4 fucked up bytes (plus null terminator) are each treated as distinct, individual code points (and not a sequence of code units). Each of these is then **expanded** out to their UTF-8 representation, one at a time. Since the high bit is set on all of these, each "code point" effectively translates to a double-byte UTF-8 sequence. Now, normally, that's like... whatever, right? We didn't specify `/utf-8`, so we're getting garbage into our string literal at some super early stage in the lexing of the source. "Aha!", you say. "I will inject each byte, one at a time, using a `\xHH` sequence, where `HH` is a 0-255 hexadecimal character." And you would be right on Clang. And right on GCC. And right according to the C and C++ standard. You would even be correct if it was an `L""` string literal, where it would insert one code unit corresponding to that sequence. But if you type this:
+
+```cpp
+	// …
+
+	const char very_normal[] = u8"\xF0\x9F\x98\xAD";
+
+	// …
+```
+
+You would not be correct on MSVC.
+
+The above code snippet is what folks typically reach for, when they cannot guarantee `/utf-8` or `/source-charset=.65001` (the Microsoft Codepage name for UTF-8). "If I can just inject the bytes, I can get a `u8""` string literal, typed according with unsigned values, converted into my `const char[]` array." This makes sense. This is what people do, to have cross-platform source code that will work everywhere, including places that were slow to adopt `\U...` sequences. It's a precise storage of the bytes, and each `\x` fits for each character.
+
+But it won't work on MSVC.
+
+The `sizeof(very_normal)` here, even with `/utf-8` specified, is [still 9](https://godbolt.org/z/M9qG3MvKx). This is because, as the previous example shows up, it treats each code unit here as being a full code point. These are all high-bits-set values, and thus are treated as 2-byte UTF-8 sequences, plus the null terminator. No other compiler does this. MSVC does not have this behavior even for its other string literal types; it's just with UTF-8 they pull this. So even if you can't have `u8"😭"` in your source code — and you try to place it into the string in an entirely agnostic way that gets around bad source encoding — it will still punch you in the face. This is not standards-conforming. It was never standards-conforming, but to be doubly sure the wording around this in both C and C++ was clarified in recent additions to make it extremely clear this is not the right behavior.
+
+There are [open bug reports against MSVC](https://developercommunity.visualstudio.com/t/hex-escape-codes-in-a-utf8-literal-are-t/225847?q=u8+string+literal+Martin) for this. There were also bug reports against the implementation **before** they nuked their bug tracker and swapped to the current Visual Studio Voice. I was there, when I was not involved in the standard and code-young to get what was going on. Back when the libogonek author and others tried to file against MSVC about this behavior. Back when the "CTP"s were still a thing MSVC was doing.
+
+They won't fix this. The standard means nothing here; they just don't give a shit. Could be because of source compatibility reasons. But even if it's a source compatibility issue, they won't even lock a standards conforming behavior behind a flag. `/permissive-` won't fix it. `/utf-8` won't fix it. There's no `/Zc:unfuck-my-u8-literals-please` flag. Nothing. The behavior will remain. It will screw up every piece of testing code you have written to test for specific patterns in your strings while you're trying to make sure the types are correct. There is nothing you can do but resign yourself to not using `u8""` anymore for those use cases.
+
+Removing the `u8` in front gets the desired result. Using `const char very_normal[] = u8"\U0001F62D";` also works, except that only applies if you're writing UTF-8 exactly. If you're trying to set up e.g. an MUTF-8 null terminator (to work with Android/Java UTF-8 strings) inside of your string literal to do a quick operation? If you want to insert some "false" bytes in your test suite's strings to check if your function works? …
+
+Hah.
+
+Stack that with the recent `char8_t` type changes for `u8""`, and it's a regular dumpster fire on most platforms to program around for the latest C++ version.
+
 
 
 
@@ -1572,6 +1634,7 @@ Hopefully, it enriched you, even if only a little. 💚
 
 [^UCS-2]: See [[depr.locale.stdcvt](https://eel.is/c++draft/depr.locale.stdcvt)].
 [^screed-ableism]: Not that we endorse the language here, clearly the commit author is having a Certified Moment® and so this commit is filled with your usual videogame chat ableist thoroughfare. But, even if packaged in this manner, a valid complaint is a valid complaint.
+[^locale-lying]: _Narrator: they were lying. Windows still had many applications that refused to acknowledge this default locale, as they would soon find out when needing `fwrite` on their machine to print UTF-8 to a capable console._
 [^lost-mind]: The Good Terminals™ includes Windows Terminal, a handful of Command Prompt shims, PowerShell (most of the time), the Console on Mac OS, and (most) Linux Terminals not designed by people part of the weird anti-Unicode Fiefdoms that exist in the many Canon *nix Universes.
 [^nullptr-lying]: NOTE: I am lying. I tried this. This is a bad idea. Do not do it on any available implementation, ever. At the best you'll segmentation fault or get an `assert` failure. At the worst you will make a security issue. This is me, in all my seriousness, letting you know this is a TERRIBLE idea.
 [^aliasing]: Aliasing-capable means that the pointer can be used as the destination of a pointer cast and then be used in certain ways without violating the rules of C and C++ on what is commonly called "strict aliasing". Generally, this means that if data has one type, it cannot be used through a pointer as another type (e.g., getting the address of a `float` variable, then casting the `float*` to a `unsigned int*` and accessing it through the `unsigned int*`). Strict aliasing is meant to allow a greater degree of optimizations by being capable of knowing certain data types can always be handled in a specific way / with specific instructions.
