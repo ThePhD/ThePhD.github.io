@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Cuneicode, and the Future of Text in C"
+title: "cuneicode, and the Future of Text in C"
 permalink: /cuneicode-and-the-future-of-text-in-c
 feature-img: "/assets/img/2023/06/trash-fire-header.jpg"
 thumbnail: "/assets/img/2023/06/trash-fire-header.jpg"
@@ -9,11 +9,11 @@ excerpt_separator: <!--more-->
 draft: true
 ---
 
-Following up from the last post, there is a lot more we need to cover. This was intended to be the post where we talk exclusively about benchmarks and numbers. But, I have unfortunately been perfectly taunted and status-locked <!--more-->, like a monster whose "aggro" was pulled by a tank, due to a few folks taking issue with my outright dismissal of the C and C++ APIs (and not showing them in the last post's teaser benchmarks).
+Following up from the last post, there is a lot more we need to cover. This was intended to be the post where we talk exclusively about benchmarks and numbers. But, I have unfortunately been perfectly taunted and status-locked <!--more-->, like a monster whose "aggro" was pulled by a tank. The reason, of course, is due to a few folks taking issue with my outright dismissal of the C and C++ APIs (and not showing them in the last post's teaser benchmarks).
 
-Therefore, this post will be squarely focused on cataloguing the C and C++ APIs in detail.
+Therefore, this post will be squarely focused on cataloguing the C and C++ APIs in detail, and how to design ourselves away from those mistakes in C.
 
-Part of this post will add to the table from [Part 1](/the-c-c++-rust-string-text-encoding-api-landscape), talking about *why* the API is trash (rather than just taking it for granted that industry professionals, hobbyists, and academic experts have already discovered how trash it is), and unfortunately adding it to the benchmarks we are doing (which means using it in anger) that will be explained later. As a refresher, here's where the table we created left off, with all of what we discovered (including errata from comments people sent in):
+Part of this post will add to the table from [Part 1](/the-c-c++-rust-string-text-encoding-api-landscape), talking about *why* the API is trash (rather than just taking it for granted that industry professionals, hobbyists, and academic experts have already discovered how trash it is). I also unfortunately had to add it to the benchmarks we are doing (which means using it in anger). As a refresher, here's where the table we created left off, with all of what we discovered (including errata from comments people sent in):
 
 | Feature Set 👇 vs. Library 👉 | ICU | libiconv | simdutf | encoding_rs/encoding_c | ztd.text |
 | Handles Legacy Encodings | ✅ | ✅  | ❌ | ✅ | ✅ |
@@ -45,7 +45,7 @@ Part of this post will add to the table from [Part 1](/the-c-c++-rust-string-tex
 | Updates Input Range (How Much Read™) | ✅ | ❌ | ✅ | ✅ | ❌ |
 | Updates Output Range (How Much Written™) | ✅ | ✅ | ✅ | ✅ | ❌ |
 
-In this article, what we're going to be doing is sizing up particularly the standard C and C++ interfaces, benchmarking all of the APIs in the table, and discussing in particular the various quirks and tradeoffs that come with doing things in this manner. We will also be showing off the C-based API that we have spent all this time leading up to, its own tradeoffs, and if it can tick all of the boxes like ztd.text does. The name of the C API is going to be Cuneicode, a portmanteau of Cuneiform (one of the first writing systems) and Unicode (of Unicode Consortium fame).
+In this article, what we're going to be doing is sizing up particularly the standard C and C++ interfaces, benchmarking all of the APIs in the table, and discussing in particular the various quirks and tradeoffs that come with doing things in this manner. We will also be showing off the C-based API that we have spent all this time leading up to, its own tradeoffs, and if it can tick all of the boxes like ztd.text does. The name of the C API is going to be cuneicode, a portmanteau of Cuneiform (one of the first writing systems) and Unicode (of Unicode Consortium fame).
 
 | Feature Set 👇 vs. Library 👉 | Standard C | Standard C++ | ztd.text | ztd.cuneicode |
 | Handles Legacy Encodings | 🤨 | 🤨 | ✅ | ❓ |
@@ -64,9 +64,9 @@ In this article, what we're going to be doing is sizing up particularly the stan
 
 First, we are going to thoroughly review why the C API is a failure API, and all the ways it precipitates the failures of the encoding conversions it was meant to cover (including the existing-at-the-time Big5-HKSCS case that it does not support).
 
-Then, we will discuss the C++-specific APIs that exist outside of the C standard. This will include going from `std::wstring_convert`'s deprecated API to the API that sits underneath it to power the string conversions that it provides, `std::codecvt<ExternCharType, InternCharType, StateObject>` and the various derived classes `std::codecvt(_utf8/_utf16/_utf8_utf16)`. We will also talk about how the C API's most pertinent failure leaks into the C++ API, and how that pitfall is the primary reason why Windows, specific IBM platforms, lots of BSD platforms, and more cannot properly support UTF-16 or UTF-32 in its core C or C++ standard library offerings.
+Then, we will discuss the C++-specific APIs that exist outside of the C standard. This will include going beneath `std::wstring_convert`'s deprecated API, to find that powers the string conversions that it used to provide. In particular, we will discuss `std::codecvt<ExternCharType, InternCharType, StateObject>` and the various derived classes `std::codecvt(_utf8/_utf16/_utf8_utf16)`. We will also talk about how the C API's most pertinent failure leaks into the C++ API, and how that pitfall is the primary reason why Windows, specific IBM platforms, lots of BSD platforms, and more cannot properly support UTF-16 or UTF-32 in its core C or C++ standard library offerings.
 
-Finally, we will discuss ztd.cuneicode / Cuneicode, a C library for doing encoding conversions that does not make exceedingly poor decisions in its interfaces.
+Finally, we will discuss ztd.cuneicode / cuneicode, a C library for doing encoding conversions that does not make exceedingly poor decisions in its interfaces.
 
 
 
@@ -795,7 +795,7 @@ Well, strap in, because we are going to be crafting a reusable, general-purpose 
 
 
 
-# Cuneicode and the Encoding Registry
+# cuneicode and the Encoding Registry
 
 As detailed in Part 1 and hinted at above, libiconv — and many other existing encoding infrastructures — do not provide a way to expand their encoding knowledge at run time. They ship with a fixed set of encodings, and you must either directly modify the library or directly edit data files in order to coax more encodings out of the interface. In the case of Standard C, sometimes that means injecting more files into the system locale files, or other brittle nd non-portable things. We need a means of loading up and controlling a central place where we can stuff all our encodings. Not only that, but we also:
 
