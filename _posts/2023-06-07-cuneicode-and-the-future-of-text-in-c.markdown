@@ -797,7 +797,7 @@ Well, strap in, because we are going to be crafting a reusable, general-purpose 
 
 # cuneicode and the Encoding Registry
 
-As detailed in Part 1 and hinted at above, libiconv — and many other existing encoding infrastructures — do not provide a way to expand their encoding knowledge at run time. They ship with a fixed set of encodings, and you must either directly modify the library or directly edit data files in order to coax more encodings out of the interface. In the case of Standard C, sometimes that means injecting more files into the system locale files, or other brittle nd non-portable things. We need a means of loading up and controlling a central place where we can stuff all our encodings. Not only that, but we also:
+As detailed in Part 1 and hinted at above, libiconv — and many other existing encoding infrastructures — do not provide a way to expand their encoding knowledge at run time. They ship with a fixed set of encodings, and you must either directly modify the library or directly edit data files in order to coax more encodings out of the interface. In the case of Standard C, sometimes that means injecting more files into the system locale files, or other brittle/non-portable things. We need a means of loading up and controlling a central place where we can stuff all our encodings. Not only that, but we also:
 
 - need to allow for controlling all allocations made; and,
 - need to allow for loading up an encoding registry with any "defaults" the library may have ready for us.
@@ -1460,19 +1460,19 @@ This satisfies all our requirements, and has an API that can work on even the ti
 | Updates Output Range (How Much Written™) | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 | Feature Set 👇 vs. Library 👉 | boost.text | utf8cpp | Standard C | Standard C++ | Windows API |
-| Handles Legacy Encodings | ❌ | ❌ | 🤨 | 🤨 | ✅ | ✅ |
-| Handles UTF Encodings | ✅ | ✅ | 🤨 | 🤨 | ✅ | ✅ |
-| Bounded and Safe Conversion API | ❌ | ❌ | 🤨 | ✅ | ✅ | ✅ |
-| Assumed Valid Conversion API | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ |
-| Unbounded Conversion API | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ |
-| Counting API | ❌ | 🤨 | ❌ | ❌ | ✅ | ✅ |
-| Validation API | ❌ | 🤨 | ❌ | ❌ | ❌ | ✅ |
-| Extensible to (Runtime) User Encodings | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ |
-| Bulk Conversions  | ✅ | ✅ | 🤨 | 🤨 | ✅ | ✅ |
-| Single Conversions | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
-| Custom Error Handling | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ |
-| Updates Input Range (How Much Read™) | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ |
-| Updates Output Range (How Much Written™) | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ |
+| Handles Legacy Encodings | ❌ | ❌ | 🤨 | 🤨 | ✅ |
+| Handles UTF Encodings | ✅ | ✅ | 🤨 | 🤨 | ✅ |
+| Bounded and Safe Conversion API | ❌ | ❌ | 🤨 | ✅ | ✅ |
+| Assumed Valid Conversion API | ✅ | ✅ | ❌ | ❌ | ❌ |
+| Unbounded Conversion API | ✅ | ✅ | ❌ | ❌ | ✅ |
+| Counting API | ❌ | 🤨 | ❌ | ❌ | ✅ |
+| Validation API | ❌ | 🤨 | ❌ | ❌ | ❌ |
+| Extensible to (Runtime) User Encodings | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Bulk Conversions  | ✅ | ✅ | 🤨 | 🤨 | ✅ |
+| Single Conversions | ✅ | ✅ | ✅ | ✅ | ❌ |
+| Custom Error Handling | ❌ | ✅ | ✅ | ✅ | ❌ |
+| Updates Input Range (How Much Read™) | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Updates Output Range (How Much Written™) | ✅ | ✅ | ✅ | ✅ | ❌ |
 
 There's more API surface that we have not covered in this code. For example, there's functions that help do error handling (e.g. replacement characters with skipping bad input, among other things). However, because this is C, this creates a combinatoric explosion of API surface: there needs to be so, SO many functions to handle it. One of the ways to mitigate this would be to use a combination of macros with Statement Expressions and similar to do better. Unfortunately, statement expressions are non-standard. What we do instead is create some pretty disgusting abominations with macros… though! Even though they are disgusting abominations, it actually ends up working somewhat decently (for now):
 
