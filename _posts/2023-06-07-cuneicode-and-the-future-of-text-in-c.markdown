@@ -1536,9 +1536,19 @@ I will not show the implementation of this, because quite frankly it's downright
 
 # I Feel My Sins Crawling On My Back
 
-The sad reality is that I attempted to standardize at least a [portion of this work](/_vendor/future_cxx/papers/C%20-%20Restartable%20and%20Non-Restartable%20Character%20Functions%20for%20Efficient%20Conversions.html) (not the generic indirect conversions and encoding registry part) in C, for C23. I failed. So even as I sit here, lamenting the state of the ecosystem, angry at glibc, angry at Standard C and Standard C++, the reality is that I'm no better. This was my responsibility to fix it, to see it through to the end. Numerous individuals pulled through for me, even submitted National Body comments on my behalf so this could be cleaned up in time. It still didn't make it. It also had knock-on effects: without these functions, we also did [not get `u8`/`u16`/`u32` specifiers for the `fprintf` family of functions](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3016.pdf) because the conversions were hard to specify without the functions being there (again, because I did not succeed in my mission).
+The sad reality is that I attempted to standardize at least a [portion of this work](/_vendor/future_cxx/papers/C%20-%20Restartable%20and%20Non-Restartable%20Character%20Functions%20for%20Efficient%20Conversions.html) (not the generic indirect conversions and encoding registry part) in C, for C23. I failed. So even as I sit here, lamenting the state of the ecosystem, angry at glibc, perpetually pissed off about Windows's `ucrt.dll`, angry at Standard C and Standard C++?
 
-That means we miss a whole cycle, without Unicode functionality in C. And, because the C++ library imports all C functions *de-facto* and *de-jure*, C++ does not get it either. This only makes me shudder more, because the deadline for the next version of the C standard is not set in stone. Some are advocating we take another 10 years to roll out the next version of the C standard with more features. Another 10 years with no cross-platform printing mechanism. Another 10 years without even the static functions going between Unicode encodings and freeing people from their locale / wide locale-sensitive conversion functions. Another 10 years of functions which are non-threadsafe.
+The reality is that I'm no better.
+
+This was my responsibility to fix it, to see it through to the end. It was, in fact, the **sole** reason I came down to work on C in the first place. Becoming Project Editor, helping with `enum`s, doing `#embed`, fixing initialization with `= {}`, `typeof`, and so much more.... that was extra. Unplanned. Unicode conversion functions was the one thing I did plan. This is the one thing I had the most knowledge about, a solid game plan for. Numerous individuals pulled through for me, even submitted National Body comments on my behalf so this could be cleaned up in time.
+
+I still didn't make it happen.
+
+It also had knock-on effects: without these functions, we also did [not get `u8`/`u16`/`u32` specifiers for the `fprintf` family of functions](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3016.pdf). The conversions were hard to specify without the functions being there (again, because I did not succeed in my mission). So not only did I fail in my mission, but my failure became other people's problems. Just my one thing I failed to do, and it kept on going. And going.
+
+And going.
+
+This means we miss a whole cycle; no Unicode functionality in C for another spin of the standardization wheel. And, because the C++ library imports all C functions *de-facto* and *de-jure*, C++ does not get it either. This only makes me shudder more, because the deadline for the next version of the C standard is not set in stone. Some are advocating we take another 10 years to roll out the next version of the C standard with more features. Another 10 years with no cross-platform printing mechanism. Another 10 years without even the static functions going between Unicode encodings and freeing people from their locale / wide locale-sensitive conversion functions. Another 10 years of functions which are non-threadsafe.
 
 10 years of getting to watch the ecosystem continue to slide into hell, because I couldn't get my words on a paper correct so I couldn't put it in the magic sky document.
 
