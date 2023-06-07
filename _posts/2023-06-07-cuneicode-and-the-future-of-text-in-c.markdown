@@ -6,7 +6,6 @@ feature-img: "/assets/img/2023/06/trash-fire-header.jpg"
 thumbnail: "/assets/img/2023/06/trash-fire-header.jpg"
 tags: [C, Standard, String, Text, Unicode, API Design]
 excerpt_separator: <!--more-->
-draft: true
 ---
 
 Following up from the last post, there is a lot more we need to cover. This was intended to be the post where we talk exclusively about benchmarks and numbers. But, I have unfortunately been perfectly taunted and status-locked <!--more-->, like a monster whose "aggro" was pulled by a tank. The reason, of course, is due to a few folks taking issue with my outright dismissal of the C and C++ APIs (and not showing them in the last post's teaser benchmarks).
