@@ -2,8 +2,8 @@
 layout: post
 title: "Cuneicode, and the Future of Text in C"
 permalink: /cuneicode-and-the-future-of-text-in-c
-feature-img: "/assets/img/2023/06/suit-header.png"
-thumbnail: "/assets/img/2023/06/suit-header.png"
+feature-img: "/assets/img/2023/06/trash-fire-header.jpg"
+thumbnail: "/assets/img/2023/06/trash-fire-header.jpg"
 tags: [C, Standard, String, Text, Unicode, API Design]
 excerpt_separator: <!--more-->
 draft: true
