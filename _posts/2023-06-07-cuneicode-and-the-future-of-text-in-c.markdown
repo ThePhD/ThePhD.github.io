@@ -257,7 +257,7 @@ All in all, just one footgun after another when it comes to using Standard C in 
 
 # Standard C++
 
-When I originally discussed Standard C++, I approached it from its flagship API — `std::wstring_convert<…>` — and all the problems therein. But, there was a layer beneath that I had filed away as "trash", but that could still be used to get around many of `std::wstring_convert<…>`'s glaring issue. For example, `wstring_convert::to_bytes` always returns a new `std::string`-alike by-value, meaning that there's no room to pre-allocate or pre-reserve data (giving it the worst of the allocation penalty and any pessimistic growth sizing as the string is converted). It also always assumes that the "output" type is `char`-based, while the input type is `Elem`-based. Coupled with the by-value, allocated return types, it makes it impossible to save on space or time, or make it interoperable with a wide variety of containers (e.g., `TArray<…>` from Unreal Engine or `boost::static_vector`), requiring an additional copy to but it into something as simple as a `std::vector`.
+When I originally discussed Standard C++, I approached it from its flagship API — `std::wstring_convert<…>` — and all the problems therein. But, there was a layer beneath that I had filed away as "trash", but that could still be used to get around many of `std::wstring_convert<…>`'s glaring issue. For example, `wstring_convert::to_bytes` always returns a new `std::string`-alike by-value, meaning that there's no room to pre-allocate or pre-reserve data (giving it the worst of the allocation penalty and any pessimistic growth sizing as the string is converted). It also always assumes that the "output" type is `char`-based, while the input type is `Elem`-based. Coupled with the by-value, allocated return types, it makes it impossible to save on space or time, or make it interoperable with a wide variety of containers (e.g., `TArray<…>` from Unreal Engine or `boost::static_vector`), requiring an additional copy to put it into something as simple as a `std::vector`.
 
 But, it would be unfair to judge the higher-level — if trashy — convenience API when there is a lower-level one present in virtual-based `codecvt` classes. These are member functions, and so the public-facing API and the protected, derive-ready API are both shown below:
 
@@ -336,7 +336,8 @@ template <typename Elem,
 UTF-32 is supported by passing in `char32_t` as the `Elem` element type. The `codecvt` API was byte-oriented, meaning it was made for serialization. That meant it would do little-endian or big-endian serialization by default, and you had to pass in `std::codecvt_mode::little_endian` to get it to behave. Similarly, it sometimes would generate or consume byte order markers if you passed in `std::codecvt_mode::consume_header` or `std::codecvt_mode::generate_header` (but it **only** generates a header for UTF-16 or UTF-8, NOT for UTF-32 since UTF-32 was considered the "internal" character type for these and therefore not on the "serialization" side, which is what the "external" character type was designated for). It was a real shame that the implementations were fairly lackluster when it first came out because this sounds like (almost) everything you could want. By virtue of being a `virtual`-based interface, you could also add your own encodings to this, which therefore made it both compile-time and run-time extensible. Finally, it also contained error codes that went beyond just "yes the conversion worked" and "no it didn't lol xd", with the `std::codecvt_base::result` enumeration:
 
 ```cpp
-enum result { ok,
+enum result {
+	ok,
 	partial,
 	error,
 	noconv
