@@ -1280,7 +1280,7 @@ int main() {
 			cnc_registry_delete(registry);
 			return 4;
 		}
-		// UTF-32 to Shift-JIS
+		// UTF-32 to UTF-8
 		cnc_open_err to_utf8_err = cnc_registry_add_single(
 			registry, "utf-32", "utf-8", utf32_to_utf8, NULL, NULL, NULL);
 		if (to_utf8_err != cnc_open_err_ok) {
