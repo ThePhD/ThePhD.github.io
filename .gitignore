@@ -10,3 +10,4 @@ Gemfile.lock
 .jekyll-metadata
 .tweet-cache
 .vscode/spellright.dict
+**/._**
