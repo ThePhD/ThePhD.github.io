@@ -1,6 +1,8 @@
 [submodule "_vendor/reveal.js"]
 	path = _vendor/reveal.js
 	url = https://github.com/hakimel/reveal.js.git
+	branch = master
 [submodule "_vendor/future_cxx"]
 	path = _vendor/future_cxx
 	url = git@github.com:ThePhD/future_cxx.git
+	branch = main
