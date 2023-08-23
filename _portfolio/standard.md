@@ -18,11 +18,12 @@ C++26   | p1967: Preprocessor `embed` - Binary Resource Inclusion | [Published](
 C++26   | p2537: Relax `va_start` Requirements to Match C | [Published](https://wg21.link/p2537) | [Latest Draft](/_vendor/future_cxx/papers/d2537.html)
 C++??   | p1040: `std::embed` | [Published](https://wg21.link/p1040) | [Latest Draft](/_vendor/future_cxx/papers/d1040.html)
 C2y/C3a | n2968: Prefixes for the Standard Library | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2968.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Prefixes%20for%20the%20Standard%20Library.html)
-C2y/C3a | n2970: Transparent Aliases | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2970.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Function%20Aliases.html)
 C2y/C3a | n2995: `__supports_literal` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2995.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__supports_literal.html)
 C2y/C3a | n2998: Literal Suffixes for `size_t` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2998.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
 C2y/C3a | n3104: More Modern Bit Utilities (Follow up to N3022) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3104.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20More%20Modern%20Bit%20Utilities.html)
-C2y/C3a | n3095 Restartable Functions for Efficient Character Conversions | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3095.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
+C2y/C3a | n3095: Restartable Functions for Efficient Character Conversions | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3095.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
+C2y/C3a | nXXX1: Integer Constant Expression Initialized `const` Integer Declarations are Implicitly `constexpr` | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Initialized%20const%20Integer%20Declarations.html)
+C2y/C3a | nXXX2: Transparent Aliases | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2970.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Function%20Aliases.html)
 
 
 ### Approved Proposals:
