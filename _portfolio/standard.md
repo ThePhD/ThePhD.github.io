@@ -16,14 +16,20 @@ C++26   | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) |
 C++26   | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/_vendor/future_cxx/papers/d1664.html)
 C++26   | p1967: Preprocessor `embed` - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/_vendor/future_cxx/papers/d1967.html)
 C++26   | p2537: Relax `va_start` Requirements to Match C | [Published](https://wg21.link/p2537) | [Latest Draft](/_vendor/future_cxx/papers/d2537.html)
+C++26   | p2958: `typeof` and `typeof_unqual` for C++ | [Published](https://wg21.link/p2958) | [Latest Draft](/_vendor/future_cxx/papers/d2958.html)
 C++??   | p1040: `std::embed` | [Published](https://wg21.link/p1040) | [Latest Draft](/_vendor/future_cxx/papers/d1040.html)
 C2y/C3a | n2968: Prefixes for the Standard Library | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2968.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Prefixes%20for%20the%20Standard%20Library.html)
 C2y/C3a | n2995: `__supports_literal` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2995.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__supports_literal.html)
 C2y/C3a | n2998: Literal Suffixes for `size_t` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2998.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
-C2y/C3a | n3104: More Modern Bit Utilities (Follow up to N3022) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3104.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20More%20Modern%20Bit%20Utilities.html)
 C2y/C3a | n3095: Restartable Functions for Efficient Character Conversions | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3095.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
-C2y/C3a | nXXX1: Integer Constant Expression Initialized `const` Integer Declarations are Implicitly `constexpr` | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Initialized%20const%20Integer%20Declarations.html)
-C2y/C3a | nXXX2: Transparent Aliases | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2970.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Function%20Aliases.html)
+C2y/C3a | cXXX1: Integer Constant Expression Initialized `const` Integer Declarations are Implicitly `constexpr` | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Initialized%20const%20Integer%20Declarations.html)
+C2y/C3a | cXXX2: Transparent Aliases | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2970.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Aliases.html)
+C2y/C3a | cXXX3: Comprehensive Statement Expressions | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Comprehensive%20Statement%20Expressions.html)
+C2y/C3a | cXXX4: Functional Functions - A Comprehensive Proposal Overviewing Blocks, Nested Functions, and Lambdas for C | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Functional%20Functions.html)
+C2y/C3a | cXXX5: `-fwrapv` for Everyone - A Measured Approach to `_Operator`s | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20A%20Measured%20Approach%20to%20_Operators.html)
+C2y/C3a | cXXX6: Improved `__attribute__((cleanup))` Through `defer` | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20__attribute__((cleanup))%20Through%20defer.html)
+C2y/C3a | cXXX7: `T[..; …]` — A Non-owning Sized Arrays for Spans and Beyond | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Non-owning%20Sized%20Arrays.html)
+C2y/C3a | cXXX8: More Modern Bit Utilities (Follow up to N3022) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3104.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20More%20Modern%20Bit%20Utilities.html)
 
 
 ### Approved Proposals:
