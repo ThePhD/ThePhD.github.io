@@ -18,7 +18,6 @@ C++26   | p1967: Preprocessor `embed` - Binary Resource Inclusion | [Published](
 C++26   | p2537: Relax `va_start` Requirements to Match C | [Published](https://wg21.link/p2537) | [Latest Draft](/_vendor/future_cxx/papers/d2537.html)
 C++26   | p2958: `typeof` and `typeof_unqual` for C++ | [Published](https://wg21.link/p2958) | [Latest Draft](/_vendor/future_cxx/papers/d2958.html)
 C++??   | p1040: `std::embed` | [Published](https://wg21.link/p1040) | [Latest Draft](/_vendor/future_cxx/papers/d1040.html)
-C2y/C3a | n2968: Prefixes for the Standard Library | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2968.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Prefixes%20for%20the%20Standard%20Library.html)
 C2y/C3a | n2995: `__supports_literal` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2995.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__supports_literal.html)
 C2y/C3a | n2998: Literal Suffixes for `size_t` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2998.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
 C2y/C3a | n3095: Restartable Functions for Efficient Character Conversions | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3095.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
@@ -29,7 +28,9 @@ C2y/C3a | cXXX4: Functional Functions - A Comprehensive Proposal Overviewing Blo
 C2y/C3a | cXXX5: `-fwrapv` for Everyone - A Measured Approach to `_Operator`s | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20A%20Measured%20Approach%20to%20_Operators.html)
 C2y/C3a | cXXX6: Improved `__attribute__((cleanup))` Through `defer` | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20__attribute__((cleanup))%20Through%20defer.html)
 C2y/C3a | cXXX7: `T[..; …]` — A Non-owning Sized Arrays for Spans and Beyond | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Non-owning%20Sized%20Arrays.html)
-C2y/C3a | cXXX8: More Modern Bit Utilities (Follow up to N3022) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3104.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20More%20Modern%20Bit%20Utilities.html)
+C2y/C3a | cXXX8: More Modern Bit Utilities (Follow up to N3022) | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20More%20Modern%20Bit%20Utilities.html)
+C2y/C3a | cXXX9: Variable-Length Array (VLA) Types for Any Size | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Variable-Length%20Array%20(VLA)%20Types%20for%20Any%20Size.html)
+C2y/C3a | cXX10: Variable-Length Array (VLA) Allocator Control | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Variable-Length%20Array%20(VLA)%20Allocation%20Control.html)
 
 
 ### Approved Proposals:
@@ -47,6 +48,7 @@ C++23 | p0330: Literal Suffixes for `ptrdiff_t` and `size_t` | [Published](https
 C++23 | p2513: `char8_t` Compatibility and Portability Fixes | [Published](https://wg21.link/p2513) | [Accepted, C++23!](/_vendor/future_cxx/papers/d2513.html)
 C23   | n2448: `[[nodiscard("should have a reason")]]` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2448.pdf) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20nodiscard.html)
 C23   | n2594: Mixed Wide String Literal Concatenation | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2594.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Mixed%20Wide%20String%20Literal%20Concatenation.html)
+C23   | n2968: Prefixes for the Standard Library | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2968.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Prefixes%20for%20the%20Standard%20Library.html)
 C23   | n2726: `_Imaginary_I` and `_Complex_I` Qualifiers | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2726.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20_Imaginary_I%20and%20_Complex_I%20Qualifiers.html)
 C23   | n2728: `char16_t` & `char32_t` string literals shall be UTF-16 and UTF-32 | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2728.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20char16_t%20&%20char32_t%20string%20literals%20shall%20be%20UTF-16%20&%20UTF-32.html)
 C23   | n2927: Not-So-Magic: `typeof()` for C | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2927.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20typeof.html)
