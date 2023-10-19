@@ -192,7 +192,7 @@ It was a fun bug to track down:
 
 If you could get away with generating tokens directly rather than source code, that would save you a bit of time performing what most compilers call "tokenization" of source code. But, because I did not feel like dealing with Clang's source location-based assumptions, I simply generated a source file and had clang process that instead. This results in a fraction of lost time (not too significant, really, but still some work always takes longer than simply not doing the work at all). A more optimized version of this would sidestep these problems deftly and avoid having to re-tokenize raw generated source code back into a sequence of `{integer literal} {comma} {integer literal} …` tokens.
 
-Nevertheless, solving this issue meant that we could dump out a fully preprocessed file when given the `-E` option. This meant that specific C and C++ tools that just preprocessed source files and did not retain include flag or embed dir information could reliably parse/process these all-bits-included files that just had the integer list expansion baked right in. This served as the baseline support for `#embed`. There was just one more thing to do to round out Level 0 support…
+Nevertheless, solving this issue meant that we could dump out a fully preprocessed file when given the `-E` option. This meant that specific C and C++ tools that just preprocessed source files and did not retain include flag or embed directory information could reliably parse/process these all-bits-included files that just had the integer list expansion baked right in. This served as the baseline support for `#embed`. There was just one more thing to do to round out Level 0 support…
 
 
 
@@ -316,7 +316,7 @@ __builtin_pp_embed(unsigned char, "/home/derp/pp_embed/examples/media/art.txt", 
 
 Notice how this source file only contains constructs that are:
 
-- blindly ASCII-parseable;
+- blindly ASCII parse-ready;
 - do not require access to the original source files anymore;
 - and, is understandable as normal C or C++ source code.
 
@@ -527,13 +527,13 @@ It is worth noting that `non_optimized0` also just completely breaks if `shaders
 That's it, in terms of implementation prowess. Ostensibly, Support Level 0 is enough to be a conforming implementation. There are tons of examples in the Clang pull request and other places for this. There are also many more extensions that can be implemented for this functionality. I can only hope that implementers that read this are emboldened to add more directives, get spicy with how they implement things, and try expanding on their techniques into the future. A stagnant implementer culture that always wants to reach for assured, standards-mandated things is no fun in a world as vast and as lovely as Computing. And, of course, having dreams and realizing them means that all of us, together, get to see…
 
 ![A screenshot of a Microsoft Windows Terminal, showing 3 prompts. One is "type main.c", showing a simple main.c file that makes a `constexpr` array and `#embed "potato.bin"` into it. The next prompt is "type main.xxd.c", showing a simple main.xxd.c which just includes an xxd-generated "potato.bin.h" file. The last prompt is a call to "dir", showing -- in particular -- the sizes of "main.exe", "main.no_builtin.exe", "main.xxd.exe", "potato.bin", and "potato.bin.h".](/assets/img/2023/10/stats.png)
-![A single command line powershell prompt command, which reads: Measure-Command { D:\Sync\Cross\llvm-project\.cmake\vs\install\x64-Release\bin\clang.exe -std=c++2c -x c++ main.xxd.c -o main.xxd.exe \| Out-Default }. It shows: TotalSeconds: 75.0577052](/assets/img/2023/10/xxd.png)
-![A single command line powershell prompt command, which reads: Measure-Command { D:\Sync\Cross\llvm-project\.cmake\vs\install\x64-Release\bin\clang.exe -std=c++2c -x c++ main.c -o main.no_builtin.exe -fno-builtin-pp_embed \| Out-Default }. It shows: TotalSeconds: 128.3183197](/assets/img/2023/10/embed-no-builtin.png)
+![A single command line PowerShell prompt command, which reads: Measure-Command { D:\Sync\Cross\llvm-project\.cmake\vs\install\x64-Release\bin\clang.exe -std=c++2c -x c++ main.xxd.c -o main.xxd.exe \| Out-Default }. It shows: TotalSeconds: 75.0577052](/assets/img/2023/10/xxd.png)
+![A single command line PowerShell prompt command, which reads: Measure-Command { D:\Sync\Cross\llvm-project\.cmake\vs\install\x64-Release\bin\clang.exe -std=c++2c -x c++ main.c -o main.no_builtin.exe -fno-builtin-pp_embed \| Out-Default }. It shows: TotalSeconds: 128.3183197](/assets/img/2023/10/embed-no-builtin.png)
 
 
 Just how much faster things can be compared to the tools we've been using for 40+ years:
 
-![A single command line powershell prompt command, which reads: Measure-Command { D:\Sync\Cross\llvm-project\.cmake\vs\install\x64-Release\bin\clang.exe -std=c++2c -x c++ main.c -o main.exe \| Out-Default }. It shows: TotalSeconds: 2.395532](/assets/img/2023/10/optimized-embed.png)
+![A single command line PowerShell prompt command, which reads: Measure-Command { D:\Sync\Cross\llvm-project\.cmake\vs\install\x64-Release\bin\clang.exe -std=c++2c -x c++ main.c -o main.exe \| Out-Default }. It shows: TotalSeconds: 2.395532](/assets/img/2023/10/optimized-embed.png)
 
 A better future is possible. A future that's at least 37x as fast as the one we're living in. We just have to grasp it.
 
