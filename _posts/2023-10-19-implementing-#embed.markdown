@@ -306,7 +306,7 @@ int main () {
 // Enter `single_byte.txt`-generated
 // file internally named `<built-in:embed:1>`
 ////////////////////////////////////////////////
-__builtin_pp_embed(unsigned char, "/home/derp/pp_embed/examples/media/art.txt", "YQ==");
+__builtin_pp_embed(unsigned char, "/home/derp/pp_embed/examples/media/single_byte.txt", "YQ==");
 ////////////////////////////////////////////////
 // Return to `main.cpp`
 ////////////////////////////////////////////////
