@@ -1,0 +1,87 @@
+# Getting My Hands Dirty
+
+
+
+Best way to learn is to get involved.
+
+So I did, and so did others.
+
+
+
+# Bit Functions
+
+![](source/img/std-bit.png)
+
+- Macros: `__STDC_ENDIAN_BIG__`, `__STDC_ENDIAN_LITTLE__`, `__STDC_ENDIAN_NATIVE__`
+- Operations: Count (leading/trailing) zeros/ones, first leading/trailing ones, bit floor/ceiling/width, `has_single_bit`
+
+
+
+# Enumerations
+
+```cpp
+enum underlying : unsigned char { b0 };
+int main () {
+	int a = _Generic(b0,
+		int: 2,
+		unsigned char: 1,
+		default: 0
+	);
+	int b = _Generic((enum underlying)b0,
+		int: 2,
+		unsigned char: 1,
+		default: 0
+	);
+	return a + b; // return 2;
+}
+```
+
+
+
+# `ckd_` Integer Functions
+
+Standard way to opt out of Undefined Behavior for integers.
+
+```cpp
+#include <stdio.h>
+#include <stdint.h>
+#include <stdckdint.h>
+
+int main() {
+	uint32_t result = {};
+	bool did_wrap = ckd_add(&result, 1u, UINT32_MAX);
+	printf("%b, %u\n", did_wrap, result); // 1, 0
+}
+```
+
+
+
+# Proper Keyword Spelling
+
+No more `<stdalign.h>`.
+
+![](source/img/keywords-fixed.png)
+
+
+
+## And so much more...
+
+![](source/img/annex-m.png)
+
+
+
+# The Common Denominator Was Never "Existing Practice"
+
+Sometimes, implementers did some of these things.
+
+But *most* changes in C?
+
+
+
+# They Come From Hardworking People
+
+People who get involved in their capacity (Tom MacDonald; Numerical Computing)…  
+Who fix the thing they are interested in (Hans Boehm; Atomics / Memory Model)…  
+Who fight against the Status Quo (Jens Gustedt; **several** language/library features)…  
+To get better tools (Aaron Ballman; attributes, `_BitInt`, so **many** things)…  
+For the people they care about (Alex Celeste; `constexpr`, `va_start(list)` with no arg)…

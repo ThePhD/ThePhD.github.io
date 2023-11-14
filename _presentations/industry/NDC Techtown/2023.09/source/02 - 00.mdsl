@@ -1,0 +1,52 @@
+# Depends On Who You Ask
+
+some herald C23 and its improvements as necessary advances;
+
+others, less excited about what we accomplished…
+
+… and *how* we've been working …!
+
+
+
+# N2986
+
+> “A significant number of recent proposals for changes have been at odds with two of those principles: to codify existing practice, and to avoid invention. This paper discusses the historical foundations of the principles, their value, and some of the problems that have stemmed from disregarding them. It concludes by proposing concrete steps for bringing future committee practice into harmony with the principles.”
+
+[“Interpreting the C23 Charter”](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2986.htm)  
+[10 May 2022, Martin Sebor](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2986.htm)
+
+
+
+# Not the Only One Unsatisfied with C's Direction
+
+> The C programming language … has, through the course of the ISO Standards process, added many attributes of more conventional programming languages and become less suitable for operating systems development. Operating system programming continues to be done in non-ISO dialects of C. The differences provide a glimpse of operating system requirements for programming languages.
+
+[“How ISO C became unusable for operating systems development”](https://arxiv.org/pdf/2201.07845.pdf)  
+[Victor Yokaiden, 19 January 2022](https://arxiv.org/pdf/2201.07845.pdf)
+
+
+
+# And Yet More...
+
+> A new major revision of the C programming language standard is nearly upon us. C23 introduces pleasant conveniences, retains venerable traps for the unwary, and innovates a gratuitous catastrophe. A few steps forward, much sideways shuffling, and a drunken backward stumble into the fireplace come together in the official dance of C standardization, the Whiskey Tango Foxtrot.
+
+[“Catch-23: The New C Standard Sets the World on Fire”](https://dl.acm.org/doi/10.1145/3588242)  
+[Terence Kelly, Yekai Pan, January 2023](https://dl.acm.org/doi/10.1145/3588242)
+
+
+
+# Well, then.
+
+
+
+# Are we failing?
+
+Are things going wrong?
+
+If so, where are things going wrong?
+
+Is the Charter failing us?
+
+
+
+# Is the Spirit of C … dying?

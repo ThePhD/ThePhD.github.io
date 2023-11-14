@@ -1,0 +1,179 @@
+# Adhering to the Charter
+
+A lot of claims that we strayed from "the path":
+
+- abandoning the "Spirit of C" with features (e.g., adding complexity);
+- not having enough user experience / commercial compiler experience with features;
+- being too inventive or ambitious in fixing problems;
+- using new features for all of the above.
+
+
+
+# How *did* we get C99, C11, C23 features?
+
+Take a look at Variable Length Arrays, Threads, Atomics, `_Generic`, and others.
+
+
+
+## Variable Length Arrays (VLAs)/Variably-Modified Types (VMTs)
+
+[Originally proposed by Cray Research/Tom MacDonald, 2 January 1994](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n317.pdf)
+
+- ✅ 3 years of subsequent proposals and editing
+- ✅ Trusted programmer (not to blow out stack, etc.)
+- ✅ Implemented in multiple compilers, to specification and following proposal
+	- Cray C/C++
+	- In EGCC fork, then GCC merged back into it around 2.x GCC days
+	- And others
+- ❌ Not simple (e.g. run-time `sizeof`, shared syntax with arrays but different semantics)
+- ❌ Meshes poorly with existing implementations.
+
+
+
+## Threads (`threads.h`)
+
+[Originally proposed by P.J. Plauger, 19 October 2005](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1269.htm)
+
+- ✅ 5 years of subsequent proposals and editing
+- ✅ Joint effort between WG21 and WG14 (compatibility, shared threading model)
+- ✅ Implemented as a library, deployable on multiple platforms
+	- MSVC/Windows under its model (partially done in `<xthreads.h>`, made ~2001)
+	- GCC/*nix and most other platforms with `libpthreads`
+- ✅ Collaboration of Hans Boehm, P.J. Plauger, Lawrence Crowl, Fred Tydeman, and Clark Nelson
+- ❌ Not implemented by most vendors ?!
+
+
+
+## Atomics (`stdatomic.h`)
+
+[Originally started by Hans Boehm, 09 November 2007](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1276.htm)
+
+- ✅ 3 years of subsequent proposals and editing
+- ✅ Joint effort between WG21 and WG14 (shared atomics model)
+- ✅ Implemented as a library at first
+	- Discovered it was difficult to coerce compiler with just library functions (A.K.A: user/implementer experience feedback!)
+- ✅ Shared work primarily between Hans Boehm, Lawrence Crowl, Paul McKenney and a few others
+- ❌ Poor compatibility (ABI issues between C and C++)
+- ❌ Rough usability with qualifier and type-style `_Atomic meow`/`_Atomic(meow)`
+
+
+## `_Generic`
+
+[Originally conceived by P.J. Plauger, 11 August 2008](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1340.htm)
+
+- ✅ GCC had a similar but slightly differently-working feature with `__builtin_choose_expr`
+- ✅ Picked up by Clark Nelson, implemented VIA EDG and (possibly?) Intel at the time
+- ✅ Proved it could work and solved the problem without introducing C templates or function overloading
+
+
+## Type-Generic Math Functions (`<tgmath.h>`)
+
+[From Jim Thomas, 23 May 1997](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n693.ps)
+
+- ✅ Part of a Technical Specification that was implemented
+	- Partly due to idea that C might have an overloading mechanism
+	- ❗❗ Overloading features rejected before this, but `<tgmath.h>` still percolating!
+- ✅ Fueled need for `_Generic` under under those constraints
+
+
+
+# ... So maybe a lot of these features were not that ill-conceived...?
+
+Not that there isn't room for improvements!
+
+
+## VLAs/VMTs have a *lot* of holes
+
+VLAs do not work in `_Generic`, cannot be initialized with elements in the list, and can be lied about when passed as an argument:
+
+```cpp
+#include <stdlib.h>
+#include <stdio.h>
+
+void print_array_size(int n, int m, int (*p)[n][m]) {
+	printf("%zu\n\n", sizeof(*p));
+}
+
+// …
+```
+
+
+
+```cpp
+// …
+int main() {
+	int n = 2, m = 3;
+	int (*p)[n][m] = malloc(sizeof * p);
+	printf("%zu\n", sizeof(*p));
+	print_array_size(n, m, p);
+	m = 4;
+	printf("%zu\n", sizeof(*p));
+	print_array_size(n, m, p);
+	n = 50;
+	printf("%zu\n", sizeof(*p));
+	print_array_size(n, m, p);
+	free(p);
+}
+```
+
+```sh
+24
+24
+
+24
+32
+
+24
+800
+```
+
+
+
+# `_Generic` loses qualifier and array information
+
+`_Generic` cannot match on exact types as l-value qualifiers are stripped from it:
+
+```cpp
+int main () {
+	const int n = 0;
+	return _Generic(n,
+		const int: 0,
+		default: 1
+	);
+	// return 1;
+}
+```
+
+
+# `<threads.h>` is not everywhere
+
+Especially when needed most (Microsoft Visual C, a few POSIX-based platforms)
+
+
+
+# Other Existential Problems
+
+- `enum`erations cannot have their size controlled
+- Undefined Behavior continues to result in surprises in lots of programs
+- Not standardizing existing extensions (statement expressions, nested functions/blocks)
+- Application Binary Interface (ABI) problems (e.g., the 32-bit time, 2038 problem)
+
+
+## It's 2023
+
+Where exactly are:
+- portable bit functions
+- SIMD / "access to the hardware"
+- portable bit packing that works across implementations and not with a bunch of sobbing, a stiff drink, and `__attribute__((packed))`
+- unicode conversion functions
+- things that exist outside of the control of locale / global shared mutable data
+
+
+
+## ... Why Haven't Those Been Solved Already?
+
+
+
+If we rely on standardizing existing practice,  
+or we have obvious deficiencies or problems  
+why has the Standard not fixed them …?

@@ -1,0 +1,50 @@
+# "Charter?"
+
+
+
+Collection of documents that describe the purpose, vision, hopes, constraints, and goals for
+
+- The Committee (ISO/IEC JTC1 SC22 WG14 — Programming Languages C); and
+- The Standard (ISO/IEC 9899 document)
+
+Found in:
+
+- N328, 17 March 1994, “Charter for Revising Standard C”, Rex Jaeschke (document too old)
+- [N444, 2 August 1995, “The C9x Charter”, Rex Jaeschke](https://www.open-std.org/jtc1/sc22/wg14/www/docs/historic/n444.htm)
+- [N1250, 29 June 2007, “The C1x Charter”, John Benito](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1250.pdf)
+- [N2021, 12 March 2016, “Preliminary C2x Charter”, David Keaton](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2021.htm)
+- [N2611, 09 November 2020, “C23 Charter Revised with Proposed Schedule”, David Keaton](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2611.htm)
+
+
+
+
+# Particularly Notable …
+
+C89: "**Existing code is important, existing implementations are not.**" & "**A standard is a treaty between implementor and programmer.**"
+
+C99: "**Maintain conceptual simplicity.**"
+
+C11: "**Trust the programmer, as a goal, is outdated in respect to the security and safety programming communities.**" & "**Unlike for C99, the consensus at the London meeting was that there should be no invention, without exception.**"
+
+C23: "**Application Programming Interfaces (APIs) should be self-documenting when possible.**"
+
+​  
+  
+And, most importantly...
+
+
+
+# Keep The Spirit of C
+
+> “ a. *Trust the programmer.*  
+> b. *Don't prevent the programmer from doing what needs to be done.*  
+> c. *Keep the language small and simple.*  
+> d. *Provide only one way to do an operation.*  
+> e. *Make it fast, even if it is not guaranteed to be portable.*  
+> f. *Make support for safety and security demonstrable.* ”
+
+
+
+# So...
+
+... Did we do that...?

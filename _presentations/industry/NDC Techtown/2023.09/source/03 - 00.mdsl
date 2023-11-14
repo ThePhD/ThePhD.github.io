@@ -1,0 +1,66 @@
+# The Spirit of C
+
+
+
+> “a. *Trust the programmer.*  
+> b. *Don't prevent the programmer from doing what needs to be done.*  
+> c. *Keep the language small and simple.*  
+> d. *Provide only one way to do an operation.*  
+> e. *Make it fast, even if it is not guaranteed to be portable.*  
+> f. *Make support for safety and security demonstrable.*”
+
+
+# Principles: 1-8 of 15
+
+- (C89) Existing code is important, existing implementations are not
+- C code can be portable.
+- C code can be non-portable.
+- Avoid “quiet changes.”
+- A standard is a treaty between implementor and programmer.
+- Keep the spirit of C.
+- (C99) Support international programming.
+- Codify existing practice to address evident deficiencies.
+
+
+
+# Principles: 9-15 of 15
+
+- (C99) Minimize incompatibilities with C89 (ISO/IEC 9899:1990)
+- Minimize incompatibilities with C++.
+- Maintain conceptual simplicity.
+- (C11) Trust the programmer, as a goal, is outdated in respect to the security and safety programming communities.
+- Unlike for C99, the consensus at the London meeting was that there should be no invention, without exception.
+- Migration of an existing code base is an issue.
+- (C23) Application Programming Interfaces (APIs) should be self-documenting when possible.
+
+But more than Principles in the Charter...
+
+
+
+# It Is Used In a LOT of
+## (Internet and Committee)
+# Arguments
+
+
+
+"This isn't in line with the **Spirit of C**—"
+
+![](source/img/KIING%20KIISMET%20-%20taking%20off%20headphones%20sized.png)
+
+
+
+# Typically Invoked Against Change
+
+`_Complex`? Not in the Spirit of C.<span class="footnote">†</span>  
+`constexpr`? Not in the Spirit of C.  
+`_Generic( … )`? Not in the Spirit of C.  
+Threads? Not in the Spirit of C.<span class="footnote">†</span>  
+`defer { … }`? Not in the Spirit of C.  
+`#embed`? Not in the Spirit of C.  
+Real Keywords (e.g. `true`)? Not in the Spirit of C.  
+Variable-Length Arrays? Not in the Spirit of C.<span class="footnote">†</span>  
+Lambdas? Not in the Spirit of C.  
+Atomics when we had `volatile`? Not in the Spirit of C.<span class="footnote">†</span>
+
+​  
+†<!-- .element: class="fragment footnote"-->  — _ex post facto_ slow feature adoption
