@@ -1,0 +1,32 @@
+# To Find Out What C is Good For...
+
+
+
+## We Must Analyze its Design !
+
+
+
+### 🚫 Do not mean Kernighan & Ritchie's Work 🚫
+
+![The C Programming Language, 2nd Edition, by Brian Kernighan & Dennis Ritchie](source/img/c-2nd-edition.jpg)
+
+
+
+## Its Standalone Tenets
+
+"What is observably correct/easy/intuitive<sup>†</sup>?"
+
+"What is observably incorrect/difficult/complex<sup>†</sup>?"
+
+
+
+## <sup>†</sup> - Subject to Perception
+
+Correctness can be measured objectively (in most cases)
+
+"Simple" / "Complex" and how intuitive things are is  
+subject to perspective, individuality, context, and/or upbringing
+
+Therefore, it can only hint us towards the right direction
+
+(Can gauge success by checking over time)

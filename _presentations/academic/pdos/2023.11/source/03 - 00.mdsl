@@ -1,0 +1,35 @@
+# Let's Design Ourselves Out of These Problems
+
+
+### "Just One More Patch Bro"
+
+![](source/img/one-more-lane.jpg)
+
+
+## Enumerations: Fixed Up
+
+Just... give enumerations an underlying type?
+
+```cpp
+enum e : unsigned char { b0 = 0xFFFFF };
+int main () {
+    int a = _Generic(b0,
+        int: 2,
+        unsigned char: 1,
+        default: 0
+    );
+    int b = _Generic((enum e)b0,
+        int: 2,
+        unsigned char: 1,
+        default: 0
+    );
+    return a + b; // return 1 + 1;
+}
+```
+
+✔️ ✔️ ✔️
+
+
+## That was... Easy.
+
+Let's do something harder, yes?

@@ -1,0 +1,164 @@
+# Fix The Problems with Variable-Length Arrays !
+
+
+## Way to have "VLA with its Size?"
+
+C Standard provides one syntax for forward declarations:
+
+```cpp
+void purr(unsigned n, int (*kitty)[*]);
+```
+
+
+## `T[*]`
+
+- ✔️ Already associated with VLAs in C Standard (forward declarations only)
+- ✔️ Intuitively denotes "any size here" (`*` also is Kleene-Star "0 or more")
+- ❌ Problem: errors for actual definitions even if it's allowed for declarations!
+- ❌ Problem: is just another syntax for "pointer".
+
+```cpp
+#include <stdlib.h>
+#include <stdio.h>
+
+// ❌
+void purr(unsigned n, int (*kitty)[*]) {
+	printf("%u\n\n", n);
+	/* … */
+}
+// ✔️
+void purr(unsigned n, int (*kitty)[n]) { 
+	printf("%u\n\n", n);
+	/* … */
+}
+```
+
+
+## `T[*]`
+
+These all mean the same thing:
+
+```cpp
+void compatible(unsigned n, int arr[]);
+void compatible(unsigned n, int arr[*]);
+void compatible(unsigned n, int arr[n]);
+void compatible(unsigned n, int arr[static n]);
+void compatible(unsigned n, int* arr);
+```
+
+❌ Bad: Application Binary Interface (ABI) is all a single pointer, no sizes allowed!! ❌
+
+
+## Cannot Hijack Existing Syntax!
+
+
+## Hijack Separate Syntax
+
+C2Y/C3A idea: allow `T[?]` to be "wide pointer" for VLAs.
+
+```cpp
+#include <stdlib.h>
+#include <stdio.h>
+
+// allow below, is "pointer to VLA"
+void purr(unsigned n, int (*kitty)[?]) {
+	size_t kitty_size = sizeof(*kitty);
+	printf("%zu\n\n", kitty_size);
+	printf("%u\n\n", n);
+	/* … */
+}
+```
+
+✔️ Size is transported with VLA!
+
+
+## Hijack Existing Syntax, `n` Not Needed!
+
+```cpp
+#include <stdlib.h>
+
+// allow below, is "pointer to VLA"
+void purr(int (*kitty)[?]) {
+	size_t kitty_size = sizeof(*kitty);
+	printf("%zu\n\n", kitty_size);
+	/* … */
+}
+```
+
+✔️ Size is transported with VLA!  
+✔️ Harder to lie about the size!
+
+
+## Re-do previous example with new syntax…
+
+```cpp
+#include <stdlib.h>
+#include <stdio.h>
+
+void print_array_size(int n, int m, int (*p)[?][?]) {
+	printf("n * m * sizeof(***p) = %zu\n", n * m * sizeof(***p));
+	printf("sizeof(*p)           = %zu\n\n", sizeof(*p));
+}
+
+// …
+```
+
+
+## Try to lie about the size again...
+
+```cpp
+// …
+int main() {
+	int n = 2, m = 3;
+	int (*p)[n][m] = malloc(sizeof *p);
+	printf("sizeof(*p) [main]    = %zu\n", sizeof(*p));
+	print_array_size(n, m, p);
+	m = 4;
+	printf("sizeof(*p) [main]    = %zu\n", sizeof(*p));
+	print_array_size(n, m, p);
+	n = 50;
+	printf("sizeof(*p) [main]    = %zu\n", sizeof(*p));
+	print_array_size(n, m, p);
+	free(p);
+}
+```
+
+
+## We're getting the right answers!
+
+```cpp
+sizeof(*p) [main]    = 24
+n * m * sizeof(***p) = 24
+sizeof(*p)           = 24
+
+sizeof(*p) [main]    = 24
+n * m * sizeof(***p) = 32
+sizeof(*p)           = 24
+
+sizeof(*p) [main]    = 24
+n * m * sizeof(***p) = 800
+sizeof(*p)           = 24
+```
+
+
+## 🎉
+
+
+## **Fix** and **Repair**…
+
+- ➕ By adding new syntax
+- 🔍 With well-defined behavior
+- 🛣 Offering a clear upgrade/transition pathway
+- 🖼 Without disturbing old masterpieces
+
+Keep to C's strengths,  
+no new huge systems!
+
+
+## Undefined/unspecified/implementation-defined behavior?
+
+<br/>
+<br/>
+<br/>
+
+**❌ SAY NO ! ❌**

@@ -1,0 +1,282 @@
+# The Correct Things
+
+"What are undeniably good features of C?"
+
+
+
+### Static Type System
+
+- ✔️ Objects have fixed properties based on immutable ("compile-time") information
+- ✔️ Values may change, but type does not
+- ✔️ Tightens the set of valid operations ("make invalid state un-representable")
+
+
+
+### Static Type System
+
+![](source/img/success-wormhole.png)
+
+
+
+### Minimal Overhead
+
+- ✔️ Does not require run-time storage to maintain language invariants
+- ✔️ Optimizations enable lean programs (size, speed, or both)
+
+
+
+### Abstract Machine, Observable Behavior
+
+- ✔️ Not Exactly the "Hardware", but is Mappable to Hardware easily
+- ✔️ Allows for a wide range of optimizations (✅ "as-is" rule)
+- ✔️ "If this happens, then these things are observable at this point in time."
+
+![](source/img/movie-projector.png)
+
+
+
+## Simple
+
+- ✔️ Lacks quite a few (VERY) complex systems other programming languages have
+- ✔️ Fixed mental overhead; "no more than the minimum needed"
+- ✔️ Old code? No problem: just keep compiling it as before
+
+
+
+# The Bad Things
+
+"What are undeniably bad features of C?"
+
+
+
+## Undefined/Unspecified/Implementation-defined Behavior
+
+- ❌ Unpredictable optimizations, no guaranteed behavior (2003 onward)
+- ❌ Pervasive, **rarely are alternatives provided** (‼️)
+
+
+### Has Been Destroying Users Since Early 2000s into ${CUR_YEAR}
+
+> [![](source/img/pkh-blog-ub.png)](http://blog.pkh.me/p/37-gcc-undefined-behaviors-are-getting-wild.html)
+>
+> — [bug/ubitux, November 11, 2022](http://blog.pkh.me/p/37-gcc-undefined-behaviors-are-getting-wild.html)  
+> [http://blog.pkh.me/p/37-gcc-undefined-behaviors-are-getting-wild.html](http://blog.pkh.me/p/37-gcc-undefined-behaviors-are-getting-wild.html)
+  
+<br/><br/>
+
+[See Also: The Sledgehammer Principle](https://thephd.dev/c-undefined-behavior-and-the-sledgehammer-guideline)  
+[https://thephd.dev/c-undefined-behavior-and-the-sledgehammer-guideline](https://thephd.dev/c-undefined-behavior-and-the-sledgehammer-guideline)
+
+
+### But... Implementation-defined Behavior?!
+
+> "Returns the number of leading 0-bits in x … If x is 0, the result is undefined."
+> 
+> — GCC, [__builtin_clz](https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html#index-_005f_005fbuiltin_005fclz) as of November 14, 2023
+
+> "The source code of the compiler is the implementation documentation."
+>
+> — Clang, Too Many Times For Me To Be Comfortable !
+
+
+### Extra Spicy: Any Behavior that is not  
+### Well-defined Behavior is Undefined Behavior
+
+![](source/img/astronaut-always-ub.jpg)
+
+
+## Underpowered as Hell
+
+- ❌ Cannot directly control layout/alignment of data (implementation-defined)
+- ❌ Size is frequently dropped on the ground
+- ❌ Libraries frequently perform unsafe operations by-default (and by specification)
+
+
+![](source/img/whitequark-enum.png)
+
+
+## Enumerations
+
+```cpp
+enum e { b0 = 0xFFFFF };
+int main () {
+    int a = _Generic(b0,
+        int: 2,
+        unsigned char: 1,
+        default: 0
+    );
+    int b = _Generic((enum e)b0,
+        int: 2,
+        unsigned char: 1,
+        default: 0
+    );
+    return a + b; // return 2 + ❓❓;
+}
+```
+
+- `b0` is an integer, so `a` must be `2`.
+- The underlying type for `enum e` is… uh… ??
+
+🔥 Welcome to `-fshort-enum` hell 🔥
+
+
+## Holes in the Language
+
+- ❌ Optional features (why is `_Complex`/`_Imaginary` support optional??)
+- ❌ Variable-Length Arrays (VLAs) make things Interesting™
+- ❌ `_Generic` does not interact with many constructs/corners of the language
+
+
+## Simple…?
+
+- ❌ Direct exposure to IdB/UsB/UB in normal operations means rapid progression to failure
+- ❌ Integer promotion rules, mixed with UB = 🙃
+- ❌ When beyond the minimum is needed, Herculean Effort is **required**
+- ❌ Always repeating yourself = more room for redundant mistakes
+- ❌ Old Code doesn't always mean Good Code…
+
+
+## VLAs - Dependent Types without the Power
+
+👊 Punch runtime holes in a static type system ! 👊
+
+```cpp
+extern unsigned int n;
+
+int main() {
+    int arr[n];
+    // ????
+}
+```
+
+
+### Important Questions
+
+- Where did this memory come from?
+- What happens if we fail to get this memory?
+- How do we control where this memory comes from?
+
+
+### Specification, Help?
+
+```cpp
+extern unsigned int n;
+
+int main() {
+    int arr[n];
+    if (arr) {
+        // always true!!
+    }
+}
+```
+
+¯\\\_(ツ)\_/¯
+
+
+### Another example: `_Generic` and VLAs
+
+```cpp
+extern unsigned int n;
+
+int main() {
+    int arr[n];
+    return _Generic(arr,
+        int[n]: 0,
+        int: 2,
+        default: 1
+    );
+}
+```
+
+
+### Does Not Compile ❌
+
+```cpp
+extern unsigned int n;
+
+int main() {
+    int arr[n];
+    return _Generic(arr,
+        int[n]: 0, // ❌! Constraint violation
+        int: 2,
+        default: 1
+    );
+}
+```
+
+
+### Another example: (pointers to) VLAs
+
+```cpp
+#include <stdlib.h>
+#include <stdio.h>
+
+void print_array_size(int n, int m, int (*p)[n][m]) {
+	printf("n * m * sizeof(***p) = %zu\n", n * m * sizeof(***p));
+	printf("sizeof(*p)           = %zu\n\n", sizeof(*p));
+}
+
+// …
+```
+
+
+Let's use it…
+
+```cpp
+// …
+int main() {
+	int n = 2, m = 3;
+	int (*p)[n][m] = malloc(sizeof *p);
+	printf("sizeof(*p) [main]    = %zu\n", sizeof(*p));
+	print_array_size(n, m, p);
+	m = 4;
+	printf("sizeof(*p) [main]    = %zu\n", sizeof(*p));
+	print_array_size(n, m, p);
+	n = 50;
+	printf("sizeof(*p) [main]    = %zu\n", sizeof(*p));
+	print_array_size(n, m, p);
+	free(p);
+}
+```
+
+
+### ❓🤔🤔❓🤔❓🤔❓🤔🤔❓
+
+```cpp
+sizeof(*p) [main]    = 24
+n * m * sizeof(***p) = 24
+sizeof(*p)           = 24
+
+sizeof(*p) [main]    = 24
+n * m * sizeof(***p) = 32
+sizeof(*p)           = 32
+
+sizeof(*p) [main]    = 24
+n * m * sizeof(***p) = 800
+sizeof(*p)           = 800
+```
+
+
+#### Awful Behavior 0. VLA drops its own sizes on the floor
+
+- Despite having stored information, no way to make one atomic<sup>†</sup> operation
+- Must pass sizes separately with `sizeof(my_vla)` (run-time) computation
+    - Don't forget to remember `sizeof()` is the # of `unsigned char`
+
+<sub><sup>†</sup> — Atomic as in "single, indivisible operation", not Atomic as in Memory Model/Ordering Guarantees</sub>
+
+
+#### Awful Behavior 1. Run-time `sizeof`
+
+- Compiler cannot statically check in worst-case scenario
+- Undefined Behavior to form and use a VLA with the wrong sizes (sanitizer required)
+- Imposes unknown overhead for size storage; not user-controllable
+
+
+#### Awful Behavior 2. Need to take VLA-by-pointer
+
+- Otherwise first array dimension is dropped<sup>†</sup>
+- God-awful syntax 🤮
+- Waste of an indirection
+
+<sub><sup>†</sup> — To be fair, this applies to almost all array parameters in C and C++; equivalent to pointers!</sub>
