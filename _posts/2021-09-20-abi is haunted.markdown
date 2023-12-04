@@ -2,8 +2,8 @@
 layout: post
 title: "Binary Banshees and Digital Demons"
 permalink: /binary-banshees-digital-demons-abi-c-c++-help-me-god-please
-feature-img: "/assets/img/cryptiidcruxx/cruxx-comic-header.png"
-thumbnail: "/assets/img/cryptiidcruxx/cruxx-comic-header.png"
+feature-img: "/assets/img/kiingkiismet/kiismet-comic-header.png"
+thumbnail: "/assets/img/kiingkiismet/kiismet-comic-header.png"
 tags: [ABI, C, C++, Standard, Help, Me]
 excerpt_separator: <!--more-->
 ---
@@ -12,14 +12,14 @@ The Committee says these things do not exist. The Committee says these things ar
 
 They lie.
 
-The standard is haunted. I know it is. Especially by that Three Letter Demon. I never really talked about how it has plagued me — plagued us all — with its insidious presence. Always the looming and lurking danger of The Demon, fearing the rearing its ugly head. While lamenting its existence I could never face it head on to challenge it. It is only at the height of my isolation that I could no longer bear witness to the violence the Three Letter Demon did to our beloved programming community and, thusly, began to scheme to take it down. But before we challenge it, dear reader, it stands to reason: what exactly is the Three Letter Demon? And why does The Demon matter to C and C++? Let's finally get through this, in full, with a little [illustrative help from our favorite local cryptid, Crux](https://cryptiidcruxx.carrd.co/) and [Luna Sorcery](https://twitter.com/lunasorcery).
+The standard is haunted. I know it is. Especially by that Three Letter Demon. I never really talked about how it has plagued me — plagued us all — with its insidious presence. Always the looming and lurking danger of The Demon, fearing the rearing its ugly head. While lamenting its existence I could never face it head on to challenge it. It is only at the height of my isolation that I could no longer bear witness to the violence the Three Letter Demon did to our beloved programming community and, thusly, began to scheme to take it down. But before we challenge it, dear reader, it stands to reason: what exactly is the Three Letter Demon? And why does The Demon matter to C and C++? Let's finally get through this, in full, with a little [illustrative help from our favorite local cryptid, kismet!](https://kiingkiismet.carrd.co/) and [Luna Sorcery](https://twitter.com/lunasorcery).
 
 
 
 
 # Application Binary Interface
 
-![A catgirl named Luna is sitting on a sofa. She has long brunette hair, a tail, and ears the same color as her hair sitting on the couch. A moon pendant dangles from her necklace as she reads a book, while what appears to be a door "SLAM" comes from the image's right, Luna's left.](/assets/img/cryptiidcruxx/cruxx-comic-1.png)
+![A catgirl named Luna is sitting on a sofa. She has long brunette hair, a tail, and ears the same color as her hair sitting on the couch. A moon pendant dangles from her necklace as she reads a book, while what appears to be a door "SLAM" comes from the image's right, Luna's left.](/assets/img/kiingkiismet/kiismet-comic-1.png)
 
 Or, as it's more commonly known as, ABI. Before many of you reading this were even born, before many of you reading this even knew what a computer was, a contract was forged in blood. It is not one you get to make for yourself; in fact, your consent or knowledge of its existence is not required, nor is it, frankly, at all requested. Everyone relies on it, and yet even people who build their own C++(-alike) compilers from scratch are unsure that such a contract exists, or that they're even playing by such rules:
 
@@ -36,7 +36,7 @@ How a function calls another function, how the stack is set up, where variables 
 
 Let's take a look.
 
-![Luna stares at the person who just entered, who is wearing a blue scarf and a purple robe. They seem not to be looking directly at Luna or saying anything as they walk in. The book is still open on their lap.](/assets/img/cryptiidcruxx/cruxx-comic-2.png)
+![Luna stares at the person who just entered, who is wearing a blue scarf and a purple robe. They seem not to be looking directly at Luna or saying anything as they walk in. The book is still open on their lap.](/assets/img/kiingkiismet/kiismet-comic-2.png)
 
 ## ABI: An Illustration
 
@@ -171,7 +171,7 @@ There is no "`long long`" or "`__int128_t`" baked into the names like there woul
 
 # Okay… But Why Does It Matter?
 
-![With a quiet "thump", the book is closed as Luna's eyebrow perks up, watching the figure walk right past her deeper into the house.](/assets/img/cryptiidcruxx/cruxx-comic-3.png)
+![With a quiet "thump", the book is closed as Luna's eyebrow perks up, watching the figure walk right past her deeper into the house.](/assets/img/kiingkiismet/kiismet-comic-3.png)
 
 Well, for C, it means that changing anything - literally anything - is an ABI break. Change your typedef to be a bigger integer? ABI break. Fix your `time_t` structure to handle time with 64-bit numbers because Jesus Christ I Thought We Already Have Been Through This Please Stop Using 32-bit Integers For Your Time Structures? ABI Break (and probably a security issue):
 
@@ -198,7 +198,7 @@ what would happen if you weren't 10 years late to the party?
 
 # Building a Graveyard
 
-![Luna speaking from the couch, her textbox overlaid by the interruption of the person who walked by. "You're back already? How--" "ABI's haunted."](/assets/img/cryptiidcruxx/cruxx-comic-4.png)
+![Luna speaking from the couch, her textbox overlaid by the interruption of the person who walked by. "You're back already? How--" "ABI's haunted."](/assets/img/kiingkiismet/kiismet-comic-4.png)
 
 Most of the time I've talked about ABI, it has usually been a casual mention, in the context of some other fight or some other larger problem. But here, we're going to talk about strictly ABI. Specifically, what happens when the ABI not only comes from the past, but also invades the present and future to stop us from doing things in C and C++.
 
@@ -431,7 +431,7 @@ And when I say in-perpetuity, I mean that in a very visceral and immediate sense
 
 # Haunting the Present
 
-![Luna speaks from the couch with a confused expression on her face, saying "… Wha–" like she's about to be interrupted by something.](/assets/img/cryptiidcruxx/cruxx-comic-5.png)
+![Luna speaks from the couch with a confused expression on her face, saying "… Wha–" like she's about to be interrupted by something.](/assets/img/kiingkiismet/kiismet-comic-5.png)
 
 One of the core problem with ABI is that it very much affects how the Committee works and designs things. It also means that improvements often get sidelined or ignored because it can't be feasibly done without an ABI break. Sometimes, there are fixes that can be done, but only partially. So, for example, while the standard adds `allocate_at_least(size_type n)` to the current `std::allocator`, nothing can be done for `std::polymorphic_allocator` because of the reasons mentioned. From a proposal that actually has a chance of making it into C++:
 
@@ -549,7 +549,7 @@ Oops! Now, we didn't know we were lying, it was very much a surprise when Corent
 
 ## "This is Going to be an ABI Break"
 
-![The catgirl on the sofa hunches her shoulders up and a blue tint overtakes her nose and cheeks as she gets scared by a big "GROOOOOOOHHhhHh" noise.](/assets/img/cryptiidcruxx/cruxx-comic-6.png)
+![The catgirl on the sofa hunches her shoulders up and a blue tint overtakes her nose and cheeks as she gets scared by a big "GROOOOOOOHHhhHh" noise.](/assets/img/kiingkiismet/kiismet-comic-6.png)
 
 Welcome to Hell, population us. You might wonder how a paper being worked on barely a year after the release of C++20 can end up being an ABI break. This is where Microsoft and VC++ comes into play. See, Microsoft had very recently been guaranteeing ABI stability in their platform deployments. In years gone by, Microsoft would break ABI with every release and ship a new DLL. It was your responsibility to sync things if it truly mattered: this let them fix a LOT of bugs in their implementation, at the risk of needing people to either recompile or at least check things worked with an updated runtime. (Or to just keep shipping the old VC++ DLLs. Remember all those VC Redistributable Downloaders for v2011 and v2012 and v2013 and v2015, anyone?). These days, however, they started locking things down in their ABIs pretty much immediately. This is why a lot of bugs suddenly became no-fix, or were pushed back to a mythical and magical "when we break ABI" timeline. See, one of the things Microsoft wanted to do was have `std::format`. And not only did they want to ship a version 0 of their own `std::format`,
 
@@ -584,7 +584,7 @@ Thank God; crisis averted! … But yet, this left is a horrible taste in my mout
 
 # The Spooky Terror Behind the Actions
 
-![A picture of the door with the "menacing" Japanese hiragana emanating from around the door, similar to JoJo's Bizarre Adventure.](/assets/img/cryptiidcruxx/cruxx-comic-7.png)
+![A picture of the door with the "menacing" Japanese hiragana emanating from around the door, similar to JoJo's Bizarre Adventure.](/assets/img/kiingkiismet/kiismet-comic-7.png)
 
 The ugly truth here is that we had to effectively convince a vendor not to do the worst possible implementation and shoot themselves in their own foot. Which is really quite remarkable! It's one thing when, say, IBM or Intel shows up and says "we have a private implementation of X, we'd like to put it in the standard library". It's understandable if people mess that up, because they only hand us the interface and not the implementation. But this was a case where:
 
@@ -605,7 +605,7 @@ The absurdity is only eclipsed by how profoundly harmful this behavior is to the
 
 # Implementation Override
 
-![The sheep is huddling up, with some kind of object in their arms, while their back is facing the viewer.](/assets/img/cryptiidcruxx/cruxx-comic-8.png)
+![The sheep is huddling up, with some kind of object in their arms, while their back is facing the viewer.](/assets/img/kiingkiismet/kiismet-comic-8.png)
 
 I am terrified, dear reader.
 
@@ -657,10 +657,10 @@ I shouldn't even be held back by my **own** mistakes from yesterday, what kind o
 
 The binary banshees and digital demons of ABI will not overtake us. It will not trample over me, over **my** implementation. I will not be bound by the mistakes of people who know not my name, nor the names of the people whose life I aim to make better. The standard is for **me** too, not just Microsoft. Not just IBM. Not just Apple. I will not let ABI hold us perpetually at implementation gunpoint. One way.
 
-![The person in the purple robe turns around. In there hands, is an assembled and prepared shotgun.](/assets/img/cryptiidcruxx/cruxx-comic-9.png)
+![The person in the purple robe turns around. In there hands, is an assembled and prepared shotgun.](/assets/img/kiingkiismet/kiismet-comic-9.png)
 
 Or another. 💚
 
-P.S.: This ENTIRE article was because [Luna Sorcery made a fun joke](https://twitter.com/lunasorcery/status/1390060842230685700). [Crux](https://twitter.com/CRYPTIIDCRUXX) brought the whole thing to life with their amazing artist skills: you should g[o commission art from them](https://cryptiidcruxx.carrd.co/), by the bucket load if you can!
+P.S.: This ENTIRE article was because [Luna Sorcery made a fun joke](https://twitter.com/lunasorcery/status/1390060842230685700). [kismet](https://twitter.com/KIINGKIISMET) brought the whole thing to life with their amazing artist skills: you should g[o commission art from them](https://kiingkiismet.com/), by the bucket load if you can!
 
 {% include anchors.html %}
