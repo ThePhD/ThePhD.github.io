@@ -34,7 +34,7 @@ These properties forge the basis of `intmax_t`'s purpose. Lossless storage, pass
 
 We cannot upgrade seamlessly.
 
-C has a much higher commitment to not breaking old code and keeping "developers close to the machine". What this actually translates to for most Application Binary Interfaces is very simplistic "name mangling" schemes (i.e., none), [weak linkers](https://twitter.com/__phantomderp/status/1329960075096694790), and other shenanigans. The end result is that we expose C developers to platform details that become invisible dependencies for their code that must be preserved at all costs. For example, let's take a C Standard function that uses `intmax_t`, `imaxabs`:
+C has a much higher commitment to not breaking old code and keeping "developers close to the machine". What this actually translates to for most Application Binary Interfaces is very simplistic "name mangling" schemes (i.e., none), [weak linkers](https://web.archive.org/web/20201121013636/https://twitter.com/__phantomderp/status/1329960075096694790), and other shenanigans. The end result is that we expose C developers to platform details that become invisible dependencies for their code that must be preserved at all costs. For example, let's take a C Standard function that uses `intmax_t`, `imaxabs`:
 
 ```cpp
 intmax_t imaxabs(intmax_t j);
