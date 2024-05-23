@@ -29,7 +29,7 @@ To start with, let's go over the syntax of C++, and how it achieves RAII. We wil
 
 # RAII: C++ Syntax
 
-As a quick primer for those who are not familiar, C++ achieves its general purpose do-and-undo mechanism through the user of *constructors* and *destructors*. Constructors are function calls that are always invoked on the creation of an object, and destructors are always invoked when an object leaves scope. One can handle doing the construction and destruction manually, but we don't have to talk about such complicated cases yet. The syntax looks as follows:
+As a quick primer for those who are not familiar, C++ achieves its general purpose do-and-undo mechanism through the use of *constructors* and *destructors*. Constructors are function calls that are always invoked on the creation of an object, and destructors are always invoked when an object leaves scope. One can handle doing the construction and destruction manually, but we don't have to talk about such complicated cases yet. The syntax looks as follows:
 
 ```cpp
 #include <cstdlib>
@@ -51,7 +51,7 @@ struct ObjectType {
 };
 ```
 
-In the above code snippet, we have a structure named `ObjectType`. It has a single constructor, that takes no arguments, and initializes all 3 of its members to some default values. It also has a destructor, which is meant to "undo" anything in the class that the programmer likes. Int his case, I an using it to purposefully `free` the data that I originally `malloc`d into the member `c` during construction. Thus, when I use the class in this manner:
+In the above code snippet, we have a structure named `ObjectType`. It has a single constructor, that takes no arguments, and initializes all 3 of its members to some default values. It also has a destructor, which is meant to "undo" anything in the class that the programmer likes. In this case, I an using it to purposefully `free` the data that I originally `malloc`d into the member `c` during construction. Thus, when I use the class in this manner:
 
 ```cpp
 #include <cstdio>
