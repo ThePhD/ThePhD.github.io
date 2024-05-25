@@ -6,7 +6,6 @@ feature-img: "/assets/img/2024/05/raii-banner.jpg"
 thumbnail: "/assets/img/2024/05/raii-banner.jpg"
 tags: [C, C++, RAII, Object Model, Effective Type, Constructors, Destructors, defer]
 excerpt_separator: <!--more-->
-draft: true
 ---
 
 Ever since I finished publishing the "defer" paper and successfully defended it on its first go-around (it now has tentative approval to go to a Technical Specification, I just need to obtain the necessary written boilerplate to do so), an old criticism<!--more--> repeats itself frequently. Both internally to the C and C++ Standards Committee, as well as to many outside, the statement is exactly as the title implies: to implement a general-purpose undo mechanism for C, why not just make Objects with Well-Scoped, Deterministic Lifetimes and build it out of that like C++? This idiom, known as Resource Acquisition Is Initialization (RAII), is C++'s biggest bread and butter and its main claim to fame over just about every other language that grew up near it and after it (including all of the garbage collected languages such as Managed C++, D, Go, etc.). I have received no less than 5 external-to-WG14 (the formal abbreviation for the C Standards Committee) requests/asks about this, and innumerable posts internal to the C Standard mailing lists.
