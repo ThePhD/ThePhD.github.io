@@ -126,7 +126,7 @@ This was a bit of a problem that stemmed from some implementations being too str
 int x[(int)+1.0];
 ```
 
-were considered constant arrays because the parsers by [the Pillar Compilers](https://www.youtube.com/watch?v=XUhVCoTsBaM) was too amazing.
+were considered constant arrays because the parsers by [the Pillar Compilers](https://www.youtube.com/watch?v=FaW5jCfvgco) was too amazing.
 
 Meme music aside, while it was nice that their constant expression parsers were exceptionally good, unfortunately that declaration should have been considered a Variable Length Array (VLA). While the compiler backend is free to lower it down to being a static array because it's so smart and capable, other far simpler compilers declared it a VLA because the C Standard's constant expression rules are incredibly limited. Seriously: a lot of what is computed at translation / compile time is actually extremely implementation-specific: there's a lot of people relying on a constant folder / constant parser that is way more beefy than the one in the C standard, which can make for a lot of problems when you're working with someone's home-grown C implementation.
 
