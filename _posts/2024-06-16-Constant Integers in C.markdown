@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Constant Integer Type Declarations Initilized With Constant Expressions Should Be Constants"
+title: "Constant Integer Type Declarations Initialized With Constant Expressions Should Be Constants"
 permalink: /constant-integers-are-actually-constant-wow-finally-someones-writing-the-goddamn-paper-🙄
 feature-img: "/assets/img/2024/06/equations-banner.jpg"
 thumbnail: "/assets/img/2024/06/equations-banner.jpg"
@@ -23,11 +23,19 @@ Thanks to changes made in C23 by Eris Celeste and Jens Gustedt (woo, thanks you 
 
 # How It Works
 
-The simple way to achieve this is to take every non-`extern`, `const`-qualified (with no other qualifiers) integer-typed (including `enum`-typed) declaration and upgrade it implicitly to be a `constexpr` declaration. It only works if you're initializing it with an integer constant expression (a specific kind of Phrase of Power in C standardese), as well as a few other constraints. There are a few reasons for it to be limited to `non`-extern declarations, and a few reasons for it to be limited to integer and integer-like types rather than the full gamut of floating/`struct`/`union`/etc. types. Let's take a peak into some of the constraints and reasonings, and why it ended up this way.
+The simple way to achieve this is to take every non-`extern`, `const`-qualified (with no other storage class specifiers except `static` in some cases) integer-typed (including `enum`-typed) declaration and upgrade it implicitly to be a `constexpr` declaration. It only works if you're initializing it with an integer constant expression (a specific kind of Phrase of Power in C standardese), as well as a few other constraints. There are a few reasons for it to be limited to `non`-extern declarations, and a few reasons for it to be limited to integer and integer-like types rather than the full gamut of floating/`struct`/`union`/etc. types. Let's take a peak into some of the constraints and reasonings, and why it ended up this way.
 
 
 
-## Integer Types? Why Not "Literally Everything™"?
+## Non-`extern` only!
+
+An `extern` object declaration could refer to read-only memory that is only read-only from the perspective of the C program. For example, it could refer to a location in memory written to by the OS, or handled by lower level routines that pull their values from a register or other hardware. (Typically, these are also marked `volatile`, but the point still stands.) We cannot have things that are visible outside of the translation unit and (potentially) affected by other translation units / powers outside of C marked as true constants; it would present a sincere conflict as interest. But, because of `extern`, we have a clear storage class specifier that allows us to know when things follow this rule or  when things do not. This makes it trivially simple to know when something is entirely internal to the translation unit and the C program and does not "escape" the C abstract machine!
+
+This makes it easy to identify which integer typed declarations would meet our goals, here. Though, it does bring up the important question of "why not the other stuff, too?". After all, if we can do this for integers, why not structures with compound literals? Why not with string literals? Why not with full array initializers and array object declarations inside of a function?! All of these things can be VERY useful to make standards-mandated available to the optimizer.
+
+
+
+## Integer-Typed Declarations? Why Not "Literally Everything™"?
 
 Doing this for integer types is more of a practicality than a full-on necessity. The reason it is practical is because 99% of all compilers already compute integer constant expressions for the purposes of the preprocessor and the purposes of the most basic internal compiler improvements. Any serious commercial compiler (and most toy compilers) can compute `1 + 1` at compile-time, and not offload that expression off to a run-time calculation.
 
