@@ -607,6 +607,6 @@ it's sleepy time. Nighty night, and thanks for coming on this wild ride with me 
 
 [^title-photo]: [Title photo](https://www.pexels.com/photo/close-up-of-menu-313700/) by [Terje Sollie](https://www.solliefoto.no/) from Pexels.
 
-[^Gankra-Animorph-post]: [Animorph Posting](https://twitter.com/Gankra_/status/1555366350662541312) by [Aria Beingessner](https://gankra.github.io/blah/), using art drawn by [Bugurrii](https://twitter.com/Bugurrii) for me!
+[^Gankra-Animorph-post]: [Animorph Posting](https://twitter.com/Gankra_/status/1555366350662541312) by [Aria Beingessner](https://gankra.github.io/blah/), using art drawn by [lilwilbug](https://twitter.com/lilwilbug) for me!
 
 {% include anchors.html %}

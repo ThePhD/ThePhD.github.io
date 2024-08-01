@@ -26,4 +26,4 @@ In my free time I try to write and draw, which has naturally led me to creating 
 
 # Credit
 
-The adorable favicon is the Twitter Sheep Emoji from [Twemoji 2.7](https://github.com/twitter/twemoji). The avatar is something I drew by hand! 
+The adorable favicon is the Twitter Sheep Emoji from [Twemoji 2.7](https://github.com/twitter/twemoji). The avatar is by [KIING KIISMET](https://www.kiingkiismet.com/)! 
