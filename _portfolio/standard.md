@@ -23,7 +23,7 @@ C2y/C3a | n3329: Transparent Aliases | [Published](https://www.open-std.org/jtc1
 C2y/C3a | n3330: More Modern Bit Utilities | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3330.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20More%20Modern%20Bit%20Utilities.html)
 C2y/C3a | n3331: `_Generic` Realignment and Improvement | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3331.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Generic%20Realignment%20and%20Improvement.html)
 C2y/C3a | n3332: `_Record` types | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3332.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Record%20types.html)
-C2y/C3a | n3333: Integer Constant Expression Initialized `const` Integer Declarations are Implicitly `constexpr` | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Initialized%20const%20Integer%20Declarations.html)
+C2y/C3a | n3333: Integer Constant Expression Initialized `const` Integer Declarations are Implicitly `constexpr` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3333.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Initialized%20const%20Integer%20Declarations.html)
 
 C2y/C3a | cXXX3: Comprehensive Statement Expressions | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Comprehensive%20Statement%20Expressions.html)
 C2y/C3a | cXXX4: Functional Functions - A Comprehensive Proposal Overviewing Blocks, Nested Functions, and Lambdas for C | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Functional%20Functions.html)
