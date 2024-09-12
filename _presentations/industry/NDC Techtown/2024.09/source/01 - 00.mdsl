@@ -1,0 +1,81 @@
+# Operators
+
+<center><img src="source/img/Operator_Overloading_Comic_pg1.png" width="80%" height="80%"></img></center>
+
+
+
+## The thing everyone loves to hate from C++
+
+> There are some things that I kind of feel torn about, like operator overloading. I left out operator overloading as a fairly personal choice because I had seen too many people abuse it in C++.
+>
+> — [James Gosling, Java Report 5(7), July 2000](http://www.gotw.ca/publications/c_family_interview.htm)
+
+
+
+## Hard to Talk About
+
+
+<center><img src="source/img/Operator_Overloading_Comic_pg5.png" width="80%" height="80%"></img></center>
+
+
+
+<center><img src="source/img/Operator_Overloading_Comic_pg8.png" width="80%" height="80%"></img></center>
+
+
+
+### Ah...
+
+
+<center><img src="source/img/Operator_Overloading_Comic_pg9.png" width="80%" height="80%"></img></center>
+
+
+
+## But it has some genuine appeal!
+
+Appeared in C mailing list before:
+
+- December 12<sup>th</sup>, 2023 - Marcus Johnson  
+  [N3201 - Operator Overloading Without Name Mangling v2](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3201.pdf)
+- August 7<sup>th</sup>, 2022 - Jacob Navia  
+  [N3051 - Operator Overloading in C, Jacob Navia](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3051.pdf)
+
+
+
+## We Define Operators for
+## Standard/Annex Math Types
+
+- `_Complex`/`complex` types, Annex G
+- Imaginary types (but not for much longer 😱)
+- `_Decimal128`, `_Float128`, `_Float32x`, etc., Annex H
+- [`ckd_${TYPE}_t`, from N2683 Towards Integer Safety](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n2683.pdf)  
+  (Supplemental portion with `ckd_${TYPE}_t` in N2683 not approved, but asked for!)
+
+
+
+## And There's More Spicy Clapbacks…
+
+<center><a href="https://twitter.com/FreyaHolmer/status/1449716182362345487"><img src="source/img/freya-holmer-tweet.png" width="50%" height="50%"></img></a></center>
+
+
+
+## So... Can It Exist for C?
+
+
+
+## Let's Start from C++'s System
+
+And then:
+- backtrack and analyze features that make up operators in C++
+- remove features we don't like
+- take into account things people want for C / fears about operators
+
+
+
+## The Systems Underlying
+## C++ Operator Overloading
+
+- ⌖ Name/Argument-Dependent Lookup
+- ⌖ Overload Resolution
+- ⌖ Implicit Conversions
+- ⌖ Destructors & Resource Acquisition Is Initialization (RAII)
+- ⌖ References

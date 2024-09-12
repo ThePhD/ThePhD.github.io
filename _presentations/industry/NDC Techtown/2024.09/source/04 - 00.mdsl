@@ -1,0 +1,190 @@
+# Overload Resolution
+
+
+
+## The Naming Problem
+
+Operators in C++ and in Jacob Navia's [N3051](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3051.pdf) exist in the same space:
+
+```cpp
+typedef struct ml_vec2 {
+	float x;
+	float y;
+} ml_vec2;
+
+ml_vec2 operator+ (ml_vec2 left, ml_vec2 right);
+ml_vec2 operator+ (ml_vec2 left, float right);
+ml_vec2 operator+ (float left, ml_vec2 right);
+```
+
+🤔
+
+How do we tell these things apart?
+
+
+
+## C++: Overload Resolution and Name Mangling
+
+- Featured in many languages, particularly C#, C++, Rust, and more
+- Add function/operator name, type names into final assembly output!
+
+```mips
+_Zpl8int128_tS_: ; operator+(int128_t, int128_t)
+	; code...
+_Zpl8int256_tS_: ; operator+(int256_t, int256_t)
+	; code...
+```
+
+
+
+# Bad For C!
+
+- "How do I name this operator in normal code to form a function pointer?"
+- Violates fundamental tenet of C
+
+```cpp
+void florba_worba(int a, double b) {}
+extern "C" void florba_worbo(int a, double b) {}
+```
+
+```mips
+_Z12florba_worbaid: ; C++
+        ret
+florba_worbo: ; C
+        ret
+```
+
+
+
+## N3051 and N3201
+
+- Point of [Johnson's N3201 - Operator without Overloading](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3201.pdf) over [Navia's N3051 - Operator Overloading in C](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3051.pdf)
+- Navia's standpoint:  
+  It's Implementation-Defined or Defined By Standard, User Literally Types In Mangled Name to Access Function Pointers
+- Marcus's standpoint:  
+  Let's Just Remove The Need
+
+Maybe we can fix this?
+
+
+
+<center><img src="source/img/lilwilbug_operator_comic_pg1.png" width="60%" height="60%"></img></center>
+
+
+
+## Designing the Fix
+
+```cpp
+typedef struct ml_vec2 {
+	float x;
+	float y;
+} ml_vec2;
+
+ml_vec2 operator+ (ml_vec2 left, ml_vec2 right);
+ml_vec2 operator+ (ml_vec2 left, float right);
+ml_vec2 operator+ (float left, ml_vec2 right);
+```
+
+
+
+## Core Problems
+
+- Actual behavior of `operator+` is locked behind unnameable operator
+- Cannot call these normally, locking out "functions only!" people
+- And, yes, overload resolution provokes name mangling issues
+
+
+
+## Designing the Fix
+
+```cpp
+// replace with functions...
+ml_vec2 ml_vec2_add (ml_vec2 left, ml_vec2 right);
+ml_vec2 ml_vec2_add_f (ml_vec2 left, float right);
+ml_vec2 ml_f_add_vec2 (float left, ml_vec2 right);
+```
+
+
+## Designing the Fix
+
+```cpp
+ml_vec2 ml_vec2_add (ml_vec2 left, ml_vec2 right);
+ml_vec2 ml_vec2_add_f (ml_vec2 left, float right);
+ml_vec2 ml_f_add_vec2 (float left, ml_vec2 right);
+// ... and hook them up directly!
+_Operator(+, ml_vec2, ml_vec2, ml_vec2_add);
+_Operator(+, ml_vec2, float, ml_vec2_add_f);
+_Operator(+, float, ml_vec2, ml_f_add_vec2);
+```
+
+
+
+<center><img src="source/img/lilwilbug_operator_comic_pg2.png" width="60%" height="60%"></img></center>
+
+
+
+<center><img src="source/img/lilwilbug_operator_comic_pg3.png" width="60%" height="60%"></img></center>
+
+
+
+# Hear Me Out…
+
+
+
+```cpp
+int main () {
+	ml_vec2 v{1.0f, 2.0f};
+	return (int)((v + 3.0f).x);
+}
+```
+
+```cpp
+int main () {
+	ml_vec2 v{1.0f, 2.0f};
+	ml_vec2 v2 = ml_vec3_add_f(v, 3.0f);
+	return (int)v2.x;
+}
+```
+
+
+
+## You Pick The One Right For You
+
+```cpp
+ml_vec2 ml_vec2_add (ml_vec2 left, ml_vec2 right);
+ml_vec2 ml_vec2_add_f (ml_vec2 left, float right);
+ml_vec2 ml_f_add_vec2 (float left, ml_vec2 right);
+
+_Operator(+, ml_vec2, ml_vec2, ml_vec2_add);
+_Operator(+, ml_vec2, float, ml_vec2_add_f);
+_Operator(+, float, ml_vec2, ml_f_add_vec2);
+```
+
+```cpp
+int main () {
+	ml_vec2 v{1.0f, 2.0f};
+	return (int)((v + 3.0f).x);
+}
+```
+
+```cpp
+int main () {
+	ml_vec2 v = ml_vec3_add_f((ml_vec2){1.0f, 2.0f}, 3.0f);
+	return (int)v.x;
+}
+```
+
+
+
+# Design **Enables** You To Pick
+
+
+
+## The Systems Underlying
+## C++ Operator Overloading
+
+- 🎯 ~~Name/Argument-Dependent Lookup~~
+- 🎯 ~~Overload Resolution~~
+- ⌖ Implicit Conversions
+- ⌖ Destructors & Resource Acquisition Is Initialization (RAII)
+- ⌖ References

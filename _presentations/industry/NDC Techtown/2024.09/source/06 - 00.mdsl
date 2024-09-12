@@ -1,0 +1,157 @@
+# Destructors
+## & Resource Acquisition Is Initialization (RAII)
+
+
+
+## Brief Overview
+
+- Every object has a constructor and a destructor
+- Whenever something goes out of scope, its destructor is invoked
+
+```cpp
+#include <memory>
+
+int main () {
+    std::unique_ptr<int> p = std::make_unique<int>(24);
+    // use `p` and `*p` and `p.get()`
+    return 0; // automatically cleans it up
+}
+```
+
+
+
+## Why Does It Matter?
+
+Imagine a `bigint` structure in C++ with addition:
+
+```cpp
+#include <vector>
+
+struct bigint {
+	std::vector<unsigned long long> data;
+
+	bigint operator+(const bigint& b) const;
+};
+```
+
+
+
+## Try to Implement the same thing in C?
+
+```cpp
+#include <allocator.h>
+
+struct bigint {
+	allocator_t* alloc;
+	unsigned long long* data;
+};
+
+bigint make_bigint(allocator_t* alloc, unsigned long long initial_value);
+void destroy_bigint(bigint* bi);
+
+bigint bigint_add(bigint left, bigint right);
+_Operator(+, bigint, bigint, bigint_add);
+
+/* … */
+```
+
+
+
+```cpp
+/* … */
+#include <limits.h>
+
+int main () {
+	bigint a = make_bigint(&alloc, 3'000'000'000);
+	bigint b = make_bigint(&alloc, ULLONG_MAX);
+
+	bigint c = a + b + a;
+
+	bigint_destroy(&c);
+	bigint_destroy(&b);
+	bigint_destroy(&a);
+}
+```
+
+
+
+## What's Wrong Here?
+
+```cpp
+/* … */
+#include <limits.h>
+
+int main () {
+	bigint a = make_bigint(&alloc, 3'000'000'000);
+	bigint b = make_bigint(&alloc, ULLONG_MAX);
+
+	bigint c = a + b + a;
+
+	bigint_destroy(&c);
+	bigint_destroy(&b);
+	bigint_destroy(&a);
+}
+```
+
+
+
+## Temporaries!
+
+```cpp
+/* … */
+#include <limits.h>
+
+int main () {
+	bigint a = make_bigint(&alloc, 3'000'000'000);
+	bigint b = make_bigint(&alloc, ULLONG_MAX);
+
+	bigint c = a + b + a; // AAAAH!
+	/* … */
+}
+```
+
+
+
+## Temporaries!
+
+```cpp
+int main () {
+	/* … */
+	bigint __c0 = a + b; // AAAAH!
+	bigint c = __c0 + a;
+
+	bigint_destroy(&c);
+	bigint_destroy(&b);
+	bigint_destroy(&a);
+}
+```
+
+
+
+## Many Ways To Handle This
+
+- Arena/Allocator that marks begin and end of block to collect all allocations
+	- Release at the end
+- Garbage-collection / refcounting-style types in C
+	- Prevalent in larger C codebases like GCC itself
+- None as automatic as C++
+
+
+
+## Hidden Blessing?
+
+- Naturally **en**courages operators for simple, stack-based types
+- Naturally **dis**courages operators for complex, heap-based types
+
+*Maybe* that's a Win-Win for the C Community...!
+
+
+
+## The Systems Underlying
+## C++ Operator Overloading
+
+- 🎯 ~~Name/Argument-Dependent Lookup~~
+- 🎯 ~~Overload Resolution~~
+- 🎯 ~~Implicit Conversions~~
+- 🎯 ~~Destructors & Resource Acquisition Is Initialization (RAII)~~
+- ⌖ References

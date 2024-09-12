@@ -1,0 +1,83 @@
+# Implicit Conversions
+
+
+
+## Literal Idea from The Gaping Abyss
+
+> “Implicit conversions are the root of all evil (or most of it) in C++ programming.”
+> 
+> — [Jason "@lefticus" Turner, 2022](https://twitter.com/lefticus/status/1578593373107081216)
+
+> “Haha I added to implicit conversions to the language my team owns and it might be the second or third largest mistake of my career.”
+>
+> — [Sean Middleditch, 2022, in reply to Jason Turner](https://twitter.com/seanmiddleditch/status/1578607390949531653)
+
+
+
+## Not Dealing With It!
+
+```cpp
+ml_vec2 ml_vec2_add (ml_vec2 left, ml_vec2 right);
+ml_vec2 ml_vec2_add_f (ml_vec2 left, float right);
+ml_vec2 ml_f_add_vec2 (float left, ml_vec2 right);
+
+_Operator(+, ml_vec2, ml_vec2, ml_vec2_add);
+_Operator(+, ml_vec2, float, ml_vec2_add_f);
+_Operator(+, float, ml_vec2, ml_f_add_vec2);
+```
+
+```cpp
+int main () {
+	ml_vec2 v{1.0f, 2.0f};
+	ml_vec2 v2 = v + 3.0; // ERROR!
+	return (int)v2.x;
+}
+```
+
+
+
+## Lookup algorithms
+
+- Based on exact type-match only
+- No match? Error ❌
+- Performs no implicit conversions, narrowing or otherwise
+- Differs from Navia's N3051, which had a system for casting that the paper wanted to employ
+
+
+
+## That's Annoying!
+
+Yes
+
+Sorry!
+
+```cpp
+ml_vec2 ml_vec2_add (ml_vec2 left, ml_vec2 right);
+ml_vec2 ml_vec2_add_f (ml_vec2 left, float right);
+ml_vec2 ml_f_add_vec2 (float left, ml_vec2 right);
+ml_vec2 ml_vec2_add_d (ml_vec2 left, double right);
+ml_vec2 ml_d_add_vec2 (double left, ml_vec2 right);
+
+_Operator(+, ml_vec2, ml_vec2, ml_vec2_add);
+_Operator(+, ml_vec2, float, ml_vec2_add_f);
+_Operator(+, float, ml_vec2, ml_f_add_vec2);
+_Operator(+, ml_vec2, double, ml_vec2_add_d);
+_Operator(+, double, ml_vec2, ml_d_add_vec2);
+```
+
+
+
+## Room for Argument Promotion / Integer Promotion?
+
+Perhaps
+
+
+
+## The Systems Underlying
+## C++ Operator Overloading
+
+- 🎯 ~~Name/Argument-Dependent Lookup~~
+- 🎯 ~~Overload Resolution~~
+- 🎯 ~~Implicit Conversions~~
+- ⌖ Destructors & Resource Acquisition Is Initialization (RAII)
+- ⌖ References

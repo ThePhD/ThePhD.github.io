@@ -1,0 +1,29 @@
+# And That's A Full Design!
+
+
+
+## Light on Some Details
+
+- Obvious Restrictions are necessary!
+- Cannot write `_Operator(+, int, int, wrapping_add_i_i);`
+	- must have one user-defined type
+	- pointers count as built-in types (no overriding pointer operations!)
+- Not exploring special scoping we gain from separated operator/function design
+
+
+
+## But We Solved The Core Tension
+
+And that means...
+
+<center><img src="source/img/lilwilbug_operator_comic_pg1.png" width="50%" height="50%"></img></center>
+
+
+
+<center><img src="source/img/lilwilbug_operator_comic_pg2a.png" width="60%" height="60%"></img></center>
+
+
+
+<center><img src="source/img/lilwilbug_operator_comic_pg3a.png" width="50%" height="50%"></img></center>
+
+We can make progress together. 💚
