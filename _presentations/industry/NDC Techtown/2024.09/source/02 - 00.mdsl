@@ -1,0 +1,76 @@
+# Name/Argument Dependent Lookup
+
+
+
+## Namespaces necessitate lookup algorithms
+
+Which `operator+`?
+
+```cpp
+namespace mathlib {
+	struct vec2 {
+		float x;
+		float y;
+		vec2 operator+ (const vec2& right) const;
+	};
+	vec2 operator+ (const vec2& left, float right);
+	vec2 operator+ (float left, const vec2& right);
+}
+
+int main () {
+	mathlib::vec2 v{1.0f, 2.0f};
+	return (int)((v + 3.0f).x); // how do we find this one?
+}
+```
+
+
+## Collects All Functions
+## In Related Places
+
+- Looks in the namespace of the type of each argument (`mathlib` space, global space)
+- In this case, finds all three `operator+` overloads in the namespace `mathlib`
+- Collects both member functions and free functions in the namespace that match the name (`operator+`)
+- Uses types, conversions, order, and more to select the right function
+
+
+
+## But... None of that in C?
+
+- No namespaces or modules: everything is at file/global scope
+- No member functions, just regular free functions
+
+
+
+## Not A Problem For C
+
+```cpp
+typedef struct ml_vec2 {
+	float x;
+	float y;
+} ml_vec2;
+
+ml_vec2 operator+ (const ml_vec2& left, const ml_vec2& right);
+ml_vec2 operator+ (const ml_vec2& left, float right);
+ml_vec2 operator+ (float left, const ml_vec2& right);
+
+int main () {
+	ml_vec2 v{1.0f, 2.0f};
+	return (int)((v + 3.0f).x); // all operators in scope!
+}
+```
+
+
+## This Gets Us To Jacob Navia's proposal (mostly)
+
+- Still has references in it
+- Still has to pick between 3 similarly-named `operator` functions
+
+
+## The Systems Underlying
+## C++ Operator Overloading
+
+- 🎯 ~~Name/Argument-Dependent Lookup~~
+- ⌖ Overload Resolution
+- ⌖ Implicit Conversions
+- ⌖ Destructors & Resource Acquisition Is Initialization (RAII)
+- ⌖ References

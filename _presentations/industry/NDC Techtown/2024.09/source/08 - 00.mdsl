@@ -1,29 +1,48 @@
-# And That's A Full Design!
+# ✨ Thank You ✨
 
 
 
-## Light on Some Details
+# Giving Thanks
 
-- Obvious Restrictions are necessary!
-- Cannot write `_Operator(+, int, int, wrapping_add_i_i);`
-	- must have one user-defined type
-	- pointers count as built-in types (no overriding pointer operations!)
-- Not exploring special scoping we gain from separated operator/function design
+🏆 The wonderful individual patrons and sponsors! 🏆
 
 
+### Thanks: NEN
 
-## But We Solved The Core Tension
+[NEN - Netherlands helped onboard me for Standards Work for the C Committee](https://www.nen.nl/en/)
 
-And that means...
-
-<center><img src="source/img/lilwilbug_operator_comic_pg1.png" width="50%" height="50%"></img></center>
-
+[![NEN About Page Website](source/img/NEN.png)](https://www.nen.nl/en/)
 
 
-<center><img src="source/img/lilwilbug_operator_comic_pg2a.png" width="60%" height="60%"></img></center>
+### Thanks: Media
+
+- [KIING KIISMET for the lovely art pieces: https://kiingkiismet.com/](https://kiingkiismet.com/)
+- [lilwilbug / Bugurri for additional art pieces: https://twitter.com/lilwilbug](https://twitter.com/lilwilbug)
+- [Background photo by Alex Andrews: https://www.pexels.com/photo/three-black-handset-toys-821754/](https://www.pexels.com/photo/three-black-handset-toys-821754/)
+- [Cendyne the Naga! https://cendyne.dev](https://cendyne.dev)
+- [Bird! https://bird.style](https://bird.style)
+
+# We Need Your Help
+
+Support a vision for a better C and C++: [here - https://thephd.dev/support/](https://thephd.dev/support/)
+
+
+### Contracting & Consulting
+
+<img src="source/img/soasis.png" alt="Shepherd's Oasis" width="250px" height="250px" style="border: 0; background: none; box-shadow : none;"/>
+<br/>
+
+Send an e-mail to [inquiries@soasis.org](mailto:inquiries@soasis.org),  
+or visit the [website!](https://soasis.org/)
+
+- System profiling, hardening and testing, performance;
+- Programming language design and implementation;
+- Compiler augmentation and implementations;
+- "the text people", Scripting on small devices, and more!
 
 
 
-<center><img src="source/img/lilwilbug_operator_comic_pg3a.png" width="50%" height="50%"></img></center>
+### Questions?
 
-We can make progress together. 💚
+<img src="source/img/soasis.png" alt="Shepherd's Oasis" width="300px" height="300px" style="border: 0; background: none; box-shadow : none;"/>
+<br/>

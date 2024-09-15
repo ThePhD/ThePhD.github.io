@@ -1,75 +1,149 @@
-# Implicit Conversions
+# Destructors
+## & Resource Acquisition Is Initialization (RAII)
 
 
 
-## Literal Idea from The Gaping Abyss
+## Brief Overview
 
-> “Implicit conversions are the root of all evil (or most of it) in C++ programming.”
-> 
-> — [Jason "@lefticus" Turner, 2022](https://twitter.com/lefticus/status/1578593373107081216)
-
-> “Haha I added to implicit conversions to the language my team owns and it might be the second or third largest mistake of my career.”
->
-> — [Sean Middleditch, 2022, in reply to Jason Turner](https://twitter.com/seanmiddleditch/status/1578607390949531653)
-
-
-
-## Not Dealing With It!
+- Every object has a constructor and a destructor
+- Whenever something goes out of scope, its destructor is invoked
 
 ```cpp
-ml_vec2 ml_vec2_add (ml_vec2 left, ml_vec2 right);
-ml_vec2 ml_vec2_add_f (ml_vec2 left, float right);
-ml_vec2 ml_f_add_vec2 (float left, ml_vec2 right);
+#include <memory>
 
-_Operator(+, ml_vec2, ml_vec2, ml_vec2_add);
-_Operator(+, ml_vec2, float, ml_vec2_add_f);
-_Operator(+, float, ml_vec2, ml_f_add_vec2);
-```
-
-```cpp
 int main () {
-	ml_vec2 v{1.0f, 2.0f};
-	ml_vec2 v2 = v + 3.0; // ERROR!
-	return (int)v2.x;
+    std::unique_ptr<int> p = std::make_unique<int>(24);
+    // use `p` and `*p` and `p.get()`
+    return 0; // automatically cleans it up
 }
 ```
 
 
 
-## Lookup algorithms
+## Why Does It Matter?
 
-- Based on exact type-match only
-- No match? Error ❌
-- Performs no implicit conversions, narrowing or otherwise
-- Differs from Navia's N3051, which had a system for casting that the paper wanted to employ
-
-
-
-## That's Annoying!
-
-Yes
-
-Sorry!
+Imagine a `bigint` structure in C++ with addition:
 
 ```cpp
-ml_vec2 ml_vec2_add (ml_vec2 left, ml_vec2 right);
-ml_vec2 ml_vec2_add_f (ml_vec2 left, float right);
-ml_vec2 ml_f_add_vec2 (float left, ml_vec2 right);
-ml_vec2 ml_vec2_add_d (ml_vec2 left, double right);
-ml_vec2 ml_d_add_vec2 (double left, ml_vec2 right);
+#include <vector>
 
-_Operator(+, ml_vec2, ml_vec2, ml_vec2_add);
-_Operator(+, ml_vec2, float, ml_vec2_add_f);
-_Operator(+, float, ml_vec2, ml_f_add_vec2);
-_Operator(+, ml_vec2, double, ml_vec2_add_d);
-_Operator(+, double, ml_vec2, ml_d_add_vec2);
+struct bigint {
+	std::vector<unsigned long long> data;
+
+	bigint operator+(const bigint& b) const;
+};
 ```
 
 
 
-## Room for Argument Promotion / Integer Promotion?
+## Try to Implement the same thing in C?
 
-Perhaps
+```cpp
+#include <allocator.h>
+
+struct bigint {
+	allocator_t* alloc;
+	unsigned long long* data;
+};
+
+bigint make_bigint(allocator_t* alloc, unsigned long long initial_value);
+void destroy_bigint(bigint* bi);
+
+bigint bigint_add(bigint left, bigint right);
+_Operator(+, bigint, bigint, bigint_add);
+
+/* … */
+```
+
+
+
+```cpp
+/* … */
+#include <limits.h>
+
+int main () {
+	bigint a = make_bigint(&alloc, 3'000'000'000);
+	bigint b = make_bigint(&alloc, ULLONG_MAX);
+
+	bigint c = a + b + a;
+
+	bigint_destroy(&c);
+	bigint_destroy(&b);
+	bigint_destroy(&a);
+}
+```
+
+
+
+## What's Wrong Here?
+
+```cpp
+/* … */
+#include <limits.h>
+
+int main () {
+	bigint a = make_bigint(&alloc, 3'000'000'000);
+	bigint b = make_bigint(&alloc, ULLONG_MAX);
+
+	bigint c = a + b + a;
+
+	bigint_destroy(&c);
+	bigint_destroy(&b);
+	bigint_destroy(&a);
+}
+```
+
+
+
+## Temporaries!
+
+```cpp
+/* … */
+#include <limits.h>
+
+int main () {
+	bigint a = make_bigint(&alloc, 3'000'000'000);
+	bigint b = make_bigint(&alloc, ULLONG_MAX);
+
+	bigint c = a + b + a; // AAAAH!
+	/* … */
+}
+```
+
+
+
+## Temporaries!
+
+```cpp
+int main () {
+	/* … */
+	bigint __c0 = a + b; // AAAAH!
+	bigint c = __c0 + a;
+
+	bigint_destroy(&c);
+	bigint_destroy(&b);
+	bigint_destroy(&a);
+}
+```
+
+
+
+## Many Ways To Handle This
+
+- Arena/Allocator that marks begin and end of block to collect all allocations
+	- Release at the end
+- Garbage-collection / refcounting-style types in C
+	- Prevalent in larger C codebases like GCC itself
+- None as automatic as C++
+
+
+
+## Hidden Blessing?
+
+- Naturally **en**courages operators for simple, stack-based types
+- Naturally **dis**courages operators for complex, heap-based types
+
+*Maybe* that's a Win-Win for the C Community...!
 
 
 
@@ -79,5 +153,5 @@ Perhaps
 - 🎯 ~~Name/Argument-Dependent Lookup~~
 - 🎯 ~~Overload Resolution~~
 - 🎯 ~~Implicit Conversions~~
-- ⌖ Destructors & Resource Acquisition Is Initialization (RAII)
+- 🎯 ~~Destructors & Resource Acquisition Is Initialization (RAII)~~
 - ⌖ References
