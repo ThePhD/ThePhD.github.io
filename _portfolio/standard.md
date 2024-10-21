@@ -12,15 +12,12 @@ I have quite a few C++ proposals I am working on and percolating through the C++
 
 ### Actively Pursued Evolution Proposals:
 
-C++26   | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/_vendor/future_cxx/papers/d1629.html)
-C++26   | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/_vendor/future_cxx/papers/d1664.html)
+C++29   | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/_vendor/future_cxx/papers/d1629.html)
+C++29   | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/_vendor/future_cxx/papers/d1664.html)
 C++26   | p1967: Preprocessor `embed` - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/_vendor/future_cxx/papers/d1967.html)
-C2y/C3a | n2995: `__supports_literal` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2995.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__supports_literal.html)
 C2y/C3a | n2998: Literal Suffixes for `size_t` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2998.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
 C2y/C3a | n3199: Improved `__attribute__((cleanup))` Through `defer` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3199.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20__attribute__((cleanup))%20Through%20defer.html)
-C2y/C3a | n3265: Restartable Functions for Efficient Character Conversions | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3265.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
 C2y/C3a | n3329: Transparent Aliases | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3329.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Aliases.html)
-C2y/C3a | n3330: More Modern Bit Utilities | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3330.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20More%20Modern%20Bit%20Utilities.html)
 C2y/C3a | n3331: `_Generic` Realignment and Improvement | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3331.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Generic%20Realignment%20and%20Improvement.html)
 C2y/C3a | n3332: `_Record` types | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3332.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Record%20types.html)
 C2y/C3a | n3333: Integer Constant Expression Initialized `const` Integer Declarations are Implicitly `constexpr` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3333.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Initialized%20const%20Integer%20Declarations.html)
@@ -60,6 +57,8 @@ C23   | n3017: Preprocessor `embed` - Binary Resource Inclusion | [Published](ht
 C23   | n3022: Modern Bit Utilities (Most Components) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3022.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Modern%20Bit%20Utilities.html)
 C23   | n3029: Improved Normal Enumerations | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3029.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Improved%20Normal%20Enumerations.html)
 C23   | n3030: Enhanced Enumerations | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3030.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Enhanced%20Enumerations.html)
+C2y   | n3330: More Modern Bit Utilities | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3330.htm) | [Accepted, C2y!](/_vendor/future_cxx/papers/C%20-%20More%20Modern%20Bit%20Utilities.html)
+C2y   | n3265: Restartable Functions for Efficient Character Conversions | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3265.htm) | [Accepted, C2y!](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
 
 
 ### Being Reworked from Feedback:
@@ -84,6 +83,7 @@ These proposals are dead and will not be picked up again.
 C++ | p1175: A simple and practical optional reference for C++ | [Published](https://wg21.link/p1175) | [Latest Draft](/_vendor/future_cxx/papers/d1175.html)
 C++ | p1130: Module Resource Requirement Propagation | [Published](https://wg21.link/p1130) | [Latest Draft](https://thephd.dev/_vendor/future_cxx/papers/d1130.html)
 C   | n3198: Unwinding | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3198.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Unwinding.html)
+C   | n2995: `__supports_literal` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2995.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__supports_literal.html)
 
 
 ### Cannot Pursue
