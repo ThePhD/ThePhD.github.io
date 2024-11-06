@@ -8,7 +8,7 @@ tags: [C, C standard, 📜]
 excerpt_separator: <!--more-->
 ---
 
-New in C2y is an operator that does something people have been asking us for, for decades:<!--more--> something that computes the size in elements (NOT bytes) of an array-like thing. This is a [great addition and came from the efforts of Alejandro Colamar in N3369](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3369.pdf), and was voted into C2y during the recently-finished Minneapolis, MN, USA 2024 standardization meeting. But, there's been some questions about whether we chose the right name or not, and rather than spend an endless amount of Committee time bikeshedding and arguing about this, I wanted to put this question to you, the user, with a survey! (Link to the survey at the bottom of the article.)
+New in C2y is an operator that does something people have been asking us for, for decades:<!--more--> something that computes the size in elements (NOT bytes) of an array-like thing. This is a [great addition and came from the efforts of Alejandro Colomar in N3369](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3369.pdf), and was voted into C2y during the recently-finished Minneapolis, MN, USA 2024 standardization meeting. But, there's been some questions about whether we chose the right name or not, and rather than spend an endless amount of Committee time bikeshedding and arguing about this, I wanted to put this question to you, the user, with a survey! (Link to the survey at the bottom of the article.)
 
 
 
