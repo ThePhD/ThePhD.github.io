@@ -65,11 +65,11 @@ int main () {
 
 
 
-## Underscore and capital letter `_Keyword`; Macro in Header
+## Underscore and capital letter `_Keyword`; Macro in a New Header
 
 This technique is a common, age-old way of providing a feature in C. It avoids clobbering the global user namespace with a new keyword that could be affected by user-defined or standards-defined macros (from e.g. POSIX or that already exist in your headers). A keyword still exists, but it's spelled with an underscore and a capital letter to prevent any failures. The user-friendly, lowercase name is only added through a new macro in a new header, so as to prevent breaking old code. Some notable features that USED to be like this:
 
-- `static_assert`/`_Static_assert` with `<assert.h>`
+- `_Static_assert`/`static_assert` with `<assert.h>`
 - `_Alignof`/`alignof` with `<stdalignof.h>`
 - `_Thread_local`/`thread_local` with `<threads.h>`
 - `_Bool`/`bool` with `<stdbool.h>`
@@ -81,7 +81,7 @@ As an example, it would look like this:
 
 const double barkbark[] = { 0.0, 0.5, 7.0, 14.7, 23.3, 42.0 };
 
-static_assert(keyword_macro(barkbark) == 6, "must have a size of 6");
+_Static_assert(keyword_macro(barkbark) == 6, "must have a size of 6");
 
 int main () {
 	return (int)barkbark[_Keyword(barkbark) - 1];
@@ -209,17 +209,17 @@ int main () {
 
 ## `nelemsof` / `_Nelemsof`
 
-This spelling is an alternative spelling to `nitems()` from BSD (to avoid taking `nitems` from BSD). `nelems` is also seem as the short, cromulent spelling of another suggestion in this list, `nelementsof`. It is a short spelling but lacks spaces between `n` and `elems`, but emphasizes this is the number of elements being counted and not anything else. The `n` is seen as a universal letter for the count of things, and most people who encounter it understand it readily enough. It lacks problems about off-by-one counts by not being associated with strings in any manner, though `n` being a common substitution for "length" might bring this up in a few people's minds.
+This spelling is an alternative spelling to `nitems()` from BSD (to avoid taking `nitems` from BSD). `nelemsof` is also seem as the short, cromulent spelling of another suggestion in this list, `nelementsof`. It is a short spelling but lacks spaces between `n` and `elems`, but emphasizes this is the number of elements being counted and not anything else. The `n` is seen as a universal letter for the count of things, and most people who encounter it understand it readily enough. It lacks problems about off-by-one counts by not being associated with strings in any manner, though `n` being a common substitution for "length" might bring this up in a few people's minds.
 
 As "nelems" and `nelems` are popular in C code, this too would need some management in its usage pattern to make it available everywhere without getting breakage in some existing code.
 
 ```cpp
 const double barkbark[] = { 0.0, 0.5, 7.0, 14.7, 23.3, 42.0 };
 
-static_assert(_Nelems(barkbark) == 6, "must have an length of 6");
+static_assert(_Nelemsof(barkbark) == 6, "must have an length of 6");
 
 int main () {
-	return (int)barkbark[nelems(barkbark) - 1];
+	return (int)barkbark[nelemsof(barkbark) - 1];
 }
 ```
 
@@ -227,7 +227,7 @@ int main () {
 
 ## `nelementsof` / `_Nelementsof`
 
-This is the long spelling of the `nelems` option just prior. It is the preferred name of the author of N3369, Alejandro Colomar, before WG14 worked to get consensus to change the name to `_Lengthof` for C2y. It's a longer name that very clearly states what it is doing, and all of the rationale for `nelems` applies.
+This is the long spelling of the `nelemsof` option just prior. It is the preferred name of the author of N3369, Alejandro Colomar, before WG14 worked to get consensus to change the name to `_Lengthof` for C2y. It's a longer name that very clearly states what it is doing, and all of the rationale for `nelems` applies.
 
 This is one of the only options that has a name so long and unusual that it shows up absolutely nowhere that matters. It can be standardized without fear as `nelements` with no macro version whatsoever, straight up becoming a keyword in the Core C language without any macro/header song-and-dance.
 
@@ -247,7 +247,7 @@ int main () {
 
 During the discussion of the paper in the Minneapolis 2024 meeting, there was a surprising amount of in-person vouching for the name `extentof`. They also envisioned it coming with a form that allowed to pass in which dimension of a multidimensional array you wanted to get the extent of, similar to C++'s `std::extent_v` and `std::rank_v`, as seen [here](https://en.cppreference.com/w/cpp/types/extent) and [here](https://en.cppreference.com/w/cpp/types/rank). Choosing this name comes with the implicit understanding that additional work would be done to furnish a `rankof`/`_Rankof` (or similar spelling) operator for C as well in some fashion to allow for better programmability over multidimensional arrays. This option tends to appeal to Fortran and Mathematically-minded individuals in general conversation, and has a certain appeal among older folks for some reason I have not been able to appropriately pin down in my observations and discussions; whether or not this will hold broadly in the C community is anyone's guess.
 
-As extent is a popular word and `extentof` similarly, this one would likely need a macro version with an underscore capital-letter keyword, but the usage pattern can be introduced gradually and gracefully.
+As "extent" is a popular word and `extentof` similarly, this one would likely need a macro version with an underscore capital-letter keyword, but the usage pattern can be introduced gradually and gracefully.
 
 ```cpp
 const double barkbark[] = { 0.0, 0.5, 7.0, 14.7, 23.3, 42.0 };
