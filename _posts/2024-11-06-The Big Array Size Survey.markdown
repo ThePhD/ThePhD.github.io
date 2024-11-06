@@ -155,7 +155,7 @@ The options in the survey are as below:
 
 ## `lenof` / `_Lenof`
 
-A very short spelling that utilizes the word "length", but shortened in the typical C fashion. Very short and easy to type, and it also fits in with most individual's idea of how this works. It is generally favored amongst C practitioners, and is immediately familiar to Pythonistas. A small point of contention: doing `_Lenof(L"barkbark")` produces the answer "5", not "4" (the null terminator is counted, just as in `sizeof("barkbark")`). This has led some to believe this would result in "confusion" when doing string processing. It's unclear whether this worry is well-founded in any data and not just a nomenclature issue.
+A very short spelling that utilizes the word "length", but shortened in the typical C fashion. Very short and easy to type, and it also fits in with most individual's idea of how this works. It is generally favored amongst C practitioners, and is immediately familiar to Pythonistas. A small point of contention: doing `_Lenof(L"barkbark")` produces the answer "9", not "8" (the null terminator is counted, just as in `sizeof("barkbark")`). This has led some to believe this would result in "confusion" when doing string processing. It's unclear whether this worry is well-founded in any data and not just a nomenclature issue.
 
 As "len" and `lenof` are popular in C code, this one would likely need a underscore-capital letter keyword and a macro to manage its introduction, but it is short.
 
@@ -258,6 +258,7 @@ int main () {
 	return (int)barkbark[extentof(barkbark) - 1];
 }
 ```
+
 
 
 
