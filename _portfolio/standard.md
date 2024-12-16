@@ -15,19 +15,23 @@ I have quite a few C++ proposals I am working on and percolating through the C++
 C++29   | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/_vendor/future_cxx/papers/d1629.html)
 C++29   | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/_vendor/future_cxx/papers/d1664.html)
 C++26   | p1967: Preprocessor `embed` - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/_vendor/future_cxx/papers/d1967.html)
+C++26   | p3540: `#embed` offset Parameter | [Published](https://wg21.link/p3540) | [Latest Draft](/_vendor/future_cxx/papers/d3540.html)
+C++29   | p1040: `std::embed` | [Published](https://wg21.link/p1040) | [Latest Draft](/_vendor/future_cxx/papers/d1040.html)
 C2y/C3a | n2998: Literal Suffixes for `size_t` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2998.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
-C2y/C3a | n3199: Improved `__attribute__((cleanup))` Through `defer` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3199.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20__attribute__((cleanup))%20Through%20defer.html)
 C2y/C3a | n3329: Transparent Aliases | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3329.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Aliases.html)
-C2y/C3a | n3331: `_Generic` Realignment and Improvement | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3331.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Generic%20Realignment%20and%20Improvement.html)
 C2y/C3a | n3332: `_Record` types | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3332.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Record%20types.html)
 C2y/C3a | n3333: Integer Constant Expression Initialized `const` Integer Declarations are Implicitly `constexpr` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3333.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Initialized%20const%20Integer%20Declarations.html)
+C2y/C3a | n3365: Official Function Nomenclature | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3365.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Official%20Function%20Nomenclature.html)
 
+C2y/C3a | cXX10: Variable-Length Array (VLA) Allocator Control | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Variable-Length%20Array%20(VLA)%20Allocation%20Control.html)
+C2y/C3a | nXXXA: `#embed` Synchronization | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed%20Synchronization.html)
+C2y/C3a | nXXXB: Improved `__attribute__((cleanup))` Through `defer` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3199.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20__attribute__((cleanup))%20Through%20defer.html)
+C2y/C3a | nXXXC: `_Generic` Realignment and Improvement | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3331.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Generic%20Realignment%20and%20Improvement.html)
+C2y/C3a | nXXXD: `__self_func` | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__self_func.html)
 C2y/C3a | cXXX3: Comprehensive Statement Expressions | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Comprehensive%20Statement%20Expressions.html)
 C2y/C3a | cXXX4: Functional Functions - A Comprehensive Proposal Overviewing Blocks, Nested Functions, and Lambdas for C | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Functional%20Functions.html)
 C2y/C3a | cXXX5: `-fwrapv` for Everyone - A Measured Approach to `_Operator`s | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20A%20Measured%20Approach%20to%20_Operators.html)
 C2y/C3a | cXXX7: `T[..; …]` — A Non-owning Sized Arrays for Spans and Beyond | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Non-owning%20Sized%20Arrays.html)
-C2y/C3a | cXXX9: Variable-Length Array (VLA) Types for Any Size | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Variable-Length%20Array%20(VLA)%20Types%20for%20Any%20Size.html)
-C2y/C3a | cXX10: Variable-Length Array (VLA) Allocator Control | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Variable-Length%20Array%20(VLA)%20Allocation%20Control.html)
 
 
 ### Approved Proposals:
