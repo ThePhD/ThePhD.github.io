@@ -1,0 +1,41 @@
+# Getting Faster
+
+
+
+### Step 0: B U L K U P ! !
+
+Instead of "one indivisible unit of work" at a time:
+
+- do as many reads as the input allows for (size is given to not over-read)
+- consume all available output space for output writing (size is given to not over-write)
+- use pointers + size ("`span`s", "memory regions") for bulk reading/writing
+
+[C2Y (Next standard after C23) has BOTH single AND bulk reading/writing (N3366)](https://thephd.dev/5-years-later-the-first-big-unicode-win-omg-yay)
+
+
+### Step 1: Use ✨ SIMD ✨
+
+[![](source/img/mcy-blog.jpeg)](https://mcyoung.xyz/2023/11/27/simd-base64/)
+
+[https://mcyoung.xyz/2023/11/27/simd-base64/](https://mcyoung.xyz/2023/11/27/simd-base64/)
+
+
+
+### Step 2: Allow ☢ Unsafety ☢ 
+
+- Allow for skipping error handling (☢ DANGER: MAKE USER ASK ☢)
+- Drop safety checks (input/output size) where possible (☢ DANGER: MAKE USER ASK ☢)
+- Ignore Input Validity (☢ DANGER: MAKE USER ASK ☢)
+
+
+
+# WARNING:
+
+## All of these produce undefined behavior and exploitable code,  
+## so it must be ⚠ OPT-IN! ⚠ 
+
+
+
+### Profit!
+
+![](source/img/utf8_to_utf32_well_formed_fastpath.png)

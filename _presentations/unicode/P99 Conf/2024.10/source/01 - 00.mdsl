@@ -1,0 +1,127 @@
+# The Numbers
+
+(, a subset of)
+
+
+
+### Talk? ⛔️ Reverse Chitchat? ✅
+
+- Start from the numbers, go backwards
+- NOT in depth
+
+
+
+### The Methodology: I
+
+- The latest of each library.
+- Windows 10 Pro machine, general user processes running in the background
+- AMD Ryzen 9 5950X @ 3400 MHz (16 Core Processor), 32.0 GB Physical Memory
+- Clang 15.0.3, with MSVC ABI
+- Entire software stack for every dependency build under default CMake flags
+- Anywhere from 150 to 10million samples per iteration, with mean (average) of 100 iterations
+- Bar graph level → mean of the 100 iterations, with provided standard deviation-based error bars
+
+
+
+### The Methodology: II
+
+- “Unsupported” is different from doing a conversion but then failing, or doing a conversion and producing the wrong output
+- If an error occurs during the benchmark, its graph will instead feature a short text blurb explaining what went wrong
+- The benchmarking code can be read to understand further what happened
+- **In general, unless explicitly noted, the fastest possible API under the constraints was used to produce the data**
+	- “Unbounded” means available space left for writing was not considered
+	- “Assume Valid” means input was not validated before being converted
+	- “Well-Formed” means that the input was well-formed (Error benchmarking isn't done yet.)
+
+
+
+![](source/img/utf16_to_utf8_well_formed.png)
+
+
+
+![](source/img/utf8_to_utf32_well_formed.png)
+
+
+
+
+### ✨ Available Online ✨
+
+[ztd.text documentation: ztdtext.readthedocs.io/en/stable/benchmarks.html](https://ztdtext.readthedocs.io/en/stable/benchmarks.html)
+
+
+
+
+
+# The Slow Path
+
+
+
+### The Basic Process
+
+0. Data at rest
+1. Decode into Universal Format
+2. Re-encode from Universal Format to New Encoding
+3. ✨ Encoded Data! ✨
+
+
+
+### Basic Unicode Loop for EUC-KR to UTF-16
+
+0. Extended Unix Code (EUC-KR) data at rest
+1. Decode **Indivisible Unit of Work** into UTF-32<sup><sup>†</sup></sup>
+	- UTF-32 has maximum bounded output (1 code point per 1 or 2 EUC-KR code units)
+	- Can set max array size: 32 bits / 4 bytes
+2. Re-encode **Indivisible Unit of Work** from UTF-32 to UTF-16
+	- UTF-16 has maximum bounded output (2 code units per UTF-32 code point)
+	- Can set max array size: 32 bits / 4 bytes
+3. Move to next part of EUC-KR data, repeat steps 0-2 until all text processed
+4. ✨ UTF-16 Data! ✨
+
+<sup>†</sup> <sub><sub>- sort of; UTF-32 is a subset of a stream of Unicode Code Points  
+(see: "unicode scalar values")</sub></sub>
+
+
+
+### Not The First Time I've Said This
+
+![](source/img/basic-loop-youtube.jpeg)
+
+
+
+### Slow Path Benefits
+
+- PROPERTY: work can be done incrementally  
+  "one unit of indivisible work" at a time
+- PROPERTY: maximum-bounded output  
+  predictably needs 4, 8, 16, etc. bytes of space
+- PROPERTY: can write bulk operations by just looping over each incremental bit
+
+
+
+### More Slow Path Benefits
+
+- PROPERTY: works on the tiniest, smallest devices
+- PROPERTY: can convert between any two encodings through universal format
+
+![](source/img/intel-8008.jpg)
+
+<sub><sub>(Image: [https://www.historybit.it](https://www.historybit.it))</sub></sub>
+
+
+
+# NOT Universal!
+
+Text encodings:
+
+- take limited input (example worst case: punycode)
+- finite bounded output (example worst case: punycode)
+- BONUS: UTFs are "self-synchronizing"  
+  (cannot accidentally read bad data and interpret it as "good data")
+
+⚠ Does not generalize to e.g. general I/O, images, networks, etc. ⚠
+
+
+
+## UNBELIEVABLY SLOW!
+
+![](source/img/utf8_to_utf32_well_formed_slowpath.png)

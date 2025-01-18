@@ -1,0 +1,150 @@
+# The Big Crime
+
+
+
+
+### How???
+
+![](source/img/utf8_to_utf32_well_formed_crime.png)
+
+
+
+### Customization Point
+
+Overriding a function call to install on our behavior (supported by the library)!
+
+```cpp
+#include <ztd/cuneicode.h>
+
+#include <ztd/idk/assert.hpp>
+
+cnc_mcerr utf8_to_utf32_convert(cnc_conversion* p_conv_desc, size_t* p_output_bytes_size,
+     unsigned char** p_output_bytes, size_t* p_input_bytes_size,
+     const unsigned char** p_input_bytes, cnc_pivot_info* p_info, void* erased_state) {
+	using from_char_t = char;
+	using to_char_t   = char32_t;
+	(void)p_conv_desc;
+	(void)p_info;
+	// …
+```
+
+[API Documentation](https://ztdcuneicode.readthedocs.io/en/latest/api/registry.html)
+
+
+
+```cpp
+	// …
+	if (p_input_bytes == nullptr || p_input_bytes[0] == nullptr) {
+		return cnc_mcerr_ok;
+	}
+	ZTD_ASSERT(p_input_bytes_size != nullptr);
+	size_t& input_bytes_size = p_input_bytes_size[0];
+	if (input_bytes_size < 1u) {
+		return input_bytes_size == 0 ? cnc_mcerr_ok : cnc_mcerr_incomplete_input;
+	}
+```
+
+
+
+```cpp
+	// …
+	size_t input_size                 = input_bytes_size;
+	cnc_mcstate_t* state              = mcstate_get(erased_state);
+	const unsigned char*& input_bytes = p_input_bytes[0];
+	const bool is_counting_only       = p_output_bytes == nullptr || p_output_bytes[0] == nullptr;
+	const bool is_unbounded_write     = p_output_bytes_size == nullptr;
+	const bool assume_valid           = cnc_mcstate_is_assuming_valid(state);
+	// …
+```
+
+
+
+```cpp
+	// …
+	if (!is_counting_only && is_unbounded_write) {
+		if (assume_valid) {
+			size_t output_written = simdutf::convert_valid_utf8_to_utf32(
+			            (const from_char_t*)input_bytes, input_size, (to_char_t*)p_output_bytes[0]
+			);
+			const size_t write_byte_size = output_written * sizeof(to_char_t);
+			input_bytes += input_bytes_size;
+			input_bytes_size = 0;
+			p_output_bytes[0] += write_byte_size;
+			return cnc_mcerr_ok;
+		}
+	}
+	// …
+```
+
+
+
+### ...
+
+```cpp
+			// …
+			size_t output_written = simdutf::convert_valid_utf8_to_utf32(
+			            (const from_char_t*)input_bytes, input_size, (to_char_t*)p_output_bytes[0]
+			);
+			// …
+```
+
+
+
+### `simdutf::convert_valid_utf8_to_utf32`
+
+
+
+
+
+![](source/img/secret_ingredient_crime_stratica.png)
+
+"The secret ingredient is crime."
+
+
+
+### All-Encompassing By Design
+
+By basing the API off of the general-purpose "slowpath" design,
+
+And making the API extensible,
+
+And providing a single API I can write against,
+
+
+
+## I CAN CONSUME EVERY OTHER API INSIDE OF MINE
+
+One-stop refactors that change the performance metrics of my ENTIRE application domain  
+with ztd.text and ztd.cuneicode
+
+![](source/img/c_ext.png) ![](source/img/c_refs.png)  
+
+![](source/img/cpp_ext.png) ![](source/img/cpp_refs.png)  
+
+
+
+I used to not be the top of the benchmark.
+
+![](source/img/utf8_to_utf32_well_formed_smol.png)
+
+I am now. :3
+
+
+
+I'm not the top of this benchmark.
+
+![](source/img/utf16_to_utf8_well_formed.png)
+
+
+
+I will be VERY soon. >:3
+
+
+
+
+
+# Good Engineers Code
+
+### Great Engineers **Steal**.
+
+No API Is Safe from me, and…

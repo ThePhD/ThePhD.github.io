@@ -1,0 +1,30 @@
+.avatar {
+	z-index: 1;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+}
+
+div.footer {
+	z-index: 1;
+	font-size: small;
+	font-style: italic;
+	position: absolute;
+	opacity: 0.5;
+	bottom: 0.5em;
+	right: 37%;
+	text-align: center;
+	box-shadow: 2px 2px 2px #111;
+	border-radius: 5px;
+	padding: 10px !important;
+}
+
+div.footer:hover {
+	opacity: 1;
+}
+
+.footnote {
+	position: relative;
+	top: -0.8em;
+	font-size: 55%;
+}
