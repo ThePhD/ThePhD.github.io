@@ -30,7 +30,7 @@ We were making a built-in operator for this, and that built-in operator was acce
 
 - double-evaluation of e.g. getting the size of the 1-d part of a 2-d array `int meow[3][4]; /* ... */ SIZE_KEYWORD(meow[first_idx()])`;
 - macro-trampling of normal user code without warning e.g. `#define array_size(....) /* ... /*` (hope you weren't using the word "array_size" anywhere important!);
-- and, better type safety e.g., `SIZE_KEYWORD(int**)0)` is a legal call given the above definition, and takes significant additional effort to improve type safety beyond the bogstandard basic definition.
+- and, better type safety e.g., `SIZE_KEYWORD((int**)0)` is a legal call given the above definition, and takes significant additional effort to improve type safety beyond the bogstandard basic definition.
 
 Of course, the easier it is to understand the feature (3 bullets in a bulleted list and one code snippet), the more debate perverts crawl out of the woodwork to start getting their Bikeshedding-jollies in on things like the name. The flames of argumentation raged powerfully for an hour or so in the Committee, and the e-mails back and forth on the Committee Reflector were fairly involved. It spawned several spin-off papers trying to ascertain the history of the spelling of size functionality (see Jakub Łukasiewicz [N3402: Words Used for Retrieving Number of Elements in Arrays and Array-like Objects Across Computer Languages](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3402.pdf)), and even before hand had a survey conducted at ARM for it (see Chris Bazley's [N3350: Survey Results for Naming of New `nelementsof()` Operator](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3350.pdf)).
 
@@ -114,9 +114,9 @@ There is a fairly convincing argument that there's a few things the C community 
 
 Here's the results for the three options of:
 
+- lowercase `keyword` with no header;
 - `_Keyword` + `stdkeyword.h` macro;
-- `_Keyword` with no header;
-- and, lowercase `keyword` with no header.
+- and, `_Keyword` with no header.
 
 ![A stacked horizontal bar chart showing the Extreme Like, Strong Like, Mild Like, No Preference, Mild Dislike, Strong Dislike, and Extreme Dislike ratios for each of the presented options for the exposure and delivery mechanism for this array size operator.](/assets/img/2025/01/big_array_size_survey_delivery_preference.png)
 
@@ -182,12 +182,12 @@ The point that C23 -- and perhaps C2y -- may be disruptive enough to justify jus
 
 There was a clear preference among the results out of the following choices:
 
-- `lengthof`/`_Lengthof`;
-- `lenofof`/`_Lenof`;
-- `countof`/`_Countof`;
-- `nelemsof`/`_Nelemsof`;
+- `extentof`/`_Extentof`
 - `nelementsof`/`_Nelementsof`;
-- `extentof`/`_Extentof`;
+- `nelemsof`/`_Nelemsof`;
+- `countof`/`_Countof`;
+- `lengthof`/`_Lengthof`;
+- and, `lenofof`/`_Lenof`.
 
 ![A stacked horizontal bar chart showing the Extreme Like, Strong Like, Mild Like, No Preference, Mild Dislike, Strong Dislike, and Extreme Dislike ratios for each of the presented options for the spelling of this array size operator.](/assets/img/2025/01/big_array_size_survey_spelling_preference.png)
 
