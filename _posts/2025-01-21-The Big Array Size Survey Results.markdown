@@ -211,7 +211,7 @@ And others clung to the strict mathematics / old-person's like of "extent":
 
 > Neither count, size or length do well with multidimensional arrays.  One might justifiably expect `countof((int[4][4]){})` or `lengthof((int[4][4]){})` to be 16 instead of 4.  So while I like countof more, I think extentof is the most unambiguous naming.
 
-But, ultimately, the stacked bar chart shows that not only is `countof` and `_Countof` the most liked, it's also the *least* disliked. It's better on just about every metric insofar as the counted votes are concerned, really. This isn't the say that it would have always been no top, given different spellings. There were a lot of protesting comments, wanting either more options or completely different options entirely:
+But, ultimately, the stacked bar chart shows that not only is `countof` and `_Countof` the most liked, it's also the *least* disliked. It's better on just about every metric insofar as the counted votes are concerned, really. This isn't the say that it would have always been on top, given different spellings. There were a lot of protesting comments, wanting either more options or completely different options entirely:
 
 > nelems() would be better than nelemsof(), to be consistent with nitems().
 
@@ -235,7 +235,7 @@ But, ultimately, the stacked bar chart shows that not only is `countof` and `_Co
 
 > I feel like nof or noof should've been an option
 
-There's alot of ask for `arraycount`/`arraysize` that showed up, but the reason those were culled from the running early (just like `nitems`) is simply because the blast radius was *known* to be enormous; any spelling of that was going to blow up a million people. This was even worse for comments that suggested we take the `of` off of `lenof` or `lengthof` or `countof` to just be `count`, `len`, or `length`; the number of identifiers people would need to goosestep around would be *enormous*. `nelementsof` was the original plan from the paper before the ARM Survey conducted by Bazley swayed Committee opinion. I, personally, expected `lengthof`/`_Lengthof` to win in this wider survey I conducted; I expected ARM's engineering consensus to be the dominant consensus throughout the industry.
+There's a lot of ask for `arraycount`/`arraysize` that showed up, but the reason those were culled from the running early (just like `nitems`) is simply because the blast radius was *known* to be enormous; any spelling of that was going to blow up a million people. This was even worse for comments that suggested we take the `of` off of `lenof` or `lengthof` or `countof` to just be `count`, `len`, or `length`; the number of identifiers people would need to goosestep around would be *enormous*. `nelementsof` was the original plan from the paper before the ARM Survey conducted by Bazley swayed Committee opinion. I, personally, expected `lengthof`/`_Lengthof` to win in this wider survey I conducted; I expected ARM's engineering consensus to be the dominant consensus throughout the industry.
 
 But, that seems not to be the case!
 
@@ -247,7 +247,7 @@ There's not too much to say about this: it's got a lot less responses since it w
 
 ![A stacked horizontal bar chart showing the Extreme Like, Strong Like, Mild Like, No Preference, Mild Dislike, Strong Dislike, and Extreme Dislike ratios for each of the several presented options for exact spelling of this array size operator.](/assets/img/2025/01/big_array_size_survey_exact_spelling_preference.png)
 
-Namely, `countof` as a keyword with no macro or header is the has the least dislike and the most likes. Various options steadily fall off from there. In the specific options, `lengthof` as a keyword with no macro or header comes close, and then from there it's `lengthof`/`countof` as macros in a header, and then various worse options from there. It more or less reinforces the previously points. There's more comments (some funny/irrelevant ones too), but I think this should provide a solid basis for the necessary data.
+Namely, `countof` as a keyword with no macro or header has the least dislike and the most likes. Various options steadily fall off from there. In the specific options, `lengthof` as a keyword with no macro or header comes close, and then from there it's `lengthof`/`countof` as macros in a header, and then various worse options as one continues to look for different combinations. It more or less reinforces the previously points. There's more comments (some funny/irrelevant ones too), but I think this should provide a solid basis for the necessary data.
 
 I expect people to simply keep bikeshedding. Even with all of this data people will still argue for and against things, but at least I can say I *did* get the data for all of this! 💚
 
