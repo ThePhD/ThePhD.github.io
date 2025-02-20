@@ -34,7 +34,7 @@ We were making a built-in operator for this, and that built-in operator was acce
 
 Of course, the easier it is to understand the feature (3 bullets in a bulleted list and one code snippet), the more debate perverts crawl out of the woodwork to start getting their Bikeshedding-jollies in on things like the name. The flames of argumentation raged powerfully for an hour or so in the Committee, and the e-mails back and forth on the Committee Reflector were fairly involved. It spawned several spin-off papers trying to ascertain the history of the spelling of size functionality (see Jakub Łukasiewicz [N3402: Words Used for Retrieving Number of Elements in Arrays and Array-like Objects Across Computer Languages](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3402.pdf)), and even before hand had a survey conducted at ARM for it (see Chris Bazley's [N3350: Survey Results for Naming of New `nelementsof()` Operator](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3350.pdf)).
 
-I had my own opinions about the subject, but rather than wax poetical, I figured I'd follow Chris Bazley's lead and just.... ask everyone. So, [I just went and asked everyone](/the-big-array-size-survey-for-c-results).
+I had my own opinions about the subject, but rather than wax poetical, I figured I'd follow Chris Bazley's lead and just.... ask everyone. So, [I just went and asked everyone](/the-big-array-size-survey-for-c).
 
 
 

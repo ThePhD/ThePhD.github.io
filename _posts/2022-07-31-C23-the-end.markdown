@@ -450,7 +450,6 @@ Still, with the new `<stdbit.h>`, this paper provides:
 
 - Endian macros (`__STDC_ENDIAN_BIG__`, `__STDC_ENDIAN_LITTLE__`, `__STDC_ENDIAN_NATIVE__`)
 - `stdc_popcount`
-- `stdc_bit_width`
 - `stdc_leading_zeroes`/`stdc_leading_ones`/`stdc_trailing_zeros`/`stdc_trailing_ones`
 - `stdc_first_leading_zero`/`stdc_first_leading_one`/`stdc_first_trailing_zero`/`stdc_first_trailing_one`
 - `stdc_has_single_bit`
