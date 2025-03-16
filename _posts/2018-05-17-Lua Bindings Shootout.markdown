@@ -178,3 +178,6 @@ see you later. ♥
 P.S.:
 
 Some future directions for this could include checking memory usage for each runtime as well. There's a whole host of measurements beyond just performance that would be quite important!
+
+{% include anchors.html %}
+

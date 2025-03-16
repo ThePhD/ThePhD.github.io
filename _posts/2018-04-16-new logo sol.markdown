@@ -25,3 +25,6 @@ For posterity, here's the older version:
 ![this older, uglier version](/assets/img/2018-04-16/old sol.png)
 
 It still looks clean, but... well, I really like the newer version!
+
+{% include anchors.html %}
+

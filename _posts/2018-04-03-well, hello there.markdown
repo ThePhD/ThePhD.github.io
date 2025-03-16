@@ -21,3 +21,6 @@ There is so much I have to talk about! And the best part is, writing it down her
 Or nobody, but that would imply I am not popular. I am _totally_ popular. Or at least, I am going to be.
 
 Soon.™
+
+{% include anchors.html %}
+

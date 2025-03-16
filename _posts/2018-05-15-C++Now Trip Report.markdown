@@ -58,3 +58,6 @@ I cannot wait to go to another C++ conference and dive into that kind of atmosph
 Until next time! ♥
 
 <sup><sup><sup><sup>Const West is Const Best!</sup></sup></sup></sup>
+
+{% include anchors.html %}
+

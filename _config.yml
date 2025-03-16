@@ -13,7 +13,7 @@ favicon: assets/favicon.png
 header_text: ♡
 header_feature_image: assets/img/pexels/triangular.jpeg
 footer_text: >
-  Copyright © 2018-2024 ThePhD -- Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap!</a> <a rel="me" href="https://pony.social/@thephd"></a>
+  Copyright © 2018-2025 ThePhD -- Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap!</a> <a rel="me" href="https://pony.social/@thephd"></a>
 
 # Blog
 excerpt: true                                           # Or "truncate" (first 250 characters), "false" to disable

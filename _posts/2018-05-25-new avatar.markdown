@@ -23,3 +23,6 @@ The hoof hands are a tad hilarious to me, since it begs so many questions of how
 With this, however, I can start settling on some concrete names for my blog and some theming! Since I have a sheep avatar, I might as well go for the whole pasture / shepherd approach. Hopefully nobody takes it in the ultra biblical direction!
 
 The new sheep favicon is from [Twemoji 2.7](https://github.com/twitter/twemoji). I like how it looks!
+
+{% include anchors.html %}
+

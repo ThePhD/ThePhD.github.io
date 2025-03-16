@@ -23,3 +23,6 @@ I also spent a good chunk of time talking about where I belong and inclusivity a
 There is a lot more to the story, but I want to focus more on the technical things rather than divulge an entire autobiography.
 
 Until next time. ♥
+
+{% include anchors.html %}
+

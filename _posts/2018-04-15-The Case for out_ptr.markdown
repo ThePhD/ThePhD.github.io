@@ -134,3 +134,6 @@ So, with the online utilities I can see almost nothing:
 
 
 LTO, constant-expression elision, and inlining are *crazy* powerful optimizations...! They get rid of nearly everything, since it's possible to prove I'm just working with a constant value (and a constant pointer value) that puts the same value into the argument. You can see an older version of the quick bench code live [here](http://quick-bench.com/ulnPxcdWyInoAlWCiAJTOfa6awM); I didn't update it with the newest benchmark code because it had no effect on the compiler being as smart as it is and just eliding nearly everything. Thusly, we have to stick with the version where we can compile multiple things or it becomes nearly impossible to measure _just_ the cost of the `out_ptr` abstraction chosen. And that cost is important to see and measure!
+
+{% include anchors.html %}
+

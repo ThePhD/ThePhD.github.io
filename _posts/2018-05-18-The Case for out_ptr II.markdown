@@ -30,3 +30,6 @@ This is going to be a short post because the answer is exactly as anyone would e
 This definitely means that by having the simple `out_ptr` implementation in the standard library, where the smart pointers can safely friend the implementation without leaking its reference to the world, is ideal.
 
 So, it's time to write a paper!
+
+{% include anchors.html %}
+
