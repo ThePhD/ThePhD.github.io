@@ -79,7 +79,7 @@ Thankfully, no. This is something that has been cooked up for a long time by exi
 - `__try`/`__finally`, where the `__finally` block is invoked on the exit/finish of the `__try` block (MSVC);
 - and, various different library hacks, such as [this high-quality defer library](https://gitlab.inria.fr/gustedt/defer) and this other [library-based library hack](https://github.com/moon-chilled/Defer).
 
-It has a lot of work and understanding behind it, and a ton of existing practice. Variations of it exist in Apple's MacOS SDK, the C parts of Swift, the Linux Kernel, GTK's `g_autoptr` (and qemu's `Lockable`), and so much more. This, of course, begs the question: if this has so much existing implementations in various styles, and so many years of experience, why is this going into a Technical Specification (or just "TS") rather than directly into the C standard? Well, honestly, there's 2 reasons.
+It has a lot of work and understanding behind it, and a ton of existing practice. Variations of it exist in Apple's MacOS SDK, the C parts of Swift, the Linux Kernel, GTK's `g_autoptr` (and qemu's `Lockable`), and so much more. It's also featured in many other languages in exactly the format specified here, including C++ (with RAII), Zig (with `defer`), and Swift (also as `defer`, but also a `guard` feature as well). This, of course, begs the question: if this has so much existing implementations in various styles, and so many years of experience, why is this going into a Technical Specification (or just "TS") rather than directly into the C standard? Well, honestly, there's 2 reasons.
 
 The first reason is that vendors claim they can put it into C ⸺ and make it globally available ⸺ faster than if it's put in the C working draft. Personally, I'm not sure I believe the vendors here; there are many features they have put into C, or even back ported from later versions of C into older versions of C. But, I'm not really at a point in my life that I feel like arguing with the vendors about a boring reskin of feature that's been in C compilers for just under as long as I've been alive, so I'm just going to take their word for it.
 
@@ -232,9 +232,18 @@ func main() {
 }
 ```
 
-This [runs without locking up Godbolt's resource until a SIGKILL](https://godbolt.org/z/e5nrxhb9n). Of course, this is pathological behavior; while it works great for a simple, direct use case ("catch errors and act on them"), it unfortunately results in other problematic behaviors. This is why the version in the defer TS does not cleave strongly to the scope of the function definition (or immediately invoked lambda), but instead directly to the innermost block and its associated scope.
+This [runs without locking up Godbolt's resource until a SIGKILL](https://godbolt.org/z/e5nrxhb9n). Of course, this is pathological behavior; while it works great for a simple, direct use case ("catch errors and act on them"), it unfortunately results in other problematic behaviors. This is why the version in the defer TS does not cleave strongly to the scope of the function definition (or immediately invoked lambda), but instead directly to the innermost block and its associated scope. This also highlights another important quality of `defer` that we need when working with a language like C (and also applies to Zig and Swift).
 
-This is not necessarily perfect, but it does mean that `defer` does not need to "store" its executions up until the end of the function, nor does it need to record predicates or track branches to know which `defer` is taken by the end of some arbitrary outer scope.  In fact, for any `defer` block, the model of behavior for the `defer` TS is pretty much that it takes all the code inside of the `defer` block and dumps it out onto each and every translation-time (compile-time) exit of that scope. This applies to early `return`, `break`ing/`continue`ing out of a loop scope, and also `goto`ing towards a label.
+
+
+## Refer to Variables Directly
+
+Also known as "capture by reference", `defer` blocks refer to variables in their scope directly (e.g., as if `defer` captured pointers to everything that was in scope and then automatically dereferenced those pointers so you could just refer to a previous `foo` directly as `foo`). This is something that people sometimes struggle with, but the choice is extremely obvious for a lot of both safety and usability reasons. Looking back at the examples above, there would be severe problems if a `defer` block would copy the `m` value, so that the `lock`/`unlock` paired calls would actually work on different entities. This would be a different kind of messed up that not even Go attempted, and no language should ever try.
+
+When you have an in-line, scope-based, compile-time feature like `defer` that does not create an "object" and cannot "travel" to different scopes, capturing directly by reference is fine. Referring to variables directly is perfectly fine. You don't need to be careful and worry about captures, or be preemptively careful by capturing things through copying in order to be "safe". `defer` -- unlike RAII objects -- can't go anywhere. You don't need to be explicit about how it gets access to things in the local scope, because `defer` can't *leave* that scope. This is also a secondary consequence of not following in Go's footsteps; by not scoping it to the function, there's no concerns about whether or not the C-style automatic storage duration variables that are in, say, a `for` loop or an `if` statement need to be "lifetime extended" to the whole function's scope.
+
+Direct variable reference and keeping things scope-based does mean that `defer` does not need to "store" its executions up until the end of the function, nor does it need to record predicates or track branches to know which `defer` is taken by the end of some arbitrary outer scope.  In fact, for any `defer` block, the model of behavior for the `defer` TS is pretty much that it takes all the code inside of the `defer` block and dumps it out onto each and every translation-time (compile-time) exit of that scope. This applies to early `return`, `break`ing/`continue`ing out of a loop scope, and also `goto`ing towards a label.
+
 
 
 ## Oh, even `goto`?
@@ -404,11 +413,11 @@ int main (int argc, char* argv[]) {
 			*p_val = 30;
 		}
 	}
-	return val; // returns 0, not 30, even e.g. if argc == 2
+	return val; // returns 0, not 30, even if argc is e.g. 2
 }
 ```
 
-But I value much more highly compatibility with existing practice (both `__try`/`__finally` and `__attribute__((cleanup(…))))`), compatibility with C++ destructors, and avoiding the absolute security nightmare. If someone wants to evaluate the `return` expression but still modify the value, they can write a paper or submit feedback to implementations that they want `defer { if (whatever) { return ...; } }` to be a thing. That way, such a behavior is formalized. And, again, even if I don't personally want to write code like this or see code like this, there's still a detectable, tangible, completely well-defined behavior for what happens if a `return` is evaluated in a `defer`. This is also not nearly as complex as e.g. Go's `defer`, because the `defer` TS uses a translation-time scoped `defer`.
+But I value much more highly compatibility with existing practice (both `__try`/`__finally` and `__attribute__((cleanup(…))))`), compatibility with C++ destructors, and avoiding the absolute security nightmare. If someone wants to evaluate the `return` expression but still modify the value, they can write a paper or submit feedback to implementations that they want `defer { if (whatever) { return ...; } }` to be a thing. That way, such a behavior is formalized. And, again, even if I don't personally want to write code like this or see code like this, there's still a detectable, tangible, completely well-defined behavior for what happens if a `return` is evaluated in a `defer`. This is also not nearly as complex as e.g. Go's `defer`, because the `defer` TS uses a translation-time scoped `defer`.
 
 It won't result in "dynamically-determined and executed `defer` causes spooky action at a distance". One would still need to be careful about having nested `defer`s that also overwrite the return, or subsequent `defer`s that attempt to change the `return` value. (One would also have to contend that every `defer`-nested `return` would need to have its expression evaluated, and potentially discarded, sans optimization to stop it.) Given needing to answer all of these questions, though, it is still icky and I'm glad we don't have to go through with `return` (or `goto` or `break` or `continue`) within `defer` statements.
 
@@ -655,6 +664,7 @@ h_err *h_build_plugins(const char *rootdir, h_build_outfiles outfiles,
 ```
 
 This works too, and one would argue that Yodaiken has done the same as `defer` but without the new feature or a TS or any shenanigans. But there's a critical part of Yodaiken's argument where his premise falls apart in the example code provided: refactoring. While he states that in "serious" code he would change this to be a single exit, the example code provided is just one that replaces all of the `defer` or manual `free`s of the original to instead be `freeall`. This was not unanticipated by the proposal he linked to, which not only discusses `defer` in terms of code savings, but also in terms of **vulnerability prevention**. And it is exactly that which Yodaiken has fallen into, much like his peers and predecessors who work on large software like the Linux Kernel.
+
 
 
 ## CVE-2021-3744, and the Truth About Programmers
