@@ -85,7 +85,7 @@ The first reason is that vendors claim they can put it into C ⸺ and make it gl
 
 The second, more unfortunate, reason is that `defer` was proposed before I got my hands on it. It was not in a good shape and ready for standardization, and the ideas about what `defer` should be were somewhat all over the place. Which is fair, because many of the initial papers were exploratory: the problem was that when we had to cut a C23 release, there was a (minor) panic about new features and there was a lot of concentrated effort to try and slim `defer` down into something ready to go. Going from the wishy-washy status of before that wasn't grounded in existing practice to something material caused the Committee to reject the idea, and state that if it came back it should come back as a TS.
 
-I could argue that this is not fair, because that vote was based off older version of the paper that was not ready and was subject to C23 pressures. The older papers were discussing various ideas like whether to capture variables by value at the point of the `defer` statement (catastrophic) or whether `defer` should be stapled to a higher scope / function scope like Go (also catastrophic), and whether writing a `for` loop would accurate a (potentially infinite) amount of extra space and allocations to store variables and other data that would be needed to run at the end of the scope (yikes!). None of those shenanigans apply anymore, but we still have to go to a TS, even though it's a mirror-image of how existing practice works (in fact, *less* powerful than existing practice). Somewhat recently, we took new polls about whether it should go in a TS or whether it should go directly into the IS (International Standard; the working draft basically). There was support and consensus for both, but *more* consensus for a TS.
+I could argue that this is not fair, because that vote was based off older version of the paper that was not ready and was subject to C23 pressures. The older papers were discussing various ideas like whether to capture variables by value at the point of the `defer` statement (catastrophic) or whether `defer` should be stapled to a higher scope / function scope like Go (also catastrophic), and whether writing a `for` loop would accumulate a (potentially infinite) amount of extra space and allocations to store variables and other data that would be needed to run at the end of the scope (yikes!). None of those shenanigans apply anymore, but we still have to go to a TS, even though it's a mirror-image of how existing practice works (in fact, *less* powerful than existing practice). Somewhat recently, we took new polls about whether it should go in a TS or whether it should go directly into the IS (International Standard; the working draft basically). There was support and consensus for both, but *more* consensus for a TS.
 
 It's not really worth fighting about, though, so into a `defer` TS it goes.
 
@@ -665,11 +665,13 @@ h_err *h_build_plugins(const char *rootdir, h_build_outfiles outfiles,
 
 This works too, and one would argue that Yodaiken has done the same as `defer` but without the new feature or a TS or any shenanigans. But there's a critical part of Yodaiken's argument where his premise falls apart in the example code provided: refactoring. While he states that in "serious" code he would change this to be a single exit, the example code provided is just one that replaces all of the `defer` or manual `free`s of the original to instead be `freeall`. This was not unanticipated by the proposal he linked to, which not only discusses `defer` in terms of code savings, but also in terms of **vulnerability prevention**. And it is exactly that which Yodaiken has fallen into, much like his peers and predecessors who work on large software like the Linux Kernel.
 
+However, one should note that Yodaiken's changes here actually don't account for everything. Inside of the loop, it's not just `freeall` on error: users need to actually free `x.dirpath`, `x.outdirmisc`, and `x.outdirphp` every single loop. `freeall` doesn't account for that, so this is actually a *downgrade* over the `defer` version (which fixed these problems). It also didn't pull from the correct `namelist` (it should be `x.namelist`), but we can just chock that up to a quick blog post from 2 years ago trying to fix some typos.
+
 
 
 ## CVE-2021-3744, and the Truth About Programmers
 
-The problem, that Yodaiken misses in his example code rewrite and his advice to developers, is the same one that the programmers [responsible for CVE-2021-3744](https://nvd.nist.gov/vuln/detail/CVE-2021-3744). You see, much like Yodaiken's rewrite of the code, the function in question here had an object. That object's name was `tag`. And just like Yodaiken's rewrite, it had a function call like `freeall` that was meant to be called at the exit point of the function: `ccp_dm_free`. The problem, of course, is that along one specific error path, in conjunction with other flow control issues, the V5 CCP's `tag` structure was not being properly freed. That's a leak of (potentially sensitive) information; thankfully, at most it could provoke a Denial of Service, per the original reporter's claims.
+The problem, that Yodaiken misses in his example code rewrite and his advice to developers, is the same one that the programmers [responsible for CVE-2021-3744](https://nvd.nist.gov/vuln/detail/CVE-2021-3744). You see, much like Yodaiken's rewrite of the code, the function in question here had an object. That object's name was `tag`. And just like Yoddsaiken's rewrite, it had a function call like `freeall` that was meant to be called at the exit point of the function: `ccp_dm_free`. The problem, of course, is that along one specific error path, in conjunction with other flow control issues, the V5 CCP's `tag` structure was not being properly freed. That's a leak of (potentially sensitive) information; thankfully, at most it coulwad provoke a Denial of Service, per the original reporter's claims.
 
 This is the exact pitfall that Yodaiken's own code is subject to.
 
@@ -691,21 +693,24 @@ struct plugins {
 
 void freeall(struct plugins *x)
 {
-	if (x->pluginsdir)
-		free(x->pluginsdir);
-	if (x->outpluginsdirphp)
-		free(x->outpluginsdirphp);
-	if (x->outpluginsdirmisc)
-		free(x->outpluginsdirmisc);
-	if (x->dirpath)
-		free(x->dirpath);
-	if (x->outdirphp)
-		free(x->outdirphp);
-	if (x->outdirmisc)
-		free(x->outdirmisc);
+	free(x->pluginsdir);
+	free(x->outpluginsdirphp);
+	free(x->outpluginsdirmisc);
+	free(x->dirpath);
+	free(x->outdirphp);
+	free(x->outdirmisc);
 	for (int i = 0; i < x->n; i++) {
 		free(x->namelist[i]);
 	}
+}
+
+void freeloop_all(struct plugins *x) {
+	free(x->dirpath);
+	free(x->outdirphp);
+	free(x->outdirmisc);
+	x->dirpath = nullptr;
+	x->outdirphp = nullptr;
+	x->outdirmisc = nullptr;
 }
 
 h_err *h_build_plugins(const char *rootdir, h_build_outfiles outfiles,
@@ -752,10 +757,11 @@ h_err *h_build_plugins(const char *rootdir, h_build_outfiles outfiles,
 		return h_err_from_errno(errno, x.namelist);
 	}
 	for (int i = 0; i < n; ++i) {
-		struct dirent *ent = namelist[i];
+		struct dirent *ent = x.namelist[i];
 		if (ent->d_name[0] == '.') {
 			continue;
 		}
+		defer freeloop_all(&x);
 		x.dirpath = h_util_path_join(x.pluginsdir, ent->d_name);
 		if (dirpath == NULL) {
 			return h_err_create(H_ERR_ALLOC, NULL);
@@ -783,9 +789,11 @@ h_err *h_build_plugins(const char *rootdir, h_build_outfiles outfiles,
 }
 ```
 
-As you can see here, we made one ⸺ just one ⸺ change to Yodaiken's code here: we use `defer freeall(&x)` at the very start of the function and delete it everywhere else. With `defer`, we no longer need to add a `freeall(&x)` at every exit point, nor do we need a ladder of `goto`s cleaning up specific things (in the case where the structure didn't exist and we tried to use a single exit point).
+As you can see here, we made three ⸺ just three ⸺ change to Yodaiken's code here: we use `defer freeall(&x)` at the very start of the function and delete it everywhere else. We fix the loop part (again) correctly with `defer freeloop_all(&x);`, which was forgotten in the Yodaiken version. And, to make that possible, we have an additional function of `freeloop_all` and a modified `freeall`, to accomodate this. (The removal of the if checks is not necessary, but it should be noted `free` is one of the very, VERY few functions in the C standard library that's explicitly documented to be a no-op with a null pointer input).
 
-It's not that Yodaiken's change wasn't an improvement over the existing code, it's just that it simply failed to capture the point of the use of `defer`: no matter how you exit from this function now (save by using [runtime control flow](#-what-about-control-flow-outside-of-compilation-time)), there **is** no way to forget to free anything. Nor is there any way to forget to free anything on some specific path. The problems of CVE-2021-3744 ⸺ and the hundreds of CVEs like it ⸺ are not really a plausible issue anymore. It means that the C code you write becomes resistant to problems with later changes or refactors: adding additional checks and exits (as we did compared to the original code in the repository, to cover some cases not covered by the original) means a forgotten `freeall(&x)` doesn't result in a leak.
+With `defer`, we no longer need to add a `freeall(&x)` at every exit point, nor do we need a ladder of `goto`s cleaning up specific things (in the case where the structure didn't exist and we tried to use a single exit point). We also don't accidentally leak loop resources, too.
+
+It's not that Yodaiken's principle of change wasn't an improvement over the existing code (consolidating the `free`s), it's just that it simply failed to capture the point of the use of `defer`: no matter how you exit from this function now (save by using [runtime control flow](#-what-about-control-flow-outside-of-compilation-time)), there **is** no way to forget to free anything. Nor is there any way to forget to free anything on some specific path. The problems of CVE-2021-3744 ⸺ and the hundreds of CVEs like it ⸺ are not really a plausible issue anymore. It means that the C code you write becomes resistant to problems with later changes or refactors: adding additional checks and exits (as we did compared to the original code in the repository, to cover some cases not covered by the original) means a forgotten `freeall(&x)` doesn't result in a leak.
 
 
 
