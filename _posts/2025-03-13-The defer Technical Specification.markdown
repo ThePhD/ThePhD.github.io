@@ -815,7 +815,7 @@ The time is now, before C2Y ships. That's why it's a TS. Whether you gate it beh
 
 
 
-# You Must Not Ne Ignorable.
+# You Must Not Be Ignorable.
 
 With: compiler vendors ⸺ especially the big ones ⸺ getting more and more serious about telling people to *Do It In The Standard Or #$&^! Off* (with some exceptions); pressure being applied to have greater and greater consensus in the standard itself making that bar higher and higher; and, vendors and individuals getting more and more pissed off about changes to C jeopardizing their implementation efforts and what they view as the integrity of the C language, extensions and changes are more at risk now than ever. Please. Please, please, prettiest of pleases.
 
