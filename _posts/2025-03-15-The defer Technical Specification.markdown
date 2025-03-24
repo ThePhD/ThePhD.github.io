@@ -75,7 +75,7 @@ This forms the core of the `defer` feature, and the basis by which we can build,
 
 Thankfully, no. This is something that has been cooked up for a long time by existing implementations in a variety of ways, such as:
 
-- `__attribute__((cleanup(func))) void* some_var;`, where `func` takes the address of `some_var` and gets invoked when `some_var`'s lifetime ends/the scope is finished (Clang, GCC, TCC, and SO many more compilers);
+- `__attribute__((cleanup(func))) void* some_var;`, where `func` takes the address of `some_var` and gets invoked when `some_var`'s lifetime ends/the scope is finished (Clang, GCC, and SO many more compilers);
 - `__try`/`__finally`, where the `__finally` block is invoked on the exit/finish of the `__try` block (MSVC);
 - and, various different library hacks, such as [this high-quality defer library](https://gitlab.inria.fr/gustedt/defer) and this other [library-based library hack](https://github.com/moon-chilled/Defer).
 
