@@ -319,13 +319,13 @@ int main () {
 }
 ```
 
-There's nothing you can do in this situation, except set up a boolean flag, use an `if`/`else` ladder, or write a separate function and then pray you can use `return` to jump out of the nested `for`/`switch` combination. This, of course, doesn't work or scale great with triply-nested loops/`switch`es or quadruply-nested things (albeit by the time you hit quadruple nesting of anything, some folks will tell you that things have gone too far); trying to jump back to the 1st loop from the 3rd loop is an annoying task, and it gets about as thorny as setting up continue/break labels and using `goto`. It's a Really Fun Thing that's been a problem in the language since Forever, and every other language has various solutions for this problem.
+There's nothing you can do in this situation, except set up a boolean flag, use an `if`/`else` ladder, or write a separate function and then pray you can use `return` to jump out of the nested `for`/`switch` combination. This, of course, doesn't work or scale great with triply-nested loops/`switch`es or quadruply-nested things (albeit by the time you hit quadruple nesting of anything, some folks will tell you that things have gone too far); trying to jump back to the 1st loop from the 3rd loop is an annoying task, and it gets thorny. It's a Really Fun Thing that's been a problem in the language since Forever, and every other language has various solutions for this problem.
 
 > HEARTBREAKING: you tried to break out of a for loop inside of a switch statement in dumbass languages like C and C++. Your code fails and everyone laughs at you.
 >
 > ⸻ [Björkus Dorkus, May 25th, 2025](https://pony.social/@thephd/114566483437564975)
 
-While `goto` is, of course, powerful enough to do this if you're interested in setting up labels and forcing yourself to keep them clean, there's a better way to figure this out. And that way is Labeled Loops:
+There's a better way to figure this out. And that way is Labeled Loops:
 
 ```cpp
 extern int n;
@@ -348,9 +348,9 @@ int main () {
 }
 ```
 
-You can `break SOME_LABEL;` or `continue SOME_LABEL;` out of there, and it'll work as you'd expect it to. Most other languages have this functionality, too, and it should help C developers with complicated, nested structures traverse them easily without needing the Heavy Moral, Social, And Technological Weight of a `goto` on their shoulder.
+You can `break SOME_LABEL;` or `continue SOME_LABEL;` out of there, and it'll work as you'd expect it to. Most other languages have this functionality, too, and it should help C developers with complicated, nested structures traverse them easily. It also dispels the heavy Moral, Social, And Technological Weight of a `goto` on Software Engineers soldiers and stay away from the scathing critiques and wary code reviewers that view it with deep suspicion. Though, if you know what you're doing? Well...
 
-![A man eating a pizza with an obviously photoshopped caption which reads: "(RAW GOTO) tastes so good when u ain't got a bitch in ya ear telling you it's (CONSIERED HARMFUL)".](/assets/img/2025/06/raw%20goto.jpg)
+![A man eating a pizza with an obviously photoshop'd caption which reads: "(RAW GOTO) tastes so good when u ain't got a bitch in ya ear telling you it's (CONSIERED HARMFUL)".](/assets/img/2025/06/raw%20goto.jpg)
 
 You can try it in [GCC, right now](https://godbolt.org/z/fKWb3dYMK); others are cooking up implementations in their trunks, too. There's been an (unsuccessful) attempt by [N3377](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3377.pdf) to change the location of the label in the loop after discussion in WG14, so for now it's going to stay a free-ranging label that just happens to be before the `for` or `while` or similar without any intervening statements. That means there is still room for the technological issue if reuse of labels (prevalent in macros in C), but honestly the solution for that should be getting better macro technology or a way to save a token concatenation in a macro so it can be used/reused properly. There's been some ideas around that, but nothing which has taken off (e.g., potentially having `__COUNTER__(IDENTIFIER)` as a way to make a custom incrementing counter per "`IDENTIFIER`" and then allowing to reference it without increment it with something like `__READ_COUNTER__(IDENTIFIER)`). But whether or not such things take off...
 
