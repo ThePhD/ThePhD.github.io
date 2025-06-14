@@ -131,7 +131,7 @@ int main () {
 	// We do not have string decimal because Octal Ruins Everything
 	const char s2[] = "\55"; // byte value 45, for some fucking reason
 	// We do not have string binary because \b is already bell
-	const char s3[] = "\b{00110111}"; // ASCII bell, plus some random crap
+	const char s3[] = "\b{00110111}"; // ASCII backspace, plus some random crap
 #endif
 	const int STOP_DOING_THIS = 067; // CEASE!
 	const char FOR_THE_LOVE_OF_GOD[] = "\067"; // PLEASE!!!
