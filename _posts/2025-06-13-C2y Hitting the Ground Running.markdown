@@ -188,7 +188,7 @@ extern void access_arr(int* arr, int idx);
 
 int main () {
 	const int N = 30;
-	int arr[n] = {};
+	int arr[N] = {};
 	switch (index) {
 	case 0 ... N:
 		access_arr(arr, index); // ahhh damnit!
@@ -209,7 +209,7 @@ extern void access_arr(int* arr, int idx);
 
 int main () {
 	const int N = 30;
-	int arr[n] = {};
+	int arr[N] = {};
 	switch (index) {
 	case 0 ... N-1: // weird spelling...
 		access_arr(arr, index); // but will work.
