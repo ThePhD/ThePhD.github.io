@@ -24,11 +24,12 @@ C2y/C3a | n3486: `__self_func` | [Published](https://www.open-std.org/jtc1/sc22/
 C2y/C3a | n3487: Transparent Aliases | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3487.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Aliases.html)
 C2y/C3a | n3485: Literal Suffixes for `size_t` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3485.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
 C2y/C3a | n3490: `#embed` Synchronization | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3490.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed%20Synchronization.html)
-C2y/C3a | n3554: Thread Attributes | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3554.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Thread%20Attributes%20-%20Implementation%20Extensible%20and%20ABI-Resistant.html)
-C2y/C3a | n3556: _Any_func - A Universal Function Pointer Storage Type | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3556.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Any_func.html)
-C2y/C3a | n3591: printf string size specifiers (and general precision length modifiers) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3591.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20printf%20string%20size%20specifiers.html)
 C2y/C3a | n3600: Integer Constant Expression Initialized `const` Integer Declarations are Implicitly `constexpr` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3443.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Initialized%20const%20Integer%20Declarations.html)
 C2y/C3a | n3601: Additional Half-Open case Range Syntax | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3601.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Additional%20Half-Open%20Case%20Range%20Syntax.html.html)
+C2y/C3a | n3625: _Any_func - A Universal Function Pointer Storage Type | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3625.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Any_func.html)
+C2y/C3a | n3626: printf string size specifiers (and general precision length modifiers) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3626.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20printf%20string%20size%20specifiers.html)
+C2y/C3a | n3627: Thread Attributes | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3627.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Thread%20Attributes%20-%20Implementation%20Extensible%20and%20ABI-Resistant.html)
+
 
 ### Actively Pursued Technical Specifications
 
