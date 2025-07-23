@@ -30,6 +30,8 @@ C2y/C3a | n3625: _Any_func - A Universal Function Pointer Storage Type | [Publis
 C2y/C3a | n3626: printf string size specifiers (and general precision length modifiers) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3626.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20printf%20string%20size%20specifiers.html)
 C2y/C3a | n3627: Thread Attributes | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3627.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Thread%20Attributes%20-%20Implementation%20Extensible%20and%20ABI-Resistant.html)
 
+C2y/C3a | n3657: Function with Data - Closures in C (A Comprehensive Proposal Overviewing Blocks, Nested Functions, and Lambdas) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3657.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Functions%20with%20Data%20-%20Closures%20in%20C.html)
+
 
 ### Actively Pursued Technical Specifications
 
@@ -37,7 +39,6 @@ C2y/C3a | n3589: `defer` Technical Specification | [Published](https://www.open-
 C2y/C3a | n3590: Improved `__attribute__((cleanup))` Through `defer` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3590.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20__attribute__((cleanup))%20Through%20defer.html)
 
 C2y/C3a | cXXX3: Comprehensive Statement Expressions | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Comprehensive%20Statement%20Expressions.html)
-C2y/C3a | cXXX4: Functional Functions - A Comprehensive Proposal Overviewing Blocks, Nested Functions, and Lambdas for C | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Functional%20Functions.html)
 C2y/C3a | cXXX5: `-fwrapv` for Everyone - A Measured Approach to `_Operator`s | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20A%20Measured%20Approach%20to%20_Operators.html)
 C2y/C3a | cXXX7: `T[..; …]` — A Non-owning Sized Arrays for Spans and Beyond | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Non-owning%20Sized%20Arrays.html)
 
