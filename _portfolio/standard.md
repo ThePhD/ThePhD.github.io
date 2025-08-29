@@ -18,18 +18,13 @@ C++29   | p3540: `#embed` offset Parameter | [Published](https://wg21.link/p3540
 C++29   | p1040: `std::embed` | [Published](https://wg21.link/p1040) | [Latest Draft](/_vendor/future_cxx/papers/d1040.html)
 
 C2y/C3a | n3332: `_Record` types | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3332.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Record%20types.html)
-C2y/C3a | n3437: Variable-Length Array (VLA) Allocator Control | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3437.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Variable-Length%20Array%20(VLA)%20Allocation%20Control.html)
-C2y/C3a | n3441: `_Generic` and VLA Realignment and Improvement | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3441.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Generic%20Realignment%20and%20Improvement.html)
-C2y/C3a | n3486: `__self_func` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3486.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__self_func.html)
 C2y/C3a | n3487: Transparent Aliases | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3487.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Aliases.html)
-C2y/C3a | n3485: Literal Suffixes for `size_t` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3485.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
 C2y/C3a | n3490: `#embed` Synchronization | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3490.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed%20Synchronization.html)
 C2y/C3a | n3600: Integer Constant Expression Initialized `const` Integer Declarations are Implicitly `constexpr` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3443.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Initialized%20const%20Integer%20Declarations.html)
 C2y/C3a | n3601: Additional Half-Open case Range Syntax | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3601.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Additional%20Half-Open%20Case%20Range%20Syntax.html.html)
 C2y/C3a | n3625: _Any_func - A Universal Function Pointer Storage Type | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3625.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Any_func.html)
 C2y/C3a | n3626: printf string size specifiers (and general precision length modifiers) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3626.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20printf%20string%20size%20specifiers.html)
 C2y/C3a | n3627: Thread Attributes | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3627.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Thread%20Attributes%20-%20Implementation%20Extensible%20and%20ABI-Resistant.html)
-
 C2y/C3a | n3657: Function with Data - Closures in C (A Comprehensive Proposal Overviewing Blocks, Nested Functions, and Lambdas) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3657.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Functions%20with%20Data%20-%20Closures%20in%20C.html)
 
 
@@ -74,7 +69,7 @@ C23   | n3030: Enhanced Enumerations | [Published](https://www.open-std.org/jtc1
 C2y   | n3330: More Modern Bit Utilities | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3330.htm) | [Accepted, C2y!](/_vendor/future_cxx/papers/C%20-%20More%20Modern%20Bit%20Utilities.html)
 C2y   | n3265: Restartable Functions for Efficient Character Conversions | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3265.htm) | [Accepted, C2y!](/_vendor/future_cxx/papers/C%20-%20Efficient%20Character%20Conversions.html)
 C2y   | n3365: Official Function Nomenclature | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3365.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Official%20Function%20Nomenclature.html)
-C2y.  | n3469: The Big Size Survey | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3469.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20The%20Big%20Size%20Survey.html)
+C2y   | n3469: The Big Size Survey | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3469.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20The%20Big%20Size%20Survey.html)
 
 
 ### Being Reworked from Feedback:
@@ -100,6 +95,10 @@ C++ | p1175: A simple and practical optional reference for C++ | [Published](htt
 C++ | p1130: Module Resource Requirement Propagation | [Published](https://wg21.link/p1130) | [Latest Draft](https://thephd.dev/_vendor/future_cxx/papers/d1130.html)
 C   | n3198: Unwinding | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3198.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Unwinding.html)
 C   | n2995: `__supports_literal` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2995.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__supports_literal.html)
+C   | n3437: Variable-Length Array (VLA) Allocator Control | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3437.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Variable-Length%20Array%20(VLA)%20Allocation%20Control.html)
+C   | n3441: `_Generic` and VLA Realignment and Improvement | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3441.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Generic%20Realignment%20and%20Improvement.html)
+C   | n3485: Literal Suffixes for `size_t` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3485.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Literal%20Suffixes%20for%20size_t.html)
+C   | n3486: `__self_func` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3486.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__self_func.html)
 
 
 ### Cannot Pursue
@@ -107,7 +106,7 @@ C   | n2995: `__supports_literal` | [Published](https://www.open-std.org/jtc1/sc
 These proposals are challenging and may require significant rework or language enhancement. Some have also been superseded by other proposals.
 
 C++ | p0051: `std::overload` | Not Published | [Latest Draft](/_vendor/future_cxx/papers/d0051.html)
-C++ | p1803: packexpr(args, I) -- compile-time friendly pack inspection | [Published](https://wg21.link/p1803) | [Latest Draft](/_vendor/future_cxx/papers/d1803.html)
+C++ | p1803: `packexpr(args, I)` -- compile-time friendly pack inspection | [Published](https://wg21.link/p1803) | [Latest Draft](/_vendor/future_cxx/papers/d1803.html)
 C++ | p1193: Explicitly Specified Returns for (Implicit) Conversions | [Published](https://wg21.link/p1193) | [Latest Draft](/_vendor/future_cxx/papers/d1193.html)
 C++ | p1378: `consteval is_string_literal(T*)` | Not Published | [Latest Draft](/_vendor/future_cxx/papers/d1378.html)
 C++ | p2958: `typeof` and `typeof_unqual` for C++ | [Published](https://wg21.link/p2958) | [Latest Draft](/_vendor/future_cxx/papers/d2958.html)
