@@ -200,7 +200,7 @@ To solve this gaggle of problems, pretty much every semi-modern language (that i
 
 # Not A Big Overview
 
-This article is **NOT** going to talk in-depth about the **design** of all of the alternatives or other languages. We're focused on the actual cost of the extensions and what they mean. A detailed overview of the design tradeoffs, their security implications, and other problems, can be read at the [ISO C Proposal for Functions with Closures here](/future_cxx/papers/C%20-%20Functions%20with%20Data%20-%20Closures%20in%20C.html); it also gets into things like Security Implications, ABI, current implementation impact, and more of the various designs. The discussion in the paper is pretty long and talks about the dozens of aspects of each solution down to both the design aspect and the implementation quirks. We encourage you to dive into that proposal and read it to figure out if there's something more specific you care about insofar as some specific design portion. But, this article is going to be concerned about one thing and one thing only:
+This article is **NOT** going to talk in-depth about the **design** of all of the alternatives or other languages. We're focused on the actual cost of the extensions and what they mean. A detailed overview of the design tradeoffs, their security implications, and other problems, can be read at the [ISO C Proposal for Functions with Closures here](/_vendor/future_cxx/papers/C%20-%20Functions%20with%20Data%20-%20Closures%20in%20C.html); it also gets into things like Security Implications, ABI, current implementation impact, and more of the various designs. The discussion in the paper is pretty long and talks about the dozens of aspects of each solution down to both the design aspect and the implementation quirks. We encourage you to dive into that proposal and read it to figure out if there's something more specific you care about insofar as some specific design portion. But, this article is going to be concerned about one thing and one thing only:
 
 
 
@@ -331,25 +331,25 @@ The two compilers tested are Apple Clang 17 and GCC 15. There are two graph imag
 
 Ta-da!
 
-![](/assets/img/2025/12/appleclang17_closure_linear.png)
+![See the paragraph for a text description of this bar chart image.](/assets/img/2025/12/appleclang17_closure_linear.png)
 
-<sub><sub><sub><a href="/assets/img/2025/12/appleclang17_closure_linear.png.txt">For the vision-impaired, a text description is available.</a></sub></sub></sub>
+<sub><a href="/assets/img/2025/12/appleclang17_closure_linear.png.txt">For the vision-impaired, a text description is available.</a></sub>
 
-![](/assets/img/2025/12/gcc15_closure_linear.png)
+![See the paragraph for a text description of this bar chart image.](/assets/img/2025/12/gcc15_closure_linear.png)
 
-<sub><sub><sub><a href="/assets/img/2025/12/gcc15_closure_linear.png.txt">For the vision-impaired, a text description is available.</a></sub></sub></sub>
+<sub><a href="/assets/img/2025/12/gcc15_closure_linear.png.txt">For the vision-impaired, a text description is available.</a></sub>
 
 
 ... Oh. That looks **awful**.
 
 It turns out that some solutions are so dogwater that it completely screws up our viewing graphs. But, it does let us know that Lambdas used the Rosetta Code style are so unbelievably awful that it is several orders of magnitude more expensive than any other solution presented! One has to wonder what the hell is going on in the code snippet there, but first we need to make the graphs more legible. To do this we're going to be using the (slightly deceptive) **LOGARITHMIC SCALING**. This is a bit deadly to do because it tends to mislead people about how much of a change there is, so please pay attention to the **potential order of magnitude gains and losses** when going from one bar graph to another.
 
-![](/assets/img/2025/12/appleclang17_closure_logarithmic.png)
-<sub><sub><sub><a href="/assets/img/2025/12/appleclang17_closure_logarithmic.png.txt">For the vision-impaired, a text description is available.</a></sub></sub></sub>
+![See the paragraph for a text description of this bar chart image.](/assets/img/2025/12/appleclang17_closure_logarithmic.png)
+<sub><a href="/assets/img/2025/12/appleclang17_closure_logarithmic.png.txt">For the vision-impaired, a text description is available.</a></sub>
 
-![](/assets/img/2025/12/gcc15_closure_logarithmic.png)
+![See the paragraph for a text description of this bar chart image.](/assets/img/2025/12/gcc15_closure_logarithmic.png)
 
-<sub><sub><sub><a href="/assets/img/2025/12/gcc15_closure_logarithmic.png.txt">For the vision-impaired, a text description is available.</a></sub></sub></sub>
+<sub><a href="/assets/img/2025/12/gcc15_closure_logarithmic.png.txt">For the vision-impaired, a text description is available.</a></sub>
 
 There we go. Now we can talk about the various solutions and -- in particular -- why "lambdas" have 4 different entries with such wildly differing performance profiles. First up, let's talk about the clear performance winners.
 
