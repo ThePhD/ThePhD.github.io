@@ -1,0 +1,25 @@
+Title: "Knuth Closure Test - Man or Boy (LOGARITHMIC SCALE)
+(AppleClang 17.0.0.17000404 on arm64)". Description: "A benchmark for determining the runtime of a Wikibooks / Rosetta Code example under many different kinds of languages."
+
+There are 10 groups, and 2 data labels (cpu time, real time) per each group with data. Lower is better. 
+
+- lambda_rosetta is 10th. Described as: "The use of C++-style lambdas in the Man or boy tests".
+  Measures to a mean of "4360684404488.3145" femtoseconds, from 50 multi-iteration samples.
+- cxx03_shared_ptr_rosetta is 9th. Described as: "The use of a std::shared_ptr with a run() function in the Man or boy tests. Does not use operator().".
+  Measures to a mean of "68627925263.8412" femtoseconds, from 50 multi-iteration samples.
+- lambda_std_function is 8th. Described as: "The use of C++-style lambdas in the Man or boy tests. Wraps the lambdas in a std::function.".
+  Measures to a mean of "37912109407.46538" femtoseconds, from 50 multi-iteration samples.
+- apple_blocks is 7th. Described as: "The use of the Apple Blocks extension for the Man or Boy tests.".
+  Measures to a mean of "9376625991.331085" femtoseconds, from 50 multi-iteration samples.
+- normal_functions_rosetta is 6th. Described as: "The use of plain C functions in the Man or Boy tests. Modifies the function arguments list to transfer data.".
+  Measures to a mean of "6592333692.8040285" femtoseconds, from 50 multi-iteration samples.
+- lambda_function_ref is 5th. Described as: "The use of C++-style lambdas in the Man or boy tests. Wraps the lambdas in a std::function_ref.".
+  Measures to a mean of "4932588882.3519945" femtoseconds, from 50 multi-iteration samples.
+- custom_callable_cxx is 4th. Described as: "The use of a custom-written C++ class with operator() in the Man or boy tests.".
+  Measures to a mean of "4589611291.575722" femtoseconds, from 50 multi-iteration samples.
+- lambda is 3rd. Described as: "The use of C++-style lambdas in the Man or boy tests. Uses templates to never erase the type: hard-codes recursion limit.".
+  Measures to a mean of "2680124888.921332" femtoseconds, from 50 multi-iteration samples.
+- lambda_all_lambdas is 2nd. Described as: "The use of C++-style lambdas in the Man or boy tests. Uses templates to never erase the type: hard-codes recursion limit, uses no regular helper functions.".
+  Measures to a mean of "2436220967.874641" femtoseconds, from 50 multi-iteration samples.
+- noop is 1st. Described as: "Measures doing literally nothing (no written expressions/statements in the benchmarking loop). Can be useful for determining potential environment noise.".
+  Measures to a mean of "0.0006341654807329178" femtoseconds, from 50 multi-iteration samples.
