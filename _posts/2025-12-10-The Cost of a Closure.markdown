@@ -211,7 +211,7 @@ In order to measure this cost, we are going to take Knuth's Man-or-Boy test and 
 
 
 
-## Anatomy of a Benhcmark: Raw C
+## Anatomy of a Benchmark: Raw C
 
 Here is the core of the Man-or-Boy test, as implemented in raw C. This implementation[^idk-benchmarks-closures] and all the others are available online for us all to scrutinize and yell at me for messing up, to make sure I'm not slandering your favorite solution for Closures in this space.
 
@@ -376,14 +376,14 @@ static int a(int k, const auto& x1, const auto& x2, const auto& x3, const auto& 
 
 Every `B` is its own unique type and we are not erasing that unique type when using the expression as an initializer to `B`. This means that when we call `a` again with `B` (the `self` in this lambda here using Deduced This, a C++23 feature that cannot be part of the C version of lambdas) which means we need to use `auto` parameters (a shortcut way of writing template parameters) to take it. But, since every parameter is unique, and every `B` is unique, calling this recursively means that, eventually, C++ compilers will actually just completely crash out/toss out-of-memory errors/say we've compile-time recursed too hard, or similar. That's why the compile-time `if constexpr` on the extra, templated `recursion` parameter needs to have some arbitrary limit. Because we know `k` starts at 10 for this test, we just have some bogus limit of "11".
 
-This results in a very spammy recursive chain of function calls, where the actual generated names of these template functions is **far** more complex than `a` and can run the compiler into the ground / cause quite a bit of instantiations if you let `recursion` get to a high enough value. But, once you add the limit, the compiler gets perfect information about this recursive call all the way to every leaf, and thus is able to not only optimize the hell out of it, but refuse to generate the other frivolous code it knows won't be useful.
+This results in a very spammy recursive chain of function calls, where the actual generated names of these template functions are **far** more complex than `a` and can run the compiler into the ground / cause quite a bit of instantiations if you let `recursion` get to a high enough value. But, once you add the limit, the compiler gets perfect information about this recursive call all the way to every leaf, and thus is able to not only optimize the hell out of it, but refuse to generate the other frivolous code it knows won't be useful.
 
 
 ### Lambdas are also Fast, even when Type-Erased
 
 You can observe a slight bump up in performance penalty when a Lambda is erased by a `std::function_ref`. This is a low-level, non-allocating, non-owning, slim "view" type that is analogous to what a language-based wide function pointer type would be in C. From this, it allows us to *guess* how good Lambdas in C would be even if you had to hide them behind a non-unique type.
 
-The performance metrics are about equivalent to if you hand-wrote a C++ class with a custom `operator()` that uses a discriminated union, no matter which compiler gets used to do it. It's obviously not as fast as having access to a direct function call and being able to slurp-inline optimize, but the performance difference is acceptable when you do not want to engage in a large degree of what is called "monomorphisation" of a genric routine or type. And, indeed, outside of macros, C has no way of doing this innately that isn't runtime-based.
+The performance metrics are about equivalent to if you hand-wrote a C++ class with a custom `operator()` that uses a discriminated union, no matter which compiler gets used to do it. It's obviously not as fast as having access to a direct function call and being able to slurp-inline optimize, but the performance difference is acceptable when you do not want to engage in a large degree of what is called "monomorphisation" of a generic routine or type. And, indeed, outside of macros, C has no way of doing this innately that isn't runtime-based.
 
 A very strong contender for a good solution!
 
@@ -392,7 +392,7 @@ A very strong contender for a good solution!
 
 One must wonder, then, why the `std::function` Lambdas and the Rosetta Code Lambdas are either bottom-middle-of-the-road or absolutely-teary-eyed-awful.
 
-Starting off, the `std::function` Lambdas are bad because of exactly that: `std::function`. `std::function` is not a "cheap" closure; it is a potentially-allocating, meaty, owning function abstraction. This means that it's safe to make one and pass it around and store it and call it later; the cost of this is, obviously, that you're allocating (when the type is big enough) for that internal storage. Part of this is alleviated by using `const std::function<int(void)>&` parameters, taking things by reference and only generating a new object when necessary. This prevents copying on every function call. Both the Rosetta Lambdas and regular `std::function` Lambdas code does the by-reference parameters bit, though, so where does the difference come in? It actually has to do with the Captures. Here's how `std::function` Lambdas defines the recursive, self-referential lambda and uses it:
+Starting off, the `std::function` Lambdas are bad because of exactly that: `std::function`. `std::function` is not a "cheap" closure; it is a potentially-allocating, meaty, owning function abstraction. This means that it's safe to make one and pass it around and store it and call it later; the cost of this is, obviously, that you're allocating (when the type is big enough) for that internal storage. Part of this is alleviated by using `const std::function<int(void)>&` parameters, taking things by reference and only generating a new object when necessary. This prevents copying on every function call. Both the Rosetta Lambdas and regular `std::function` Lambdas code do the by-reference parameters bit, though, so where does the difference come in? It actually has to do with the Captures. Here's how `std::function` Lambdas defines the recursive, self-referential lambda and uses it:
 
 ```cpp
 using f_t = std::function<int(void)>;
@@ -433,12 +433,12 @@ You are using the function's stack frame at that precise point in the program as
 
 - A stack that is executable so that the base address used for the trampoline can be run succinctly.
 - A real function frame that exists somewhere in memory to serve as the base address for the trampoline.
-- Real objects in memory backing the names of the captured variables accesses.
+- Real objects in memory backing the names of the captured variables to be accessed.
 
 This all seems like regular consequences, until you tack on the second order affects from the point of optimization.
 
 - A stack that now has both data and instructions all blended into itself.
-- A real function frame, which means no ommission of a frame pointer and no collapsing / inlining of that function frame.
+- A real function frame, which means no omission of a frame pointer and no collapsing / inlining of that function frame.
 - Real objects that all have their address taken that are tied to the function frame, which must be memory-accessible and which the compiler now has a hard time telling if they can simply be exchanged through registers or if the need to **actually** sit somewhere in memory.
 
 In other words: GNU Nested Functions have created the perfect little storm for what might be the best optimizer-murderer. The reason it performs so drastically poorly (worse than even allocating lambdas inside of a `std::function` or C++03-style virtual function calls inside of a bulky, nasty C++ `std::shared_ptr`) by a whole order of magnitude or more is that everything about Nested Functions and their current implementation is basically Optimizer Death. If the compiler can't see through everything -- and the Man-or-Boy test with a non-constant value of `k` and `expected_k` -- GNU Nested Functions deteriorate rapidly. It takes every core optimization technique that we've researched and maximized on in the last 30 years and puts a shotgun to the side of its head once it can't pre-compute `k` and `expected_k`.
@@ -451,7 +451,7 @@ Finally, there is a *minor* performance degredation because our benchmarking sof
 
 ## What about Apple Blocks?
 
-Apple Blocks are not the fastest, but they the best of the C extensions while being the worst of the "fast" solutions. They are not faster than just hacking the `ARG*` into the function signature and using regular normal C function calls, unfortunately, and that's likely due to their shared, heap-ish nature. The saddest part about Apple Blocks is that it works using a Blocks Runtime that is already as optimized as it can possibly be: Clang and Apple both document that whie the Blocks Runtime does manage an Automatic Reference Counted (ARC) Heap of Block pointers, when a Block is first created it will literally have its memory stored on the stack rather than in the heap. In order to move it to the heap, one must call `Block_copy` to trigger the "normal" heap-based shenanigans. We never call `Block_copy`, so this is with as-fast-as-possible variable access and management with few allocations.
+Apple Blocks are not the fastest, but they the best of the C extensions while being the worst of the "fast" solutions. They are not faster than just hacking the `ARG*` into the function signature and using regular normal C function calls, unfortunately, and that's likely due to their shared, heap-ish nature. The saddest part about Apple Blocks is that it works using a Blocks Runtime that is already as optimized as it can possibly be: Clang and Apple both document that while the Blocks Runtime does manage an Automatic Reference Counted (ARC) Heap of Block pointers, when a Block is first created it will literally have its memory stored on the stack rather than in the heap. In order to move it to the heap, one must call `Block_copy` to trigger the "normal" heap-based shenanigans. We never call `Block_copy`, so this is with as-fast-as-possible variable access and management with few allocations.
 
 It's very slightly disappointing that: normal C functions with an `ARG*` blob; a custom C++ class using a discriminated union and `operator()`; any mildly conscientious use of lambdas; and, any other such shenanigans perform better than the very best Apple Blocks has to offer. One has to imagine that all of the ARC management functions made to copy the `int^(void)` "hat-style" function pointers, even if they end up not doing much for the data stored on the stack, impacted the results here. But, this is also somewhat good news: because Apple Block hat pointers are cheaply-copiable entities (they are just pointers to a Block object), it means that even if we copy all of the arguments into the closure every function call, that copying is about as cheap as it can get. Obivously, as regular "Lambdas" and "Lambas (No Function Helpers)" demonstrate, being able to just slurp everything up by address/by reference -- including visible function arguments -- with `[&]` saves us a teensy, tiny bit of time[^apple-blocks-parameters].
 
@@ -480,7 +480,7 @@ static int a(int arg_k, fn_t ^ x1, fn_t ^ x2, fn_t ^ x3, fn_t ^ x4, fn_t ^ x5) {
 }
 ```
 
-(no `__block` on the `b` variable) is actually a huge bug. Apple Blocks, like older C++ Lambdas, cannot technically refer to "itself" inside. You have to refer to the "self" by capturing the variable it set to. For those who use C++ and are familiar with the lambdas over there, it's like making sure you capture the variable you initialize with the lambda by reference while *also* making sure it has a concrete type. It can only be escaped by using `auto` and Deducing This, or some other combination of referential-use. That is:
+(no `__block` on the `b` variable) is actually a huge bug. Apple Blocks, like older C++ Lambdas, cannot technically refer to "itself" inside. You have to refer to the "self" by capturing the variable it is assigned to. For those who use C++ and are familiar with the lambdas over there, it's like making sure you capture the variable you initialize with the lambda by reference while *also* making sure it has a concrete type. It can only be escaped by using `auto` and Deducing This, or some other combination of referential-use. That is:
 
 - `auto x = [&x](int v) { if (v != limit) x(v + 1); return v + 8; }` does not compile, as the type `auto` isn't figured out yet;
 - `std::function_ref<int(int)> x = [&x](int v) { if (v != limit) x(v + 1); return v + 8; }` compiles but due to C++ shenanigans produces a dangling reference to a temporary lambda that dies after the full expression (the initialization);
@@ -493,7 +493,7 @@ The problem with the most recent Apple Blocks snippet just above is that it's th
 
 Notice that there's no `&x` in the lambda initializer's capture list. It's copying an (uninitialized) variable by-value into the lambda. This is what Apple Blocks set into a variable that does not have a `__block` specifier, like in our bad code case with `b`.
 
-All variations of this on all implementations which allow for self-referencing allow this and compile some form of this. You would imagine some implementations would warn about this, but this is leftover nonsense from allowing a variable to refer to itself in its initialization. The obvious reason this happens in C and C++ is because you can create self-referential structures, but unfortunately neither languages provided a safe way to do this generally. C++23's Deducing This does not work inside of regular functions and non-objects, so good luck applying to other places and other extensions. The only extension which does not suffer this problem is GNU Nested Functions, because it creates a function declaration / definition rather than a variable with an initializer. Thus, this code from the benchmarks works:
+All variations of this on all implementations which allow for self-referencing allow this and compile some form of this. You would imagine some implementations would warn about this, but this is leftover nonsense from allowing a variable to refer to itself in its initialization. The obvious reason this happens in C and C++ is because you can create self-referential structures, but unfortunately neither language provided a safe way to do this generally. C++23's Deducing This does not work inside of regular functions and non-objects, so good luck applying it to other places and other extensions. The only extension which does not suffer this problem is GNU Nested Functions, because it creates a function declaration / definition rather than a variable with an initializer. Thus, this code from the benchmarks works:
 
 ```cpp
 inline static int gnu_nested_functions_a(int k, int xl(void), int x2(void), int x3(void), int x4(void), int x5(void)) {
@@ -504,7 +504,7 @@ inline static int gnu_nested_functions_a(int k, int xl(void), int x2(void), int 
 }
 ```
 
-And it has the semantics one would expect, unlike how Blocks, Lambdas, or others with default by-value copying works.
+And it has the semantics one would expect, unlike how Blocks, Lambdas, or others with default by-value copying work.
 
 In the general case, this is what the paper `__self_func` was going to solve[^__self_func], but... that's going to need some time for me to convince WG14 that maybe it IS actually a good idea. We can probably just keep writing the buggy code a few dozen more times for the recursion case and keep leaving it error prone, but I'll try my best to convince them one more time that the above situation is very not-okay.
 
@@ -513,9 +513,9 @@ In the general case, this is what the paper `__self_func` was going to solve[^__
 
 # Thinking It Over
 
-While the Man-or-Boy test isn't exactly the end-all, be-all performance test, due to flexing both (self)-referential data and utilization of local copies with recursion, it is surprisingly suitable for figuring out if a closure design is decent enough in a mid to high-level programming language. It also gives me some confidence that, at the very least, the baseline for performance of statically-known, compile-time understood, non-type erased, callable Closure object will have the best implementation quality and performance tradeoffs for a language like ISO C no matter the compiler implementation.
+While the Man-or-Boy test isn't exactly the end-all, be-all performance test, due to flexing both (self)-referential data and utilization of local copies with recursion, it is surprisingly suitable for figuring out if a closure design is decent enough in a mid to high-level programming language. It also gives me some confidence that, at the very least, the baseline for performance of statically-known, compile-time understood, non type-erased, callable Closure objects will have the best implementation quality and performance tradeoffs for a language like ISO C no matter the compiler implementation.
 
-In the future, at some point, I'll have to write about **why** that is. It's a bit upside-down from the perspective of readers of this blog to **first** address performance and then later write about the design, but it's nice to make sure we're not designing ourselves into a bad performance corner at the offset of this whole adventure.
+In the future, at some point, I'll have to write about **why** that is. It's a bit upside down from the perspective of readers of this blog to **first** address performance and then later write about the design, but it's nice to make sure we're not designing ourselves into a bad performance corner at the outset of this whole adventure.
 
 
 
@@ -531,19 +531,19 @@ typedef int(compute_fn_t)(int);
 int do_computation(int num, compute_fn_t% success_modification);
 ```
 
-A wide function pointer type like this would also be traditionally convertible from a number of already-existing extensions, too, where GNU Nested Functions, Apple Blocks, C++-style Lambdas, and more could create the appropriate wide function pointer type to be cheaply used. Additionally, it also works for FFI: things like Go closures already use GCC's `__builtin_call_with_static_chain` to transport through their Go functions in C. Many other functions from other languages could be cheaply and efficiently bridged with this, without having to come up with hairbrained schemes about where to put a `void* userdata` or some kind of implicit context pointer / implicit environment pointer.
+A wide function pointer type like this would also be traditionally convertible from a number of already existing extensions, too, where GNU Nested Functions, Apple Blocks, C++-style Lambdas, and more could create the appropriate wide function pointer type to be cheaply used. Additionally, it also works for FFI: things like Go closures already use GCC's `__builtin_call_with_static_chain` to transport through their Go functions in C. Many other functions from other languages could be cheaply and efficiently bridged with this, without having to come up with harebrained schemes about where to put a `void* userdata` or some kind of implicit context pointer / implicit environment pointer.
 
 
 
 ## Existing Extensions?
 
-Unfortunately -- except for the borland closure annotation -- there's too many things that are performance-stinky about both GNU Nested Functions and Apple Blocks. It's no wonder GCC is trying to add `-ftrampoline-impl=heap` to the story of GNU Nested Functions; they might be able to tighten up that performance and make it more competitive with Apple Blocks. But, unfortunately, since it is heap-based, there's a real chance that its **maximum** performance ceiling is only as good as Apple Blocks, and **not** as good as a C++-style Lambda.
+Unfortunately -- except for the Borland closure annotation -- there's too many things that are performance-stinky about existing C extensions to this problem. It's no wonder GCC is trying to add `-ftrampoline-impl=heap` to the story of GNU Nested Functions; they might be able to tighten up that performance and make it more competitive with Apple Blocks. But, unfortunately, since it is heap-based, there's a real chance that its **maximum** performance ceiling is only as good as Apple Blocks, and **not** as good as a C++-style Lambda.
 
 Both GNU Nested Functions and Apple Blocks -- as they are implemented -- do not really work well in ISO C. GNU Nested Functions because their base design and most prevalent implementation are performance-awful, but also Apple Blocks because of the copying and indirection runtime of Blocks that manage ARC pointers providing a hard upper limit on how good the performance can actually be in complex cases.
 
 Regular C code, again, performs middle-of-the-road here. It's not the worst of it, but it's not the best at all, which means there's some room beneath how we could go having the C code run. While it's hard to fully trust the Rosetta Code Man-or-Boy code for C as the best, it is a pretty clear example of how a "normal" C developer would do it and how it's not actually able to hit maximum performance for this situation.
 
-I wanted to add a version of regular C code that used a dynamic array with `static`s to transfer data, or a bunch of `thread_local`s, but I could not bring myself to actually care enough to write a complex association scheme from a specific invocation of the recursive function `a` and the slot of dynamic data that represented the closure's data. I'm sure there's schemes for it and I could think of a few, but at that point it's such a violent contortion to get a solution that going that I figured it simply wasn't worth the effort. But, as always,
+I wanted to add a version of regular C code that used a dynamic array with `static`s to transfer data, or a bunch of `thread_local`s, but I could not bring myself to actually care enough to write a complex association scheme from a specific invocation of the recursive function `a` and the slot of dynamic data that represented the closure's data. I'm sure there's schemes for it and I could think of a few, but at that point it's such a violent contortion to get a solution going that I figured it simply wasn't worth the effort. But, as always,
 
 pull requests are welcome. 💚
 
