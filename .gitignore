@@ -11,3 +11,4 @@ Gemfile.lock
 .tweet-cache
 .vscode/spellright.dict
 **/._**
+.ruby-version
