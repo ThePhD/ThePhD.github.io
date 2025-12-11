@@ -69,7 +69,7 @@ and so on, and so forth. This is the core of the problem here. It becomes more p
 
 The solutions to these problems come in 4 major flavors in C and C++ code.
 
-- Just reimplement the offending function to take a userdata pointer so you can pass whatever data you want (typical C solution, e.g. going from `qsort` as the sorting function to BSD's `qsort_r`[^bsd-qsort_r] or Annex K's `qsort_s`[^annex.k-qsort_s]).
+- Just reimplement the offending function to take a userdata pointer so you can pass whatever data you want (typical C solution, e.g. going from `qsort` as the sorting function to BSD's `qsort_r`[^bsd-qsort_r] or Annex K's `qsort_s`[^annex-k-qsort_s]).
 - Use GNU Nested Functions to just Refer To What You Want Anyways.
 - Use Apple Blocks to just Refer To What You Want Anyways.
 - Use C++ Lambdas and some elbow grease to just Refer To What You Want Anyways.
@@ -235,7 +235,7 @@ static int A(ARG* a) {
 // ...
 ```
 
-You will notice that there is a big, fat, ugly `ARG*` parameter hanging around all of these functions. That is because, as stated before, plain ISO C cannot handle passing the data around unless it's part of a function's arguments. Because the actual core of the Man-or-Boy experiment is the ability to refer to specific calues of `k` that exist during the recursive run of the program, we need to actually **modify the function signature** and thereby cheat some of the implicit Man-or-Boy requirements of not passing the value in directly. Here's what `ARG` looks like:
+You will notice that there is a big, fat, ugly `ARG*` parameter hanging around all of these functions. That is because, as stated before, plain ISO C cannot handle passing the data around unless it's part of a function's arguments. Because the actual core of the Man-or-Boy experiment is the ability to refer to specific values of `k` that exist during the recursive run of the program, we need to actually **modify the function signature** and thereby cheat some of the implicit Man-or-Boy requirements of not passing the value in directly. Here's what `ARG` looks like:
 
 ```cpp
 typedef struct arg {
@@ -303,7 +303,7 @@ This allows us to know, for sure, that we're actually measuring something and no
 
 # Methodology
 
-The tests were ran on a dying 13-inch 2020 MacBook Pro M1 that has suffered several toddler spills and two severe falls. It has 16 GB of RAM and is on MacOS 15.7.2 Sequoia at the time the test was taken, using the stock MacOS AppleClang Compiler and the stock `brew install gcc` compiler in order to produce the numbers seen on December 6th, 2025.
+The tests were ran on a dying 13-inch 2020 MacBook Pro M1 that has suffered several toddler spills and two severe falls. It has 16 GB of RAM and is son MacOS 15.7.2 Sequoia at the time the test was taken, using the stock MacOS AppleClang Compiler and the stock `brew install gcc` compiler in order to produce the numbers seen on December 6th, 2025.
 
 There 2 measures being conducted: Real Time and CPU Time. The time is gathered by running a single iteration of the code within the `for` loop anywhere from a couple thousand to hundreds of thousands of times to produce confidence in that run of the benchmark. This is then averaged to produce the first point. The process is repeated 50 times, repeating that many iterations to build further confidence in the measurement. All 50 means are used as the points for the values, and the average of all of those 50 means is then used as the height of a bar in a bar graph.
 
@@ -317,7 +317,7 @@ The bars are presented side-by-side as a horizontal bar chart with 11 categories
 6. `Lambdas (Rosetta Code)`: The code straight out of the C++11 Rosetta Code Lambda section on the Man-or-Boy Rosetta Code implementation.
 7. `Apple Blocks`: Uses Apple Blocks to implement the test, along with the `__block` specifier to refer directly to certain variables on the stack.
 8. `GNU Nested Functions (Rosetta Code)`: The code straight out of the C Rosetta Code section on the Man-or-Boy Rosetta Code implementation.
-9. `GNU Nested Functions`: GNU Nested Functions similar to the Rosetta Code implementation, but with some slight modifications in a hope to potentially alleviate some stack pressure if possible by using regualr helper functions like `f0`, `f1`, and `f_1`.
+9. `GNU Nested Functions`: GNU Nested Functions similar to the Rosetta Code implementation, but with some slight modifications in a hope to potentially alleviate some stack pressure if possible by using regular helper functions like `f0`, `f1`, and `f_1`.
 10. `Custom C++ Class`: A custom-written C++ class using a discriminated union to decide whether its doing a straight function call or attemping to engage in the Man-or-Boy recursion.
 11. `C++03 shared_ptr (Rosetta Code)`: A C++ class using `std::enable_shared_from_this` and `std::shared_ptr` with a virtual function call to invoke the "right" function call during recursion.
 
@@ -377,8 +377,6 @@ static int a(int k, const auto& x1, const auto& x2, const auto& x3, const auto& 
 Every `B` is its own unique type and we are not erasing that unique type when using the expression as an initializer to `B`. This means that when we call `a` again with `B` (the `self` in this lambda here using Deduced This, a C++23 feature that cannot be part of the C version of lambdas) which means we need to use `auto` parameters (a shortcut way of writing template parameters) to take it. But, since every parameter is unique, and every `B` is unique, calling this recursively means that, eventually, C++ compilers will actually just completely crash out/toss out-of-memory errors/say we've compile-time recursed too hard, or similar. That's why the compile-time `if constexpr` on the extra, templated `recursion` parameter needs to have some arbitrary limit. Because we know `k` starts at 10 for this test, we just have some bogus limit of "11".
 
 This results in a very spammy recursive chain of function calls, where the actual generated names of these template functions is **far** more complex than `a` and can run the compiler into the ground / cause quite a bit of instantiations if you let `recursion` get to a high enough value. But, once you add the limit, the compiler gets perfect information about this recursive call all the way to every leaf, and thus is able to not only optimize the hell out of it, but refuse to generate the other frivolous code it knows won't be useful.
-
-The difference between "Lambdas (No Function Helpers)"
 
 
 ### Lambdas are also Fast, even when Type-Erased
@@ -487,7 +485,7 @@ static int a(int arg_k, fn_t ^ x1, fn_t ^ x2, fn_t ^ x3, fn_t ^ x4, fn_t ^ x5) {
 - `auto x = [&x](int v) { if (v != limit) x(v + 1); return v + 8; }` does not compile, as the type `auto` isn't figured out yet;
 - `std::function_ref<int(int)> x = [&x](int v) { if (v != limit) x(v + 1); return v + 8; }` compiles but due to C++ shenanigans produces a dangling reference to a temporary lambda that dies after the full expression (the initialization);
 - `std::function<int(int)> x = [&x](int v) { if (v != limit) x(v + 1); return v + 8; }` compiles and works with no segfaults because `std::function` allocates, and the reference to itself `&x` is just fine.
-- and, finally, `auto x = [](this const auto& self, int v) { if (v != limit) x(v + 1); return v + 8; }` which compiles and works with no segfaults because the invisible `self` parameter is just a reference to the current object.
+- and, finally, `auto x = [](this const auto& self, int v) { if (v != limit) self(v + 1); return v + 8; }` which compiles and works with no segfaults because the invisible `self` parameter is just a reference to the current object.
 
 The problem with the most recent Apple Blocks snippet just above is that it's the equivalent of doing 
 
@@ -523,7 +521,7 @@ In the future, at some point, I'll have to write about **why** that is. It's a b
 
 ## Learned Insights
 
-Surprising nobody, the more information the compiler is allowed to accrue (the Lambda design), the better its ability to make the code fast. What might be slightly more surprising is that a **slim**, **compact** layer of type erasure -- not a bulky set of Virtual Function Calls (C++03 `shared_ptr` Rosetta Code design) -- does not actually cost much at all (Lambdas with `std::function_ref`). This points out something else that's part of the ISO C proposal for Closures (but not formally in its wording): Wide Functin Pointers.
+Surprising nobody, the more information the compiler is allowed to accrue (the Lambda design), the better its ability to make the code fast. What might be slightly more surprising is that a **slim**, **compact** layer of type erasure -- not a bulky set of Virtual Function Calls (C++03 `shared_ptr` Rosetta Code design) -- does not actually cost much at all (Lambdas with `std::function_ref`). This points out something else that's part of the ISO C proposal for Closures (but not formally in its wording): Wide Function Pointers.
 
 The ability to make a thin `{ some_function_type* func; void* context; }` type backed by the compiler in C would be extremely powerful. Martin Uecker has a proposal that has received interest and passing approval in the Committee, but it would be nice to [move it along in a nice direction](/_vendor/future_cxx/papers/C%20-%20Functions%20with%20Data%20-%20Closures%20in%20C.html#appendix-wide.function.pointer). My suggestion is having `%` as a modifier, so it can be used easily since wide function pointers are an extremely prevalent concept. Being able to write something like the following would be very easy and helpful.
 
@@ -554,7 +552,7 @@ pull requests are welcome. 💚
 
 
 [^bsd-qsort_r]: See [https://man.freebsd.org/cgi/man.cgi?query=qsort_r](https://man.freebsd.org/cgi/man.cgi?query=qsort_r).
-[^annex.k-qsort_s]: See [https://en.cppreference.com/w/c/algorithm/qsort](https://en.cppreference.com/w/c/algorithm/qsort).
+[^annex-k-qsort_s]: See [https://en.cppreference.com/w/c/algorithm/qsort](https://en.cppreference.com/w/c/algorithm/qsort).
 [^idk-benchmarks-closures]: See: [https://github.com/soasis/idk/tree/main/benchmarks/closures](https://github.com/soasis/idk/tree/main/benchmarks/closures).
 [^catch2-benchmark]: See [https://github.com/catchorg/Catch2/blob/devel/docs/benchmarks.md](https://github.com/catchorg/Catch2/blob/devel/docs/benchmarks.md). And try it out. It's pretty good, I just haven't gotten off my butt to make the swap to it yet.
 [^google-benchmark]: See [https://github.com/google/benchmark](https://github.com/google/benchmark).
