@@ -1,0 +1,29 @@
+Title: "Knuth Closure Test - Man or Boy  
+(GNU 15.2.0 on Darwin 24.6.0-arm64 at 2025-12-28T04:14:02Z)". Description: "A benchmark for determining the runtime of a Wikibooks / Rosetta Code example under many different kinds of languages."
+
+There are 12 groups, and 2 data labels (cpu time, real time) per each group with data. Lower is better. 
+
+- GNU Nested Functions (Rosetta Code) is 12th. Described as: "The use of the GNU Nested Functions C extension for the Man or Boy tests.".
+  Measures to a mean of "174346.5012464768" nanoseconds, from 150 multi-iteration samples.
+- GNU Nested Functions is 11th. Described as: "The use of the GNU Nested Functions C extension for the Man or Boy tests.".
+  Measures to a mean of "173355.3577476824" nanoseconds, from 150 multi-iteration samples.
+- Lambdas (std::function) is 10th. Described as: "The use of C++-style lambdas in the Man or boy tests. Wraps the lambdas in a std::function.".
+  Measures to a mean of "33090.93237414491" nanoseconds, from 150 multi-iteration samples.
+- Normal Functions (Thread Local) is 9th. Described as: "The use of plain C functions with thread local variables for data transfer in the Man or Boy tests.".
+  Measures to a mean of "5861.828293318605" nanoseconds, from 150 multi-iteration samples.
+- Normal Functions (Static) is 8th. Described as: "The use of plain C functions with static variables for data transfer in the Man or Boy tests.".
+  Measures to a mean of "4782.553861317718" nanoseconds, from 150 multi-iteration samples.
+- Custom C++ Class is 7th. Described as: "The use of a custom-written C++ class with operator() in the Man or boy tests.".
+  Measures to a mean of "2673.161826394454" nanoseconds, from 150 multi-iteration samples.
+- Normal Functions (Rosetta Code) is 6th. Described as: "The use of plain C functions in the Man or Boy tests. Modifies the function arguments list to transfer data.".
+  Measures to a mean of "2653.4177145328886" nanoseconds, from 150 multi-iteration samples.
+- Lambdas (std::function_ref) is 5th. Described as: "The use of C++-style lambdas in the Man or boy tests. Wraps the lambdas in a std::function_ref.".
+  Measures to a mean of "2485.3561158098905" nanoseconds, from 150 multi-iteration samples.
+- Normal Functions is 4th. Described as: "The use of plain C functions in the Man or Boy tests. Modifies the function arguments list to transfer data. Does not have an eval helper like in the Rosetta code functions.".
+  Measures to a mean of "2451.5665492347894" nanoseconds, from 150 multi-iteration samples.
+- Lambdas is 3rd. Described as: "The use of C++-style lambdas in the Man or boy tests. Uses templates to never erase the type: hard-codes recursion limit.".
+  Measures to a mean of "1687.495316989901" nanoseconds, from 150 multi-iteration samples.
+- Lambdas (No Function Helpers) is 2nd. Described as: "The use of C++-style lambdas in the Man or boy tests. Uses templates to never erase the type: hard-codes recursion limit, uses no regular helper functions.".
+  Measures to a mean of "1205.4187708226466" nanoseconds, from 150 multi-iteration samples.
+- noop is 1st. Described as: "Measures doing literally nothing (no written expressions/statements in the benchmarking loop). Can be useful for determining potential environment noise.".
+  Measures to a mean of "6.818771362304688e-10" nanoseconds, from 150 multi-iteration samples.

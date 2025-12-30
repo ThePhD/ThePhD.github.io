@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The Cost Of a Closure in C"
+title: "The Cost of a Closure in C"
 permalink: /the-cost-of-a-closure-in-c-c2y
 feature-img: "/assets/img/2025/12/man-pulling-wallet.jpg"
 thumbnail: "/assets/img/2025/12/man-pulling-wallet.jpg"
