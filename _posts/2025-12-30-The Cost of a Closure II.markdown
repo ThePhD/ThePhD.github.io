@@ -26,7 +26,7 @@ As always, the implementations of my benchmarks are publicly available[^idk-benc
 
 # Experimental Setup
 
-The only thing that changed from the last time we did this was to use 150 repetitions of the whole 100,000+ sample iterations benchmarks rather than just 50 or 100 repetitions. You can find the full, detailed explanation p[at the bottom of this article](#methodology).
+The only thing that changed from the last time we did this was to use 150 repetitions of the whole 100,000+ sample iterations benchmarks rather than just 50 or 100 repetitions. You can find the full, detailed explanation [at the bottom of this article](#methodology).
 
 
 # Plain C - New Categories
@@ -250,7 +250,7 @@ Happy New Year, and until next weird niche performance bit. 💚
 
 The tests were ran on a 13-inch 2020 MacBook Pro M1. It has 16 GB of RAM and is on MacOS 15.7.2 Sequoia at the time the test was taken, using the stock MacOS AppleClang Compiler and the stock brew install gcc compiler in order to produce the numbers seen on December 28th, 2025.
 
-The experimental setup used the Man or Boy test, but with the given k value loaded by calling a function in a DLL / Shared Object. The expected k value that the Man or Boy test is supposed to yield is also loaded from a DLL / Shared Object. This prevents optimizing out all recursion and doing enough ahead-of-time computation to simply collapse the benchmarked code into a constant-time, translation-time calculation. It ensures the benchmark is actually measuring the actual performance characteristics of the technique used, as all of them are computing from the same initial k value and all of them are expected to produce the same expected_k answer.
+The experimental setup used the Man or Boy test, but with the given `k` value loaded by calling a function in a DLL / Shared Object. The expected `k` value that the Man or Boy test is supposed to yield is also loaded from a DLL / Shared Object. This prevents optimizing out all recursion and doing enough ahead-of-time computation to simply collapse the benchmarked code into a constant-time, translation-time calculation. It ensures the benchmark is actually measuring the actual performance characteristics of the technique used, as all of them are computing from the same initial k value and all of them are expected to produce the same `expected_k` answer.
 
 There 2 measures being conducted: Real ("wall clock") Time and CPU Time. The time is gathered by running a single iteration of the code within a for loop. That loop runs anywhere from a couple thousand to hundreds of thousands of times to produce confidence in that run of the benchmark, and each loop run is considered an individual iteration. The iterations are then averaged to produce the first point after there is confidence that the measurement is accurate and the benchmark is warm. The iteration process to produce a single mean was then repeated 150 times. All 150 means are used as the points for the values (shown as transparent dots) on the bar graph, and the average of all of those 150 means is then used as the height of a bar in a bar graph.
 
