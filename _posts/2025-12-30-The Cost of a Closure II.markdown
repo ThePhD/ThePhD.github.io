@@ -191,14 +191,14 @@ The good news is that removing the `int* k` only means we have one level of indi
 
 ## Lambdas Are Still Peak
 
-It is the encapsulation and the preservation of type information without hiding it behind an additional structures that keeps the performance lean. This means that the design of lambdas -- a unique object with its own type that is not immediately hoisted or erased like it is in Apple Blocks, GNU Nested Functions, and other compiler techniques, is actually the **leanest possible implementation**.
+It is the encapsulation and the preservation of type information without hiding it behind an additional structures that keeps the performance lean. This means that the design of lambdas -- a unique object with its own type that is not immediately hoisted or erased like it is in Apple Blocks, GNU Nested Functions, and other compiler techniques -- is actually the **leanest possible implementation**.
 
 The drawback of this that is especially egregious in C, unfortunately, is that unlike C++ there are no templates in C. There's no "fake" recursion parameter we can add to limit an infinity-spiral of self-calls. This means that unique typings -- while an unrestricted boon in C++ -- is actually a bit of a drawback in C! In terms of passing arguments around and returning them, there's no type-generics at compile-time that can help with this.
 
 So either all the code interacting with it has to be macros (EWWWW), OR we need to develop at **least** one layer of indirection so we can prevent things like infinite recursion or realistically handle lots of data types. The much more sadder conclusion is that a programming language like C, unless you drop down to assembly or hand-unroll loops with your own selection of manually-crafted strong types, you will lose out on some degree of performance. This is not normally something anybody would be able to say about C, but it turns out that needing to do type-erasure imposes a cost. If the compiler cannot unroll that cost for any number of reasons, you will end up paying for it in performance. (But you can still get pretty good code size, so that part is nice at least.)
 
 
-## The Next Tier Up: Very Small Amounts of Type Erasure"
+## The Next Tier Up: Very Small Amounts of Type Erasure
 
 While Lambdas are the best and standalone in what they are capable of, they are only the best under C++-ish, template-ish circumstances (like C macro generics). When you have to ditch the templates and the perfect type information, C++-style Lambdas lose a good bit of their competitive edge. Primarily, any amount of lean type erasure adds an non-negotiable impact to performance over the base case, as shown by "Normal Functions", "Custom C++ Class", "Lambdas `std::function_ref`", and "Normal Functions (Statics)".
 
@@ -211,13 +211,13 @@ No surprise that no matter the setup, using the `thread_local` keyword instead o
 
 It goes to show that having what the Closures WIP ISO C proposal asks for both C++-style Lambdas and C-style "Capture Functions" (nested functions that do not have the design, ABI issues, and Implementation Baggage of regular GNU Nested Functions)[^capture-functions] **along with** a Wide Function Pointer type would be better than trying to figure out a magic `static` or magic `thread_local` style of implementation.
 
-We are not sure what to think of the Local Functions and Function Literals proposals[^local-literal-functions], because neither of them try to allow you to access local variables. Which is 90%[^stat-90] of the reason anyone uses Nested Functions to begin with
+We are not sure what to think of the Local Functions and Function Literals proposals[^local-literal-functions], because neither of them try to allow you to access local variables. Which is 90%[^stat-90] of the reason anyone uses Nested Functions to begin with!
 
 
 
 ## What Is Going On With GNU Nested Functions???
 
-Honestly, I do NOT know.
+Honestly, I do NOT know at this point.
 
 It's worth saying that I almost had to cut out GNU Nested Functions because of how god-awfully the were performing in the GCC graphs. It made it exponentially harder to get a good, zoomed-in look at the rest of the entries. While some have talked about standardizing just GNU Nested Functions, I do not think that ISO C could standardize an extension like this in any kind of Good Faith and still call itself a language concerned about low-level code and speed. Its existing implementations are so performance-deleting it's a wonder why the decades-old code generated for it hasn't been improved or touched up. I can only hope that the forthcoming `-ftrampoline-impl=heap` code from GCC puts it more in-line with the "Normal Functions (Static)" or "Normal Functions (Thread Local)" category, but if the performance of the new trampoline is just as awful as the current one I'd consider GNU Nested Functions to be dead-on-arrival for a lot of use cases.
 
@@ -237,7 +237,7 @@ Now that we have thoroughly evaluated the solution space for C, including many o
 - It is unclear if making what is effectively access to the function frame / "environment" through a pointer is an advisable course of action for the future of the C ecosystem.
 - C users writing typical C code will, at some point, suffer some degree of performance loss in complex scenarios due to necessary type erasure to work with complex, compiler-generated closure types. Type-generic macro programming can help here, but the tradeoff for code size versus speed should be considered on whether to use a normal, type-erased interface versus an entirely (macro-)generic set of function calls.
 
-Finally, both `static` and `thread_local` have performance cost, moreso on GCC than on Clang. I'd be interested to run the MSVC numbers too as more than just a quick "this works on the damn compiler" check, but I think these numbers are more than enough to draw general conclusions about.
+Finally, both `static` and `thread_local` have performance cost, moreso on GCC than on Clang. I'd be interested to run the MSVC numbers too as more than just a quick "this works on the damn compiler" check, but I think these numbers are more than enough to draw general conclusions about the viability of the various approaches.
 
 Happy New Year, and until next weird niche performance bit. 💚
 
