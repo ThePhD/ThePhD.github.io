@@ -21,7 +21,7 @@
 ```cpp
 void take_something(void* p);
 
-int main )(int argc, [[maybe_unused]] char* argv[]) {
+int main(int argc, [[maybe_unused]] char* argv[]) {
 	int f () _Capture(argc) {
 		return argc + 1;
 	}
@@ -38,7 +38,7 @@ int main )(int argc, [[maybe_unused]] char* argv[]) {
 ```cpp
 void take_something(void* p);
 
-int main )(int argc, [[maybe_unused]] const char* argv[]) {
+int main(int argc, [[maybe_unused]] const char* argv[]) {
 	int f () _Capture(argc) {
 		return argc + 1;
 	}
@@ -59,7 +59,7 @@ int main )(int argc, [[maybe_unused]] const char* argv[]) {
 ```cpp
 int perform_work(int (work_fn)(void*), void* userdata);
 
-int main )(int argc, [[maybe_unused]] const char* argv[]) {
+int main(int argc, [[maybe_unused]] const char* argv[]) {
 	int f () _Capture(argc) {
 		return argc + 1;
 	}
