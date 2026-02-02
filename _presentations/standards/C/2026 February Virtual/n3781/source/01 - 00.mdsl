@@ -1,0 +1,74 @@
+# Closures have a RICH History in C
+
+
+
+## Four Distinct Existing Practices
+
+- Plain C
+- GNU Nested Functions (GCC-specific, Clang refuses to implement)
+- Apple Blocks (Clang-specific, removed from GCC after NeXT Support died off slowly)
+- Lambdas
+
+
+
+## Four Distinct Existing Practices
+
+- Plain C
+	- `static` data transport subtype
+	- `thread_local` data transport subtype
+	- `T*` (specific)/`void*` (general) user data function parameter modification subtype
+
+
+
+
+## Four Distinct Existing Practices
+
+- GNU Nested Functions (GCC-specific, Clang refuses to implement)
+	- Declaration-based
+	- Trampolines (stack or heap) control behavior
+	- `__builtin_with_static_chain` compatible (but not usually used this way)
+	- By-reference/by-name stack data subtype
+	- Forward-declarable with `auto`
+
+
+
+## Four Distinct Existing Practices
+
+- Apple Blocks (Clang-specific, removed from GCC after NeXT Support died off slowly)
+	- Expression-based, can be used immediately in-line with other function arguments
+	- blocks-rt / Blocks Runtime, Automatic Reference Counted (ARC)-based lifetime control
+	- Manual trampoline creation subtype
+	- By-reference/by-name stack data AND by-value copy stack data subtype
+
+
+
+## 🎖️ Honorable Mention
+
+Borland C's closure function pointer annotation
+
+
+
+## Other Relevant Existing Practice
+
+- C++ Lambdas
+- C++ `struct` + function call operator
+
+
+
+## Shorthand and Longform Definitions / Expressions?
+
+C (GNU) and C++ solutions in this space are only ones to pick a "long form" solution  
+or "short hand" solution but not have both.
+
+- Lua, JavaScript, Haskell/OCaml/most functional languages: syntax for shorthand is same for long form: just sprinkle in an identifier, have both.
+- C++, C (Apple Blocks), Rust, Python, Java, C#, etc.: syntax for shorthand lambdas is different from syntax for long form function definitions, have both.
+- C (GNU Nested Functions): long form definition only.
+
+
+
+## Priamry reason for having both?
+
+#### Small-function-inside-other-function-call is an important usecae  
+(e.g. a call to `sort(...)`)  
+
+(Secondary reason: a second kind of "statement expression")

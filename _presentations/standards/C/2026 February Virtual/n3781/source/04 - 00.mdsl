@@ -1,0 +1,71 @@
+# First Approximation - Performance
+
+
+
+## Not Always The Best !
+
+Captures current implementation strength / weaknesses
+
+but not full potential !
+
+
+
+![](/assets/img/2025/12/manorboy2-gcc15-linear.png)
+
+
+
+![](/assets/img/2025/12/manorboy2-appleclang17-linear.png)
+
+
+
+![](/assets/img/2025/12/manorboy2-gcc15-linear-focused.png)
+
+
+
+![](/assets/img/2025/12/manorboy2-appleclang17-linear-focused.png)
+
+
+
+## Full analysis available at:
+
+- [The Cost of a Closure in C - https://thephd.dev/the-cost-of-a-closure-in-c-c2y](https://thephd.dev/the-cost-of-a-closure-in-c-c2y)  
+- [The Cost of a Closure in C, The Rest - https://thephd.dev/the-cost-of-a-closure-in-c-c2y-followup](https://thephd.dev/the-cost-of-a-closure-in-c-c2y-followup)
+
+
+
+
+## Takeaways I:
+
+- GNU Nested Functions need more work to be viable
+	- Need Wide Function Pointer to save some performance, too
+- Lambda-style design (but not necessarily Lambdas) produce the best throughput/speed and smallest code
+  	- Matches Capture Functions, Gustedt-style and C++-style Lambdas designs
+- Allocation-heavy, type-erased designs contract some implicit, unavoidable overhead in the "best" case
+	- Apple Blocks (Blocks is a runtime, allocates and deallocates the control block even for the simple case)
+- Trampolines are, generally, very bad for performance
+	- `-ftrampoline-impl=heap` from GCC (not yet tested, but still clears `icache`)
+
+
+
+## Takeaways II:
+
+#### ALL SOLUTIONS NEED A WIDE FUNCTION POINTER TYPE
+
+- Lambda with `std::function_ref` approximates "Wide Function Pointer" performance
+- Will be default of C ecosystem, which is pretty good performance ("second place" on the graph)
+
+
+
+## Anything Else?
+
+- Original proposal has Forward Declarations -- not trivial, probably will remove.
+- C++ Lambdas have `mutable` keyword to allow messing with internal value
+- In-general, captures do not allow for storage class specifiers. Maybe we allow that?
+
+
+
+## Committee Questions
+
+1. "We like the direction of N3780 and want to see -- at a much later point -- Capture Functions with Wording."
+2. "We like the direction of N3780 and want to see -- at a much later point -- Lambdas with Wording."
+3. "We encourage further work for C2y/C3a into a Technical Specification." (NOT into the IS.) 

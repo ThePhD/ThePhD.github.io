@@ -1,0 +1,118 @@
+# Current Proposals
+
+
+
+## ISO C Track Record
+
+- Apple Blocks - Blaine Garst & Apple - [n1451](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n1451.pdf), [n1457](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n1457.pdf), final [n2030](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n2030.pdf)
+- Nested Functions & Closure Contexts - Martin Uecker - [n2661](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n2661.pdf), [n3654](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3654.pdf)
+- Lambdas - Jens Gustedt - [n2982](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n2892.pdf), [n2893](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n2893.htm)
+	- [n2924: Type-generic (`auto` parameters)](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n2924.pdf)
+- Function Literals and Local Functions - Thiago Adams - [n3678](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3678.pdf), [n3679](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n3679.pdf)
+- Capture Functions / Gustedt-style Lambdas - JeanHeyd Meneide & Shepherd - [n3780](/_vendor/future_cxx/papers/C%20-%20Functions%20with%20Data%20-%20Closures%20in%20C.html)
+
+
+
+## Design Components
+
+- **Capture By-Name**: can refer to an object directly, as if working with it as an l-value or dereferencing a pointer to that object. Sometimes also called "capture by reference".
+- **Capture By-Value**: can refer to a copy of an object from within the function, at some fixed point in time. The lifetime of the copied object from the capture is tied to the closure rather than the scope it comes from.
+- **Selective Capture**: can pick and choose what to capture and how it gets captured.
+- **Safe to Return Closure**: part of the dynamic lifetime problem, but is there a way to write this closure type such that it is safe to return?
+
+
+
+## Design Components
+
+- **Relocatable to Heap (Lifetime Management)**: if it is possible to extend or otherwise change the lifetime of a closure so that it can last longer, either by copying or relocating the closure.
+- **Usable Directly as Expression**: whether or not the closure can appear as a function argument or something else.
+- **Forward-Declarable**: whether or not the closure can be forward-declared and perhaps used in some ways (e.g., callable as a function but perhaps any related object definition might not be usable).
+- **Immediately Invokable**: whether or not the closure can be immediately invoked, usually without naming it.
+
+
+
+## Design Components
+
+- **Convertible to Function Pointer**: whether or not the closure can be converted to a function pointer of an identical signature to be called.
+- **Convertible to "Wide" Function Type**: whether or not the closure can be converted to a "wide" function pointer type, now or into the future.
+- **Access to Non-Erased Object/Type**: can use and store the closure object without erasing the type or the object first.
+- **Access to Captures through Object/Type**: access the closure’s captures outside of the closure’s invocable body.
+- **Recursion Possible**: can refer to itself in order to create a recursive algorithm in the normal fashion, without needing a special feature like C++'s Deducing This or the proposed `__self_func`.
+
+
+
+![Feature table, part 1](source/img/features-1.png)
+
+
+
+![Feature table, part 2](source/img/features-2.png)
+
+
+
+![Feature table, part 3](source/img/features-3.png)
+
+
+
+## Irreconcilable Differences - Nested Functions
+
+Why not Nested Functions (Uecker, GCC)?
+
+- Lack of control (always by-name, not by-value?)
+- Lifetime issues -- cannot elevate data to higher lifetime
+- Performance issues with existing design (partly solvable?)
+- Locked-in ABI/Source Code (it must down-convert to a function pointer trampoline)
+
+```cpp
+typedef void(fn_t)(void);
+
+fn_t* use_later;
+
+void f (fn_t* f) {
+	use_later = f;
+}
+
+void g (void) {
+	use_later();
+}
+```
+
+
+
+## Irreconcilable Differences - Nested Functions
+
+```cpp
+extern int computed_answer;
+
+int main (int argc, char* argv[]) {
+	{ // New scope
+		int val = argc + 1;
+		void compute (void) {
+			computed_answer = val;
+		}
+		f(compute);
+		// end of scope, end of "compute" and "val" lifetime
+	}
+	g(); // uh oh
+	return computed_answer;
+}
+```
+
+
+
+## Irreconcilable Differences - Apple Blocks
+
+Why not Apple Blocks (Garst, Apple)?
+
+- Type-erased and uses an Reference Counting implementation to boost lifetime
+- Requires a "runtime" -- mandatory overhead as a basic implementation
+- Pre-existing ABI -- locked-in details can prevent growth or change
+
+
+
+## Irreconcilable Differences - Function Literals / Local Functions
+
+Why not Function Literals/Local Functions (Adams, Cake)?
+
+- Does not engage with 90% of code that uses Nested Functions / Apple Blocks (accesses a variable from the local context)
+- Simplicit of proposal comes from making it the user's problem, not providing elegant solution
+- Not useful

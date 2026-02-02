@@ -1,0 +1,342 @@
+# Capture Fucntions
+
+### Or "What is Being Proposed Instead?"
+
+
+
+## Based on GCC with Slight Modification
+
+- Uses familiar function declaration/definition syntax
+- Adds `_Capture(...)` clause to explicitly grab memory
+
+
+
+## `struct`/`union` that is Callable ("Invocable")
+
+- Implementation-defined structure (or union) type that holds all data
+	- `sizeof`, `alignof` capable
+	- Regular object (that can be `memcpy`'d or otherwise manipulated like any other complete object)
+	- Can be passed in and returned in normal way users expect
+
+```cpp
+void take_something(void* p);
+
+int main )(int argc, [[maybe_unused]] char* argv[]) {
+	int f () _Capture(argc) {
+		return argc + 1;
+	}
+	return f();
+}
+```
+
+
+
+## `struct`/`union` that is Callable ("Invocable")
+
+- Address-of operation produces a `void*` (it's an object), not a function pointer
+
+```cpp
+void take_something(void* p);
+
+int main )(int argc, [[maybe_unused]] const char* argv[]) {
+	int f () _Capture(argc) {
+		return argc + 1;
+	}
+	take_something(&f);
+	take_something(f); // constraint violation -- cannot convert {object} to `void*`
+	return f();
+}
+```
+
+
+
+## `struct`/`union` that is Callable ("Invocable")
+
+- Empty capture lists result in a capture-less closure
+	- Implicit conversion to typed function pointer
+	- Useful idiom: object + hand-crafted, in-line trampoline to work with old code
+
+```cpp
+int perform_work(int (work_fn)(void*), void* userdata);
+
+int main )(int argc, [[maybe_unused]] const char* argv[]) {
+	int f () _Capture(argc) {
+		return argc + 1;
+	}
+	int f_jumpoff (void* userdata) _Capture() {
+		typeof(f)* pf = userdata; // pointer to closure type
+		return (*pf)();
+	}
+	return perform_work(f_jumpoff, &f);
+}
+```
+
+
+
+## WEAKNESS: Does Not Work With `qsort`!
+
+- No `void*` userdata with function pointer? No way to pass as pure function pointer
+	- Same problem for the Wide Function Pointers, Apple Blocks, etc. etc.
+- Needs a "trampoline", implicit trampolines (conversion to plain function pointer)
+	- Talked about in [the Appendix §6.3](/_vendor/future_cxx/papers/C%20-%20Functions%20with%20Data%20-%20Closures%20in%20C.html#appendix-make.trampoline)
+	- GCC uses their own stack or heap based trampolines -- comes at a price
+	- Apple Blocks has an explicit function to make a trampoline (and unmake it)
+
+
+
+## Lambdas are Largely the Same
+
+- Lambdas are largely the same as Capture Functions, but they work as expressions
+- Usable for `qsort` purposes (with no captures)
+
+```cpp
+#include <stdlib.h>
+
+int main(int argc, char* argv[]) {
+	int list[] = { 2, 11, 32, 49, 57, 20, 110, 203 };
+	qsort(list, _Countof(list), sizeof(*list),
+		// lambda syntax
+		[]() (const void* untyped_left, const void* untyped_right) {
+			const int* left = untyped_left;
+			const int* right = untyped_right;
+			return *left - *right;
+		}
+	);
+		
+	return list[0]; // return 2;
+}
+```
+
+
+
+## **NEW** Member Access for Captures
+
+```cpp
+#include <stdio.h>
+
+int main () {
+	int x = 30;
+	double y = 5.0;
+	char z = 'a';
+```
+```cpp
+	int cap_fn0 () _Capture(=, &renamed_x = x, &z) {
+		printf("inside cap_fn0 | renamed_x: %d, y: %f, z: %c\n",
+			renamed_x, y, z);
+	}
+		
+	int cap_fn1 () _Capture(&, renamed_y = y, z) {
+		printf("inside cap_fn1 | x: %d, renamed_y: %f, z: %c\n",
+			x, renamed_y, z);
+	}
+	// ...
+```
+
+
+
+## **NEW** Member Access for Captures
+
+```cpp
+	// ...
+	x = 60;
+	y = 10.0;
+	z = 'z';
+
+	cap_fn0();
+	cap_fn1();
+```
+```cpp	
+	printf("\n");
+
+	printf("inside main fn | cap_fn0.renamed_x: %d, cap_fn0.y: %f, cap_fn0.z: %c\n",
+		cap_fn0.renamed_x, cap_fn0.y, cap_fn0.z);
+	printf("inside main fn | cap_fn1.x: %d, cap_fn1.renamed_y: %f, cap_fn1.z: %c\n",
+		cap_fn1.x, cap_fn1.renamed_y, cap_fn1.z);
+
+	return 0;
+}
+```
+
+## **NEW** Member Access for Captures
+
+Prints:
+
+```sh
+inside cap_fn0 | renamed_x: 60, y: 5.0, z: a
+inside cap_fn1 | x: 60, renamed_y: 10.0, z: z
+
+inside main fn | cap_fn0.renamed_x: 60, cap_fn0.y: 5.0, cap_fn0.z: a
+inside main fn | cap_fn1.x: 60, cap_fn1.renamed_y: 10.0, cap_fn1.z: z
+```
+
+
+
+## Proposing Both
+
+- Lambdas: C++ Compatibility, Expression-Based, "Shorthand"
+- Capture Functions: GNU Nested Function Familiarity, Declaration-Based, "Longform"
+
+
+
+
+## Featureset
+
+![Feature table](source/img/features-committed.png)
+
+
+
+## Important for Transitioning
+
+- Approximate GNU Nested Function Behavior by using all-capture `&`
+- Approximate Apple Blocks Behavior by using all-value-capture `=`
+
+
+
+## Example from N3654, meant as Lambda Quiz
+
+"What is the output of this?" - Meant to be a Gotcha Quiz.
+
+```cpp
+#include <stdio.h>
+
+int j = 3;
+
+int main()
+{
+  int i = 3;
+  auto foo = [=](){ printf("%d\n", i); };
+  auto bar = [=](){ printf("%d\n", j); };
+  i = j = 4;
+  foo();
+  bar();
+}
+```
+
+
+
+## Example from N3654, meant as Lambda Quiz
+
+The answer is "3" and then "4" ([https://godbolt.org/z/KW4j1zG93](https://godbolt.org/z/KW4j1zG93))
+
+```cpp
+#include <stdio.h>
+
+int j = 3;
+
+int main()
+{
+  int i = 3;
+  auto foo = [=](){ printf("%d\n", i); };
+  auto bar = [=](){ printf("%d\n", j); };
+  i = j = 4;
+  foo();
+  bar();
+}
+```
+
+
+
+## Is This Wrong?
+
+N3564 implies it is wrong! Except, with Apple Blocks...
+
+```cpp
+#include <stdio.h>
+
+int j = 3;
+
+int main()
+{
+	int i = 3;
+	auto foo = ^(){ printf("%d\n", i); };
+	auto bar = ^(){ printf("%d\n", j); };
+	i = j = 4;
+	foo();
+	bar();
+}
+```
+
+
+
+## Is This Wrong?
+
+The answer is "3" and then "4" ([https://godbolt.org/z/a9c79cjYb](https://godbolt.org/z/a9c79cjYb))
+
+```cpp
+#include <stdio.h>
+
+int j = 3;
+
+int main()
+{
+	int i = 3;
+	auto foo = ^(){ printf("%d\n", i); };
+	auto bar = ^(){ printf("%d\n", j); };
+	i = j = 4;
+	foo();
+	bar();
+}
+```
+
+
+
+## GNU Nested Functions Produces Different Answer
+
+The answer here is "4" and then "4" ([https://godbolt.org/z/voWG3Gjo3](https://godbolt.org/z/voWG3Gjo3))
+
+```cpp
+#include <stdio.h>
+
+int j = 3;
+
+int main()
+{
+	int i = 3;
+	void foo() { printf("%d\n", i); };
+	void bar() { printf("%d\n", j); };
+	i = j = 4;
+	foo();
+	bar();
+}
+```
+
+
+
+## But... Lambdas can give the exact same answer!
+
+The answer here is "4" and then "4" ([https://godbolt.org/z/EW8PETdxz](https://godbolt.org/z/EW8PETdxz))
+
+```cpp
+#include <stdio.h>
+
+int j = 3;
+
+int main()
+{
+	int i = 3;
+	auto foo = [&](){ printf("%d\n", i); };
+	auto bar = [&](){ printf("%d\n", j); };
+	i = j = 4;
+	foo();
+	bar();
+}
+
+```
+
+
+
+### And that's okay!!
+
+A unifying solution allows for both paradigms to be used;
+
+- Use the `_Capture(&)` to get GNU Nested Function behavior, works for that ecosystem
+- Use `_Capture(=)` to get Apple Blocks behavior, works for that ecosystem
+	- With specific `&ident` to emulate `__block` vars!
+
+
+
+#### Therefore, we propose Explicit Captures to allow for this!
+
+NOBODY has to sacrifice what they want!
+
+# 🎉🎉
