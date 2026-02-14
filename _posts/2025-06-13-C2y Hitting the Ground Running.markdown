@@ -36,7 +36,7 @@ int main () {
 }
 ```
 
-This doesn't necessarily stop certain compilers from making `countof` an implementation-defined keyword anyways, but I imagine that nobody's implementation will be that brave. But, that concludes that for the forseeable future: thank you for helping us reach this decision!
+This doesn't necessarily stop certain compilers from making `countof` an implementation-defined keyword anyways, but I imagine that nobody's implementation will be that brave. But, that concludes that for the foreseeable future: thank you for helping us reach this decision!
 
 
 
@@ -78,7 +78,7 @@ int main (int argc, char*[]) {
 }
 ```
 
-Now, occasionally you still need custom logic for the check, even with the declaration. You can do that by adding a semi-colon `;` and then putting a typical allowed conditional check afterwards. A common idiom is using `0` for the success result of an API, so you don't want to heck with `if (some_val)`, you want to use `if (!some_val)`, like so:
+Now, occasionally you still need custom logic for the check, even with the declaration. You can do that by adding a semi-colon `;` and then putting a typical allowed conditional check afterwards. A common idiom is using `0` for the success result of an API, so you don't want to check with `if (some_val)`, you want to use `if (!some_val)`, like so:
 
 ```cpp
 #include <stdio.h>
