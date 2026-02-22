@@ -632,7 +632,7 @@ h_err *h_build_plugins(const char *rootdir, h_build_outfiles outfiles,
 			continue;
 		}
 		x.dirpath = h_util_path_join(x.pluginsdir, ent->d_name);
-		if (dirpath == NULL) {
+		if (x.dirpath == NULL) {
 			freeall(&x);
 			return h_err_create(H_ERR_ALLOC, NULL);
 		}
@@ -763,7 +763,7 @@ h_err *h_build_plugins(const char *rootdir, h_build_outfiles outfiles,
 		}
 		defer freeloop_all(&x);
 		x.dirpath = h_util_path_join(x.pluginsdir, ent->d_name);
-		if (dirpath == NULL) {
+		if (x.dirpath == NULL) {
 			return h_err_create(H_ERR_ALLOC, NULL);
 		}
 		x.outdirphp = h_util_path_join(outpluginsdirphp, ent->d_name);
