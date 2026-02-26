@@ -19,20 +19,19 @@ C++29   | p1040: `std::embed` | [Published](https://wg21.link/p1040) | [Latest D
 
 C2y/C3a | n3332: `_Record` types | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3332.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Record%20types.html)
 C2y/C3a | n3487: Transparent Aliases | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3487.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Aliases.html)
-C2y/C3a | n3490: `#embed` Synchronization | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3490.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed%20Synchronization.html)
 C2y/C3a | n3600: Integer Constant Expression Initialized `const` Integer Declarations are Implicitly `constexpr` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3443.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Initialized%20const%20Integer%20Declarations.html)
-C2y/C3a | n3601: Additional Half-Open case Range Syntax | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3601.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Additional%20Half-Open%20Case%20Range%20Syntax.html.html)
-C2y/C3a | n3625: _Any_func - A Universal Function Pointer Storage Type | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3625.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Any_func.html)
-C2y/C3a | n3626: printf string size specifiers (and general precision length modifiers) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3626.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20printf%20string%20size%20specifiers.html)
 C2y/C3a | n3627: Thread Attributes | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3627.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Thread%20Attributes%20-%20Implementation%20Extensible%20and%20ABI-Resistant.html)
-C2y/C3a | n3657: Function with Data - Closures in C (A Comprehensive Proposal Overviewing Blocks, Nested Functions, and Lambdas) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3657.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Functions%20with%20Data%20-%20Closures%20in%20C.html)
-
+C2y/C3a | n3695: Strict Compatibility for Translation-Time Type Matching Improvements | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3695.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Strict%20Compatibility%20for%20Translation-Time%20Type%20Matching%20Improvements.html)
+C2y/C3a | n3785: Expression Evaluation and Access in _Generic | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3785.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Expression%20Evaluation%20and%20Access%20in%20_Generic.html)
+C2y/C3a | n3810: _Any_func - A Universal Function Pointer Storage Type | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3810.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Any_func.html)
+C2y/C3a | n3811: `#embed` Synchronization | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3811.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed%20Synchronization.html)
 
 ### Actively Pursued Technical Specifications
 
-C2y/C3a | n3589: `defer` Technical Specification | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3589.pdf) | [Latest Draft](/_vendor/future_cxx/technical%20specification/C%20-%20defer/C%20-%20defer%20Technical%20Specification.pdf)
-C2y/C3a | n3590: Improved `__attribute__((cleanup))` Through `defer` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3590.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20__attribute__((cleanup))%20Through%20defer.html)
+C2y/C3a | n3734: `defer` Technical Specification | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3734.pdf) | [Latest Draft](/_vendor/future_cxx/technical%20specification/C%20-%20defer/C%20-%20defer%20Technical%20Specification.pdf)
+C2y/C3a | n3733: Improved `__attribute__((cleanup))` Through `defer` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3733.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Improved%20__attribute__((cleanup))%20Through%20defer.html)
 
+C2y/C3a | n3780: Function with Data - Closures in C (A Comprehensive Proposal Overviewing Blocks, Nested Functions, and Lambdas) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3780.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Functions%20with%20Data%20-%20Closures%20in%20C.html)
 C2y/C3a | cXXX3: Comprehensive Statement Expressions | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Comprehensive%20Statement%20Expressions.html)
 C2y/C3a | cXXX5: `-fwrapv` for Everyone - A Measured Approach to `_Operator`s | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20A%20Measured%20Approach%20to%20_Operators.html)
 C2y/C3a | cXXX7: `T[..; …]` — A Non-owning Sized Arrays for Spans and Beyond | Soon™ | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Non-owning%20Sized%20Arrays.html)
@@ -87,7 +86,7 @@ C++ | p1683: A Survey of References for Standard Library Types - A Survey of Opt
 
 
 ### Expired:
-
+ 
 These proposals are dead and will not be picked up again.
 
 
@@ -110,5 +109,7 @@ C++ | p1803: `packexpr(args, I)` -- compile-time friendly pack inspection | [Pub
 C++ | p1193: Explicitly Specified Returns for (Implicit) Conversions | [Published](https://wg21.link/p1193) | [Latest Draft](/_vendor/future_cxx/papers/d1193.html)
 C++ | p1378: `consteval is_string_literal(T*)` | Not Published | [Latest Draft](/_vendor/future_cxx/papers/d1378.html)
 C++ | p2958: `typeof` and `typeof_unqual` for C++ | [Published](https://wg21.link/p2958) | [Latest Draft](/_vendor/future_cxx/papers/d2958.html)
+C3a | n3601: Additional Half-Open case Range Syntax | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3601.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Additional%20Half-Open%20Case%20Range%20Syntax.html.html)
+C3a | n3691: printf string size specifiers (and general precision length modifiers) | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3691.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20printf%20string%20size%20specifiers.html)
 
 {% include anchors.html %}
