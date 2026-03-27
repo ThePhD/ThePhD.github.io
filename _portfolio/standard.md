@@ -16,6 +16,7 @@ C++29   | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) |
 C++29   | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/_vendor/future_cxx/papers/d1664.html)
 C++29   | p3540: `#embed` offset Parameter | [Published](https://wg21.link/p3540) | [Latest Draft](/_vendor/future_cxx/papers/d3540.html)
 C++29   | p1040: `std::embed` | [Published](https://wg21.link/p1040) | [Latest Draft](/_vendor/future_cxx/papers/d1040.html)
+C++29   | p1130: Module Resource Requirement Propagation | [Published](https://wg21.link/p1130) | [Latest Draft](https://thephd.dev/_vendor/future_cxx/papers/d1130.html)
 
 C2y/C3a | n3332: `_Record` types | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3332.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Record%20types.html)
 C2y/C3a | n3695: Strict Compatibility for Translation-Time Type Matching Improvements | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3695.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Strict%20Compatibility%20for%20Translation-Time%20Type%20Matching%20Improvements.html)
@@ -52,6 +53,7 @@ C++23 | p0330: Literal Suffixes for `ptrdiff_t` and `size_t` | [Published](https
 C++23 | p2513: `char8_t` Compatibility and Portability Fixes | [Published](https://wg21.link/p2513) | [Accepted, C++23!](/_vendor/future_cxx/papers/d2513.html)
 C++26 | p2537: Relax `va_start` Requirements to Match C | [Published](https://wg21.link/p2537) | [Latest Draft](/_vendor/future_cxx/papers/d2537.html)
 C++26 | p1967: Preprocessor `embed` - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/_vendor/future_cxx/papers/d1967.html)
+C++26 | (Through Steve Downey -- Thanks, Steve!) p1175: A simple and practical optional reference for C++ | [Published](https://wg21.link/p1175) | [Latest Draft](/_vendor/future_cxx/papers/d1175.html)
 C23   | n2448: `[[nodiscard("should have a reason")]]` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2448.pdf) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20nodiscard.html)
 C23   | n2594: Mixed Wide String Literal Concatenation | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2594.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Mixed%20Wide%20String%20Literal%20Concatenation.html)
 C23   | n2968: Prefixes for the Standard Library | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2968.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Prefixes%20for%20the%20Standard%20Library.html)
@@ -91,8 +93,6 @@ C++ | p1683: A Survey of References for Standard Library Types - A Survey of Opt
 These proposals are dead and will not be picked up again.
 
 
-C++ | p1175: A simple and practical optional reference for C++ | [Published](https://wg21.link/p1175) | [Latest Draft](/_vendor/future_cxx/papers/d1175.html)
-C++ | p1130: Module Resource Requirement Propagation | [Published](https://wg21.link/p1130) | [Latest Draft](https://thephd.dev/_vendor/future_cxx/papers/d1130.html)
 C   | n3198: Unwinding | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3198.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Unwinding.html)
 C   | n2995: `__supports_literal` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2995.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20__supports_literal.html)
 C   | n3441: `_Generic` and VLA Realignment and Improvement | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3441.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Generic%20Realignment%20and%20Improvement.html)
