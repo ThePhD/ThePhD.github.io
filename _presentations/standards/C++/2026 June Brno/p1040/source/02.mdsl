@@ -1,0 +1,82 @@
+# First Part: `#depend`
+
+
+
+## Algorithm for Whitelisting Resources
+
+`#depend "..."/<...>` directive becomes ECMA-262 Regular Expression Filter
+
+- Every `"**"` becomes a `".*"`
+- Every `"*"` becomes a `"[^\\/]*"`<sup>✟✟✟</sup>
+- Every other character is either properly escaped to be treated as a character, or a normal character
+- A `"$"` is added at the end (to anchor the expression)
+
+<sup>✟✟✟</sup> - whatever is considered an implementation-defined directory-separator
+
+
+
+## `#depend <foo.bin>`
+
+- Regular Expression: `foo\.bin$`
+- Allow file directory for search: probably not
+- Matches:
+	- ✅ foo.bin 
+	- ❌ foo.bins
+	- ❌ foo.bi
+	- ❌ foo.b
+
+
+
+## `#depend "files/*.json"`
+
+- Regular Expression: `files/[^\\/]*\.json$`
+- Matches:
+	- ✅ files/bar.json 
+	- ❌ files/quz/bar.json
+
+
+
+## `#depend <res/**.txt>`
+
+- Regular Expression: `res/(.*)\.txt$`
+- Matches:
+	- ✅ res/1.txt
+	- ✅ res/2/3/nested.meow.txt
+	- ❌ res/4/5/a.txtx
+
+
+
+## `#depend <meow/*a/woof.bin>`
+
+- Regular Expression: `meow/[^\\/]*a/woof\.bin`
+- Matches:
+	- ✅ meow/a/woof.bin
+	- ✅ meow/baa/woof.bin
+	- ✅ meow/baaa/woof.bin
+	- ❌ meow/ab/woof.bin
+
+
+
+## Modules?
+
+Already decided on, three times (2018, 2020 Prague, 2025 Sofia):
+
+- `#depend` are translation-unit private
+- Do not traverse outside of the module (important for encapsulation)
+- Revived [p1130 - Module Resource Dependency Propagation: https://wg21.link/p1130](https://wg21.link/p1130)
+- Summary:
+	- `#depend` remains private, translation-unit
+	- `#depend export` explicitly says "added to module information"
+	- Minutiae discussed in P1130 - handled there, not here
+
+
+
+## Why is `**` here?
+
+`-Iproject/include` and `-embed-dir=project/resources` is the equivalent of `#depend <resources/**>`.
+
+You can access `<boost/shared_ptr.hpp>` and not just `<boost>` by itself when you do `-Iboost-1.56.1/include`.
+
+You can `#embed <data/dir/art.bin>` when you do `-embed-dir=game/data`.
+
+### `**` is the default, but we make it explicit since this is a source file construct and not a flag.

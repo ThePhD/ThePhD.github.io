@@ -1,0 +1,32 @@
+## Current State - C23 and C++26
+
+```cpp
+#embed <...>|"..." [params(args...), ...]
+```
+
+Preprocessor-based, simple specification ("expands to acomma-separated list of integer literals")
+
+- ✅ Viable for C and C++ (shared design and goals for both languages)
+- ✅ Trackable by tooling without doing full Type Checking / Constant Evaluation
+- ❌ Unable to use / read contents and feed it back in
+
+
+
+## Future Goal - C++29 (no C2y/C29):
+
+```cpp
+#depend <...>|"..."
+
+template <typename T>
+span<T> embed([u8|w|]string_view resource_name,
+	size_t offset = 0,
+	optional<size_t> limit = nullopt
+);
+```
+
+Library-based, `consteval` function backed by a compiler builtin<br/>+ preprocesor "whitelist"/"filter" for allowable files
+
+- ✅ Works at constant evaluation time (right on time!)
+- ✅ Implementable today (built-ins work just fine)
+- ✅ Enables complex use cases not at all covered by non-programmable alternative
+- ✅ Discoverable by ancient build tech (using `#depend <foo>` to get files when necessary)

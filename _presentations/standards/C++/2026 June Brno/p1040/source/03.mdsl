@@ -1,0 +1,134 @@
+# Second Part: `std::embed`
+
+
+
+## Simple Interface
+
+- Makes a static storage-duration `constexpr`-capable array.
+- Return a `std::span` pointing to it.
+- Not guaranteed to be unique; modeled after string memory.
+- `std::byte`, `char`, or `unsigned char`.
+
+
+
+## Special Power: Recursive
+
+Observe the two following files.
+
+`core/base.lua`:
+
+```cpp
+base = {
+  ["value"] = 30
+}
+```
+
+`main.lua`:
+
+```cpp
+require 'core/base.lua'
+
+function main()
+  return 1 + base.value
+end
+```
+
+
+
+## With `#embed` ....
+
+`main.cpp`:
+```cpp
+constexpr const char lua_code[] = {
+	#embed <main.lua> suffix(, 0)
+};
+
+#include <iostream>
+#include <sol2/sol2.hpp>
+
+int main () {
+	sol::state lua;
+	lua.run_script(lua_code);
+	// fails -- `main.lua` references, `core/base.lua` at runtime
+	return 0;
+}
+```
+
+Still have a file reference; how do we fix??
+
+
+
+## With `std::embed` ....
+
+`main.cpp`:
+```cpp
+constexpr const char lua_code[] = {
+	#embed <main.lua> suffix(, 0)
+};
+
+#include <iostream>
+#include <sol2/sol2.hpp>
+
+int main () {
+	sol::state lua;
+	lua.run_script(lua_code);
+	// fails -- `main.lua` references, `core/base.lua` at runtime
+	return 0;
+}
+```
+
+Still have a file reference; how do we fix??
+
+
+
+## With `std::embed`:
+
+`main.cpp`:
+```cpp
+#include <span>
+#include <phd/make_array.hpp>
+#include <phd/embed.hpp>
+#include <format>
+#include <iostream>
+#include <sol2/sol2.hpp>
+
+int main(int, char*[]) {
+	constexpr auto original_file_span = phd::embed<char>("resources/main.lua");
+
+	std::printf("original file (\"%s\"):\n\n%s", "resources/main.lua", original_file.data());
+	std::printf("\n\n=================================================================================\n");
+
+	constexpr auto original_file = comptime_make_string_array<original_file_span.size()>(original_file_span);
+	constexpr auto final_glob = recursive_parse_lua("resources/main.lua");
+	std::printf("`consteval recursive_parse_lua` result:\n\n%s", glob.data());
+
+	sol::state lua;
+	lua.run_script(lua_code); // ✅🎉!!
+	return 0;
+}
+```
+
+
+Which outputs....
+
+```cpp
+original file ("resources/main.lua"):
+
+require 'core/base.lua'
+
+function main()
+  return 1 + base.value
+end
+
+==============================================================================
+`consteval recursive_parse_lua` result:
+
+-- core/base.lua
+base = {
+  ["value"] = 30
+}
+
+function main()
+  return 1 + base.value;
+end
+```
