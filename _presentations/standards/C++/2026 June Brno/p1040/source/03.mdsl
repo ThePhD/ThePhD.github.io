@@ -58,39 +58,17 @@ Still have a file reference; how do we fix??
 
 
 
-## With `std::embed` ....
-
-`main.cpp`:
-```cpp
-constexpr const char lua_code[] = {
-	#embed <main.lua> suffix(, 0)
-};
-
-#include <iostream>
-#include <sol2/sol2.hpp>
-
-int main () {
-	sol::state lua;
-	lua.run_script(lua_code);
-	// fails -- `main.lua` references, `core/base.lua` at runtime
-	return 0;
-}
-```
-
-Still have a file reference; how do we fix??
-
-
-
 ## With `std::embed`:
 
 `main.cpp`:
 ```cpp
 #include <span>
-#include <phd/make_array.hpp>
+#include <phd/make_static.hpp>
 #include <phd/embed.hpp>
 #include <format>
-#include <iostream>
+
 #include <sol2/sol2.hpp>
+#include <iostream>
 
 int main(int, char*[]) {
 	constexpr auto original_file_span = phd::embed<char>("resources/main.lua");
@@ -99,8 +77,8 @@ int main(int, char*[]) {
 	std::printf("\n\n=================================================================================\n");
 
 	constexpr auto original_file = comptime_make_string_array<original_file_span.size()>(original_file_span);
-	constexpr auto final_glob = recursive_parse_lua("resources/main.lua");
-	std::printf("`consteval recursive_parse_lua` result:\n\n%s", glob.data());
+	constexpr auto lua_code = recursive_parse_lua("resources/main.lua");
+	std::printf("`consteval recursive_parse_lua` result:\n\n%s", lua_code.data());
 
 	sol::state lua;
 	lua.run_script(lua_code); // ✅🎉!!
@@ -132,3 +110,27 @@ function main()
   return 1 + base.value;
 end
 ```
+
+
+## Endless Possibilities
+
+- Seamless integration between developer + other parts of teams
+	- Constant data means ability to know layouts ahead-of-time
+	- E.g., HLSL Uniforms, GLSL Vertex Data Formats
+	- E.g., ML Weights, Profiling Data Fed back into compilation
+	- E.g., Flattening complex 3d model files for deployment
+
+- Output is compile-time data -- all the benefits thereof
+	- Inlineable + Optimizable !
+
+
+## Intuitive and Safe Compile-time Programming
+
+- `consteval`, `std::embed`ded data + C++26 reflection drives interfaces
+	- Normal "laypeople" (from Software PoV) provide data files
+	- Data files get parsed as constant evaluation time
+	- Builds (loudly) fail early versus runtime failures / runtime corruption
+	- `-embed-dir=...` + `#depend` keeps allowed file list tight and local
+
+- Shipping (compact) executables is FAR easier
+	- SDKs can provide their data very simply!

@@ -18,18 +18,20 @@
 ## `#depend <foo.bin>`
 
 - Regular Expression: `foo\.bin$`
-- Allow file directory for search: probably not
 - Matches:
 	- ✅ foo.bin 
 	- ❌ foo.bins
 	- ❌ foo.bi
 	- ❌ foo.b
+	- ✅ meow/foo.bin 
+	- ❌ arf/foo.bin/quack.data
 
 
 
 ## `#depend "files/*.json"`
 
 - Regular Expression: `files/[^\\/]*\.json$`
+- Allow file-local directory for search: probably yes
 - Matches:
 	- ✅ files/bar.json 
 	- ❌ files/quz/bar.json
@@ -39,6 +41,7 @@
 ## `#depend <res/**.txt>`
 
 - Regular Expression: `res/(.*)\.txt$`
+- Allow file-local directory for search: probably not
 - Matches:
 	- ✅ res/1.txt
 	- ✅ res/2/3/nested.meow.txt
@@ -48,7 +51,8 @@
 
 ## `#depend <meow/*a/woof.bin>`
 
-- Regular Expression: `meow/[^\\/]*a/woof\.bin`
+- Regular Expression: `meow/[^\\/]*a/woof\.bin$`
+- Allow file-local directory for search: probably yes
 - Matches:
 	- ✅ meow/a/woof.bin
 	- ✅ meow/baa/woof.bin
@@ -68,6 +72,29 @@ Already decided on, three times (2018, 2020 Prague, 2025 Sofia):
 	- `#depend` remains private, translation-unit
 	- `#depend export` explicitly says "added to module information"
 	- Minutiae discussed in P1130 - handled there, not here
+
+
+
+## Important for "Encapsulation"?
+
+`deps.c++m:`
+```cpp
+export module deps;
+
+#depend <sdk/private/​**> // translation unit-internal
+#depend export <sdk/everything/​**> // P1130 FUTURE DIRECTION: module public
+```
+
+`main.cpp:`
+```cpp
+import deps;
+
+int main () {
+  std::embed("sdk/everything/meow.wav"); // ill-formed -- with P1130, ok
+  std::embed("sdk/private/super_secret_sauce.mix"); // ill-formed
+  return 0;
+}
+```
 
 
 
