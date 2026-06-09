@@ -9,6 +9,7 @@
 - Every `"**"` becomes a `".*"`
 - Every `"*"` becomes a `"[^\\/]*"`<sup>✟✟✟</sup>
 - Every other character is either properly escaped to be treated as a character, or a normal character
+- A `"(.*[\\/])?"` is added at the beginning (to prevent suffixed files/directories) ⭐️
 - A `"$"` is added at the end (to anchor the expression)
 
 <sup>✟✟✟</sup> - whatever is considered an implementation-defined directory-separator
@@ -17,20 +18,22 @@
 
 ## `#depend <foo.bin>`
 
-- Regular Expression: `foo\.bin$`
+- Regular Expression: `(.*[\\/])?foo\.bin$`
 - Matches:
-	- ✅ foo.bin 
+	- ✅ foo.bin
+	- ✅ meow/foo.bin
 	- ❌ foo.bins
 	- ❌ foo.bi
 	- ❌ foo.b
-	- ✅ meow/foo.bin 
+	- ❌ ffoo.bin ⭐️ 
+	- ❌ meow/ffoo.bin ⭐️ 
 	- ❌ arf/foo.bin/quack.data
 
 
 
 ## `#depend "files/*.json"`
 
-- Regular Expression: `files/[^\\/]*\.json$`
+- Regular Expression: `(.*[\\/])?files/[^\\/]*\.json$`
 - Allow file-local directory for search: probably yes
 - Matches:
 	- ✅ files/bar.json 
@@ -40,24 +43,28 @@
 
 ## `#depend <res/**.txt>`
 
-- Regular Expression: `res/(.*)\.txt$`
+- Regular Expression: `(.*[\\/])?res/(.*)\.txt$`
 - Allow file-local directory for search: probably not
 - Matches:
 	- ✅ res/1.txt
 	- ✅ res/2/3/nested.meow.txt
+	- ❌ notres/2/3/nested.meow.txt ⭐️
 	- ❌ res/4/5/a.txtx
+	- ❌ notres/4/5/a.txtx
 
 
 
 ## `#depend <meow/*a/woof.bin>`
 
-- Regular Expression: `meow/[^\\/]*a/woof\.bin$`
+- Regular Expression: `(.*[\\/])?meow/[^\\/]*a/woof\.bin$`
 - Allow file-local directory for search: probably yes
 - Matches:
 	- ✅ meow/a/woof.bin
 	- ✅ meow/baa/woof.bin
 	- ✅ meow/baaa/woof.bin
 	- ❌ meow/ab/woof.bin
+	- ❌ meow/ab/notwoof.bin ⭐️
+	- ❌ barkmeow/ab/notwoof.bin ⭐️
 
 
 
@@ -99,6 +106,18 @@ int main () {
 
 
 ## Why is `**` here?
+
+`-Iproject/include` and `-embed-dir=project/resources` is the equivalent of `#depend <resources/**>`.
+
+You can access `<boost/shared_ptr.hpp>` and not just `<boost>` by itself when you do `-Iboost-1.56.1/include`.
+
+You can `#embed <data/dir/art.bin>` when you do `-embed-dir=game/data`.
+
+### `**` is the default, but we make it explicit since this is a source file construct and not a flag.
+
+
+
+## 
 
 `-Iproject/include` and `-embed-dir=project/resources` is the equivalent of `#depend <resources/**>`.
 
