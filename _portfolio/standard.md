@@ -14,7 +14,6 @@ I have quite a few C++ proposals I am working on and percolating through the C++
 
 C++29   | p1629: Standard Text Encoding | [Published](https://wg21.link/p1629) | [Latest Draft](/_vendor/future_cxx/papers/d1629.html)
 C++29   | p1664: Reconstructible Ranges | [Published](https://wg21.link/p1664) | [Latest Draft](/_vendor/future_cxx/papers/d1664.html)
-C++29   | p3540: `#embed` offset Parameter | [Published](https://wg21.link/p3540) | [Latest Draft](/_vendor/future_cxx/papers/d3540.html)
 C++29   | p1040: `std::embed` | [Published](https://wg21.link/p1040) | [Latest Draft](/_vendor/future_cxx/papers/d1040.html)
 C++29   | p1130: Module Resource Requirement Propagation | [Published](https://wg21.link/p1130) | [Latest Draft](https://thephd.dev/_vendor/future_cxx/papers/d1130.html)
 
@@ -54,6 +53,7 @@ C++23 | p2513: `char8_t` Compatibility and Portability Fixes | [Published](https
 C++26 | p2537: Relax `va_start` Requirements to Match C | [Published](https://wg21.link/p2537) | [Latest Draft](/_vendor/future_cxx/papers/d2537.html)
 C++26 | p1967: Preprocessor `embed` - Binary Resource Inclusion | [Published](https://wg21.link/p1967) | [Latest Draft](/_vendor/future_cxx/papers/d1967.html)
 C++26 | (Through Steve Downey -- Thanks, Steve!) p1175: A simple and practical optional reference for C++ | [Published](https://wg21.link/p1175) | [Latest Draft](/_vendor/future_cxx/papers/d1175.html)
+C++29 | p3540: `#embed` offset Parameter | [Published](https://wg21.link/p3540) | [Latest Draft](/_vendor/future_cxx/papers/d3540.html)
 C23   | n2448: `[[nodiscard("should have a reason")]]` | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2448.pdf) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20nodiscard.html)
 C23   | n2594: Mixed Wide String Literal Concatenation | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2594.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Mixed%20Wide%20String%20Literal%20Concatenation.html)
 C23   | n2968: Prefixes for the Standard Library | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n2968.htm) | [Accepted, C23!](/_vendor/future_cxx/papers/C%20-%20Prefixes%20for%20the%20Standard%20Library.html)
