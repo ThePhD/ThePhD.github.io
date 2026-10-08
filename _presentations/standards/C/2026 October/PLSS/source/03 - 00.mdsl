@@ -1,0 +1,55 @@
+# Standards Can Shape The Direction of Programming Languages
+
+**and** guide implementers in a positive direction for their users
+
+
+
+## Some Downsides
+
+- Timelag -- it takes time for changes to proliferate
+- Friction -- some features are a constant fight
+- Implementer Expectations -- need to be conscientious and appreciative of implementer time
+
+
+
+## Good Benefits
+
+- Implementations know what to spend their time on
+- Users know how to voice their concern
+- Shared language of implementation and specification
+- **Liability Coverage for Software/Hardware Behaviors**
+
+
+
+## .... Liability? Huh??
+
+Yes! Specifications and Standards can be leveraged by organizations to  
+guarantee either behavioral boundaries or specific actions!
+
+Heavily used for:
+
+- C++
+- C
+- Java
+- Fortran
+- Ada (and more!)
+
+
+
+## Having a Standard Means...
+
+It can be certified and held accountable/responsible, and also offloads liability!
+
+- IEC 61508 and their cerification/accreditation bodies,  
+  as well as the Safety Integrity Level (SIL)
+- ISO 26262 & Automotive Safety Integrity Level (ASIL)
+
+
+
+## Even Rust (sort of) Needed a Standard
+
+Ferrocene is not THE Rust Standard™, but it IS a  
+safety-certified spinoff of Rust which hammers out  
+much of the behavior!
+
+[![A picture of the Ferrocene repository.](source/img/ferrocene-repo.png)](https://ferrocene.dev/)

@@ -1,0 +1,47 @@
+# The C Standard is Pretty Old
+
+- First "Informal" Specification: "The C Programming Language"
+  Book/Manual, Published 1978  
+  by Brian **K**ernighan and Dennis **R**itchie (K&R C)
+
+- First Formal Standard: ANSI X3.159-1989  
+  by the X3J11 Committee  
+  of the American National Standards Institution (ANSI)
+
+- First Formal **International** Standard: ISO/IEC 9899:1990
+
+![ISO/IEC Logo](source/img/iso-logo64.png)
+
+
+
+## C23 (formally ISO/IEC 9899:2024) released
+
+C2y (likely C29) in progress from Working Group 14 (WG14)
+
+![A screenshot from the ISO website showing the latest C published C standard, ISO/IEC 9899 - 2024, available for purchase](source/img/iso9899-purchase.png)
+
+
+
+## Nice!
+
+Which brings us to two extremely similar questions:
+
+- "Should I Update The Standard of My Language?" (e.g. C, C++, Fortran, JS, ...)
+- "Should I Standardize™ My Language?" (Zig, Rust, ...)
+
+
+
+## The Answer is the Same for Both of These
+
+And that answer is...
+
+
+
+## It Depends!
+
+We can answer it by looking at what Standardization has done  
+for us, **MATERIALLY**, in these 3 cases for the ISO C Standard:
+
+- `typeof`, introduced in C23
+- `<threads.h>`'s thread features, introduced in C11
+- `realloc` Undefined Behavior, introduced in C23

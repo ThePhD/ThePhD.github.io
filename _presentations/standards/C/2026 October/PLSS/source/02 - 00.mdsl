@@ -1,0 +1,229 @@
+# Standardization Purpose #1
+
+## With `typeof` as a Practical Example
+
+
+
+## Very simple feature
+
+```cpp
+typeof(1) main () {
+	return 0;
+}
+// same as:
+int main () {
+	return 0;
+}
+```
+
+- Put in expression, get out type
+- First mentioned in C89 rationale (!!)
+- Usable in GCC since time immemorial
+- Ubiquitous in all ecosystems ...
+
+
+
+
+## E X C E P T .  M I C R O S O F T .  V I S U A L .  C .
+
+```cpp
+typeof(1) main () {
+	return 0;
+}
+```
+
+```sh
+<source>(1): error C2143: syntax error: missing ')' before 'constant'
+<source>(1): error C2143: syntax error: missing '{' before 'constant'
+<source>(1): error C2059: syntax error: 'constant'
+<source>(1): error C2059: syntax error: ')'
+Compiler returned: 2
+```
+
+- 35+ year old extension, but Microsoft won't add it
+- Every compiler has the technology for it already
+- It is 202x -- why won't Microsoft implement this?!
+
+
+
+## It's Not Standard?!
+
+One of those very old things that were not standardized, so...
+
+- N2927 put it into ISO C in 2022
+- Rolled out with the C23 Standard
+
+
+
+## Suddenly?
+
+Microsoft Visual C has `typeof`, within 1~2 months of ratification of the C Standard
+
+```cpp
+typeof(1) main () {
+	return 0;
+}
+```
+
+```sh
+Compiler returned: 0
+```
+
+
+
+## Standardization Purpose #1
+
+Elevate User requests
+
+- 30+ years of ignoring ➡️➡️ 1 month implemented
+- Low-stakes, low-cost, high-impact feature
+- Improves shared compiler/platform codebase stability
+
+Conformance has TEETH!
+
+![A black cat with their mouth open showing off their sharp teeth and fang-like canines](source/img/yawn-cat.jpg)
+
+
+
+
+# Standardization Purpose #2
+
+### `<threads.h>`: An Aspirational Example
+
+
+
+## `<threads.h>` is a bit strange!
+
+First standardized in C11 during the  
+"we need mutexes and multithreading stuff" push
+
+- Modeled pretty strongly after POSIX threads (pthreads) capabilities
+- Much of it very easily implementable on top of most major platforms
+
+
+
+## But it wasn't... implemented?!
+
+January 2024 (13 years later):
+- Apple: No
+- Windows: No
+- Linux (glibc): Yes, but often ignored?
+- Other libcs: No lmao
+
+
+
+## Lots of Non-Conformance!
+
+Tends to happen with library features vs. language feature  
+(At the same time: C++, with similar features, has 100% conformance)
+
+
+
+## Reports on Why It's Not A Priority?
+
+- "Lacks power: can't set thread name, affinity, stack sizes, etc."
+- "I can just use {Platform-specific wrapper}"
+- "I can use a C11 Threads wrapper"
+
+
+
+## Only Mild Improvement
+
+October 2026 (15 years, today):
+- Apple: No
+- Windows: Yes, still kinda ignored
+- Linux (glibc): Yes, still kinda ignored
+- Other libcs: No lmao
+
+
+
+## How To Improve Conformance?
+
+One important criticism:
+
+#### "Lacks power: can't set thread name, affinity, stack sizes, etc."
+
+
+
+## How To Improve Conformance?
+
+Add power with a new C2y feature:  
+Gives C2y ability to set thread names, stack size, affinities, and more
+
+[![A picture of the current rendition of the Thread Attributes paper](source/img/thread-attr-paper.png)](https://thephd.dev/_vendor/future_cxx/papers/C%20-%20Thread%20Attributes%20-%20Implementation%20Extensible%20and%20ABI-Resistant.html)
+
+
+
+## Buy-in !
+
+A lot of implementers (embedded developers and 'Other' libc developers)  
+saw this interface...
+
+and liked it!!
+
+![A tweet from the Dreamcast Homebrew SDK KOS Developer](source/img/kos-dev-tweet.png)
+
+
+
+## Standardization Purpose #2:
+
+Give Implementers and Users something they like!
+
+- Getting multiple vendors to approve the design
+- Users getting more power
+- "Carrot" -- attract implementation and user excitement with good features
+
+
+
+
+
+# Standardization Purpose #3
+
+## The `realloc` Scuffle
+
+
+
+## `realloc` was Implementation-Defined / Unspecified up to C17
+
+
+
+## C23 -> Undefined Behavior
+
+[![A 2019 paper from Robert Seacord titled Zero-Size Reallocations are Undefined Behavior](source/img/realloc-ub-paper.png)](https://www.open-std.org/JTC1/SC22/WG14/www/docs/n2464.pdf)
+
+
+
+## Caused a Stir
+
+Published in ACM:
+
+[![A picture of an article by Terence Kelly called Catch-23: The New C Standard Sets the World on Fire](source/img/catch23-article.png)](https://queue.acm.org/doi/pdf/10.1145/3588242)
+
+
+
+## But Why?
+
+☢️ D a n g e r o u s ☢️
+
+[![An article from a Singaporean Security Researcher called How a double-free bug in WhatsApp turns to RCE](source/img/whatsapp-bug.png)](https://awakened1712.github.io/hacking/hacking-whatsapp-gif-rce/)
+
+
+
+## How?
+
+2 major implementation categories are **mutually negative to one another**
+
+- Program on the first platform/libc category and switch to the second:  
+  ➡️ **USE-AFTER FREE BUG!!**
+- Program on the second platform/libc category and switch to the first:  
+  ➡️ **DOUBLE FREE BUG!!**
+
+
+
+## Standardization Purpose #3:
+
+Recognizing reality and matching what happens on the ground
+
+- Has caused lots of motion and discussion in implementations
+- Might actually get a less-dangerous specification to overturn UB (!!)
+- Will take time, but discussion would not have happened otherwise
