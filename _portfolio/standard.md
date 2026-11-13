@@ -20,10 +20,11 @@ C++29   | p1130: Module Resource Requirement Propagation | [Published](https://w
 C2y/C3a | n3332: `_Record` types | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3332.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Record%20types.html)
 C2y/C3a | n3695: Strict Compatibility for Translation-Time Type Matching Improvements | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3695.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Strict%20Compatibility%20for%20Translation-Time%20Type%20Matching%20Improvements.html)
 C2y/C3a | n3912: `#embed` Synchronization | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3912.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20embed%20Synchronization.html)
-C2y/C3a | n3914: _Any_func - A Universal Function Pointer Storage Type | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3889.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Any_func.html)
 C2y/C3a | n3915: Expression Evaluation and Access in _Generic | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3888.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Expression%20Evaluation%20and%20Access%20in%20_Generic.html)
 C2y/C3a | n3916: Thread Attributes | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3851.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Thread%20Attributes%20-%20Implementation%20Extensible%20and%20ABI-Resistant.html)
 C2y/C3a | n4000: Transparent Aliases | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n4000.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Transparent%20Aliases.html)
+C2y/C3a | n4002: `_Any_func` - A Universal Function Pointer Storage Type | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n4002.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20_Any_func.html)
+C2y/C3a | n4008: Unicode Printing | [Published](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n4008.htm) | [Latest Draft](/_vendor/future_cxx/papers/C%20-%20Unicode%20Printing.html)
 
 
 ### Actively Pursued Technical Specifications
